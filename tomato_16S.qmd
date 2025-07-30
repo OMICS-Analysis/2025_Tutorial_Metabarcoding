@@ -1,0 +1,173 @@
+---
+title: "Metagenomica de Tomate 16S"
+author: "OMICs analysis"
+format: html
+editor: visual
+execute:
+  engine: knitr
+---
+
+## Tomate 16S
+
+Datos de partida "[Disentangling the genetic basis of rhizosphere microbiome assembly in tomato](https://www.ncbi.nlm.nih.gov/sra/?term=SRX13358039)"
+
+Para este tutorial vamos a utilizar [**Qiime2**](https://qiime2.org/)**,** [aquí](https://library.qiime2.org/quickstart) lo puedes instalar según sea tu sistema operativo. Para los siguientes pasos vamos a autilizar la distribución "[amplicon](https://amplicon-docs.qiime2.org/)". Este tutorial se hizo utilizando el sistema operativo `Ubuntu 22.04.5 LTS`, en un equipo con `24 Gb` de `RAM` `Intel® Core™ i7-3610QM CPU @ 2.30GHz × 8`. Todo se hizo usando la `terminal`.
+
+**Primer paso:** Genera una carpeta (directorio) exclusiva para llevar a cabo el proyecto, en este caso el nombre de la carpeta es `2025_Demo_tomato_16S`, en ella se va generar una carpeta para guardar los genomas 16S que tendrá por nombre `data`.
+
+Lo genomas 16S los podrás encontrar [**aquí**](https://drive.google.com/drive/folders/1mQRMfCqHzCaF9_sc_az1Cj3l6YCAAB5V?usp=drive_link)para descargar.
+
+A continuación.
+
+```{bash, eval=FALSE, echo=TRUE}
+mkdir 2025_Demo_tomato_16S
+cd 2025_Demo_tomato_16S
+mkdir data
+```
+
+## Importar datos pareados con Qiime2
+
+Vamos a generar un archivo `manifiesto` en el vamos a indicar la localización de las lecturas pareadas. El archivo se ve de la siguiente manera:
+
+```{r, echo=FALSE, message=FALSE}
+df <- readr::read_tsv("../2025_Demo_16S_tomate/tomato_manifest")
+
+df
+```
+
+Este archivo lo vamos a nombrar como `tomato_manifest`, este archivo es de tipo `tab-separate-value`. Puedes descargar el archivo `manifiesto` [aquí](https://drive.google.com/file/d/1hIzzApEfZfKqOlxhjVDsSvKVmqUbEA1d/view?usp=drive_link).
+
+Para importar los secuencias 16S pareadas vamos a utilizar el siguiente código:
+
+```{bash, eval=FALSE, echo=TRUE}
+qiime tools import \
+--type 'SampleData[PairedEndSequencesWithQuality]' \
+--input-path tomato_manifest \
+--output-path paired-end-tomato-16s.qza \
+--input-format PairedEndFastqManifestPhred33V2
+
+```
+
+Una vez importadas las secuencias, vamos a realizar un preprocesmaiento con `cutadapt` para eliminar adapdores, `qiime2` nos permite hacer esto utilizando la siguiente instrucción:
+
+```{bash, eval=FALSE, echo=TRUE}
+qiime cutadapt trim-paired \
+--i-demultiplexed-sequences paired-end-tomato-16s.qza \
+--p-front-f CCTACGGGNGGCWGCAG \
+--p-adapter-f GGATTAGATACCCBDGTAGTC \
+--p-front-r GACTACHVGGGTATCTAATCC \
+--p-adapter-r CTGCWGCCNCCCGTAGG \
+--p-match-read-wildcards \
+--p-discard-untrimmed \
+--o-trimmed-sequences trimmed_paired-end-tomato-16s.qza --p-cores 5
+```
+
+### Explicación del comando:
+
+-   **`--i-demultiplexed-sequences paired-end-tomato-16s.qza`**\
+
+    Este parámetro indica el archivo de entrada que contiene tus secuencias pareadas ya demultiplexadas. El archivo de entrada es `paired-end-tomato-16s.qza`.
+
+-   **Adaptadores para las lecturas forward y reverse**
+
+    -   **`--p-front-f CCTACGGGNGGCWGCAG`**: Adaptador 5' de las lecturas forward.
+
+    -   **`--p-adapter-f GGATTAGATACCCBDGTAGTC`**: Adaptador 3' de las lecturas forward.
+
+    -   **`--p-front-r GACTACHVGGGTATCTAATCC`**: Adaptador 5' de las lecturas reverse.
+
+    -   **`--p-adapter-r CTGCWGCCNCCCGTAGG`**: Adaptador 3' de las lecturas reverse.
+
+-   **`--p-match-read-wildcards`**\
+
+    Este flag permite que los comodines (como N, W, B, D, H, V) en los adaptadores coincidan con las bases en las secuencias de lectura.
+
+-   **`--p-discard-untrimmed`**\
+
+    Esta opción descarta las secuencias que no contienen los adaptadores especificados, asegurando que solo se conserven las lecturas correctamente recortadas.
+
+-   **`--o-trimmed-sequences trimmed.qza`**\
+
+    Define el archivo de salida en formato `QZA` (`trimmed_paired-end-tomato-16s.qza`) que contendrá las secuencias recortadas. `Qiime` genera un solo archivo `QZA` que puedes usar en pasos posteriores del análisis.
+
+## Explorar los archivos importados
+
+Qiime permite generar un reporte HTML para ver la cantidad de lecturas por muestras y métricas generales de secuencia. Para ello podemos generar el siguiente archivo:
+
+```{bash, eval=FALSE, echo=TRUE}
+qiime demux summarize \
+--i-data trimmed_paired-end-tomato-16s.qza \
+--o-visualization summary_tomato_16s.qzv
+```
+
+Para visualizar este archivo utiliza el siguiente código:
+
+```{bash, eval=FALSE, echo=TRUE}
+qiime tools view summary_tomato_16s.qzv
+```
+
+## DADA2
+
+```{bash, eval=FALSE, echo=TRUE}
+qiime dada2 denoise-paired \
+--i-demultiplexed-seqs trimmed_paired-end-tomato-16s.qza \
+--p-trunc-len-f 280 \
+--p-trunc-len-r 260 \
+--o-representative-sequences rep-seqs-dada2-tomato-16s.qza \
+--o-table table-dada2-tomato-16s.qza \
+--o-denoising-stats stats-dada2-tomato-16s.qza \
+--p-n-threads 5
+```
+
+Con esto podemos ver un reporte de la cantidad de lecturas filtradas:
+
+```{bash, eval=FALSE, echo=TRUE}
+qiime metadata tabulate \
+  --m-input-file stats-dada2-tomato-16s.qza \
+  --o-visualization stats-dada2-tomato-16s.qzv
+  
+qiime tools view stats-dada2-tomato-16s.qzv
+```
+
+Después de terminar el paso de filtrado de calidad, querrás explorar los datos que obtuviste. Este filtrado es importante porque elimina las secuencias de baja calidad o con errores, dejándote datos más confiables para trabajar. Para revisar esos datos, puedes usar dos comandos que te muestran resúmenes visuales fáciles de entender.
+
+```{bash, eval=FALSE, echo=TRUE}
+qiime feature-table summarize \
+  --i-table table-dada2-tomato-16s.qza \
+  --o-visualization table-dada2-tomato-16s.qzv \
+  --m-sample-metadata-file sample-metadata.tsv
+```
+
+```{bash, eval=FALSE, echo=TRUE}
+qiime feature-table tabulate-seqs \
+  --i-data rep-seqs-dada2-tomato-16s.qza \
+  --o-visualization rep-seqs-dada2-tomato-16s.qzv
+```
+
+-   **El comando `feature-table summarize`**, para cuando se cuenta con `metadata.`\
+
+    Este comando te ayuda a ver:
+
+    -   **Cuántas secuencias hay en cada muestra**: por ejemplo, cuántas secuencias tiene cada una de tus muestras biológicas.
+
+    -   **Cuántas secuencias hay por característica**: las características pueden ser cosas como tipos de bacterias o genes que encontraste, en caso de agregar metadatos.
+
+    -   **Gráficos (histogramas)**: estos te muestran cómo se distribuyen las secuencias.
+
+    -   **Estadísticas básicas**: algunos números que resumen tus datos de forma general, para que tengas una idea rápida de lo que tienes.
+
+-   **El comando `feature-table tabulate-seqs`**\
+
+    Este comando es útil porque:
+
+    -   Te da una lista que conecta cada **ID de característica** (un código único para cada característica) con la secuencia de ADN que representa.
+
+    -   Además, te ofrece **enlaces** para buscar esas secuencias en una base de datos grande llamada **NCBI nt**.
+
+### ¿Por qué son útiles estos comandos?
+
+-   El primero te da una visión general de tus datos: cuántas secuencias tienes y cómo están organizadas.
+
+-   El segundo te permite investigar a fondo las características que te interesen, conectando los códigos con las secuencias reales y dándote herramientas para explorar más.
+
+Más adelante en el tutorial, cuando quieras aprender más sobre características específicas que sean importantes en tus datos, el segundo comando será especialmente útil. Estos pasos te ayudarán a entender mejor tus datos filtrados y a seguir con tu análisis de manera informada.
