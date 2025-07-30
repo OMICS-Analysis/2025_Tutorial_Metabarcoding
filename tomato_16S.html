@@ -8,7 +8,7 @@
 
 <meta name="author" content="OMICs analysis">
 
-<title>Metagenomica de Tomate 16S</title>
+<title>Metagenomica de Tomate 16S usando Qiime2</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -80,7 +80,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title">Metagenomica de Tomate 16S</h1>
+<h1 class="title">Metagenomica de Tomate 16S usando Qiime2</h1>
 </div>
 
 
@@ -107,13 +107,17 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <h2 class="anchored" data-anchor-id="tomate-16s">Tomate 16S</h2>
 <p>Datos de partida “<a href="https://www.ncbi.nlm.nih.gov/sra/?term=SRX13358039">Disentangling the genetic basis of rhizosphere microbiome assembly in tomato</a>”</p>
 <p>Para este tutorial vamos a utilizar <a href="https://qiime2.org/"><strong>Qiime2</strong></a><strong>,</strong> <a href="https://library.qiime2.org/quickstart">aquí</a> lo puedes instalar según sea tu sistema operativo. Para los siguientes pasos vamos a autilizar la distribución “<a href="https://amplicon-docs.qiime2.org/">amplicon</a>”. Este tutorial se hizo utilizando el sistema operativo <code>Ubuntu 22.04.5 LTS</code>, en un equipo con <code>24 Gb</code> de <code>RAM</code> <code>Intel® Core™ i7-3610QM CPU @ 2.30GHz × 8</code>. Todo se hizo usando la <code>terminal</code>.</p>
+<p>Una vez instalado <code>qiime</code> activa el ambiente conda.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="ex">conda</span> activate qiime2-amplicon-2024.10</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
 <p><strong>Primer paso:</strong> Genera una carpeta (directorio) exclusiva para llevar a cabo el proyecto, en este caso el nombre de la carpeta es <code>2025_Demo_tomato_16S</code>, en ella se va generar una carpeta para guardar los genomas 16S que tendrá por nombre <code>data</code>.</p>
 <p>Lo genomas 16S los podrás encontrar <a href="https://drive.google.com/drive/folders/1mQRMfCqHzCaF9_sc_az1Cj3l6YCAAB5V?usp=drive_link"><strong>aquí</strong></a>para descargar.</p>
 <p>A continuación.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">mkdir</span> 2025_Demo_tomato_16S</span>
-<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="bu">cd</span> 2025_Demo_tomato_16S</span>
-<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="fu">mkdir</span> data</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="fu">mkdir</span> 2025_Demo_tomato_16S</span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="bu">cd</span> 2025_Demo_tomato_16S</span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a><span class="fu">mkdir</span> data</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </section>
 <section id="importar-datos-pareados-con-qiime2" class="level2">
@@ -141,23 +145,23 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <p>Este archivo lo vamos a nombrar como <code>tomato_manifest</code>, este archivo es de tipo <code>tab-separate-value</code>. Puedes descargar el archivo <code>manifiesto</code> <a href="https://drive.google.com/file/d/1hIzzApEfZfKqOlxhjVDsSvKVmqUbEA1d/view?usp=drive_link">aquí</a>.</p>
 <p>Para importar los secuencias 16S pareadas vamos a utilizar el siguiente código:</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="ex">qiime</span> tools import <span class="dt">\</span></span>
-<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>--type <span class="st">'SampleData[PairedEndSequencesWithQuality]'</span> <span class="dt">\</span></span>
-<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>--input-path tomato_manifest <span class="dt">\</span></span>
-<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a>--output-path paired-end-tomato-16s.qza <span class="dt">\</span></span>
-<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a>--input-format PairedEndFastqManifestPhred33V2</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="ex">qiime</span> tools import <span class="dt">\</span></span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>--type <span class="st">'SampleData[PairedEndSequencesWithQuality]'</span> <span class="dt">\</span></span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>--input-path tomato_manifest <span class="dt">\</span></span>
+<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a>--output-path paired-end-tomato-16s.qza <span class="dt">\</span></span>
+<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a>--input-format PairedEndFastqManifestPhred33V2</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>Una vez importadas las secuencias, vamos a realizar un preprocesmaiento con <code>cutadapt</code> para eliminar adapdores, <code>qiime2</code> nos permite hacer esto utilizando la siguiente instrucción:</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="ex">qiime</span> cutadapt trim-paired <span class="dt">\</span></span>
-<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>--i-demultiplexed-sequences paired-end-tomato-16s.qza <span class="dt">\</span></span>
-<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>--p-front-f CCTACGGGNGGCWGCAG <span class="dt">\</span></span>
-<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a>--p-adapter-f GGATTAGATACCCBDGTAGTC <span class="dt">\</span></span>
-<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a>--p-front-r GACTACHVGGGTATCTAATCC <span class="dt">\</span></span>
-<span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a>--p-adapter-r CTGCWGCCNCCCGTAGG <span class="dt">\</span></span>
-<span id="cb4-7"><a href="#cb4-7" aria-hidden="true" tabindex="-1"></a>--p-match-read-wildcards <span class="dt">\</span></span>
-<span id="cb4-8"><a href="#cb4-8" aria-hidden="true" tabindex="-1"></a>--p-discard-untrimmed <span class="dt">\</span></span>
-<span id="cb4-9"><a href="#cb4-9" aria-hidden="true" tabindex="-1"></a>--o-trimmed-sequences trimmed_paired-end-tomato-16s.qza <span class="at">--p-cores</span> 5</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="ex">qiime</span> cutadapt trim-paired <span class="dt">\</span></span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>--i-demultiplexed-sequences paired-end-tomato-16s.qza <span class="dt">\</span></span>
+<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a>--p-front-f CCTACGGGNGGCWGCAG <span class="dt">\</span></span>
+<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a>--p-adapter-f GGATTAGATACCCBDGTAGTC <span class="dt">\</span></span>
+<span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a>--p-front-r GACTACHVGGGTATCTAATCC <span class="dt">\</span></span>
+<span id="cb5-6"><a href="#cb5-6" aria-hidden="true" tabindex="-1"></a>--p-adapter-r CTGCWGCCNCCCGTAGG <span class="dt">\</span></span>
+<span id="cb5-7"><a href="#cb5-7" aria-hidden="true" tabindex="-1"></a>--p-match-read-wildcards <span class="dt">\</span></span>
+<span id="cb5-8"><a href="#cb5-8" aria-hidden="true" tabindex="-1"></a>--p-discard-untrimmed <span class="dt">\</span></span>
+<span id="cb5-9"><a href="#cb5-9" aria-hidden="true" tabindex="-1"></a>--o-trimmed-sequences trimmed_paired-end-tomato-16s.qza <span class="at">--p-cores</span> 5</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <section id="explicación-del-comando" class="level3">
 <h3 class="anchored" data-anchor-id="explicación-del-comando">Explicación del comando:</h3>
@@ -188,46 +192,46 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <h2 class="anchored" data-anchor-id="explorar-los-archivos-importados">Explorar los archivos importados</h2>
 <p>Qiime permite generar un reporte HTML para ver la cantidad de lecturas por muestras y métricas generales de secuencia. Para ello podemos generar el siguiente archivo:</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="ex">qiime</span> demux summarize <span class="dt">\</span></span>
-<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>--i-data trimmed_paired-end-tomato-16s.qza <span class="dt">\</span></span>
-<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a>--o-visualization summary_tomato_16s.qzv</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="ex">qiime</span> demux summarize <span class="dt">\</span></span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>--i-data trimmed_paired-end-tomato-16s.qza <span class="dt">\</span></span>
+<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a>--o-visualization summary_tomato_16s.qzv</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>Para visualizar este archivo utiliza el siguiente código:</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="ex">qiime</span> tools view summary_tomato_16s.qzv</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="ex">qiime</span> tools view summary_tomato_16s.qzv</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </section>
 <section id="dada2" class="level2">
-<h2 class="anchored" data-anchor-id="dada2">DADA2</h2>
+<h2 class="anchored" data-anchor-id="dada2"><a href="https://benjjneb.github.io/dada2/">DADA2</a></h2>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="ex">qiime</span> dada2 denoise-paired <span class="dt">\</span></span>
-<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>--i-demultiplexed-seqs trimmed_paired-end-tomato-16s.qza <span class="dt">\</span></span>
-<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a>--p-trunc-len-f 280 <span class="dt">\</span></span>
-<span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a>--p-trunc-len-r 260 <span class="dt">\</span></span>
-<span id="cb7-5"><a href="#cb7-5" aria-hidden="true" tabindex="-1"></a>--o-representative-sequences rep-seqs-dada2-tomato-16s.qza <span class="dt">\</span></span>
-<span id="cb7-6"><a href="#cb7-6" aria-hidden="true" tabindex="-1"></a>--o-table table-dada2-tomato-16s.qza <span class="dt">\</span></span>
-<span id="cb7-7"><a href="#cb7-7" aria-hidden="true" tabindex="-1"></a>--o-denoising-stats stats-dada2-tomato-16s.qza <span class="dt">\</span></span>
-<span id="cb7-8"><a href="#cb7-8" aria-hidden="true" tabindex="-1"></a>--p-n-threads 5</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="ex">qiime</span> dada2 denoise-paired <span class="dt">\</span></span>
+<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a>--i-demultiplexed-seqs trimmed_paired-end-tomato-16s.qza <span class="dt">\</span></span>
+<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a>--p-trunc-len-f 280 <span class="dt">\</span></span>
+<span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a>--p-trunc-len-r 260 <span class="dt">\</span></span>
+<span id="cb8-5"><a href="#cb8-5" aria-hidden="true" tabindex="-1"></a>--o-representative-sequences rep-seqs-dada2-tomato-16s.qza <span class="dt">\</span></span>
+<span id="cb8-6"><a href="#cb8-6" aria-hidden="true" tabindex="-1"></a>--o-table table-dada2-tomato-16s.qza <span class="dt">\</span></span>
+<span id="cb8-7"><a href="#cb8-7" aria-hidden="true" tabindex="-1"></a>--o-denoising-stats stats-dada2-tomato-16s.qza <span class="dt">\</span></span>
+<span id="cb8-8"><a href="#cb8-8" aria-hidden="true" tabindex="-1"></a>--p-n-threads 5</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>Con esto podemos ver un reporte de la cantidad de lecturas filtradas:</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="ex">qiime</span> metadata tabulate <span class="dt">\</span></span>
-<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a>  <span class="at">--m-input-file</span> stats-dada2-tomato-16s.qza <span class="dt">\</span></span>
-<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">--o-visualization</span> stats-dada2-tomato-16s.qzv</span>
-<span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a>  </span>
-<span id="cb8-5"><a href="#cb8-5" aria-hidden="true" tabindex="-1"></a><span class="ex">qiime</span> tools view stats-dada2-tomato-16s.qzv</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="ex">qiime</span> metadata tabulate <span class="dt">\</span></span>
+<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a>  <span class="at">--m-input-file</span> stats-dada2-tomato-16s.qza <span class="dt">\</span></span>
+<span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">--o-visualization</span> stats-dada2-tomato-16s.qzv</span>
+<span id="cb9-4"><a href="#cb9-4" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb9-5"><a href="#cb9-5" aria-hidden="true" tabindex="-1"></a><span class="ex">qiime</span> tools view stats-dada2-tomato-16s.qzv</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>Después de terminar el paso de filtrado de calidad, querrás explorar los datos que obtuviste. Este filtrado es importante porque elimina las secuencias de baja calidad o con errores, dejándote datos más confiables para trabajar. Para revisar esos datos, puedes usar dos comandos que te muestran resúmenes visuales fáciles de entender.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="ex">qiime</span> feature-table summarize <span class="dt">\</span></span>
-<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a>  <span class="at">--i-table</span> table-dada2-tomato-16s.qza <span class="dt">\</span></span>
-<span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">--o-visualization</span> table-dada2-tomato-16s.qzv <span class="dt">\</span></span>
-<span id="cb9-4"><a href="#cb9-4" aria-hidden="true" tabindex="-1"></a>  <span class="at">--m-sample-metadata-file</span> sample-metadata.tsv</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb10"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="ex">qiime</span> feature-table summarize <span class="dt">\</span></span>
+<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a>  <span class="at">--i-table</span> table-dada2-tomato-16s.qza <span class="dt">\</span></span>
+<span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">--o-visualization</span> table-dada2-tomato-16s.qzv <span class="dt">\</span></span>
+<span id="cb10-4"><a href="#cb10-4" aria-hidden="true" tabindex="-1"></a>  <span class="at">--m-sample-metadata-file</span> Experiment_Design.tsv</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb10"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="ex">qiime</span> feature-table tabulate-seqs <span class="dt">\</span></span>
-<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a>  <span class="at">--i-data</span> rep-seqs-dada2-tomato-16s.qza <span class="dt">\</span></span>
-<span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">--o-visualization</span> rep-seqs-dada2-tomato-16s.qzv</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="ex">qiime</span> feature-table tabulate-seqs <span class="dt">\</span></span>
+<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a>  <span class="at">--i-data</span> rep-seqs-dada2-tomato-16s.qza <span class="dt">\</span></span>
+<span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">--o-visualization</span> rep-seqs-dada2-tomato-16s.qzv</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <ul>
 <li><p><strong>El comando <code>feature-table summarize</code></strong>, para cuando se cuenta con <code>metadata.</code><br>

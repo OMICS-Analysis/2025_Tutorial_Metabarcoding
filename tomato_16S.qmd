@@ -1,5 +1,5 @@
 ---
-title: "Metagenomica de Tomate 16S"
+title: "Metagenomica de Tomate 16S usando Qiime2"
 author: "OMICs analysis"
 format: html
 editor: visual
@@ -12,6 +12,12 @@ execute:
 Datos de partida "[Disentangling the genetic basis of rhizosphere microbiome assembly in tomato](https://www.ncbi.nlm.nih.gov/sra/?term=SRX13358039)"
 
 Para este tutorial vamos a utilizar [**Qiime2**](https://qiime2.org/)**,** [aquí](https://library.qiime2.org/quickstart) lo puedes instalar según sea tu sistema operativo. Para los siguientes pasos vamos a autilizar la distribución "[amplicon](https://amplicon-docs.qiime2.org/)". Este tutorial se hizo utilizando el sistema operativo `Ubuntu 22.04.5 LTS`, en un equipo con `24 Gb` de `RAM` `Intel® Core™ i7-3610QM CPU @ 2.30GHz × 8`. Todo se hizo usando la `terminal`.
+
+Una vez instalado `qiime` activa el ambiente conda.
+
+```{bash, eval=FALSE, echo=TRUE}
+conda activate qiime2-amplicon-2024.10
+```
 
 **Primer paso:** Genera una carpeta (directorio) exclusiva para llevar a cabo el proyecto, en este caso el nombre de la carpeta es `2025_Demo_tomato_16S`, en ella se va generar una carpeta para guardar los genomas 16S que tendrá por nombre `data`.
 
@@ -106,7 +112,7 @@ Para visualizar este archivo utiliza el siguiente código:
 qiime tools view summary_tomato_16s.qzv
 ```
 
-## DADA2
+## [DADA2](https://benjjneb.github.io/dada2/)
 
 ```{bash, eval=FALSE, echo=TRUE}
 qiime dada2 denoise-paired \
@@ -135,7 +141,7 @@ Después de terminar el paso de filtrado de calidad, querrás explorar los datos
 qiime feature-table summarize \
   --i-table table-dada2-tomato-16s.qza \
   --o-visualization table-dada2-tomato-16s.qzv \
-  --m-sample-metadata-file sample-metadata.tsv
+  --m-sample-metadata-file Experiment_Design.tsv
 ```
 
 ```{bash, eval=FALSE, echo=TRUE}
