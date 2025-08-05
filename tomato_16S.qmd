@@ -1,7 +1,9 @@
 ---
-title: "Metagenomica de Tomate 16S usando Qiime2"
+title: "Metabarcoding: Tomate 16S usando Qiime2"
 author: "OMICs analysis"
-format: html
+format: 
+  html:
+    theme: journal
 editor: visual
 execute:
   engine: knitr
@@ -11,7 +13,7 @@ execute:
 
 Datos de partida "[Disentangling the genetic basis of rhizosphere microbiome assembly in tomato](https://www.ncbi.nlm.nih.gov/sra/?term=SRX13358039)"
 
-Para este tutorial vamos a utilizar [**Qiime2**](https://qiime2.org/)**,** [aquí](https://library.qiime2.org/quickstart) lo puedes instalar según sea tu sistema operativo. Para los siguientes pasos vamos a autilizar la distribución "[amplicon](https://amplicon-docs.qiime2.org/)". Este tutorial se hizo utilizando el sistema operativo `Ubuntu 22.04.5 LTS`, en un equipo con `24 Gb` de `RAM` `Intel® Core™ i7-3610QM CPU @ 2.30GHz × 8`. Todo se hizo usando la `terminal`.
+Para este tutorial vamos a utilizar [Qiime2](https://qiime2.org/)**,** [aquí](https://library.qiime2.org/quickstart) lo puedes instalar según sea tu sistema operativo. Para los siguientes pasos vamos a autilizar la distribución "[amplicon](https://amplicon-docs.qiime2.org/)". Este tutorial se hizo utilizando el sistema operativo `Ubuntu 22.04.5 LTS`, en un equipo con `24 Gb` de `RAM` `Intel® Core™ i7-3610QM CPU @ 2.30GHz × 8`. Todo se hizo usando la `terminal`.
 
 Una vez instalado `qiime` activa el ambiente conda.
 
@@ -54,7 +56,7 @@ qiime tools import \
 
 ```
 
-Una vez importadas las secuencias, vamos a realizar un preprocesmaiento con `cutadapt` para eliminar adapdores, `qiime2` nos permite hacer esto utilizando la siguiente instrucción:
+Una vez importadas las secuencias, vamos a realizar un preprocesmaiento con [`cutadapt`](https://cutadapt.readthedocs.io/en/stable/) para eliminar adapdores, `qiime2` nos permite hacer esto utilizando la siguiente instrucción:
 
 ```{bash, eval=FALSE, echo=TRUE}
 qiime cutadapt trim-paired \
@@ -137,6 +139,14 @@ qiime tools view stats-dada2-tomato-16s.qzv
 
 Después de terminar el paso de filtrado de calidad, querrás explorar los datos que obtuviste. Este filtrado es importante porque elimina las secuencias de baja calidad o con errores, dejándote datos más confiables para trabajar. Para revisar esos datos, puedes usar dos comandos que te muestran resúmenes visuales fáciles de entender.
 
+EXPERIMENT DESIGN
+
+```{r, echo=FALSE, message=FALSE}
+df <- readr::read_tsv("../2025_Demo_16S_tomate/Experiment_Design.tsv")
+
+df
+```
+
 ```{bash, eval=FALSE, echo=TRUE}
 qiime feature-table summarize \
   --i-table table-dada2-tomato-16s.qza \
@@ -176,4 +186,219 @@ qiime feature-table tabulate-seqs \
 
 -   El segundo te permite investigar a fondo las características que te interesen, conectando los códigos con las secuencias reales y dándote herramientas para explorar más.
 
-Más adelante en el tutorial, cuando quieras aprender más sobre características específicas que sean importantes en tus datos, el segundo comando será especialmente útil. Estos pasos te ayudarán a entender mejor tus datos filtrados y a seguir con tu análisis de manera informada.
+# Medidas de diversidad
+
+```{bash, eval=FALSE}
+qiime diversity core-metrics-phylogenetic \
+--i-phylogeny rooted-tree-dada2-tomato-16s.qza \
+--i-table table-dada2-tomato-16s.qza \
+--p-sampling-depth 16890 \
+--m-metadata-file Experiment_Design.tsv \
+--output-dir core-metrics-results
+```
+
+### Distancia Bray Curtis
+
+![](images/bray_curtis.png){fig-align="center"}
+
+### Distancia de Jaccard
+
+![](images/distancia_jaccard.png){fig-align="center"}
+
+## Alfa diversidad
+
+```{bash, eval=FALSE}
+qiime diversity alpha-group-significance \
+--i-alpha-diversity core-metrics-results/faith_pd_vector.qza \
+--m-metadata-file Experiment_Design.tsv \
+--o-visualization core-metrics-results/faith-pd-group-significance.qzv
+```
+
+```{bash, eval=FALSE}
+qiime diversity alpha-group-significance \
+--i-alpha-diversity core-metrics-results/evenness_vector.qza \
+--m-metadata-file Experiment_Design.tsv \
+--o-visualization core-metrics-results/evenness-group-significance.qzv
+
+```
+
+### Eveness (Uniformidad de grupo)
+
+![](images/alpha-compare.png){fig-align="center"}
+
+```{r, echo=FALSE, message=FALSE}
+df <- readr::read_csv("tables/kruskal-wallis-pairwise-Type_evenness.csv")
+
+gt::gt(df)
+```
+
+### Faith's Phylogenetic Diversity (PD)
+
+![](images/alpha-compare_faith.png){fig-align="center"}
+
+```{r, echo=FALSE, message=FALSE}
+
+df <- readr::read_csv("tables/kruskal-wallis-pairwise-Type_faith.csv")
+
+gt::gt(df)
+```
+
+## Beta diversidad
+
+```{bash, eval=FALSE}
+qiime diversity beta-group-significance \
+--i-distance-matrix core-metrics-results/unweighted_unifrac_distance_matrix.qza \
+--m-metadata-file Experiment_Design.tsv \
+--m-metadata-column Type \
+--o-visualization core-metrics-results/unweighted-unifrac-body-site-significance.qzv \
+--p-pairwise
+```
+
+```{bash, eval=FALSE}
+qiime diversity beta-group-significance \
+--i-distance-matrix core-metrics-results/unweighted_unifrac_distance_matrix.qza \
+--m-metadata-file Experiment_Design.tsv \
+--o-visualization core-metrics-results/unweighted-unifrac-significance.qzv \
+--p-pairwise
+```
+
+### Unweighted UniFrac Distance: PERMANOVA
+
+```{r, message=FALSE, echo=FALSE}
+suppressPackageStartupMessages(library(tidyverse))
+
+df <- readr::read_tsv("tables/raw_data_permanova.tsv")
+
+h1 <- df %>% 
+  filter(Group1 == "NC")
+
+
+ggplot(h1, aes(y = Distance, x = Group2, fill = Group2)) +
+  geom_boxplot(color = "black") + theme_classic() +
+  labs(title = "Distance to NC", fill = "Group") +
+  xlab("Group") + 
+  theme(text = element_text(size = 20)) +
+  scale_fill_manual(values = c( "#8f0052","#276518"))
+
+
+h2 <- df %>% 
+  filter(Group1 == "Tomato")
+
+
+ggplot(h2, aes(y = Distance, x = Group2, fill = Group2)) +
+  geom_boxplot(color = "black") + theme_classic() +
+  labs(title = "Distance to Tomato", fill = "Group") +
+  xlab("Group") + 
+  theme(text = element_text(size = 20)) +
+  scale_fill_manual(values = c( "#8f0052","#276518"))
+
+```
+
+```{r, message=FALSE, echo=FALSE}
+
+df <- readr::read_csv("tables/permanova-pairwise.csv")
+
+gt::gt(df)
+
+```
+
+## Alfa rarefacción
+
+```{bash, eval=FALSE}
+qiime diversity alpha-rarefaction \
+--i-table table-dada2-tomato-16s.qza \
+--i-phylogeny rooted-tree-dada2-tomato-16s.qza \
+--p-max-depth 4000 \
+--m-metadata-file Experiment_Design.tsv \
+--o-visualization alpha-rarefaction-dada2-tomato-16s.qzv
+```
+
+# Taxonomía
+
+```{bash, eval=FALSE}
+qiime rescript get-silva-data \
+--p-version '138.2' \
+--p-target 'SSURef_NR99' \
+--o-silva-sequences silva-138.2-ssu-nr99-rna-seqs.qza \
+--o-silva-taxonomy silva-138.2-ssu-nr99-tax.qza
+```
+
+```{bash, eval=FALSE}
+qiime rescript reverse-transcribe \
+--i-rna-sequences silva-138.2-ssu-nr99-rna-seqs.qza \    --o-dna-sequences silva-138.2-ssu-nr99-seqs.qza
+```
+
+```{bash, eval=FALSE}
+qiime rescript cull-seqs \
+--i-sequences silva-138.2-ssu-nr99-seqs.qza \
+--o-clean-sequences silva-138.2-ssu-nr99-seqs-cleaned.qza
+```
+
+```{bash, eval=FALSE}
+qiime rescript filter-seqs-length-by-taxon \
+--i-sequences silva-138.2-ssu-nr99-seqs-cleaned.qza \
+--i-taxonomy silva-138.2-ssu-nr99-tax.qza \
+--p-labels Archaea Bacteria Eukaryota \
+--p-min-lens 900 1200 1400 \
+--o-filtered-seqs silva-138.2-ssu-nr99-seqs-filt.qza \    --o-discarded-seqs silva-138.2-ssu-nr99-seqs-discard.qza
+```
+
+```{bash, eval=FALSE}
+qiime rescript dereplicate \
+--i-sequences silva-138.2-ssu-nr99-seqs-filt.qza  \
+--i-taxa silva-138.2-ssu-nr99-tax.qza \
+--p-mode 'uniq' \
+--o-dereplicated-sequences silva-138.2-ssu-nr99-seqs-derep-uniq.qza \
+--o-dereplicated-taxa silva-138.2-ssu-nr99-tax-derep-uniq.qza
+```
+
+```{bash, eval=FALSE}
+qiime feature-classifier extract-reads \
+--i-sequences silva-138.2-ssu-nr99-seqs-derep-uniq.qza \
+--p-f-primer GTGYCAGCMGCCGCGGTAA \
+--p-r-primer GGACTACNVGGGTWTCTAAT \
+--p-n-jobs 5 \
+--p-read-orientation 'forward' \
+--o-reads silva-138.2-ssu-nr99-seqs-515f-806r.qza
+```
+
+```{bash, eval=FALSE}
+iime rescript dereplicate \
+--i-sequences silva-138.2-ssu-nr99-seqs-515f-806r.qza \
+--i-taxa silva-138.2-ssu-nr99-tax-derep-uniq.qza \
+--p-mode 'uniq' \
+--o-dereplicated-sequences silva-138.2-ssu-nr99-seqs-515f-806r-uniq.qza \
+--o-dereplicated-taxa  silva-138.2-ssu-nr99-tax-515f-806r-derep-uniq.qza
+```
+
+```{bash, eval=FALSE}
+qiime feature-classifier fit-classifier-naive-bayes \
+--i-reference-reads silva-138.2-ssu-nr99-seqs-515f-806r-uniq.qza \
+--i-reference-taxonomy silva-138.2-ssu-nr99-tax-515f-806r-derep-uniq.qza \
+--o-classifier silva-138.2-ssu-nr99-515f-806r-classifier.qza
+```
+
+## Diversidad/abundancía
+
+```{bash, eval=FALSE}
+qiime feature-classifier classify-sklearn \
+  --i-classifier silva-138.2-ssu-nr99-515f-806r-classifier.qza \
+  --i-reads rep-seqs-dada2-tomato-16s.qza \
+  --o-classification taxonomy.qza
+```
+
+```{bash, eval=FALSE}
+qiime metadata tabulate \
+  --m-input-file taxonomy.qza \
+  --o-visualization taxonomy.qzv
+```
+
+```{bash, eval=FALSE}
+qiime taxa barplot \
+  --i-table table-dada2-tomato-16s.qza \
+  --i-taxonomy taxonomy.qza \
+  --m-metadata-file Experiment_Design.tsv \
+  --o-visualization taxa-bar-plots.qzv
+```
+
+![](images/rect469.png){fig-align="center"}
