@@ -317,7 +317,7 @@ qiime diversity alpha-rarefaction \
 
 Los rasgos observados (Observed features) son una métrica de diversidad alfa fundamental que cuantifica la riqueza de una comunidad microbiana contando el número de unidades taxonómicas operativas (OTU) distintas o variantes de secuencia de amplicón (ASV) presentes en una sola muestra.
 
-```{r, message=FALSE, echo=FALSE}
+```{r, message=FALSE, echo=FALSE, warning=FALSE}
 
 suppressPackageStartupMessages(library(tidyverse))
 
@@ -363,7 +363,7 @@ ggplot(obfe_long, aes(
   ) +
   scale_x_discrete(name = "Sequencing Depth") +
   scale_y_continuous(name = "Observed Features") +
-  theme_minimal(base_size = 14) +
+  theme_minimal(base_size = 15) +
   theme(
     legend.title = element_blank(),
     panel.grid.major.x = element_blank()
@@ -371,6 +371,10 @@ ggplot(obfe_long, aes(
   scale_fill_manual(values = c( "#8f0052","#276518")) +
   scale_color_manual(values = c( "#8f0052","#276518"))
 ```
+
+### Shannon
+
+El índice de diversidad de Shannon es una **métrica comúnmente utilizada para analizar la diversidad alfa, ya que considera tanto la riqueza de especies como la abundancia relativa de cada taxón dentro de una muestra**.
 
 # Taxonomía
 
