@@ -313,6 +313,65 @@ qiime diversity alpha-rarefaction \
 --o-visualization alpha-rarefaction-dada2-tomato-16s.qzv
 ```
 
+### Observed Features
+
+Los rasgos observados (Observed features) son una métrica de diversidad alfa fundamental que cuantifica la riqueza de una comunidad microbiana contando el número de unidades taxonómicas operativas (OTU) distintas o variantes de secuencia de amplicón (ASV) presentes en una sola muestra.
+
+```{r, message=FALSE, echo=FALSE}
+
+suppressPackageStartupMessages(library(tidyverse))
+
+obfe <- readr::read_csv("tables/observed_features.csv",
+                        col_types = cols(
+                 `sample-id` = col_skip(),
+                 accession   = col_skip(),
+                 sra_run     = col_skip(),
+                 Type        = col_factor(),
+                 .default    = col_double()
+               ))
+
+obfe_long <- obfe %>%
+  pivot_longer(
+    cols = starts_with("depth-"), 
+    names_to = c("Depth", "Iter"),            
+    names_pattern = "depth-([0-9]+)_iter-([0-9]+)",
+    values_to = "observed_features",
+    values_drop_na = TRUE                     
+  ) %>%
+  mutate(
+    Depth = as.integer(Depth),
+    Iter  = as.integer(Iter)
+  )
+
+
+ggplot(obfe_long, aes(
+    x    = factor(Depth),                   
+    y    = observed_features,
+    fill = Type                         
+  )) +
+  geom_boxplot(position = position_dodge(width = 0.8),
+               color = "black") +
+  stat_summary(
+    aes(
+      x      = as.numeric(factor(Depth)),
+      colour = Type,
+      group  = Type
+    ),
+    fun    = median,
+    geom   = "line",
+    size   = 1
+  ) +
+  scale_x_discrete(name = "Sequencing Depth") +
+  scale_y_continuous(name = "Observed Features") +
+  theme_minimal(base_size = 14) +
+  theme(
+    legend.title = element_blank(),
+    panel.grid.major.x = element_blank()
+  ) +
+  scale_fill_manual(values = c( "#8f0052","#276518")) +
+  scale_color_manual(values = c( "#8f0052","#276518"))
+```
+
 # Taxonomía
 
 ```{bash, eval=FALSE}
