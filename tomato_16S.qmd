@@ -578,7 +578,7 @@ ggplot(obfe_long, aes(
 
 La diversidad filogenética de Faith (PD de Faith) es una medida de la biodiversidad que cuantifica la amplitud de la historia evolutiva representada por un conjunto de especies u otras unidades taxonómicas, definida como la suma de las longitudes de las ramas de un árbol filogenético que conectan los miembros del conjunto.
 
-```{r, message=FALSE, echo=TRUE, warning=FALSE}
+```{r, message=FALSE, echo=FALSE, warning=FALSE}
 suppressPackageStartupMessages(library(tidyverse))
 
 obfe <- readr::read_csv("tables/faith_pd.csv",
@@ -634,6 +634,10 @@ ggplot(obfe_long, aes(
 
 # Taxonomía
 
+### Descarga de la base de datos SILVA
+
+Descarga la base de datos SILVA en su versión 138.2, específicamente el conjunto de datos SSURef_NR99. Este conjunto contiene secuencias del gen 16S rRNA agrupadas al 99% de similitud, lo que reduce redundancia y facilita el procesamiento.
+
 ```{bash, eval=FALSE}
 qiime rescript get-silva-data \
 --p-version '138.2' \
@@ -642,16 +646,36 @@ qiime rescript get-silva-data \
 --o-silva-taxonomy silva-138.2-ssu-nr99-tax.qza
 ```
 
+### Conversión de RNA a DNA
+
+Convierte las secuencias de RNA descargadas a secuencias de DNA. Esto es necesario porque los análisis posteriores, incluyendo el entrenamiento del clasificador.
+
 ```{bash, eval=FALSE}
 qiime rescript reverse-transcribe \
 --i-rna-sequences silva-138.2-ssu-nr99-rna-seqs.qza \    --o-dna-sequences silva-138.2-ssu-nr99-seqs.qza
 ```
+
+### Eliminación de secuencias de baja calidad
+
+Filtra y elimina secuencias de baja calidad o con posibles errores, como aquellas con bases ambiguas (ej. 'N') o secuencias con regiones repetitivas largas que podrían afectar la precisión del clasificador.
 
 ```{bash, eval=FALSE}
 qiime rescript cull-seqs \
 --i-sequences silva-138.2-ssu-nr99-seqs.qza \
 --o-clean-sequences silva-138.2-ssu-nr99-seqs-cleaned.qza
 ```
+
+### Filtrado de secuencias por longitud y taxón
+
+Filtra las secuencias según su longitud mínima, dependiendo del grupo taxonómico:
+
+-   Archaea: ≥900 bp
+
+-   Bacteria: ≥1200 bp
+
+-   Eukaryota: ≥1400 bp
+
+Esto asegura que solo se utilicen secuencias completas o casi completas.
 
 ```{bash, eval=FALSE}
 qiime rescript filter-seqs-length-by-taxon \
@@ -662,6 +686,10 @@ qiime rescript filter-seqs-length-by-taxon \
 --o-filtered-seqs silva-138.2-ssu-nr99-seqs-filt.qza \    --o-discarded-seqs silva-138.2-ssu-nr99-seqs-discard.qza
 ```
 
+### Dereplicación de secuencias
+
+Elimina secuencias duplicadas, manteniendo solo las únicas junto con su información taxonómica. Esto reduce la carga computacional sin perder diversidad taxonómica.
+
 ```{bash, eval=FALSE}
 qiime rescript dereplicate \
 --i-sequences silva-138.2-ssu-nr99-seqs-filt.qza  \
@@ -670,6 +698,10 @@ qiime rescript dereplicate \
 --o-dereplicated-sequences silva-138.2-ssu-nr99-seqs-derep-uniq.qza \
 --o-dereplicated-taxa silva-138.2-ssu-nr99-tax-derep-uniq.qza
 ```
+
+### Extracción de la región V4
+
+Extrae la región hipervariable V4 del gen 16S rRNA usando los cebadores 515F (forward) y 806R (reverse). Esta región es comúnmente utilizada en estudios de microbiomas, por lo que el clasificador se optimiza para datos que la contengan.
 
 ```{bash, eval=FALSE}
 qiime feature-classifier extract-reads \
@@ -681,6 +713,10 @@ qiime feature-classifier extract-reads \
 --o-reads silva-138.2-ssu-nr99-seqs-515f-806r.qza
 ```
 
+### Dereplicación de la región V4
+
+Realiza una segunda dereplicación, esta vez sobre las secuencias de la región V4, eliminando duplicados adicionales que puedan haber surgido tras la extracción.
+
 ```{bash, eval=FALSE}
 iime rescript dereplicate \
 --i-sequences silva-138.2-ssu-nr99-seqs-515f-806r.qza \
@@ -689,6 +725,10 @@ iime rescript dereplicate \
 --o-dereplicated-sequences silva-138.2-ssu-nr99-seqs-515f-806r-uniq.qza \
 --o-dereplicated-taxa  silva-138.2-ssu-nr99-tax-515f-806r-derep-uniq.qza
 ```
+
+### Entrenamiento del clasificador Naive Bayes
+
+Entrena un clasificador Naive Bayes utilizando las secuencias únicas de la región V4 y su taxonomía. Este clasificador puede usarse luego para asignar taxonomía a secuencias 16S de muestras de microbiomas.
 
 ```{bash, eval=FALSE}
 qiime feature-classifier fit-classifier-naive-bayes \
