@@ -3,13 +3,15 @@ title: "Metabarcoding: Tomate 16S usando Qiime2"
 author: "OMICs analysis"
 format: 
   html:
+    toc: true
+    toc-depth: 3
     theme: journal
 editor: visual
 execute:
   engine: knitr
 ---
 
-## Tomate 16S
+# Introducción
 
 Datos de partida "[Disentangling the genetic basis of rhizosphere microbiome assembly in tomato](https://www.ncbi.nlm.nih.gov/sra/?term=SRX13358039)"
 
@@ -23,9 +25,9 @@ conda activate qiime2-amplicon-2024.10
 
 **Primer paso:** Genera una carpeta (directorio) exclusiva para llevar a cabo el proyecto, en este caso el nombre de la carpeta es `2025_Demo_tomato_16S`, en ella se va generar una carpeta para guardar los genomas 16S que tendrá por nombre `data`.
 
-Lo genomas 16S los podrás encontrar [**aquí**](https://drive.google.com/drive/folders/1mQRMfCqHzCaF9_sc_az1Cj3l6YCAAB5V?usp=drive_link)para descargar.
+Lo genomas 16S los podrás encontrar [**aquí**](https://drive.google.com/drive/folders/1mQRMfCqHzCaF9_sc_az1Cj3l6YCAAB5V?usp=drive_link) para descargar.
 
-A continuación.
+Escribe los siguiente comando en la terminal para crear el directorio.
 
 ```{bash, eval=FALSE, echo=TRUE}
 mkdir 2025_Demo_tomato_16S
@@ -33,7 +35,7 @@ cd 2025_Demo_tomato_16S
 mkdir data
 ```
 
-## Importar datos pareados con Qiime2
+# Importar datos pareados con Qiime2
 
 Vamos a generar un archivo `manifiesto` en el vamos a indicar la localización de las lecturas pareadas. El archivo se ve de la siguiente manera:
 
@@ -55,6 +57,29 @@ qiime tools import \
 --input-format PairedEndFastqManifestPhred33V2
 
 ```
+
+Para visualizar la calidad de los archivos importado podemos usar el siguiente comando:
+
+```{bash, eval=FALSE}
+qiime demux summarize \
+--i-data paired-end-tomato-16s.qza \ 
+--o-visualization summary_tmp_tomato_16s.qzv
+
+qiime tools view summary_tmp_tomato_16s.qzv
+```
+
+![](images/forwdard_q1.png){fig-align="center"}
+
+![](images/reverse_q1.png){fig-align="center"}
+
+**Número de lecturas por muestra**
+
+```{r, echo=FALSE, message=FALSE}
+df <- readr::read_tsv("tables/per-sample-fastq-counts.tsv")
+gt::gt(df)
+```
+
+## Cutadapt
 
 Una vez importadas las secuencias, vamos a realizar un preprocesmaiento con [`cutadapt`](https://cutadapt.readthedocs.io/en/stable/) para eliminar adapdores, `qiime2` nos permite hacer esto utilizando la siguiente instrucción:
 
@@ -98,7 +123,7 @@ qiime cutadapt trim-paired \
 
     Define el archivo de salida en formato `QZA` (`trimmed_paired-end-tomato-16s.qza`) que contendrá las secuencias recortadas. `Qiime` genera un solo archivo `QZA` que puedes usar en pasos posteriores del análisis.
 
-## Explorar los archivos importados
+### Explorar los archivos
 
 Qiime permite generar un reporte HTML para ver la cantidad de lecturas por muestras y métricas generales de secuencia. Para ello podemos generar el siguiente archivo:
 
@@ -114,7 +139,14 @@ Para visualizar este archivo utiliza el siguiente código:
 qiime tools view summary_tomato_16s.qzv
 ```
 
-## [DADA2](https://benjjneb.github.io/dada2/)
+**Número de cuentas por muestras después de cuatadapt**
+
+```{r, echo=FALSE, message=FALSE}
+df <- readr::read_tsv("tables/per-sample-fastq-counts_after_qadapt.tsv")
+gt::gt(df)
+```
+
+# Filtrado de lecturas con [DADA2](https://benjjneb.github.io/dada2/)
 
 ```{bash, eval=FALSE, echo=TRUE}
 qiime dada2 denoise-paired \
@@ -137,6 +169,14 @@ qiime metadata tabulate \
 qiime tools view stats-dada2-tomato-16s.qzv
 ```
 
+**Lecturas filtradas con DADA2**
+
+```{r, echo=FALSE, message=FALSE}
+df <- readr::read_tsv("tables/metadata_dada2.tsv")
+
+gt::gt(df)
+```
+
 Después de terminar el paso de filtrado de calidad, querrás explorar los datos que obtuviste. Este filtrado es importante porque elimina las secuencias de baja calidad o con errores, dejándote datos más confiables para trabajar. Para revisar esos datos, puedes usar dos comandos que te muestran resúmenes visuales fáciles de entender.
 
 Los datos asociados los vamos a depositar en un archivo nombrado `experiment_design.tsv`:
@@ -157,10 +197,21 @@ qiime feature-table summarize \
 ```{bash, eval=FALSE, echo=TRUE}
 qiime feature-table tabulate-seqs \
   --i-data rep-seqs-dada2-tomato-16s.qza \
-  --o-visualization rep-seqs-dada2-tomato-16s.qzv
+  --o-visualization rep-seqs-dada2-tomato-16s.qza
 ```
 
--   **El comando `feature-table summarize`**, para cuando se cuenta con `metadata.`\
+El archivo `table-dada2-tomato-16s.qza` contiene la matriz de cuentas; en el apéndice [Abrir archivos de Qiime2 en R] podrás ver a detlla como trabajar con los archivos `.qza` en `R`; los primeros 10 ASV se ven del siguiente modo:
+
+```{r, echo=FALSE}
+df_tmp <- qiime2R::read_qza("../2025_Demo_16S_tomate/table-dada2-tomato-16s.qza")
+ss <- data.frame(df_tmp$data)
+df <- head(ss, 10)
+df_tmp <- cbind(ASV=rownames(df), df)
+
+gt::gt(df_tmp)
+```
+
+-   **El comando `feature-table summarize`**
 
     Este comando te ayuda a ver:
 
@@ -182,6 +233,19 @@ qiime feature-table tabulate-seqs \
 
 # Medidas de diversidad
 
+### Generación de un árbol filogenético
+
+```{bash, eval=FALSE}
+qiime phylogeny align-to-tree-mafft-fasttree \
+  --i-sequences rep-seqs-dada2-tomato-16s.qza \
+  --o-alignment aligned-rep-seqs-dada2-tomato-16s.qza \
+  --o-masked-alignment masked-aligned-rep-seqs-dada2-tomato-16s.qza \
+  --o-tree unrooted-tree.qza \
+  --o-rooted-tree rooted-tree-dada2-tomato-16s.qza
+```
+
+### Métricas general de filogenética
+
 ```{bash, eval=FALSE}
 qiime diversity core-metrics-phylogenetic \
 --i-phylogeny rooted-tree-dada2-tomato-16s.qza \
@@ -201,6 +265,36 @@ La **alfa diversidad** es la diversidad media de especies microbianas en un luga
 -   Considera tanto el número de especies como su abundancia relativa
 -   Es independiente de la escala espacial específica
 -   Fundamental para caracterizar comunidades microbianas
+
+### Simpson Index
+
+```{bash, eval=FALSE}
+qiime diversity alpha-group-significance \
+  --i-alpha-diversity simpson_diversity.qza \             
+  --m-metadata-file Experiment_Design.tsv \ 
+  --o-visualization core-metrics-results/simpson-group-significance.qzv
+```
+
+```{bash, eval=FALSE}
+qiime diversity alpha-group-significance \
+  --i-alpha-diversity simpson_diversity.qza \                   
+  --m-metadata-file Experiment_Design.tsv \ 
+  --o-visualization core-metrics-results/simpson-group-significance.qzv
+```
+
+```{bash, eval=FALSE}
+qiime tools view core-metrics-results/simpson-group-significance.qzv
+```
+
+![](images/simpson_index.png){fig-align="center"}
+
+```{r, echo=FALSE, message=FALSE}
+df <- readr::read_csv("tables/kruskal-wallis-pairwise-Type_simpson.csv")
+
+gt::gt(df)
+```
+
+### Otras métricas 
 
 ```{bash, eval=FALSE}
 qiime diversity alpha-group-significance \
@@ -291,7 +385,7 @@ df <- readr::read_csv("tables/kruskal-wallis-pairwise-Type_faith.csv")
 gt::gt(df)
 ```
 
-## Alfa rarefacción
+## Curvas de rarefacción
 
 La **alfa-rarefacción** es una técnica para evaluar cómo crece la diversidad “intra-muestra” (α-diversidad) a medida que aumentas el número de lecturas secuenciadas. En metagenómica o secuenciación 16S, su objetivo principal es:
 
@@ -545,8 +639,6 @@ ggplot(obfe_long, aes(
   scale_color_manual(values = c( "#8f0052","#276518"))
 ```
 
-# 
-
 ## Beta diversidad (β-diversidad)
 
 La **beta diversidad** es la relación entre la diversidad regional y la diversidad local de especies. Mide el grado de diferenciación o recambio de especies entre diferentes sitios o comunidades. En microbiología, nos permite comparar qué tan similares o diferentes son las comunidades microbianas entre distintas muestras.
@@ -624,8 +716,6 @@ donde:
 
 ![](images/bray_curtis.png){fig-align="center"}
 
-## 
-
 ### Distancia de Jaccard
 
 ```{bash, eval=FALSE}
@@ -666,7 +756,7 @@ donde:
 
 ![](images/distancia_jaccard.png){fig-align="center"}
 
-## UniFrac
+### UniFrac
 
 **UniFrac** es una métrica de distancia filogenética utilizada para comparar comunidades biológicas. Incorpora información sobre las relaciones filogenéticas entre los organismos observados, diferenciándose de medidas como Bray-Curtis.
 
@@ -718,7 +808,7 @@ qiime tools view core-metrics-results/unweighted_unifrac_emperor.qzv
 
 #### PERMANOVA
 
-Los siguientes datos se descragaron a partir del siguinete comando en `bash` para posteriormente gráficar en `R`.
+Los siguientes datos se descargaron a partir del siguinete comando en `bash` para posteriormente gráficar en `R`.
 
 En `bash`:
 
@@ -767,6 +857,124 @@ gt::gt(df)
 ```
 
 # Taxonomía
+
+## Diversidad/abundancía
+
+```{bash, eval=FALSE}
+qiime feature-classifier classify-sklearn \
+  --i-classifier silva-138.2-ssu-nr99-515f-806r-classifier.qza \
+  --i-reads rep-seqs-dada2-tomato-16s.qza \
+  --o-classification taxonomy.qza
+```
+
+```{bash, eval=FALSE}
+qiime metadata tabulate \
+  --m-input-file taxonomy.qza \
+  --o-visualization taxonomy.qzv
+```
+
+```{bash, eval=FALSE}
+qiime taxa barplot \
+  --i-table table-dada2-tomato-16s.qza \
+  --i-taxonomy taxonomy.qza \
+  --m-metadata-file Experiment_Design.tsv \
+  --o-visualization taxa-bar-plots.qzv
+```
+
+![](images/rect469.png){fig-align="center"}
+
+## Pruebas de abundancia diferencial con ANCOM-BC
+
+```{bash, eval=FALSE}
+qiime composition ancombc \
+  --i-table table-dada2-tomato-16s.qza \ 
+  --m-metadata-file Experiment_Design.tsv \
+  --p-formula 'Type' \   
+  --o-differentials ancombc-subject.qza
+```
+
+```{bash, eval=FALSE}
+qiime composition da-barplot \
+  --i-data ancombc-subject.qza \
+  --p-significance-threshold 0.001 \
+  --o-visualization da-barplot-type.qzv
+```
+
+```{bash, eval=FALSE}
+qiime tools view da-barplot-type.qzv
+```
+
+![](images/visualization.png){fig-align="center"}
+
+Ahora lo puedes hacer para cada ASV anotado por niveles, en este caso lo haremos con en `nivel 3` y usaremos de los metadata a `Type`:
+
+```{bash, eval=FALSE}
+qiime taxa collapse \
+  --i-table table-dada2-tomato-16s.qza \
+  --i-taxonomy taxonomy.qza \
+  --p-level 3 \
+  --o-collapsed-table tomato-table-l3.qza
+```
+
+```{bash, eval=FALSE}
+qiime composition ancombc \
+  --i-table tomato-table-l3.qza \ 
+  --m-metadata-file Experiment_Design.tsv \ 
+  --p-formula 'Type' \   
+  --o-differentials l3-ancombc-type.qza  
+```
+
+```{bash, eval=FALSE}
+qiime composition da-barplot \
+  --i-data l3-ancombc-type.qza \  
+  --p-significance-threshold 0.001 \
+  --p-level-delimiter ';' \
+  --o-visualization l3-da-barplot-subject.qzv
+  
+qiime tools view l3-da-barplot-subject.qzv
+```
+
+![](images/visualization_level3.png){fig-align="center"}
+
+Para el caso de el `nivel 6` solo habría que cambiar en ese flag:
+
+```{bash, eval=FALSE}
+qiime taxa collapse \                     
+  --i-table table-dada2-tomato-16s.qza \
+  --i-taxonomy taxonomy.qza \              
+  --p-level 6 \       
+  --o-collapsed-table tomato-table-l6.qza
+
+qiime composition ancombc \               
+  --i-table tomato-table-l6.qza \       
+  --m-metadata-file Experiment_Design.tsv \
+  --p-formula 'Type' \
+  --o-differentials l6-ancombc-type.qza 
+  
+qiime composition da-barplot \            
+  --i-data l6-ancombc-type.qza \
+  --p-significance-threshold 0.001 \
+  --p-level-delimiter ';' \
+  --o-visualization l6-da-barplot-subject.qzv
+
+qiime tools view l6-da-barplot-subject.qzv
+```
+
+![](images/visualization_level6.png){fig-align="center"}
+
+# Apéndice 
+
+## Abrir archivos de Qiime2 en R
+
+## Otras métricas de Alfa Diversidad
+
+### Usando R para gŕaficar
+
+## Otras métricas de Beta Diversidad
+
+### Usando R para gráficar
+
+## Entrenamiento base de datos SILVA
 
 ### Descarga de la base de datos SILVA
 
@@ -871,27 +1079,4 @@ qiime feature-classifier fit-classifier-naive-bayes \
 --o-classifier silva-138.2-ssu-nr99-515f-806r-classifier.qza
 ```
 
-## Diversidad/abundancía
-
-```{bash, eval=FALSE}
-qiime feature-classifier classify-sklearn \
-  --i-classifier silva-138.2-ssu-nr99-515f-806r-classifier.qza \
-  --i-reads rep-seqs-dada2-tomato-16s.qza \
-  --o-classification taxonomy.qza
-```
-
-```{bash, eval=FALSE}
-qiime metadata tabulate \
-  --m-input-file taxonomy.qza \
-  --o-visualization taxonomy.qzv
-```
-
-```{bash, eval=FALSE}
-qiime taxa barplot \
-  --i-table table-dada2-tomato-16s.qza \
-  --i-taxonomy taxonomy.qza \
-  --m-metadata-file Experiment_Design.tsv \
-  --o-visualization taxa-bar-plots.qzv
-```
-
-![](images/rect469.png){fig-align="center"}
+## 
