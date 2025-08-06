@@ -489,28 +489,7 @@ donde:
 
 \- $\alpha$ = diversidad alfa promedio
 
-```{bash, eval=FALSE}
-qiime diversity beta-group-significance \
---i-distance-matrix core-metrics-results/unweighted_unifrac_distance_matrix.qza \
---m-metadata-file Experiment_Design.tsv \
---m-metadata-column Type \
---o-visualization core-metrics-results/unweighted-unifrac-body-site-significance.qzv \
---p-pairwise
-```
-
-```{bash, eval=FALSE}
-qiime diversity beta-group-significance \
---i-distance-matrix core-metrics-results/unweighted_unifrac_distance_matrix.qza \
---m-metadata-file Experiment_Design.tsv \
---o-visualization core-metrics-results/unweighted-unifrac-significance.qzv \
---p-pairwise
-```
-
 ### Distancia Bray Curtis
-
-```{bash, eval=FALSE}
-qiime tools view core-metrics-results/bray_curtis_emperor.qzv
-```
 
 La **distancia de Bray-Curtis** es una medida de disimilitud composicional entre dos sitios basada en las abundancias de especies. Es ampliamente utilizada en ecología microbiana para comparar comunidades.
 
@@ -541,13 +520,31 @@ donde:
 -   1 = sitios completamente diferentes
 -   No considera relaciones filogenéticas
 
+```{bash, eval=FALSE}
+qiime tools view core-metrics-results/bray_curtis_emperor.qzv
+```
+
 ![](images/bray_curtis.png){fig-align="center"}
 
-### Distancia de Jaccard
+#### PERMANOVA
 
 ```{bash, eval=FALSE}
-qiime tools view core-metrics-results/jaccard_emperor.qzv
+qiime diversity beta-group-significance \
+--i-distance-matrix core-metrics-results/bray_curtis_distance_matrix.qza \     
+--m-metadata-file Experiment_Design.tsv \
+--o-visualization core-metrics-results/curtis-significance.qzv \
+--p-pairwise --m-metadata-column Type
 ```
+
+```{bash, eval=FALSE}
+qiime tools view core-metrics-results/curtis-significance.qzv
+```
+
+![](images/permanova_curtis_boxplot.png){fig-align="center"}
+
+![](images/permanova_curtis_table.png){fig-align="center"}
+
+### Distancia de Jaccard
 
 La **distancia de Jaccard** mide la disimilitud entre dos conjuntos basándose únicamente en presencia/ausencia, sin considerar abundancias. Es útil para datos binarios.
 
@@ -581,7 +578,29 @@ donde:
 -   1 = sitios completamente diferentes (no comparten especies)
 -   No considera abundancias, solo presencia/ausencia
 
+```{bash, eval=FALSE}
+qiime tools view core-metrics-results/jaccard_emperor.qzv
+```
+
 ![](images/distancia_jaccard.png){fig-align="center"}
+
+#### PERMANOVA
+
+```{bash, eval=FALSE}
+qiime diversity beta-group-significance \
+--i-distance-matrix core-metrics-results/jaccard_distance_matrix.qza \ 
+--m-metadata-file Experiment_Design.tsv \
+--o-visualization core-metrics-results/jaccard-significance.qzv \
+--p-pairwise --m-metadata-column Type
+```
+
+```{bash, eval=FALSE}
+qiime tools view core-metrics-results/jaccard-significance.qzv
+```
+
+![](images/permanova_jaccard_boxplot.png){fig-align="center"}
+
+![](images/permanova_jaccard_table.png){fig-align="center"}
 
 ### UniFrac
 
@@ -624,6 +643,15 @@ donde:
 -   Valores entre 0 y 1
 -   0 = comunidades idénticas filogenéticamente
 -   1 = comunidades completamente diferentes filogenéticamente
+
+```{bash, eval=FALSE}
+qiime diversity beta-group-significance \
+--i-distance-matrix core-metrics-results/unweighted_unifrac_distance_matrix.qza \
+--m-metadata-file Experiment_Design.tsv \
+--m-metadata-column Type \
+--o-visualization core-metrics-results/unweighted-unifrac-body-site-significance.qzv \
+--p-pairwise
+```
 
 ### Unweighted UniFrac  
 
