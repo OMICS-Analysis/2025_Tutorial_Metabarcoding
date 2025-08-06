@@ -399,24 +399,14 @@ La **alfa-rarefacción** es una técnica para evaluar cómo crece la diversidad 
 qiime diversity alpha-rarefaction \
 --i-table table-dada2-tomato-16s.qza \
 --i-phylogeny rooted-tree-dada2-tomato-16s.qza \
---p-max-depth 4000 \
+--p-max-depth 20000 \
 --m-metadata-file Experiment_Design.tsv \
 --o-visualization alpha-rarefaction-dada2-tomato-16s.qzv
 ```
 
-Para los siguientes gráficos se dercargaron los archivos `.csv` a partir del archivo `.qzv`, para posteriormente usar `R` para gráficar.
-
 ```{bash, eval=FALSE}
 qiime tools view alpha-rarefaction-dada2-tomato-16s.qzv
 ```
-
-Se descargaron los siguientes archivos:
-
--   `observed_features.csv`
-
--   `shannon.csv`
-
--   `faith_pd.csv`
 
 ### Observed Features
 
@@ -437,62 +427,7 @@ donde:
 
 \- $S$ = riqueza de especies observadas
 
-En `R`:
-
-```{r, message=FALSE, echo=TRUE, warning=FALSE}
-
-suppressPackageStartupMessages(library(tidyverse))
-
-obfe <- readr::read_csv("tables/observed_features.csv",
-                        col_types = cols(
-                 `sample-id` = col_skip(),
-                 accession   = col_skip(),
-                 sra_run     = col_skip(),
-                 Type        = col_factor(),
-                 .default    = col_double()
-               ))
-
-obfe_long <- obfe %>%
-  pivot_longer(
-    cols = starts_with("depth-"), 
-    names_to = c("Depth", "Iter"),            
-    names_pattern = "depth-([0-9]+)_iter-([0-9]+)",
-    values_to = "observed_features",
-    values_drop_na = TRUE                     
-  ) %>%
-  mutate(
-    Depth = as.integer(Depth),
-    Iter  = as.integer(Iter)
-  )
-
-
-ggplot(obfe_long, aes(
-    x    = factor(Depth),                   
-    y    = observed_features,
-    fill = Type                         
-  )) +
-  geom_boxplot(position = position_dodge(width = 0.8),
-               color = "black") +
-  stat_summary(
-    aes(
-      x      = as.numeric(factor(Depth)),
-      colour = Type,
-      group  = Type
-    ),
-    fun    = median,
-    geom   = "line",
-    size   = 1
-  ) +
-  scale_x_discrete(name = "Sequencing Depth") +
-  scale_y_continuous(name = "Observed Features") +
-  theme_minimal(base_size = 15) +
-  theme(
-    legend.title = element_blank(),
-    panel.grid.major.x = element_blank()
-  ) +
-  scale_fill_manual(values = c( "#8f0052","#276518")) +
-  scale_color_manual(values = c( "#8f0052","#276518"))
-```
+![](images/features_rarefaction.png){fig-align="center"}
 
 ### Shannon
 
@@ -523,121 +458,13 @@ donde:
 -   Valores \> 3: alta diversidad
 -   Valores más altos indican mayor diversidad y equitabilidad
 
-En `R`:
-
-```{r, message=FALSE, echo=TRUE, warning=FALSE}
-suppressPackageStartupMessages(library(tidyverse))
-
-obfe <- readr::read_csv("tables/shannon.csv",
-                        col_types = cols(
-                 `sample-id` = col_skip(),
-                 accession   = col_skip(),
-                 sra_run     = col_skip(),
-                 Type        = col_factor(),
-                 .default    = col_double()
-               ))
-
-obfe_long <- obfe %>%
-  pivot_longer(
-    cols = starts_with("depth-"), 
-    names_to = c("Depth", "Iter"),            
-    names_pattern = "depth-([0-9]+)_iter-([0-9]+)",
-    values_to = "Shannon_Index",
-    values_drop_na = TRUE                     
-  ) %>%
-  mutate(
-    Depth = as.integer(Depth),
-    Iter  = as.integer(Iter)
-  )
-
-
-ggplot(obfe_long, aes(
-    x    = factor(Depth),                   
-    y    = Shannon_Index,
-    fill = Type                         
-  )) +
-  geom_boxplot(position = position_dodge(width = 0.8),
-               color = "black") +
-  stat_summary(
-    aes(
-      x      = as.numeric(factor(Depth)),
-      colour = Type,
-      group  = Type
-    ),
-    fun    = median,
-    geom   = "line",
-    size   = 1
-  ) +
-  scale_x_discrete(name = "Sequencing Depth") +
-  scale_y_continuous(name = "Shannon Index") +
-  theme_minimal(base_size = 15) +
-  theme(
-    legend.title = element_blank(),
-    panel.grid.major.x = element_blank()
-  ) +
-  scale_fill_manual(values = c( "#8f0052","#276518")) +
-  scale_color_manual(values = c( "#8f0052","#276518"))
-```
+![](images/shannon_rarefaction.png){fig-align="center"}
 
 ### Faith PD
 
 La diversidad filogenética de Faith (PD de Faith) es una medida de la biodiversidad que cuantifica la amplitud de la historia evolutiva representada por un conjunto de especies u otras unidades taxonómicas, definida como la suma de las longitudes de las ramas de un árbol filogenético que conectan los miembros del conjunto.
 
-En `R`:
-
-```{r, message=FALSE, echo=TRUE, warning=FALSE}
-suppressPackageStartupMessages(library(tidyverse))
-
-obfe <- readr::read_csv("tables/faith_pd.csv",
-                        col_types = cols(
-                 `sample-id` = col_skip(),
-                 accession   = col_skip(),
-                 sra_run     = col_skip(),
-                 Type        = col_factor(),
-                 .default    = col_double()
-               ))
-
-obfe_long <- obfe %>%
-  pivot_longer(
-    cols = starts_with("depth-"), 
-    names_to = c("Depth", "Iter"),            
-    names_pattern = "depth-([0-9]+)_iter-([0-9]+)",
-    values_to = "faith",
-    values_drop_na = TRUE                     
-  ) %>%
-  mutate(
-    Depth = as.integer(Depth),
-    Iter  = as.integer(Iter)
-  )
-
-
-ggplot(obfe_long, aes(
-    x    = factor(Depth),                   
-    y    = faith,
-    fill = Type                         
-  )) +
-  geom_boxplot(position = position_dodge(width = 0.8),
-               color = "black") +
-  stat_summary(
-    aes(
-      x      = as.numeric(factor(Depth)),
-      colour = Type,
-      group  = Type
-    ),
-    fun    = median,
-    geom   = "line",
-    size   = 1
-  ) +
-  scale_x_discrete(name = "Sequencing Depth") +
-  scale_y_continuous(name = "Faith PD") +
-  theme_minimal(base_size = 15) +
-  theme(
-    legend.title = element_blank(),
-    panel.grid.major.x = element_blank()
-  ) +
-  scale_fill_manual(values = c( "#8f0052","#276518")) +
-  scale_color_manual(values = c( "#8f0052","#276518"))
-```
+![](images/faith_rarefaction.png){fig-align="center"}
 
 ## Beta diversidad (β-diversidad)
 
@@ -808,53 +635,13 @@ qiime tools view core-metrics-results/unweighted_unifrac_emperor.qzv
 
 #### PERMANOVA
 
-Los siguientes datos se descargaron a partir del siguinete comando en `bash` para posteriormente gráficar en `R`.
-
-En `bash`:
-
 ```{bash, eval=FALSE}
 qiime tools view core-metrics-results/unweighted-unifrac-body-site-significance.qzv
 ```
 
-En `R`:
+![](images/permanova_boxplots.png){fig-align="center"}
 
-```{r, message=FALSE, echo=TRUE}
-suppressPackageStartupMessages(library(tidyverse))
-
-df <- readr::read_tsv("tables/raw_data_permanova.tsv")
-
-h1 <- df %>% 
-  filter(Group1 == "NC")
-
-
-ggplot(h1, aes(y = Distance, x = Group2, fill = Group2)) +
-  geom_boxplot(color = "black") + theme_classic() +
-  labs(title = "Distance to NC", fill = "Group") +
-  xlab("Group") + 
-  theme(text = element_text(size = 20)) +
-  scale_fill_manual(values = c( "#8f0052","#276518"))
-
-
-h2 <- df %>% 
-  filter(Group1 == "Tomato")
-
-
-ggplot(h2, aes(y = Distance, x = Group2, fill = Group2)) +
-  geom_boxplot(color = "black") + theme_classic() +
-  labs(title = "Distance to Tomato", fill = "Group") +
-  xlab("Group") + 
-  theme(text = element_text(size = 20)) +
-  scale_fill_manual(values = c( "#8f0052","#276518"))
-
-```
-
-```{r, message=FALSE, echo=FALSE}
-
-df <- readr::read_csv("tables/permanova-pairwise.csv")
-
-gt::gt(df)
-
-```
+![](images/permanova_table.png){fig-align="center"}
 
 # Taxonomía
 
@@ -968,11 +755,250 @@ qiime tools view l6-da-barplot-subject.qzv
 
 ## Otras métricas de Alfa Diversidad
 
+Para los siguientes gráficos se dercargaron los archivos `.csv` a partir del archivo `.qzv`, para posteriormente usar `R` para gráficar.
+
+```{bash, eval=FALSE}
+qiime tools view alpha-rarefaction-dada2-tomato-16s.qzv
+```
+
+Se descargaron los siguientes archivos:
+
+-   `observed_features.csv`
+
+-   `shannon.csv`
+
+-   `faith_pd.csv`
+
 ### Usando R para gŕaficar
+
+#### Observed Features
+
+```{r, message=FALSE, echo=TRUE, warning=FALSE}
+
+suppressPackageStartupMessages(library(tidyverse))
+
+obfe <- readr::read_csv("tables/observed_features.csv",
+                        col_types = cols(
+                 `sample-id` = col_skip(),
+                 accession   = col_skip(),
+                 sra_run     = col_skip(),
+                 Type        = col_factor(),
+                 .default    = col_double()
+               ))
+
+obfe_long <- obfe %>%
+  pivot_longer(
+    cols = starts_with("depth-"), 
+    names_to = c("Depth", "Iter"),            
+    names_pattern = "depth-([0-9]+)_iter-([0-9]+)",
+    values_to = "observed_features",
+    values_drop_na = TRUE                     
+  ) %>%
+  mutate(
+    Depth = as.integer(Depth),
+    Iter  = as.integer(Iter)
+  )
+
+
+ggplot(obfe_long, aes(
+    x    = factor(Depth),                   
+    y    = observed_features,
+    fill = Type                         
+  )) +
+  geom_boxplot(position = position_dodge(width = 0.8),
+               color = "black") +
+  stat_summary(
+    aes(
+      x      = as.numeric(factor(Depth)),
+      colour = Type,
+      group  = Type
+    ),
+    fun    = median,
+    geom   = "line",
+    size   = 1
+  ) +
+  scale_x_discrete(name = "Sequencing Depth") +
+  scale_y_continuous(name = "Observed Features") +
+  theme_minimal(base_size = 15) +
+  theme(
+    legend.title = element_blank(),
+    panel.grid.major.x = element_blank()
+  ) +
+  scale_fill_manual(values = c( "#8f0052","#276518")) +
+  scale_color_manual(values = c( "#8f0052","#276518"))
+```
+
+#### Shannon
+
+En `R`:
+
+```{r, message=FALSE, echo=TRUE, warning=FALSE}
+suppressPackageStartupMessages(library(tidyverse))
+
+obfe <- readr::read_csv("tables/shannon.csv",
+                        col_types = cols(
+                 `sample-id` = col_skip(),
+                 accession   = col_skip(),
+                 sra_run     = col_skip(),
+                 Type        = col_factor(),
+                 .default    = col_double()
+               ))
+
+obfe_long <- obfe %>%
+  pivot_longer(
+    cols = starts_with("depth-"), 
+    names_to = c("Depth", "Iter"),            
+    names_pattern = "depth-([0-9]+)_iter-([0-9]+)",
+    values_to = "Shannon_Index",
+    values_drop_na = TRUE                     
+  ) %>%
+  mutate(
+    Depth = as.integer(Depth),
+    Iter  = as.integer(Iter)
+  )
+
+
+ggplot(obfe_long, aes(
+    x    = factor(Depth),                   
+    y    = Shannon_Index,
+    fill = Type                         
+  )) +
+  geom_boxplot(position = position_dodge(width = 0.8),
+               color = "black") +
+  stat_summary(
+    aes(
+      x      = as.numeric(factor(Depth)),
+      colour = Type,
+      group  = Type
+    ),
+    fun    = median,
+    geom   = "line",
+    size   = 1
+  ) +
+  scale_x_discrete(name = "Sequencing Depth") +
+  scale_y_continuous(name = "Shannon Index") +
+  theme_minimal(base_size = 15) +
+  theme(
+    legend.title = element_blank(),
+    panel.grid.major.x = element_blank()
+  ) +
+  scale_fill_manual(values = c( "#8f0052","#276518")) +
+  scale_color_manual(values = c( "#8f0052","#276518"))
+```
+
+### Faith-PD
+
+En `R`:
+
+```{r, message=FALSE, echo=TRUE, warning=FALSE}
+suppressPackageStartupMessages(library(tidyverse))
+
+obfe <- readr::read_csv("tables/faith_pd.csv",
+                        col_types = cols(
+                 `sample-id` = col_skip(),
+                 accession   = col_skip(),
+                 sra_run     = col_skip(),
+                 Type        = col_factor(),
+                 .default    = col_double()
+               ))
+
+obfe_long <- obfe %>%
+  pivot_longer(
+    cols = starts_with("depth-"), 
+    names_to = c("Depth", "Iter"),            
+    names_pattern = "depth-([0-9]+)_iter-([0-9]+)",
+    values_to = "faith",
+    values_drop_na = TRUE                     
+  ) %>%
+  mutate(
+    Depth = as.integer(Depth),
+    Iter  = as.integer(Iter)
+  )
+
+
+ggplot(obfe_long, aes(
+    x    = factor(Depth),                   
+    y    = faith,
+    fill = Type                         
+  )) +
+  geom_boxplot(position = position_dodge(width = 0.8),
+               color = "black") +
+  stat_summary(
+    aes(
+      x      = as.numeric(factor(Depth)),
+      colour = Type,
+      group  = Type
+    ),
+    fun    = median,
+    geom   = "line",
+    size   = 1
+  ) +
+  scale_x_discrete(name = "Sequencing Depth") +
+  scale_y_continuous(name = "Faith PD") +
+  theme_minimal(base_size = 15) +
+  theme(
+    legend.title = element_blank(),
+    panel.grid.major.x = element_blank()
+  ) +
+  scale_fill_manual(values = c( "#8f0052","#276518")) +
+  scale_color_manual(values = c( "#8f0052","#276518"))
+```
+
+## 
 
 ## Otras métricas de Beta Diversidad
 
+Los siguientes datos se descargaron a partir del siguinete comando en `bash` para posteriormente gráficar en `R`.
+
+En `bash`:
+
+```{bash, eval=FALSE}
+qiime tools view core-metrics-results/unweighted-unifrac-body-site-significance.qzv
+```
+
 ### Usando R para gráficar
+
+#### PERMANOVA
+
+En `R`:
+
+```{r, message=FALSE, echo=TRUE}
+suppressPackageStartupMessages(library(tidyverse))
+
+df <- readr::read_tsv("tables/raw_data_permanova.tsv")
+
+h1 <- df %>% 
+  filter(Group1 == "NC")
+
+
+ggplot(h1, aes(y = Distance, x = Group2, fill = Group2)) +
+  geom_boxplot(color = "black") + theme_classic() +
+  labs(title = "Distance to NC", fill = "Group") +
+  xlab("Group") + 
+  theme(text = element_text(size = 20)) +
+  scale_fill_manual(values = c( "#8f0052","#276518"))
+
+
+h2 <- df %>% 
+  filter(Group1 == "Tomato")
+
+
+ggplot(h2, aes(y = Distance, x = Group2, fill = Group2)) +
+  geom_boxplot(color = "black") + theme_classic() +
+  labs(title = "Distance to Tomato", fill = "Group") +
+  xlab("Group") + 
+  theme(text = element_text(size = 20)) +
+  scale_fill_manual(values = c( "#8f0052","#276518"))
+
+```
+
+```{r, message=FALSE, echo=FALSE}
+
+df <- readr::read_csv("tables/permanova-pairwise.csv")
+
+gt::gt(df)
+
+```
 
 ## Entrenamiento base de datos SILVA
 
@@ -1078,5 +1104,3 @@ qiime feature-classifier fit-classifier-naive-bayes \
 --i-reference-taxonomy silva-138.2-ssu-nr99-tax-515f-806r-derep-uniq.qza \
 --o-classifier silva-138.2-ssu-nr99-515f-806r-classifier.qza
 ```
-
-## 
