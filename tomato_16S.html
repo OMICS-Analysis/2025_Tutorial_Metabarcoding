@@ -319,61 +319,6 @@ window.Quarto = {
 <span id="cb13-5"><a href="#cb13-5" aria-hidden="true" tabindex="-1"></a>--m-metadata-file Experiment_Design.tsv <span class="dt">\</span></span>
 <span id="cb13-6"><a href="#cb13-6" aria-hidden="true" tabindex="-1"></a>--output-dir core-metrics-results</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<section id="distancia-bray-curtis" class="level3">
-<h3 class="anchored" data-anchor-id="distancia-bray-curtis">Distancia Bray Curtis</h3>
-<p>La <strong>distancia de Bray-Curtis</strong> es una medida de disimilitud composicional entre dos sitios basada en las abundancias de especies. Es ampliamente utilizada en ecología microbiana para comparar comunidades.</p>
-<section id="fórmula-de-bray-curtis" class="level4">
-<h4 class="anchored" data-anchor-id="fórmula-de-bray-curtis">Fórmula de Bray-Curtis:</h4>
-<p><span class="math display">\[BC_{ij} = 1 - \frac{2C_{ij}}{S_i + S_j}\]</span></p>
-<p>o de forma equivalente:</p>
-<p><span class="math display">\[BC_{ij} = \frac{\sum_{k=1}^{n} |x_{ik} - x_{jk}|}{\sum_{k=1}^{n} (x_{ik} + x_{jk})}\]</span></p>
-<p>donde: - <span class="math inline">\(BC_{ij}\)</span> = distancia de Bray-Curtis entre sitios <span class="math inline">\(i\)</span> y <span class="math inline">\(j\)</span> - <span class="math inline">\(C_{ij}\)</span> = suma de los valores menores para especies comunes entre ambos sitios - <span class="math inline">\(S_i\)</span>, <span class="math inline">\(S_j\)</span> = número total de individuos contados en los sitios <span class="math inline">\(i\)</span> y <span class="math inline">\(j\)</span> - <span class="math inline">\(x_{ik}\)</span>, <span class="math inline">\(x_{jk}\)</span> = abundancia de la especie <span class="math inline">\(k\)</span> en los sitios <span class="math inline">\(i\)</span> y <span class="math inline">\(j\)</span> - <span class="math inline">\(n\)</span> = número total de especies</p>
-</section>
-<section id="interpretación" class="level4">
-<h4 class="anchored" data-anchor-id="interpretación">Interpretación:</h4>
-<ul>
-<li>Valores entre 0 y 1</li>
-<li>0 = sitios idénticos en composición</li>
-<li>1 = sitios completamente diferentes</li>
-<li>No considera relaciones filogenéticas</li>
-</ul>
-<div class="quarto-figure quarto-figure-center">
-<figure class="figure">
-<p><img src="images/bray_curtis.png" class="img-fluid quarto-figure quarto-figure-center figure-img"></p>
-</figure>
-</div>
-</section>
-</section>
-<section id="distancia-de-jaccard" class="level3">
-<h3 class="anchored" data-anchor-id="distancia-de-jaccard">Distancia de Jaccard</h3>
-<p>La <strong>distancia de Jaccard</strong> mide la disimilitud entre dos conjuntos basándose únicamente en presencia/ausencia, sin considerar abundancias. Es útil para datos binarios.</p>
-<section id="fórmula-del-índice-de-jaccard" class="level4">
-<h4 class="anchored" data-anchor-id="fórmula-del-índice-de-jaccard">Fórmula del índice de Jaccard:</h4>
-<p><span class="math display">\[J(A,B) = \frac{|A \cap B|}{|A \cup B|}\]</span></p>
-</section>
-<section id="fórmula-de-la-distancia-de-jaccard" class="level4">
-<h4 class="anchored" data-anchor-id="fórmula-de-la-distancia-de-jaccard">Fórmula de la distancia de Jaccard:</h4>
-<p><span class="math display">\[D_J(A,B) = 1 - J(A,B) = 1 - \frac{|A \cap B|}{|A \cup B|}\]</span></p>
-<p>o en términos ecológicos:</p>
-<p><span class="math display">\[J = \frac{c}{a + b - c}\]</span></p>
-<p>donde: - <span class="math inline">\(J\)</span> = índice de similitud de Jaccard - <span class="math inline">\(a\)</span> = número de especies presentes en el sitio A - <span class="math inline">\(b\)</span> = número de especies presentes en el sitio B<br>
-- <span class="math inline">\(c\)</span> = número de especies presentes en ambos sitios A y B - <span class="math inline">\(D_J\)</span> = distancia de Jaccard</p>
-</section>
-<section id="interpretación-1" class="level4">
-<h4 class="anchored" data-anchor-id="interpretación-1">Interpretación:</h4>
-<ul>
-<li>Valores entre 0 y 1</li>
-<li>0 = sitios idénticos (especies presentes son las mismas)</li>
-<li>1 = sitios completamente diferentes (no comparten especies)</li>
-<li>No considera abundancias, solo presencia/ausencia</li>
-</ul>
-<div class="quarto-figure quarto-figure-center">
-<figure class="figure">
-<p><img src="images/distancia_jaccard.png" class="img-fluid quarto-figure quarto-figure-center figure-img"></p>
-</figure>
-</div>
-</section>
-</section>
 <section id="alfa-diversidad-α-diversidad" class="level2">
 <h2 class="anchored" data-anchor-id="alfa-diversidad-α-diversidad">Alfa diversidad (α-diversidad)</h2>
 <p>La <strong>alfa diversidad</strong> es la diversidad media de especies microbianas en un lugar a escala local. Representa la riqueza de especies y su abundancia relativa dentro de una sola muestra o hábitat. Es uno de los componentes fundamentales de la diversidad biológica junto con la diversidad beta y gamma.</p>
@@ -406,8 +351,8 @@ window.Quarto = {
 <p><span class="math display">\[J' = \frac{H'}{H'_{\max}} = \frac{H'}{\ln S}\]</span></p>
 <p>donde: - <span class="math inline">\(J'\)</span> = índice de equitabilidad de Pielou - <span class="math inline">\(H'\)</span> = índice de Shannon observado - <span class="math inline">\(H'_{\max}\)</span> = diversidad máxima posible = <span class="math inline">\(\ln S\)</span> - <span class="math inline">\(S\)</span> = número de especies</p>
 </section>
-<section id="interpretación-2" class="level4">
-<h4 class="anchored" data-anchor-id="interpretación-2">Interpretación:</h4>
+<section id="interpretación" class="level4">
+<h4 class="anchored" data-anchor-id="interpretación">Interpretación:</h4>
 <ul>
 <li>Valores entre 0 y 1</li>
 <li>0 = máxima inequidad (una especie domina completamente)</li>
@@ -420,23 +365,23 @@ window.Quarto = {
 </div>
 <div class="cell">
 <div class="cell-output-display">
-<div id="usrpxtxubj" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
-<style>#usrpxtxubj table {
+<div id="msxjiyeamo" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<style>#msxjiyeamo table {
   font-family: system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
-#usrpxtxubj thead, #usrpxtxubj tbody, #usrpxtxubj tfoot, #usrpxtxubj tr, #usrpxtxubj td, #usrpxtxubj th {
+#msxjiyeamo thead, #msxjiyeamo tbody, #msxjiyeamo tfoot, #msxjiyeamo tr, #msxjiyeamo td, #msxjiyeamo th {
   border-style: none;
 }
 
-#usrpxtxubj p {
+#msxjiyeamo p {
   margin: 0;
   padding: 0;
 }
 
-#usrpxtxubj .gt_table {
+#msxjiyeamo .gt_table {
   display: table;
   border-collapse: collapse;
   line-height: normal;
@@ -462,12 +407,12 @@ window.Quarto = {
   border-left-color: #D3D3D3;
 }
 
-#usrpxtxubj .gt_caption {
+#msxjiyeamo .gt_caption {
   padding-top: 4px;
   padding-bottom: 4px;
 }
 
-#usrpxtxubj .gt_title {
+#msxjiyeamo .gt_title {
   color: #333333;
   font-size: 125%;
   font-weight: initial;
@@ -479,7 +424,7 @@ window.Quarto = {
   border-bottom-width: 0;
 }
 
-#usrpxtxubj .gt_subtitle {
+#msxjiyeamo .gt_subtitle {
   color: #333333;
   font-size: 85%;
   font-weight: initial;
@@ -491,7 +436,7 @@ window.Quarto = {
   border-top-width: 0;
 }
 
-#usrpxtxubj .gt_heading {
+#msxjiyeamo .gt_heading {
   background-color: #FFFFFF;
   text-align: center;
   border-bottom-color: #FFFFFF;
@@ -503,13 +448,13 @@ window.Quarto = {
   border-right-color: #D3D3D3;
 }
 
-#usrpxtxubj .gt_bottom_border {
+#msxjiyeamo .gt_bottom_border {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
 }
 
-#usrpxtxubj .gt_col_headings {
+#msxjiyeamo .gt_col_headings {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -524,7 +469,7 @@ window.Quarto = {
   border-right-color: #D3D3D3;
 }
 
-#usrpxtxubj .gt_col_heading {
+#msxjiyeamo .gt_col_heading {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -544,7 +489,7 @@ window.Quarto = {
   overflow-x: hidden;
 }
 
-#usrpxtxubj .gt_column_spanner_outer {
+#msxjiyeamo .gt_column_spanner_outer {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -556,15 +501,15 @@ window.Quarto = {
   padding-right: 4px;
 }
 
-#usrpxtxubj .gt_column_spanner_outer:first-child {
+#msxjiyeamo .gt_column_spanner_outer:first-child {
   padding-left: 0;
 }
 
-#usrpxtxubj .gt_column_spanner_outer:last-child {
+#msxjiyeamo .gt_column_spanner_outer:last-child {
   padding-right: 0;
 }
 
-#usrpxtxubj .gt_column_spanner {
+#msxjiyeamo .gt_column_spanner {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
@@ -576,11 +521,11 @@ window.Quarto = {
   width: 100%;
 }
 
-#usrpxtxubj .gt_spanner_row {
+#msxjiyeamo .gt_spanner_row {
   border-bottom-style: hidden;
 }
 
-#usrpxtxubj .gt_group_heading {
+#msxjiyeamo .gt_group_heading {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -606,7 +551,7 @@ window.Quarto = {
   text-align: left;
 }
 
-#usrpxtxubj .gt_empty_group_heading {
+#msxjiyeamo .gt_empty_group_heading {
   padding: 0.5px;
   color: #333333;
   background-color: #FFFFFF;
@@ -621,15 +566,15 @@ window.Quarto = {
   vertical-align: middle;
 }
 
-#usrpxtxubj .gt_from_md > :first-child {
+#msxjiyeamo .gt_from_md > :first-child {
   margin-top: 0;
 }
 
-#usrpxtxubj .gt_from_md > :last-child {
+#msxjiyeamo .gt_from_md > :last-child {
   margin-bottom: 0;
 }
 
-#usrpxtxubj .gt_row {
+#msxjiyeamo .gt_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -648,7 +593,7 @@ window.Quarto = {
   overflow-x: hidden;
 }
 
-#usrpxtxubj .gt_stub {
+#msxjiyeamo .gt_stub {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -661,7 +606,7 @@ window.Quarto = {
   padding-right: 5px;
 }
 
-#usrpxtxubj .gt_stub_row_group {
+#msxjiyeamo .gt_stub_row_group {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -675,15 +620,15 @@ window.Quarto = {
   vertical-align: top;
 }
 
-#usrpxtxubj .gt_row_group_first td {
+#msxjiyeamo .gt_row_group_first td {
   border-top-width: 2px;
 }
 
-#usrpxtxubj .gt_row_group_first th {
+#msxjiyeamo .gt_row_group_first th {
   border-top-width: 2px;
 }
 
-#usrpxtxubj .gt_summary_row {
+#msxjiyeamo .gt_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -693,16 +638,16 @@ window.Quarto = {
   padding-right: 5px;
 }
 
-#usrpxtxubj .gt_first_summary_row {
+#msxjiyeamo .gt_first_summary_row {
   border-top-style: solid;
   border-top-color: #D3D3D3;
 }
 
-#usrpxtxubj .gt_first_summary_row.thick {
+#msxjiyeamo .gt_first_summary_row.thick {
   border-top-width: 2px;
 }
 
-#usrpxtxubj .gt_last_summary_row {
+#msxjiyeamo .gt_last_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -712,7 +657,7 @@ window.Quarto = {
   border-bottom-color: #D3D3D3;
 }
 
-#usrpxtxubj .gt_grand_summary_row {
+#msxjiyeamo .gt_grand_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -722,7 +667,7 @@ window.Quarto = {
   padding-right: 5px;
 }
 
-#usrpxtxubj .gt_first_grand_summary_row {
+#msxjiyeamo .gt_first_grand_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -732,7 +677,7 @@ window.Quarto = {
   border-top-color: #D3D3D3;
 }
 
-#usrpxtxubj .gt_last_grand_summary_row_top {
+#msxjiyeamo .gt_last_grand_summary_row_top {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -742,11 +687,11 @@ window.Quarto = {
   border-bottom-color: #D3D3D3;
 }
 
-#usrpxtxubj .gt_striped {
+#msxjiyeamo .gt_striped {
   background-color: rgba(128, 128, 128, 0.05);
 }
 
-#usrpxtxubj .gt_table_body {
+#msxjiyeamo .gt_table_body {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -755,7 +700,7 @@ window.Quarto = {
   border-bottom-color: #D3D3D3;
 }
 
-#usrpxtxubj .gt_footnotes {
+#msxjiyeamo .gt_footnotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -769,7 +714,7 @@ window.Quarto = {
   border-right-color: #D3D3D3;
 }
 
-#usrpxtxubj .gt_footnote {
+#msxjiyeamo .gt_footnote {
   margin: 0px;
   font-size: 90%;
   padding-top: 4px;
@@ -778,7 +723,7 @@ window.Quarto = {
   padding-right: 5px;
 }
 
-#usrpxtxubj .gt_sourcenotes {
+#msxjiyeamo .gt_sourcenotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -792,7 +737,7 @@ window.Quarto = {
   border-right-color: #D3D3D3;
 }
 
-#usrpxtxubj .gt_sourcenote {
+#msxjiyeamo .gt_sourcenote {
   font-size: 90%;
   padding-top: 4px;
   padding-bottom: 4px;
@@ -800,72 +745,72 @@ window.Quarto = {
   padding-right: 5px;
 }
 
-#usrpxtxubj .gt_left {
+#msxjiyeamo .gt_left {
   text-align: left;
 }
 
-#usrpxtxubj .gt_center {
+#msxjiyeamo .gt_center {
   text-align: center;
 }
 
-#usrpxtxubj .gt_right {
+#msxjiyeamo .gt_right {
   text-align: right;
   font-variant-numeric: tabular-nums;
 }
 
-#usrpxtxubj .gt_font_normal {
+#msxjiyeamo .gt_font_normal {
   font-weight: normal;
 }
 
-#usrpxtxubj .gt_font_bold {
+#msxjiyeamo .gt_font_bold {
   font-weight: bold;
 }
 
-#usrpxtxubj .gt_font_italic {
+#msxjiyeamo .gt_font_italic {
   font-style: italic;
 }
 
-#usrpxtxubj .gt_super {
+#msxjiyeamo .gt_super {
   font-size: 65%;
 }
 
-#usrpxtxubj .gt_footnote_marks {
+#msxjiyeamo .gt_footnote_marks {
   font-size: 75%;
   vertical-align: 0.4em;
   position: initial;
 }
 
-#usrpxtxubj .gt_asterisk {
+#msxjiyeamo .gt_asterisk {
   font-size: 100%;
   vertical-align: 0;
 }
 
-#usrpxtxubj .gt_indent_1 {
+#msxjiyeamo .gt_indent_1 {
   text-indent: 5px;
 }
 
-#usrpxtxubj .gt_indent_2 {
+#msxjiyeamo .gt_indent_2 {
   text-indent: 10px;
 }
 
-#usrpxtxubj .gt_indent_3 {
+#msxjiyeamo .gt_indent_3 {
   text-indent: 15px;
 }
 
-#usrpxtxubj .gt_indent_4 {
+#msxjiyeamo .gt_indent_4 {
   text-indent: 20px;
 }
 
-#usrpxtxubj .gt_indent_5 {
+#msxjiyeamo .gt_indent_5 {
   text-indent: 25px;
 }
 
-#usrpxtxubj .katex-display {
+#msxjiyeamo .katex-display {
   display: inline-flex !important;
   margin-bottom: 0.75em !important;
 }
 
-#usrpxtxubj div.Reactable > div.rt-table > div.rt-thead > div.rt-tr.rt-tr-group-header > div.rt-th-group:after {
+#msxjiyeamo div.Reactable > div.rt-table > div.rt-thead > div.rt-tr.rt-tr-group-header > div.rt-th-group:after {
   height: 0px !important;
 }
 </style>
@@ -919,23 +864,23 @@ window.Quarto = {
 </div>
 <div class="cell">
 <div class="cell-output-display">
-<div id="itagnfnuzw" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
-<style>#itagnfnuzw table {
+<div id="cgeacmktty" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<style>#cgeacmktty table {
   font-family: system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
-#itagnfnuzw thead, #itagnfnuzw tbody, #itagnfnuzw tfoot, #itagnfnuzw tr, #itagnfnuzw td, #itagnfnuzw th {
+#cgeacmktty thead, #cgeacmktty tbody, #cgeacmktty tfoot, #cgeacmktty tr, #cgeacmktty td, #cgeacmktty th {
   border-style: none;
 }
 
-#itagnfnuzw p {
+#cgeacmktty p {
   margin: 0;
   padding: 0;
 }
 
-#itagnfnuzw .gt_table {
+#cgeacmktty .gt_table {
   display: table;
   border-collapse: collapse;
   line-height: normal;
@@ -961,12 +906,12 @@ window.Quarto = {
   border-left-color: #D3D3D3;
 }
 
-#itagnfnuzw .gt_caption {
+#cgeacmktty .gt_caption {
   padding-top: 4px;
   padding-bottom: 4px;
 }
 
-#itagnfnuzw .gt_title {
+#cgeacmktty .gt_title {
   color: #333333;
   font-size: 125%;
   font-weight: initial;
@@ -978,7 +923,7 @@ window.Quarto = {
   border-bottom-width: 0;
 }
 
-#itagnfnuzw .gt_subtitle {
+#cgeacmktty .gt_subtitle {
   color: #333333;
   font-size: 85%;
   font-weight: initial;
@@ -990,7 +935,7 @@ window.Quarto = {
   border-top-width: 0;
 }
 
-#itagnfnuzw .gt_heading {
+#cgeacmktty .gt_heading {
   background-color: #FFFFFF;
   text-align: center;
   border-bottom-color: #FFFFFF;
@@ -1002,13 +947,13 @@ window.Quarto = {
   border-right-color: #D3D3D3;
 }
 
-#itagnfnuzw .gt_bottom_border {
+#cgeacmktty .gt_bottom_border {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
 }
 
-#itagnfnuzw .gt_col_headings {
+#cgeacmktty .gt_col_headings {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -1023,7 +968,7 @@ window.Quarto = {
   border-right-color: #D3D3D3;
 }
 
-#itagnfnuzw .gt_col_heading {
+#cgeacmktty .gt_col_heading {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -1043,7 +988,7 @@ window.Quarto = {
   overflow-x: hidden;
 }
 
-#itagnfnuzw .gt_column_spanner_outer {
+#cgeacmktty .gt_column_spanner_outer {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -1055,15 +1000,15 @@ window.Quarto = {
   padding-right: 4px;
 }
 
-#itagnfnuzw .gt_column_spanner_outer:first-child {
+#cgeacmktty .gt_column_spanner_outer:first-child {
   padding-left: 0;
 }
 
-#itagnfnuzw .gt_column_spanner_outer:last-child {
+#cgeacmktty .gt_column_spanner_outer:last-child {
   padding-right: 0;
 }
 
-#itagnfnuzw .gt_column_spanner {
+#cgeacmktty .gt_column_spanner {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
@@ -1075,11 +1020,11 @@ window.Quarto = {
   width: 100%;
 }
 
-#itagnfnuzw .gt_spanner_row {
+#cgeacmktty .gt_spanner_row {
   border-bottom-style: hidden;
 }
 
-#itagnfnuzw .gt_group_heading {
+#cgeacmktty .gt_group_heading {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1105,7 +1050,7 @@ window.Quarto = {
   text-align: left;
 }
 
-#itagnfnuzw .gt_empty_group_heading {
+#cgeacmktty .gt_empty_group_heading {
   padding: 0.5px;
   color: #333333;
   background-color: #FFFFFF;
@@ -1120,15 +1065,15 @@ window.Quarto = {
   vertical-align: middle;
 }
 
-#itagnfnuzw .gt_from_md > :first-child {
+#cgeacmktty .gt_from_md > :first-child {
   margin-top: 0;
 }
 
-#itagnfnuzw .gt_from_md > :last-child {
+#cgeacmktty .gt_from_md > :last-child {
   margin-bottom: 0;
 }
 
-#itagnfnuzw .gt_row {
+#cgeacmktty .gt_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1147,7 +1092,7 @@ window.Quarto = {
   overflow-x: hidden;
 }
 
-#itagnfnuzw .gt_stub {
+#cgeacmktty .gt_stub {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -1160,7 +1105,7 @@ window.Quarto = {
   padding-right: 5px;
 }
 
-#itagnfnuzw .gt_stub_row_group {
+#cgeacmktty .gt_stub_row_group {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -1174,15 +1119,15 @@ window.Quarto = {
   vertical-align: top;
 }
 
-#itagnfnuzw .gt_row_group_first td {
+#cgeacmktty .gt_row_group_first td {
   border-top-width: 2px;
 }
 
-#itagnfnuzw .gt_row_group_first th {
+#cgeacmktty .gt_row_group_first th {
   border-top-width: 2px;
 }
 
-#itagnfnuzw .gt_summary_row {
+#cgeacmktty .gt_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -1192,16 +1137,16 @@ window.Quarto = {
   padding-right: 5px;
 }
 
-#itagnfnuzw .gt_first_summary_row {
+#cgeacmktty .gt_first_summary_row {
   border-top-style: solid;
   border-top-color: #D3D3D3;
 }
 
-#itagnfnuzw .gt_first_summary_row.thick {
+#cgeacmktty .gt_first_summary_row.thick {
   border-top-width: 2px;
 }
 
-#itagnfnuzw .gt_last_summary_row {
+#cgeacmktty .gt_last_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1211,7 +1156,7 @@ window.Quarto = {
   border-bottom-color: #D3D3D3;
 }
 
-#itagnfnuzw .gt_grand_summary_row {
+#cgeacmktty .gt_grand_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -1221,7 +1166,7 @@ window.Quarto = {
   padding-right: 5px;
 }
 
-#itagnfnuzw .gt_first_grand_summary_row {
+#cgeacmktty .gt_first_grand_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1231,7 +1176,7 @@ window.Quarto = {
   border-top-color: #D3D3D3;
 }
 
-#itagnfnuzw .gt_last_grand_summary_row_top {
+#cgeacmktty .gt_last_grand_summary_row_top {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1241,11 +1186,11 @@ window.Quarto = {
   border-bottom-color: #D3D3D3;
 }
 
-#itagnfnuzw .gt_striped {
+#cgeacmktty .gt_striped {
   background-color: rgba(128, 128, 128, 0.05);
 }
 
-#itagnfnuzw .gt_table_body {
+#cgeacmktty .gt_table_body {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -1254,7 +1199,7 @@ window.Quarto = {
   border-bottom-color: #D3D3D3;
 }
 
-#itagnfnuzw .gt_footnotes {
+#cgeacmktty .gt_footnotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -1268,7 +1213,7 @@ window.Quarto = {
   border-right-color: #D3D3D3;
 }
 
-#itagnfnuzw .gt_footnote {
+#cgeacmktty .gt_footnote {
   margin: 0px;
   font-size: 90%;
   padding-top: 4px;
@@ -1277,7 +1222,7 @@ window.Quarto = {
   padding-right: 5px;
 }
 
-#itagnfnuzw .gt_sourcenotes {
+#cgeacmktty .gt_sourcenotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -1291,7 +1236,7 @@ window.Quarto = {
   border-right-color: #D3D3D3;
 }
 
-#itagnfnuzw .gt_sourcenote {
+#cgeacmktty .gt_sourcenote {
   font-size: 90%;
   padding-top: 4px;
   padding-bottom: 4px;
@@ -1299,72 +1244,72 @@ window.Quarto = {
   padding-right: 5px;
 }
 
-#itagnfnuzw .gt_left {
+#cgeacmktty .gt_left {
   text-align: left;
 }
 
-#itagnfnuzw .gt_center {
+#cgeacmktty .gt_center {
   text-align: center;
 }
 
-#itagnfnuzw .gt_right {
+#cgeacmktty .gt_right {
   text-align: right;
   font-variant-numeric: tabular-nums;
 }
 
-#itagnfnuzw .gt_font_normal {
+#cgeacmktty .gt_font_normal {
   font-weight: normal;
 }
 
-#itagnfnuzw .gt_font_bold {
+#cgeacmktty .gt_font_bold {
   font-weight: bold;
 }
 
-#itagnfnuzw .gt_font_italic {
+#cgeacmktty .gt_font_italic {
   font-style: italic;
 }
 
-#itagnfnuzw .gt_super {
+#cgeacmktty .gt_super {
   font-size: 65%;
 }
 
-#itagnfnuzw .gt_footnote_marks {
+#cgeacmktty .gt_footnote_marks {
   font-size: 75%;
   vertical-align: 0.4em;
   position: initial;
 }
 
-#itagnfnuzw .gt_asterisk {
+#cgeacmktty .gt_asterisk {
   font-size: 100%;
   vertical-align: 0;
 }
 
-#itagnfnuzw .gt_indent_1 {
+#cgeacmktty .gt_indent_1 {
   text-indent: 5px;
 }
 
-#itagnfnuzw .gt_indent_2 {
+#cgeacmktty .gt_indent_2 {
   text-indent: 10px;
 }
 
-#itagnfnuzw .gt_indent_3 {
+#cgeacmktty .gt_indent_3 {
   text-indent: 15px;
 }
 
-#itagnfnuzw .gt_indent_4 {
+#cgeacmktty .gt_indent_4 {
   text-indent: 20px;
 }
 
-#itagnfnuzw .gt_indent_5 {
+#cgeacmktty .gt_indent_5 {
   text-indent: 25px;
 }
 
-#itagnfnuzw .katex-display {
+#cgeacmktty .katex-display {
   display: inline-flex !important;
   margin-bottom: 0.75em !important;
 }
 
-#itagnfnuzw div.Reactable > div.rt-table > div.rt-thead > div.rt-tr.rt-tr-group-header > div.rt-th-group:after {
+#cgeacmktty div.Reactable > div.rt-table > div.rt-thead > div.rt-tr.rt-tr-group-header > div.rt-th-group:after {
   height: 0px !important;
 }
 </style>
@@ -1396,11 +1341,90 @@ window.Quarto = {
 </section>
 </section>
 </section>
+<section id="alfa-rarefacción" class="level2">
+<h2 class="anchored" data-anchor-id="alfa-rarefacción">Alfa rarefacción</h2>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb16"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a><span class="ex">qiime</span> diversity alpha-rarefaction <span class="dt">\</span></span>
+<span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a>--i-table table-dada2-tomato-16s.qza <span class="dt">\</span></span>
+<span id="cb16-3"><a href="#cb16-3" aria-hidden="true" tabindex="-1"></a>--i-phylogeny rooted-tree-dada2-tomato-16s.qza <span class="dt">\</span></span>
+<span id="cb16-4"><a href="#cb16-4" aria-hidden="true" tabindex="-1"></a>--p-max-depth 4000 <span class="dt">\</span></span>
+<span id="cb16-5"><a href="#cb16-5" aria-hidden="true" tabindex="-1"></a>--m-metadata-file Experiment_Design.tsv <span class="dt">\</span></span>
+<span id="cb16-6"><a href="#cb16-6" aria-hidden="true" tabindex="-1"></a>--o-visualization alpha-rarefaction-dada2-tomato-16s.qzv</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<section id="observed-features" class="level3">
+<h3 class="anchored" data-anchor-id="observed-features">Observed Features</h3>
+<p>Las <strong>Observed Features</strong> representan simplemente el <strong>número de características taxonómicas diferentes</strong> (especies, géneros, familias, etc.) observadas en una muestra. Es la medida más básica de riqueza de especies.</p>
+<section id="características-principales-2" class="level4">
+<h4 class="anchored" data-anchor-id="características-principales-2">Características principales:</h4>
+<ul>
+<li>Medida directa de riqueza taxonómica</li>
+<li>No considera abundancia relativa</li>
+<li>Sensible al esfuerzo de muestreo</li>
+<li>Base para otros índices de diversidad</li>
+</ul>
+<p>La fórmula es simplemente:</p>
+<p><span class="math display">\[S = \text{número total de especies observadas}\]</span></p>
+<p>donde: - <span class="math inline">\(S\)</span> = riqueza de especies observadas</p>
+<div class="cell">
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="tomato_16S_files/figure-html/unnamed-chunk-19-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+</section>
+</section>
+<section id="shannon" class="level3">
+<h3 class="anchored" data-anchor-id="shannon">Shannon</h3>
+<p>El <strong>índice de Shannon</strong> (Shannon-Weaver o Shannon-Wiener) mide la biodiversidad específica considerando tanto la riqueza de especies como su abundancia relativa. Está basado en la teoría de la información y mide la incertidumbre para predecir la especie de un individuo tomado al azar.</p>
+<section id="fórmula-del-índice-de-shannon" class="level4">
+<h4 class="anchored" data-anchor-id="fórmula-del-índice-de-shannon">Fórmula del índice de Shannon:</h4>
+<p><span class="math display">\[H' = -\sum_{i=1}^{S} p_i \ln p_i\]</span></p>
+<p>donde: - <span class="math inline">\(H'\)</span> = índice de Shannon - <span class="math inline">\(S\)</span> = número de especies (riqueza de especies) - <span class="math inline">\(p_i\)</span> = proporción de individuos de la especie <span class="math inline">\(i\)</span> respecto al total: <span class="math inline">\(p_i = \frac{n_i}{N}\)</span> - <span class="math inline">\(n_i\)</span> = número de individuos de la especie <span class="math inline">\(i\)</span> - <span class="math inline">\(N\)</span> = número total de individuos de todas las especies - <span class="math inline">\(\ln\)</span> = logaritmo natural</p>
+</section>
+<section id="interpretación-1" class="level4">
+<h4 class="anchored" data-anchor-id="interpretación-1">Interpretación:</h4>
+<ul>
+<li>Valores entre 0.5 y 5 en ecosistemas naturales</li>
+<li>Valores &lt; 2: baja diversidad</li>
+<li>Valores &gt; 3: alta diversidad</li>
+<li>Valores más altos indican mayor diversidad y equitabilidad</li>
+</ul>
+<div class="cell">
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="tomato_16S_files/figure-html/unnamed-chunk-20-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+</section>
+</section>
+<section id="faith-pd" class="level3">
+<h3 class="anchored" data-anchor-id="faith-pd">Faith PD</h3>
+<p>La diversidad filogenética de Faith (PD de Faith) es una medida de la biodiversidad que cuantifica la amplitud de la historia evolutiva representada por un conjunto de especies u otras unidades taxonómicas, definida como la suma de las longitudes de las ramas de un árbol filogenético que conectan los miembros del conjunto.</p>
+<div class="cell">
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="tomato_16S_files/figure-html/unnamed-chunk-21-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+</section>
+</section>
+</section>
+<section id="section" class="level1">
+<h1></h1>
 <section id="beta-diversidad-β-diversidad" class="level2">
 <h2 class="anchored" data-anchor-id="beta-diversidad-β-diversidad">Beta diversidad (β-diversidad)</h2>
 <p>La <strong>beta diversidad</strong> es la relación entre la diversidad regional y la diversidad local de especies. Mide el grado de diferenciación o recambio de especies entre diferentes sitios o comunidades. En microbiología, nos permite comparar qué tan similares o diferentes son las comunidades microbianas entre distintas muestras.</p>
-<section id="características-principales-2" class="level4">
-<h4 class="anchored" data-anchor-id="características-principales-2">Características principales:</h4>
+<section id="características-principales-3" class="level4">
+<h4 class="anchored" data-anchor-id="características-principales-3">Características principales:</h4>
 <ul>
 <li>Mide la variación en composición entre comunidades</li>
 <li>Puede deberse a recambio de especies o anidamiento</li>
@@ -1411,20 +1435,78 @@ window.Quarto = {
 <p><span class="math display">\[\beta = \frac{\gamma}{\alpha}\]</span></p>
 <p>donde: - <span class="math inline">\(\beta\)</span> = diversidad beta verdadera (número efectivo de comunidades) - <span class="math inline">\(\gamma\)</span> = diversidad total del conjunto de datos - <span class="math inline">\(\alpha\)</span> = diversidad alfa promedio</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb16"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a><span class="ex">qiime</span> diversity beta-group-significance <span class="dt">\</span></span>
-<span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a>--i-distance-matrix core-metrics-results/unweighted_unifrac_distance_matrix.qza <span class="dt">\</span></span>
-<span id="cb16-3"><a href="#cb16-3" aria-hidden="true" tabindex="-1"></a>--m-metadata-file Experiment_Design.tsv <span class="dt">\</span></span>
-<span id="cb16-4"><a href="#cb16-4" aria-hidden="true" tabindex="-1"></a>--m-metadata-column Type <span class="dt">\</span></span>
-<span id="cb16-5"><a href="#cb16-5" aria-hidden="true" tabindex="-1"></a>--o-visualization core-metrics-results/unweighted-unifrac-body-site-significance.qzv <span class="dt">\</span></span>
-<span id="cb16-6"><a href="#cb16-6" aria-hidden="true" tabindex="-1"></a>--p-pairwise</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</div>
-<div class="cell">
 <div class="sourceCode cell-code" id="cb17"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a><span class="ex">qiime</span> diversity beta-group-significance <span class="dt">\</span></span>
 <span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a>--i-distance-matrix core-metrics-results/unweighted_unifrac_distance_matrix.qza <span class="dt">\</span></span>
 <span id="cb17-3"><a href="#cb17-3" aria-hidden="true" tabindex="-1"></a>--m-metadata-file Experiment_Design.tsv <span class="dt">\</span></span>
-<span id="cb17-4"><a href="#cb17-4" aria-hidden="true" tabindex="-1"></a>--o-visualization core-metrics-results/unweighted-unifrac-significance.qzv <span class="dt">\</span></span>
-<span id="cb17-5"><a href="#cb17-5" aria-hidden="true" tabindex="-1"></a>--p-pairwise</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb17-4"><a href="#cb17-4" aria-hidden="true" tabindex="-1"></a>--m-metadata-column Type <span class="dt">\</span></span>
+<span id="cb17-5"><a href="#cb17-5" aria-hidden="true" tabindex="-1"></a>--o-visualization core-metrics-results/unweighted-unifrac-body-site-significance.qzv <span class="dt">\</span></span>
+<span id="cb17-6"><a href="#cb17-6" aria-hidden="true" tabindex="-1"></a>--p-pairwise</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb18"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a><span class="ex">qiime</span> diversity beta-group-significance <span class="dt">\</span></span>
+<span id="cb18-2"><a href="#cb18-2" aria-hidden="true" tabindex="-1"></a>--i-distance-matrix core-metrics-results/unweighted_unifrac_distance_matrix.qza <span class="dt">\</span></span>
+<span id="cb18-3"><a href="#cb18-3" aria-hidden="true" tabindex="-1"></a>--m-metadata-file Experiment_Design.tsv <span class="dt">\</span></span>
+<span id="cb18-4"><a href="#cb18-4" aria-hidden="true" tabindex="-1"></a>--o-visualization core-metrics-results/unweighted-unifrac-significance.qzv <span class="dt">\</span></span>
+<span id="cb18-5"><a href="#cb18-5" aria-hidden="true" tabindex="-1"></a>--p-pairwise</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section>
+<section id="distancia-bray-curtis" class="level3">
+<h3 class="anchored" data-anchor-id="distancia-bray-curtis">Distancia Bray Curtis</h3>
+<p>La <strong>distancia de Bray-Curtis</strong> es una medida de disimilitud composicional entre dos sitios basada en las abundancias de especies. Es ampliamente utilizada en ecología microbiana para comparar comunidades.</p>
+<section id="fórmula-de-bray-curtis" class="level4">
+<h4 class="anchored" data-anchor-id="fórmula-de-bray-curtis">Fórmula de Bray-Curtis:</h4>
+<p><span class="math display">\[BC_{ij} = 1 - \frac{2C_{ij}}{S_i + S_j}\]</span></p>
+<p>o de forma equivalente:</p>
+<p><span class="math display">\[BC_{ij} = \frac{\sum_{k=1}^{n} |x_{ik} - x_{jk}|}{\sum_{k=1}^{n} (x_{ik} + x_{jk})}\]</span></p>
+<p>donde: - <span class="math inline">\(BC_{ij}\)</span> = distancia de Bray-Curtis entre sitios <span class="math inline">\(i\)</span> y <span class="math inline">\(j\)</span> - <span class="math inline">\(C_{ij}\)</span> = suma de los valores menores para especies comunes entre ambos sitios - <span class="math inline">\(S_i\)</span>, <span class="math inline">\(S_j\)</span> = número total de individuos contados en los sitios <span class="math inline">\(i\)</span> y <span class="math inline">\(j\)</span> - <span class="math inline">\(x_{ik}\)</span>, <span class="math inline">\(x_{jk}\)</span> = abundancia de la especie <span class="math inline">\(k\)</span> en los sitios <span class="math inline">\(i\)</span> y <span class="math inline">\(j\)</span> - <span class="math inline">\(n\)</span> = número total de especies</p>
+</section>
+<section id="interpretación-2" class="level4">
+<h4 class="anchored" data-anchor-id="interpretación-2">Interpretación:</h4>
+<ul>
+<li>Valores entre 0 y 1</li>
+<li>0 = sitios idénticos en composición</li>
+<li>1 = sitios completamente diferentes</li>
+<li>No considera relaciones filogenéticas</li>
+</ul>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="images/bray_curtis.png" class="img-fluid quarto-figure quarto-figure-center figure-img"></p>
+</figure>
+</div>
+</section>
+</section>
+</section>
+<section id="section-1" class="level2">
+<h2 class="anchored" data-anchor-id="section-1"></h2>
+<section id="distancia-de-jaccard" class="level3">
+<h3 class="anchored" data-anchor-id="distancia-de-jaccard">Distancia de Jaccard</h3>
+<p>La <strong>distancia de Jaccard</strong> mide la disimilitud entre dos conjuntos basándose únicamente en presencia/ausencia, sin considerar abundancias. Es útil para datos binarios.</p>
+<section id="fórmula-del-índice-de-jaccard" class="level4">
+<h4 class="anchored" data-anchor-id="fórmula-del-índice-de-jaccard">Fórmula del índice de Jaccard:</h4>
+<p><span class="math display">\[J(A,B) = \frac{|A \cap B|}{|A \cup B|}\]</span></p>
+</section>
+<section id="fórmula-de-la-distancia-de-jaccard" class="level4">
+<h4 class="anchored" data-anchor-id="fórmula-de-la-distancia-de-jaccard">Fórmula de la distancia de Jaccard:</h4>
+<p><span class="math display">\[D_J(A,B) = 1 - J(A,B) = 1 - \frac{|A \cap B|}{|A \cup B|}\]</span></p>
+<p>o en términos ecológicos:</p>
+<p><span class="math display">\[J = \frac{c}{a + b - c}\]</span></p>
+<p>donde: - <span class="math inline">\(J\)</span> = índice de similitud de Jaccard - <span class="math inline">\(a\)</span> = número de especies presentes en el sitio A - <span class="math inline">\(b\)</span> = número de especies presentes en el sitio B<br>
+- <span class="math inline">\(c\)</span> = número de especies presentes en ambos sitios A y B - <span class="math inline">\(D_J\)</span> = distancia de Jaccard</p>
+</section>
+<section id="interpretación-3" class="level4">
+<h4 class="anchored" data-anchor-id="interpretación-3">Interpretación:</h4>
+<ul>
+<li>Valores entre 0 y 1</li>
+<li>0 = sitios idénticos (especies presentes son las mismas)</li>
+<li>1 = sitios completamente diferentes (no comparten especies)</li>
+<li>No considera abundancias, solo presencia/ausencia</li>
+</ul>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="images/distancia_jaccard.png" class="img-fluid quarto-figure quarto-figure-center figure-img"></p>
+</figure>
+</div>
+</section>
 </section>
 </section>
 <section id="unifrac" class="level2">
@@ -1440,8 +1522,8 @@ window.Quarto = {
 <p><span class="math display">\[W(A,B) = \sum_{i=1}^{N} l_i \times \left|\frac{A_i}{A_t} - \frac{B_i}{B_t}\right|\]</span></p>
 <p>donde: - <span class="math inline">\(W(A,B)\)</span> = distancia UniFrac ponderada entre muestras A y B - <span class="math inline">\(A_i\)</span> = número de secuencias de la muestra A en las ramas descendientes del nodo <span class="math inline">\(i\)</span> - <span class="math inline">\(A_t\)</span> = número total de secuencias en la muestra A - <span class="math inline">\(B_i\)</span> = número de secuencias de la muestra B en las ramas descendientes del nodo <span class="math inline">\(i\)</span> - <span class="math inline">\(B_t\)</span> = número total de secuencias en la muestra B</p>
 </section>
-<section id="interpretación-3" class="level4">
-<h4 class="anchored" data-anchor-id="interpretación-3">Interpretación:</h4>
+<section id="interpretación-4" class="level4">
+<h4 class="anchored" data-anchor-id="interpretación-4">Interpretación:</h4>
 <ul>
 <li>Valores entre 0 y 1</li>
 <li>0 = comunidades idénticas filogenéticamente</li>
@@ -1454,37 +1536,37 @@ window.Quarto = {
 <div class="cell-output-display">
 <div>
 <figure class="figure">
-<p><img src="tomato_16S_files/figure-html/unnamed-chunk-20-1.png" class="img-fluid figure-img" width="672"></p>
+<p><img src="tomato_16S_files/figure-html/unnamed-chunk-24-1.png" class="img-fluid figure-img" width="672"></p>
 </figure>
 </div>
 </div>
 <div class="cell-output-display">
 <div>
 <figure class="figure">
-<p><img src="tomato_16S_files/figure-html/unnamed-chunk-20-2.png" class="img-fluid figure-img" width="672"></p>
+<p><img src="tomato_16S_files/figure-html/unnamed-chunk-24-2.png" class="img-fluid figure-img" width="672"></p>
 </figure>
 </div>
 </div>
 </div>
 <div class="cell">
 <div class="cell-output-display">
-<div id="yvtxnnkknx" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
-<style>#yvtxnnkknx table {
+<div id="lxeulndpve" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<style>#lxeulndpve table {
   font-family: system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
-#yvtxnnkknx thead, #yvtxnnkknx tbody, #yvtxnnkknx tfoot, #yvtxnnkknx tr, #yvtxnnkknx td, #yvtxnnkknx th {
+#lxeulndpve thead, #lxeulndpve tbody, #lxeulndpve tfoot, #lxeulndpve tr, #lxeulndpve td, #lxeulndpve th {
   border-style: none;
 }
 
-#yvtxnnkknx p {
+#lxeulndpve p {
   margin: 0;
   padding: 0;
 }
 
-#yvtxnnkknx .gt_table {
+#lxeulndpve .gt_table {
   display: table;
   border-collapse: collapse;
   line-height: normal;
@@ -1510,12 +1592,12 @@ window.Quarto = {
   border-left-color: #D3D3D3;
 }
 
-#yvtxnnkknx .gt_caption {
+#lxeulndpve .gt_caption {
   padding-top: 4px;
   padding-bottom: 4px;
 }
 
-#yvtxnnkknx .gt_title {
+#lxeulndpve .gt_title {
   color: #333333;
   font-size: 125%;
   font-weight: initial;
@@ -1527,7 +1609,7 @@ window.Quarto = {
   border-bottom-width: 0;
 }
 
-#yvtxnnkknx .gt_subtitle {
+#lxeulndpve .gt_subtitle {
   color: #333333;
   font-size: 85%;
   font-weight: initial;
@@ -1539,7 +1621,7 @@ window.Quarto = {
   border-top-width: 0;
 }
 
-#yvtxnnkknx .gt_heading {
+#lxeulndpve .gt_heading {
   background-color: #FFFFFF;
   text-align: center;
   border-bottom-color: #FFFFFF;
@@ -1551,13 +1633,13 @@ window.Quarto = {
   border-right-color: #D3D3D3;
 }
 
-#yvtxnnkknx .gt_bottom_border {
+#lxeulndpve .gt_bottom_border {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
 }
 
-#yvtxnnkknx .gt_col_headings {
+#lxeulndpve .gt_col_headings {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -1572,7 +1654,7 @@ window.Quarto = {
   border-right-color: #D3D3D3;
 }
 
-#yvtxnnkknx .gt_col_heading {
+#lxeulndpve .gt_col_heading {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -1592,7 +1674,7 @@ window.Quarto = {
   overflow-x: hidden;
 }
 
-#yvtxnnkknx .gt_column_spanner_outer {
+#lxeulndpve .gt_column_spanner_outer {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -1604,15 +1686,15 @@ window.Quarto = {
   padding-right: 4px;
 }
 
-#yvtxnnkknx .gt_column_spanner_outer:first-child {
+#lxeulndpve .gt_column_spanner_outer:first-child {
   padding-left: 0;
 }
 
-#yvtxnnkknx .gt_column_spanner_outer:last-child {
+#lxeulndpve .gt_column_spanner_outer:last-child {
   padding-right: 0;
 }
 
-#yvtxnnkknx .gt_column_spanner {
+#lxeulndpve .gt_column_spanner {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
@@ -1624,11 +1706,11 @@ window.Quarto = {
   width: 100%;
 }
 
-#yvtxnnkknx .gt_spanner_row {
+#lxeulndpve .gt_spanner_row {
   border-bottom-style: hidden;
 }
 
-#yvtxnnkknx .gt_group_heading {
+#lxeulndpve .gt_group_heading {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1654,7 +1736,7 @@ window.Quarto = {
   text-align: left;
 }
 
-#yvtxnnkknx .gt_empty_group_heading {
+#lxeulndpve .gt_empty_group_heading {
   padding: 0.5px;
   color: #333333;
   background-color: #FFFFFF;
@@ -1669,15 +1751,15 @@ window.Quarto = {
   vertical-align: middle;
 }
 
-#yvtxnnkknx .gt_from_md > :first-child {
+#lxeulndpve .gt_from_md > :first-child {
   margin-top: 0;
 }
 
-#yvtxnnkknx .gt_from_md > :last-child {
+#lxeulndpve .gt_from_md > :last-child {
   margin-bottom: 0;
 }
 
-#yvtxnnkknx .gt_row {
+#lxeulndpve .gt_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1696,7 +1778,7 @@ window.Quarto = {
   overflow-x: hidden;
 }
 
-#yvtxnnkknx .gt_stub {
+#lxeulndpve .gt_stub {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -1709,7 +1791,7 @@ window.Quarto = {
   padding-right: 5px;
 }
 
-#yvtxnnkknx .gt_stub_row_group {
+#lxeulndpve .gt_stub_row_group {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -1723,15 +1805,15 @@ window.Quarto = {
   vertical-align: top;
 }
 
-#yvtxnnkknx .gt_row_group_first td {
+#lxeulndpve .gt_row_group_first td {
   border-top-width: 2px;
 }
 
-#yvtxnnkknx .gt_row_group_first th {
+#lxeulndpve .gt_row_group_first th {
   border-top-width: 2px;
 }
 
-#yvtxnnkknx .gt_summary_row {
+#lxeulndpve .gt_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -1741,16 +1823,16 @@ window.Quarto = {
   padding-right: 5px;
 }
 
-#yvtxnnkknx .gt_first_summary_row {
+#lxeulndpve .gt_first_summary_row {
   border-top-style: solid;
   border-top-color: #D3D3D3;
 }
 
-#yvtxnnkknx .gt_first_summary_row.thick {
+#lxeulndpve .gt_first_summary_row.thick {
   border-top-width: 2px;
 }
 
-#yvtxnnkknx .gt_last_summary_row {
+#lxeulndpve .gt_last_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1760,7 +1842,7 @@ window.Quarto = {
   border-bottom-color: #D3D3D3;
 }
 
-#yvtxnnkknx .gt_grand_summary_row {
+#lxeulndpve .gt_grand_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -1770,7 +1852,7 @@ window.Quarto = {
   padding-right: 5px;
 }
 
-#yvtxnnkknx .gt_first_grand_summary_row {
+#lxeulndpve .gt_first_grand_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1780,7 +1862,7 @@ window.Quarto = {
   border-top-color: #D3D3D3;
 }
 
-#yvtxnnkknx .gt_last_grand_summary_row_top {
+#lxeulndpve .gt_last_grand_summary_row_top {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1790,11 +1872,11 @@ window.Quarto = {
   border-bottom-color: #D3D3D3;
 }
 
-#yvtxnnkknx .gt_striped {
+#lxeulndpve .gt_striped {
   background-color: rgba(128, 128, 128, 0.05);
 }
 
-#yvtxnnkknx .gt_table_body {
+#lxeulndpve .gt_table_body {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -1803,7 +1885,7 @@ window.Quarto = {
   border-bottom-color: #D3D3D3;
 }
 
-#yvtxnnkknx .gt_footnotes {
+#lxeulndpve .gt_footnotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -1817,7 +1899,7 @@ window.Quarto = {
   border-right-color: #D3D3D3;
 }
 
-#yvtxnnkknx .gt_footnote {
+#lxeulndpve .gt_footnote {
   margin: 0px;
   font-size: 90%;
   padding-top: 4px;
@@ -1826,7 +1908,7 @@ window.Quarto = {
   padding-right: 5px;
 }
 
-#yvtxnnkknx .gt_sourcenotes {
+#lxeulndpve .gt_sourcenotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -1840,7 +1922,7 @@ window.Quarto = {
   border-right-color: #D3D3D3;
 }
 
-#yvtxnnkknx .gt_sourcenote {
+#lxeulndpve .gt_sourcenote {
   font-size: 90%;
   padding-top: 4px;
   padding-bottom: 4px;
@@ -1848,72 +1930,72 @@ window.Quarto = {
   padding-right: 5px;
 }
 
-#yvtxnnkknx .gt_left {
+#lxeulndpve .gt_left {
   text-align: left;
 }
 
-#yvtxnnkknx .gt_center {
+#lxeulndpve .gt_center {
   text-align: center;
 }
 
-#yvtxnnkknx .gt_right {
+#lxeulndpve .gt_right {
   text-align: right;
   font-variant-numeric: tabular-nums;
 }
 
-#yvtxnnkknx .gt_font_normal {
+#lxeulndpve .gt_font_normal {
   font-weight: normal;
 }
 
-#yvtxnnkknx .gt_font_bold {
+#lxeulndpve .gt_font_bold {
   font-weight: bold;
 }
 
-#yvtxnnkknx .gt_font_italic {
+#lxeulndpve .gt_font_italic {
   font-style: italic;
 }
 
-#yvtxnnkknx .gt_super {
+#lxeulndpve .gt_super {
   font-size: 65%;
 }
 
-#yvtxnnkknx .gt_footnote_marks {
+#lxeulndpve .gt_footnote_marks {
   font-size: 75%;
   vertical-align: 0.4em;
   position: initial;
 }
 
-#yvtxnnkknx .gt_asterisk {
+#lxeulndpve .gt_asterisk {
   font-size: 100%;
   vertical-align: 0;
 }
 
-#yvtxnnkknx .gt_indent_1 {
+#lxeulndpve .gt_indent_1 {
   text-indent: 5px;
 }
 
-#yvtxnnkknx .gt_indent_2 {
+#lxeulndpve .gt_indent_2 {
   text-indent: 10px;
 }
 
-#yvtxnnkknx .gt_indent_3 {
+#lxeulndpve .gt_indent_3 {
   text-indent: 15px;
 }
 
-#yvtxnnkknx .gt_indent_4 {
+#lxeulndpve .gt_indent_4 {
   text-indent: 20px;
 }
 
-#yvtxnnkknx .gt_indent_5 {
+#lxeulndpve .gt_indent_5 {
   text-indent: 25px;
 }
 
-#yvtxnnkknx .katex-display {
+#lxeulndpve .katex-display {
   display: inline-flex !important;
   margin-bottom: 0.75em !important;
 }
 
-#yvtxnnkknx div.Reactable > div.rt-table > div.rt-thead > div.rt-tr.rt-tr-group-header > div.rt-th-group:after {
+#lxeulndpve div.Reactable > div.rt-table > div.rt-thead > div.rt-tr.rt-tr-group-header > div.rt-th-group:after {
   height: 0px !important;
 }
 </style>
@@ -1943,82 +2025,6 @@ window.Quarto = {
 </tbody>
 </table>
 
-</div>
-</div>
-</div>
-</section>
-</section>
-<section id="alfa-rarefacción" class="level2">
-<h2 class="anchored" data-anchor-id="alfa-rarefacción">Alfa rarefacción</h2>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb18"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a><span class="ex">qiime</span> diversity alpha-rarefaction <span class="dt">\</span></span>
-<span id="cb18-2"><a href="#cb18-2" aria-hidden="true" tabindex="-1"></a>--i-table table-dada2-tomato-16s.qza <span class="dt">\</span></span>
-<span id="cb18-3"><a href="#cb18-3" aria-hidden="true" tabindex="-1"></a>--i-phylogeny rooted-tree-dada2-tomato-16s.qza <span class="dt">\</span></span>
-<span id="cb18-4"><a href="#cb18-4" aria-hidden="true" tabindex="-1"></a>--p-max-depth 4000 <span class="dt">\</span></span>
-<span id="cb18-5"><a href="#cb18-5" aria-hidden="true" tabindex="-1"></a>--m-metadata-file Experiment_Design.tsv <span class="dt">\</span></span>
-<span id="cb18-6"><a href="#cb18-6" aria-hidden="true" tabindex="-1"></a>--o-visualization alpha-rarefaction-dada2-tomato-16s.qzv</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</div>
-<section id="observed-features" class="level3">
-<h3 class="anchored" data-anchor-id="observed-features">Observed Features</h3>
-<p>Las <strong>Observed Features</strong> representan simplemente el <strong>número de características taxonómicas diferentes</strong> (especies, géneros, familias, etc.) observadas en una muestra. Es la medida más básica de riqueza de especies.</p>
-<section id="características-principales-3" class="level4">
-<h4 class="anchored" data-anchor-id="características-principales-3">Características principales:</h4>
-<ul>
-<li>Medida directa de riqueza taxonómica</li>
-<li>No considera abundancia relativa</li>
-<li>Sensible al esfuerzo de muestreo</li>
-<li>Base para otros índices de diversidad</li>
-</ul>
-<p>La fórmula es simplemente:</p>
-<p><span class="math display">\[S = \text{número total de especies observadas}\]</span></p>
-<p>donde: - <span class="math inline">\(S\)</span> = riqueza de especies observadas</p>
-<div class="cell">
-<div class="cell-output-display">
-<div>
-<figure class="figure">
-<p><img src="tomato_16S_files/figure-html/unnamed-chunk-23-1.png" class="img-fluid figure-img" width="672"></p>
-</figure>
-</div>
-</div>
-</div>
-</section>
-</section>
-<section id="shannon" class="level3">
-<h3 class="anchored" data-anchor-id="shannon">Shannon</h3>
-<p>El <strong>índice de Shannon</strong> (Shannon-Weaver o Shannon-Wiener) mide la biodiversidad específica considerando tanto la riqueza de especies como su abundancia relativa. Está basado en la teoría de la información y mide la incertidumbre para predecir la especie de un individuo tomado al azar.</p>
-<section id="fórmula-del-índice-de-shannon" class="level4">
-<h4 class="anchored" data-anchor-id="fórmula-del-índice-de-shannon">Fórmula del índice de Shannon:</h4>
-<p><span class="math display">\[H' = -\sum_{i=1}^{S} p_i \ln p_i\]</span></p>
-<p>donde: - <span class="math inline">\(H'\)</span> = índice de Shannon - <span class="math inline">\(S\)</span> = número de especies (riqueza de especies) - <span class="math inline">\(p_i\)</span> = proporción de individuos de la especie <span class="math inline">\(i\)</span> respecto al total: <span class="math inline">\(p_i = \frac{n_i}{N}\)</span> - <span class="math inline">\(n_i\)</span> = número de individuos de la especie <span class="math inline">\(i\)</span> - <span class="math inline">\(N\)</span> = número total de individuos de todas las especies - <span class="math inline">\(\ln\)</span> = logaritmo natural</p>
-</section>
-<section id="interpretación-4" class="level4">
-<h4 class="anchored" data-anchor-id="interpretación-4">Interpretación:</h4>
-<ul>
-<li>Valores entre 0.5 y 5 en ecosistemas naturales</li>
-<li>Valores &lt; 2: baja diversidad</li>
-<li>Valores &gt; 3: alta diversidad</li>
-<li>Valores más altos indican mayor diversidad y equitabilidad</li>
-</ul>
-<div class="cell">
-<div class="cell-output-display">
-<div>
-<figure class="figure">
-<p><img src="tomato_16S_files/figure-html/unnamed-chunk-24-1.png" class="img-fluid figure-img" width="672"></p>
-</figure>
-</div>
-</div>
-</div>
-</section>
-</section>
-<section id="faith-pd" class="level3">
-<h3 class="anchored" data-anchor-id="faith-pd">Faith PD</h3>
-<p>La diversidad filogenética de Faith (PD de Faith) es una medida de la biodiversidad que cuantifica la amplitud de la historia evolutiva representada por un conjunto de especies u otras unidades taxonómicas, definida como la suma de las longitudes de las ramas de un árbol filogenético que conectan los miembros del conjunto.</p>
-<div class="cell">
-<div class="cell-output-display">
-<div>
-<figure class="figure">
-<p><img src="tomato_16S_files/figure-html/unnamed-chunk-25-1.png" class="img-fluid figure-img" width="672"></p>
-</figure>
 </div>
 </div>
 </div>

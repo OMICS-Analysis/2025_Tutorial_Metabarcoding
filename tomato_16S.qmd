@@ -197,57 +197,6 @@ qiime diversity core-metrics-phylogenetic \
 --output-dir core-metrics-results
 ```
 
-### Distancia Bray Curtis
-
-La **distancia de Bray-Curtis** es una medida de disimilitud composicional entre dos sitios basada en las abundancias de especies. Es ampliamente utilizada en ecología microbiana para comparar comunidades.
-
-#### Fórmula de Bray-Curtis:
-
-$$BC_{ij} = 1 - \frac{2C_{ij}}{S_i + S_j}$$
-
-o de forma equivalente:
-
-$$BC_{ij} = \frac{\sum_{k=1}^{n} |x_{ik} - x_{jk}|}{\sum_{k=1}^{n} (x_{ik} + x_{jk})}$$
-
-donde: - $BC_{ij}$ = distancia de Bray-Curtis entre sitios $i$ y $j$ - $C_{ij}$ = suma de los valores menores para especies comunes entre ambos sitios - $S_i$, $S_j$ = número total de individuos contados en los sitios $i$ y $j$ - $x_{ik}$, $x_{jk}$ = abundancia de la especie $k$ en los sitios $i$ y $j$ - $n$ = número total de especies
-
-#### Interpretación:
-
--   Valores entre 0 y 1
--   0 = sitios idénticos en composición
--   1 = sitios completamente diferentes
--   No considera relaciones filogenéticas
-
-![](images/bray_curtis.png){fig-align="center"}
-
-### Distancia de Jaccard
-
-La **distancia de Jaccard** mide la disimilitud entre dos conjuntos basándose únicamente en presencia/ausencia, sin considerar abundancias. Es útil para datos binarios.
-
-#### Fórmula del índice de Jaccard:
-
-$$J(A,B) = \frac{|A \cap B|}{|A \cup B|}$$
-
-#### Fórmula de la distancia de Jaccard:
-
-$$D_J(A,B) = 1 - J(A,B) = 1 - \frac{|A \cap B|}{|A \cup B|}$$
-
-o en términos ecológicos:
-
-$$J = \frac{c}{a + b - c}$$
-
-donde: - $J$ = índice de similitud de Jaccard - $a$ = número de especies presentes en el sitio A - $b$ = número de especies presentes en el sitio B\
-- $c$ = número de especies presentes en ambos sitios A y B - $D_J$ = distancia de Jaccard
-
-#### Interpretación:
-
--   Valores entre 0 y 1
--   0 = sitios idénticos (especies presentes son las mismas)
--   1 = sitios completamente diferentes (no comparten especies)
--   No considera abundancias, solo presencia/ausencia
-
-![](images/distancia_jaccard.png){fig-align="center"}
-
 ## Alfa diversidad (α-diversidad)
 
 La **alfa diversidad** es la diversidad media de especies microbianas en un lugar a escala local. Representa la riqueza de especies y su abundancia relativa dentro de una sola muestra o hábitat. Es uno de los componentes fundamentales de la diversidad biológica junto con la diversidad beta y gamma.
@@ -322,102 +271,6 @@ donde: - $PD$ = diversidad filogenética de Faith - $N$ = número de ramas del �
 df <- readr::read_csv("tables/kruskal-wallis-pairwise-Type_faith.csv")
 
 gt::gt(df)
-```
-
-## Beta diversidad (β-diversidad)
-
-La **beta diversidad** es la relación entre la diversidad regional y la diversidad local de especies. Mide el grado de diferenciación o recambio de especies entre diferentes sitios o comunidades. En microbiología, nos permite comparar qué tan similares o diferentes son las comunidades microbianas entre distintas muestras.
-
-#### Características principales:
-
--   Mide la variación en composición entre comunidades
--   Puede deberse a recambio de especies o anidamiento
--   Valores altos indican comunidades muy diferentes
--   Valores bajos indican comunidades similares
-
-La **diversidad β verdadera** se calcula como:
-
-$$\beta = \frac{\gamma}{\alpha}$$
-
-donde: - $\beta$ = diversidad beta verdadera (número efectivo de comunidades) - $\gamma$ = diversidad total del conjunto de datos - $\alpha$ = diversidad alfa promedio
-
-```{bash, eval=FALSE}
-qiime diversity beta-group-significance \
---i-distance-matrix core-metrics-results/unweighted_unifrac_distance_matrix.qza \
---m-metadata-file Experiment_Design.tsv \
---m-metadata-column Type \
---o-visualization core-metrics-results/unweighted-unifrac-body-site-significance.qzv \
---p-pairwise
-```
-
-```{bash, eval=FALSE}
-qiime diversity beta-group-significance \
---i-distance-matrix core-metrics-results/unweighted_unifrac_distance_matrix.qza \
---m-metadata-file Experiment_Design.tsv \
---o-visualization core-metrics-results/unweighted-unifrac-significance.qzv \
---p-pairwise
-```
-
-## UniFrac
-
-**UniFrac** es una métrica de distancia filogenética utilizada para comparar comunidades biológicas. Incorpora información sobre las relaciones filogenéticas entre los organismos observados, diferenciándose de medidas como Bray-Curtis.
-
-#### UniFrac No Ponderado (Unweighted):
-
-$$U(A,B) = \frac{\sum_{i=1}^{N} l_i \times |A_i - B_i|}{\sum_{i=1}^{N} l_i \times \max(A_i, B_i)}$$
-
-donde: - $U(A,B)$ = distancia UniFrac no ponderada entre muestras A y B - $N$ = número de nodos en el árbol filogenético - $l_i$ = longitud de la rama entre el nodo $i$ y su nodo parental - $A_i$ = indicador (1 o 0) de presencia de la muestra A en las ramas descendientes del nodo $i$ - $B_i$ = indicador (1 o 0) de presencia de la muestra B en las ramas descendientes del nodo $i$
-
-#### UniFrac Ponderado (Weighted):
-
-$$W(A,B) = \sum_{i=1}^{N} l_i \times \left|\frac{A_i}{A_t} - \frac{B_i}{B_t}\right|$$
-
-donde: - $W(A,B)$ = distancia UniFrac ponderada entre muestras A y B - $A_i$ = número de secuencias de la muestra A en las ramas descendientes del nodo $i$ - $A_t$ = número total de secuencias en la muestra A - $B_i$ = número de secuencias de la muestra B en las ramas descendientes del nodo $i$ - $B_t$ = número total de secuencias en la muestra B
-
-#### Interpretación:
-
--   Valores entre 0 y 1
--   0 = comunidades idénticas filogenéticamente
--   1 = comunidades completamente diferentes filogenéticamente
-
-### Unweighted UniFrac Distance: PERMANOVA
-
-```{r, message=FALSE, echo=FALSE}
-suppressPackageStartupMessages(library(tidyverse))
-
-df <- readr::read_tsv("tables/raw_data_permanova.tsv")
-
-h1 <- df %>% 
-  filter(Group1 == "NC")
-
-
-ggplot(h1, aes(y = Distance, x = Group2, fill = Group2)) +
-  geom_boxplot(color = "black") + theme_classic() +
-  labs(title = "Distance to NC", fill = "Group") +
-  xlab("Group") + 
-  theme(text = element_text(size = 20)) +
-  scale_fill_manual(values = c( "#8f0052","#276518"))
-
-
-h2 <- df %>% 
-  filter(Group1 == "Tomato")
-
-
-ggplot(h2, aes(y = Distance, x = Group2, fill = Group2)) +
-  geom_boxplot(color = "black") + theme_classic() +
-  labs(title = "Distance to Tomato", fill = "Group") +
-  xlab("Group") + 
-  theme(text = element_text(size = 20)) +
-  scale_fill_manual(values = c( "#8f0052","#276518"))
-
-```
-
-```{r, message=FALSE, echo=FALSE}
-
-df <- readr::read_csv("tables/permanova-pairwise.csv")
-
-gt::gt(df)
-
 ```
 
 ## Alfa rarefacción
@@ -630,6 +483,157 @@ ggplot(obfe_long, aes(
   ) +
   scale_fill_manual(values = c( "#8f0052","#276518")) +
   scale_color_manual(values = c( "#8f0052","#276518"))
+```
+
+# 
+
+## Beta diversidad (β-diversidad)
+
+La **beta diversidad** es la relación entre la diversidad regional y la diversidad local de especies. Mide el grado de diferenciación o recambio de especies entre diferentes sitios o comunidades. En microbiología, nos permite comparar qué tan similares o diferentes son las comunidades microbianas entre distintas muestras.
+
+#### Características principales:
+
+-   Mide la variación en composición entre comunidades
+-   Puede deberse a recambio de especies o anidamiento
+-   Valores altos indican comunidades muy diferentes
+-   Valores bajos indican comunidades similares
+
+La **diversidad β verdadera** se calcula como:
+
+$$\beta = \frac{\gamma}{\alpha}$$
+
+donde: - $\beta$ = diversidad beta verdadera (número efectivo de comunidades) - $\gamma$ = diversidad total del conjunto de datos - $\alpha$ = diversidad alfa promedio
+
+```{bash, eval=FALSE}
+qiime diversity beta-group-significance \
+--i-distance-matrix core-metrics-results/unweighted_unifrac_distance_matrix.qza \
+--m-metadata-file Experiment_Design.tsv \
+--m-metadata-column Type \
+--o-visualization core-metrics-results/unweighted-unifrac-body-site-significance.qzv \
+--p-pairwise
+```
+
+```{bash, eval=FALSE}
+qiime diversity beta-group-significance \
+--i-distance-matrix core-metrics-results/unweighted_unifrac_distance_matrix.qza \
+--m-metadata-file Experiment_Design.tsv \
+--o-visualization core-metrics-results/unweighted-unifrac-significance.qzv \
+--p-pairwise
+```
+
+### Distancia Bray Curtis
+
+La **distancia de Bray-Curtis** es una medida de disimilitud composicional entre dos sitios basada en las abundancias de especies. Es ampliamente utilizada en ecología microbiana para comparar comunidades.
+
+#### Fórmula de Bray-Curtis:
+
+$$BC_{ij} = 1 - \frac{2C_{ij}}{S_i + S_j}$$
+
+o de forma equivalente:
+
+$$BC_{ij} = \frac{\sum_{k=1}^{n} |x_{ik} - x_{jk}|}{\sum_{k=1}^{n} (x_{ik} + x_{jk})}$$
+
+donde: - $BC_{ij}$ = distancia de Bray-Curtis entre sitios $i$ y $j$ - $C_{ij}$ = suma de los valores menores para especies comunes entre ambos sitios - $S_i$, $S_j$ = número total de individuos contados en los sitios $i$ y $j$ - $x_{ik}$, $x_{jk}$ = abundancia de la especie $k$ en los sitios $i$ y $j$ - $n$ = número total de especies
+
+#### Interpretación:
+
+-   Valores entre 0 y 1
+-   0 = sitios idénticos en composición
+-   1 = sitios completamente diferentes
+-   No considera relaciones filogenéticas
+
+![](images/bray_curtis.png){fig-align="center"}
+
+## 
+
+### Distancia de Jaccard
+
+La **distancia de Jaccard** mide la disimilitud entre dos conjuntos basándose únicamente en presencia/ausencia, sin considerar abundancias. Es útil para datos binarios.
+
+#### Fórmula del índice de Jaccard:
+
+$$J(A,B) = \frac{|A \cap B|}{|A \cup B|}$$
+
+#### Fórmula de la distancia de Jaccard:
+
+$$D_J(A,B) = 1 - J(A,B) = 1 - \frac{|A \cap B|}{|A \cup B|}$$
+
+o en términos ecológicos:
+
+$$J = \frac{c}{a + b - c}$$
+
+donde: - $J$ = índice de similitud de Jaccard - $a$ = número de especies presentes en el sitio A - $b$ = número de especies presentes en el sitio B\
+- $c$ = número de especies presentes en ambos sitios A y B - $D_J$ = distancia de Jaccard
+
+#### Interpretación:
+
+-   Valores entre 0 y 1
+-   0 = sitios idénticos (especies presentes son las mismas)
+-   1 = sitios completamente diferentes (no comparten especies)
+-   No considera abundancias, solo presencia/ausencia
+
+![](images/distancia_jaccard.png){fig-align="center"}
+
+## UniFrac
+
+**UniFrac** es una métrica de distancia filogenética utilizada para comparar comunidades biológicas. Incorpora información sobre las relaciones filogenéticas entre los organismos observados, diferenciándose de medidas como Bray-Curtis.
+
+#### UniFrac No Ponderado (Unweighted):
+
+$$U(A,B) = \frac{\sum_{i=1}^{N} l_i \times |A_i - B_i|}{\sum_{i=1}^{N} l_i \times \max(A_i, B_i)}$$
+
+donde: - $U(A,B)$ = distancia UniFrac no ponderada entre muestras A y B - $N$ = número de nodos en el árbol filogenético - $l_i$ = longitud de la rama entre el nodo $i$ y su nodo parental - $A_i$ = indicador (1 o 0) de presencia de la muestra A en las ramas descendientes del nodo $i$ - $B_i$ = indicador (1 o 0) de presencia de la muestra B en las ramas descendientes del nodo $i$
+
+#### UniFrac Ponderado (Weighted):
+
+$$W(A,B) = \sum_{i=1}^{N} l_i \times \left|\frac{A_i}{A_t} - \frac{B_i}{B_t}\right|$$
+
+donde: - $W(A,B)$ = distancia UniFrac ponderada entre muestras A y B - $A_i$ = número de secuencias de la muestra A en las ramas descendientes del nodo $i$ - $A_t$ = número total de secuencias en la muestra A - $B_i$ = número de secuencias de la muestra B en las ramas descendientes del nodo $i$ - $B_t$ = número total de secuencias en la muestra B
+
+#### Interpretación:
+
+-   Valores entre 0 y 1
+-   0 = comunidades idénticas filogenéticamente
+-   1 = comunidades completamente diferentes filogenéticamente
+
+### Unweighted UniFrac Distance: PERMANOVA
+
+```{r, message=FALSE, echo=FALSE}
+suppressPackageStartupMessages(library(tidyverse))
+
+df <- readr::read_tsv("tables/raw_data_permanova.tsv")
+
+h1 <- df %>% 
+  filter(Group1 == "NC")
+
+
+ggplot(h1, aes(y = Distance, x = Group2, fill = Group2)) +
+  geom_boxplot(color = "black") + theme_classic() +
+  labs(title = "Distance to NC", fill = "Group") +
+  xlab("Group") + 
+  theme(text = element_text(size = 20)) +
+  scale_fill_manual(values = c( "#8f0052","#276518"))
+
+
+h2 <- df %>% 
+  filter(Group1 == "Tomato")
+
+
+ggplot(h2, aes(y = Distance, x = Group2, fill = Group2)) +
+  geom_boxplot(color = "black") + theme_classic() +
+  labs(title = "Distance to Tomato", fill = "Group") +
+  xlab("Group") + 
+  theme(text = element_text(size = 20)) +
+  scale_fill_manual(values = c( "#8f0052","#276518"))
+
+```
+
+```{r, message=FALSE, echo=FALSE}
+
+df <- readr::read_csv("tables/permanova-pairwise.csv")
+
+gt::gt(df)
+
 ```
 
 # Taxonomía
