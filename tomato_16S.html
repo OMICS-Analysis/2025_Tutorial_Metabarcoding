@@ -69,6 +69,35 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <link href="tomato_16S_files/libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
 <link href="tomato_16S_files/libs/bootstrap/bootstrap-a71a25f19e128005acb9c00d38d9c2cf.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
 
+  <script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script>
+  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
+
+<script type="text/javascript">
+const typesetMath = (el) => {
+  if (window.MathJax) {
+    // MathJax Typeset
+    window.MathJax.typeset([el]);
+  } else if (window.katex) {
+    // KaTeX Render
+    var mathElements = el.getElementsByClassName("math");
+    var macros = [];
+    for (var i = 0; i < mathElements.length; i++) {
+      var texText = mathElements[i].firstChild;
+      if (mathElements[i].tagName == "SPAN") {
+        window.katex.render(texText.data, mathElements[i], {
+          displayMode: mathElements[i].classList.contains('display'),
+          throwOnError: false,
+          macros: macros,
+          fleqn: false
+        });
+      }
+    }
+  }
+}
+window.Quarto = {
+  typesetMath
+};
+</script>
 
 </head>
 
@@ -292,22 +321,70 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 <section id="distancia-bray-curtis" class="level3">
 <h3 class="anchored" data-anchor-id="distancia-bray-curtis">Distancia Bray Curtis</h3>
+<p>La <strong>distancia de Bray-Curtis</strong> es una medida de disimilitud composicional entre dos sitios basada en las abundancias de especies. Es ampliamente utilizada en ecología microbiana para comparar comunidades.</p>
+<section id="fórmula-de-bray-curtis" class="level4">
+<h4 class="anchored" data-anchor-id="fórmula-de-bray-curtis">Fórmula de Bray-Curtis:</h4>
+<p><span class="math display">\[BC_{ij} = 1 - \frac{2C_{ij}}{S_i + S_j}\]</span></p>
+<p>o de forma equivalente:</p>
+<p><span class="math display">\[BC_{ij} = \frac{\sum_{k=1}^{n} |x_{ik} - x_{jk}|}{\sum_{k=1}^{n} (x_{ik} + x_{jk})}\]</span></p>
+<p>donde: - <span class="math inline">\(BC_{ij}\)</span> = distancia de Bray-Curtis entre sitios <span class="math inline">\(i\)</span> y <span class="math inline">\(j\)</span> - <span class="math inline">\(C_{ij}\)</span> = suma de los valores menores para especies comunes entre ambos sitios - <span class="math inline">\(S_i\)</span>, <span class="math inline">\(S_j\)</span> = número total de individuos contados en los sitios <span class="math inline">\(i\)</span> y <span class="math inline">\(j\)</span> - <span class="math inline">\(x_{ik}\)</span>, <span class="math inline">\(x_{jk}\)</span> = abundancia de la especie <span class="math inline">\(k\)</span> en los sitios <span class="math inline">\(i\)</span> y <span class="math inline">\(j\)</span> - <span class="math inline">\(n\)</span> = número total de especies</p>
+</section>
+<section id="interpretación" class="level4">
+<h4 class="anchored" data-anchor-id="interpretación">Interpretación:</h4>
+<ul>
+<li>Valores entre 0 y 1</li>
+<li>0 = sitios idénticos en composición</li>
+<li>1 = sitios completamente diferentes</li>
+<li>No considera relaciones filogenéticas</li>
+</ul>
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
 <p><img src="images/bray_curtis.png" class="img-fluid quarto-figure quarto-figure-center figure-img"></p>
 </figure>
 </div>
 </section>
+</section>
 <section id="distancia-de-jaccard" class="level3">
 <h3 class="anchored" data-anchor-id="distancia-de-jaccard">Distancia de Jaccard</h3>
+<p>La <strong>distancia de Jaccard</strong> mide la disimilitud entre dos conjuntos basándose únicamente en presencia/ausencia, sin considerar abundancias. Es útil para datos binarios.</p>
+<section id="fórmula-del-índice-de-jaccard" class="level4">
+<h4 class="anchored" data-anchor-id="fórmula-del-índice-de-jaccard">Fórmula del índice de Jaccard:</h4>
+<p><span class="math display">\[J(A,B) = \frac{|A \cap B|}{|A \cup B|}\]</span></p>
+</section>
+<section id="fórmula-de-la-distancia-de-jaccard" class="level4">
+<h4 class="anchored" data-anchor-id="fórmula-de-la-distancia-de-jaccard">Fórmula de la distancia de Jaccard:</h4>
+<p><span class="math display">\[D_J(A,B) = 1 - J(A,B) = 1 - \frac{|A \cap B|}{|A \cup B|}\]</span></p>
+<p>o en términos ecológicos:</p>
+<p><span class="math display">\[J = \frac{c}{a + b - c}\]</span></p>
+<p>donde: - <span class="math inline">\(J\)</span> = índice de similitud de Jaccard - <span class="math inline">\(a\)</span> = número de especies presentes en el sitio A - <span class="math inline">\(b\)</span> = número de especies presentes en el sitio B<br>
+- <span class="math inline">\(c\)</span> = número de especies presentes en ambos sitios A y B - <span class="math inline">\(D_J\)</span> = distancia de Jaccard</p>
+</section>
+<section id="interpretación-1" class="level4">
+<h4 class="anchored" data-anchor-id="interpretación-1">Interpretación:</h4>
+<ul>
+<li>Valores entre 0 y 1</li>
+<li>0 = sitios idénticos (especies presentes son las mismas)</li>
+<li>1 = sitios completamente diferentes (no comparten especies)</li>
+<li>No considera abundancias, solo presencia/ausencia</li>
+</ul>
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
 <p><img src="images/distancia_jaccard.png" class="img-fluid quarto-figure quarto-figure-center figure-img"></p>
 </figure>
 </div>
 </section>
-<section id="alfa-diversidad" class="level2">
-<h2 class="anchored" data-anchor-id="alfa-diversidad">Alfa diversidad</h2>
+</section>
+<section id="alfa-diversidad-α-diversidad" class="level2">
+<h2 class="anchored" data-anchor-id="alfa-diversidad-α-diversidad">Alfa diversidad (α-diversidad)</h2>
+<p>La <strong>alfa diversidad</strong> es la diversidad media de especies microbianas en un lugar a escala local. Representa la riqueza de especies y su abundancia relativa dentro de una sola muestra o hábitat. Es uno de los componentes fundamentales de la diversidad biológica junto con la diversidad beta y gamma.</p>
+<section id="características-principales" class="level4">
+<h4 class="anchored" data-anchor-id="características-principales">Características principales:</h4>
+<ul>
+<li>Mide la diversidad dentro de una muestra individual</li>
+<li>Considera tanto el número de especies como su abundancia relativa</li>
+<li>Es independiente de la escala espacial específica</li>
+<li>Fundamental para caracterizar comunidades microbianas</li>
+</ul>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb14"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="ex">qiime</span> diversity alpha-group-significance <span class="dt">\</span></span>
 <span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a>--i-alpha-diversity core-metrics-results/faith_pd_vector.qza <span class="dt">\</span></span>
@@ -320,8 +397,22 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb15-3"><a href="#cb15-3" aria-hidden="true" tabindex="-1"></a>--m-metadata-file Experiment_Design.tsv <span class="dt">\</span></span>
 <span id="cb15-4"><a href="#cb15-4" aria-hidden="true" tabindex="-1"></a>--o-visualization core-metrics-results/evenness-group-significance.qzv</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<section id="eveness-uniformidad-de-grupo" class="level3">
-<h3 class="anchored" data-anchor-id="eveness-uniformidad-de-grupo">Eveness (Uniformidad de grupo)</h3>
+</section>
+<section id="eveness-equitabilidad" class="level3">
+<h3 class="anchored" data-anchor-id="eveness-equitabilidad">Eveness (equitabilidad)</h3>
+<p>La <strong>Evenness</strong> o <strong>equitabilidad</strong> mide qué tan uniformemente están distribuidas las abundancias de las especies en una comunidad. Una alta equitabilidad indica que las especies tienen abundancias similares.</p>
+<section id="índice-de-equitabilidad-de-pielou" class="level4">
+<h4 class="anchored" data-anchor-id="índice-de-equitabilidad-de-pielou">Índice de Equitabilidad de Pielou:</h4>
+<p><span class="math display">\[J' = \frac{H'}{H'_{\max}} = \frac{H'}{\ln S}\]</span></p>
+<p>donde: - <span class="math inline">\(J'\)</span> = índice de equitabilidad de Pielou - <span class="math inline">\(H'\)</span> = índice de Shannon observado - <span class="math inline">\(H'_{\max}\)</span> = diversidad máxima posible = <span class="math inline">\(\ln S\)</span> - <span class="math inline">\(S\)</span> = número de especies</p>
+</section>
+<section id="interpretación-2" class="level4">
+<h4 class="anchored" data-anchor-id="interpretación-2">Interpretación:</h4>
+<ul>
+<li>Valores entre 0 y 1</li>
+<li>0 = máxima inequidad (una especie domina completamente)</li>
+<li>1 = máxima equidad (todas las especies igualmente abundantes)</li>
+</ul>
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
 <p><img src="images/alpha-compare.png" class="img-fluid quarto-figure quarto-figure-center figure-img"></p>
@@ -329,23 +420,23 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 <div class="cell">
 <div class="cell-output-display">
-<div id="cpkfxirvys" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
-<style>#cpkfxirvys table {
+<div id="ptzottiags" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<style>#ptzottiags table {
   font-family: system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
-#cpkfxirvys thead, #cpkfxirvys tbody, #cpkfxirvys tfoot, #cpkfxirvys tr, #cpkfxirvys td, #cpkfxirvys th {
+#ptzottiags thead, #ptzottiags tbody, #ptzottiags tfoot, #ptzottiags tr, #ptzottiags td, #ptzottiags th {
   border-style: none;
 }
 
-#cpkfxirvys p {
+#ptzottiags p {
   margin: 0;
   padding: 0;
 }
 
-#cpkfxirvys .gt_table {
+#ptzottiags .gt_table {
   display: table;
   border-collapse: collapse;
   line-height: normal;
@@ -371,12 +462,12 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   border-left-color: #D3D3D3;
 }
 
-#cpkfxirvys .gt_caption {
+#ptzottiags .gt_caption {
   padding-top: 4px;
   padding-bottom: 4px;
 }
 
-#cpkfxirvys .gt_title {
+#ptzottiags .gt_title {
   color: #333333;
   font-size: 125%;
   font-weight: initial;
@@ -388,7 +479,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   border-bottom-width: 0;
 }
 
-#cpkfxirvys .gt_subtitle {
+#ptzottiags .gt_subtitle {
   color: #333333;
   font-size: 85%;
   font-weight: initial;
@@ -400,7 +491,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   border-top-width: 0;
 }
 
-#cpkfxirvys .gt_heading {
+#ptzottiags .gt_heading {
   background-color: #FFFFFF;
   text-align: center;
   border-bottom-color: #FFFFFF;
@@ -412,13 +503,13 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   border-right-color: #D3D3D3;
 }
 
-#cpkfxirvys .gt_bottom_border {
+#ptzottiags .gt_bottom_border {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
 }
 
-#cpkfxirvys .gt_col_headings {
+#ptzottiags .gt_col_headings {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -433,7 +524,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   border-right-color: #D3D3D3;
 }
 
-#cpkfxirvys .gt_col_heading {
+#ptzottiags .gt_col_heading {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -453,7 +544,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   overflow-x: hidden;
 }
 
-#cpkfxirvys .gt_column_spanner_outer {
+#ptzottiags .gt_column_spanner_outer {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -465,15 +556,15 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   padding-right: 4px;
 }
 
-#cpkfxirvys .gt_column_spanner_outer:first-child {
+#ptzottiags .gt_column_spanner_outer:first-child {
   padding-left: 0;
 }
 
-#cpkfxirvys .gt_column_spanner_outer:last-child {
+#ptzottiags .gt_column_spanner_outer:last-child {
   padding-right: 0;
 }
 
-#cpkfxirvys .gt_column_spanner {
+#ptzottiags .gt_column_spanner {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
@@ -485,11 +576,11 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   width: 100%;
 }
 
-#cpkfxirvys .gt_spanner_row {
+#ptzottiags .gt_spanner_row {
   border-bottom-style: hidden;
 }
 
-#cpkfxirvys .gt_group_heading {
+#ptzottiags .gt_group_heading {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -515,7 +606,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   text-align: left;
 }
 
-#cpkfxirvys .gt_empty_group_heading {
+#ptzottiags .gt_empty_group_heading {
   padding: 0.5px;
   color: #333333;
   background-color: #FFFFFF;
@@ -530,15 +621,15 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   vertical-align: middle;
 }
 
-#cpkfxirvys .gt_from_md > :first-child {
+#ptzottiags .gt_from_md > :first-child {
   margin-top: 0;
 }
 
-#cpkfxirvys .gt_from_md > :last-child {
+#ptzottiags .gt_from_md > :last-child {
   margin-bottom: 0;
 }
 
-#cpkfxirvys .gt_row {
+#ptzottiags .gt_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -557,7 +648,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   overflow-x: hidden;
 }
 
-#cpkfxirvys .gt_stub {
+#ptzottiags .gt_stub {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -570,7 +661,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   padding-right: 5px;
 }
 
-#cpkfxirvys .gt_stub_row_group {
+#ptzottiags .gt_stub_row_group {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -584,15 +675,15 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   vertical-align: top;
 }
 
-#cpkfxirvys .gt_row_group_first td {
+#ptzottiags .gt_row_group_first td {
   border-top-width: 2px;
 }
 
-#cpkfxirvys .gt_row_group_first th {
+#ptzottiags .gt_row_group_first th {
   border-top-width: 2px;
 }
 
-#cpkfxirvys .gt_summary_row {
+#ptzottiags .gt_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -602,16 +693,16 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   padding-right: 5px;
 }
 
-#cpkfxirvys .gt_first_summary_row {
+#ptzottiags .gt_first_summary_row {
   border-top-style: solid;
   border-top-color: #D3D3D3;
 }
 
-#cpkfxirvys .gt_first_summary_row.thick {
+#ptzottiags .gt_first_summary_row.thick {
   border-top-width: 2px;
 }
 
-#cpkfxirvys .gt_last_summary_row {
+#ptzottiags .gt_last_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -621,7 +712,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   border-bottom-color: #D3D3D3;
 }
 
-#cpkfxirvys .gt_grand_summary_row {
+#ptzottiags .gt_grand_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -631,7 +722,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   padding-right: 5px;
 }
 
-#cpkfxirvys .gt_first_grand_summary_row {
+#ptzottiags .gt_first_grand_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -641,7 +732,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   border-top-color: #D3D3D3;
 }
 
-#cpkfxirvys .gt_last_grand_summary_row_top {
+#ptzottiags .gt_last_grand_summary_row_top {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -651,11 +742,11 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   border-bottom-color: #D3D3D3;
 }
 
-#cpkfxirvys .gt_striped {
+#ptzottiags .gt_striped {
   background-color: rgba(128, 128, 128, 0.05);
 }
 
-#cpkfxirvys .gt_table_body {
+#ptzottiags .gt_table_body {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -664,7 +755,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   border-bottom-color: #D3D3D3;
 }
 
-#cpkfxirvys .gt_footnotes {
+#ptzottiags .gt_footnotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -678,7 +769,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   border-right-color: #D3D3D3;
 }
 
-#cpkfxirvys .gt_footnote {
+#ptzottiags .gt_footnote {
   margin: 0px;
   font-size: 90%;
   padding-top: 4px;
@@ -687,7 +778,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   padding-right: 5px;
 }
 
-#cpkfxirvys .gt_sourcenotes {
+#ptzottiags .gt_sourcenotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -701,7 +792,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   border-right-color: #D3D3D3;
 }
 
-#cpkfxirvys .gt_sourcenote {
+#ptzottiags .gt_sourcenote {
   font-size: 90%;
   padding-top: 4px;
   padding-bottom: 4px;
@@ -709,72 +800,72 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   padding-right: 5px;
 }
 
-#cpkfxirvys .gt_left {
+#ptzottiags .gt_left {
   text-align: left;
 }
 
-#cpkfxirvys .gt_center {
+#ptzottiags .gt_center {
   text-align: center;
 }
 
-#cpkfxirvys .gt_right {
+#ptzottiags .gt_right {
   text-align: right;
   font-variant-numeric: tabular-nums;
 }
 
-#cpkfxirvys .gt_font_normal {
+#ptzottiags .gt_font_normal {
   font-weight: normal;
 }
 
-#cpkfxirvys .gt_font_bold {
+#ptzottiags .gt_font_bold {
   font-weight: bold;
 }
 
-#cpkfxirvys .gt_font_italic {
+#ptzottiags .gt_font_italic {
   font-style: italic;
 }
 
-#cpkfxirvys .gt_super {
+#ptzottiags .gt_super {
   font-size: 65%;
 }
 
-#cpkfxirvys .gt_footnote_marks {
+#ptzottiags .gt_footnote_marks {
   font-size: 75%;
   vertical-align: 0.4em;
   position: initial;
 }
 
-#cpkfxirvys .gt_asterisk {
+#ptzottiags .gt_asterisk {
   font-size: 100%;
   vertical-align: 0;
 }
 
-#cpkfxirvys .gt_indent_1 {
+#ptzottiags .gt_indent_1 {
   text-indent: 5px;
 }
 
-#cpkfxirvys .gt_indent_2 {
+#ptzottiags .gt_indent_2 {
   text-indent: 10px;
 }
 
-#cpkfxirvys .gt_indent_3 {
+#ptzottiags .gt_indent_3 {
   text-indent: 15px;
 }
 
-#cpkfxirvys .gt_indent_4 {
+#ptzottiags .gt_indent_4 {
   text-indent: 20px;
 }
 
-#cpkfxirvys .gt_indent_5 {
+#ptzottiags .gt_indent_5 {
   text-indent: 25px;
 }
 
-#cpkfxirvys .katex-display {
+#ptzottiags .katex-display {
   display: inline-flex !important;
   margin-bottom: 0.75em !important;
 }
 
-#cpkfxirvys div.Reactable > div.rt-table > div.rt-thead > div.rt-tr.rt-tr-group-header > div.rt-th-group:after {
+#ptzottiags div.Reactable > div.rt-table > div.rt-thead > div.rt-tr.rt-tr-group-header > div.rt-th-group:after {
   height: 0px !important;
 }
 </style>
@@ -804,8 +895,23 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 </div>
 </section>
+</section>
 <section id="faiths-phylogenetic-diversity-pd" class="level3">
 <h3 class="anchored" data-anchor-id="faiths-phylogenetic-diversity-pd">Faith’s Phylogenetic Diversity (PD)</h3>
+<p><strong>Faith’s Phylogenetic Diversity (PD)</strong> es un índice que incorpora información filogenética para medir la diversidad evolutiva de una comunidad. No solo considera el número de especies sino también sus relaciones evolutivas.</p>
+<section id="fórmula-de-faith-pd" class="level4">
+<h4 class="anchored" data-anchor-id="fórmula-de-faith-pd">Fórmula de Faith PD:</h4>
+<p><span class="math display">\[PD = \sum_{i=1}^{N} L_i\]</span></p>
+<p>donde: - <span class="math inline">\(PD\)</span> = diversidad filogenética de Faith - <span class="math inline">\(N\)</span> = número de ramas del árbol filogenético que conectan las especies presentes - <span class="math inline">\(L_i\)</span> = longitud de la rama <span class="math inline">\(i\)</span> en el árbol filogenético - Las ramas se suman desde las especies hasta la raíz del árbol</p>
+</section>
+<section id="características-principales-1" class="level4">
+<h4 class="anchored" data-anchor-id="características-principales-1">Características principales:</h4>
+<ul>
+<li>Incorpora historia evolutiva</li>
+<li>Útil para prioridades de conservación</li>
+<li>Medida en unidades de tiempo evolutivo</li>
+<li>Mayor PD indica mayor diversidad evolutiva</li>
+</ul>
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
 <p><img src="images/alpha-compare_faith.png" class="img-fluid quarto-figure quarto-figure-center figure-img"></p>
@@ -813,23 +919,23 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 <div class="cell">
 <div class="cell-output-display">
-<div id="wsxkcxcpyj" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
-<style>#wsxkcxcpyj table {
+<div id="slcjfdakks" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<style>#slcjfdakks table {
   font-family: system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
-#wsxkcxcpyj thead, #wsxkcxcpyj tbody, #wsxkcxcpyj tfoot, #wsxkcxcpyj tr, #wsxkcxcpyj td, #wsxkcxcpyj th {
+#slcjfdakks thead, #slcjfdakks tbody, #slcjfdakks tfoot, #slcjfdakks tr, #slcjfdakks td, #slcjfdakks th {
   border-style: none;
 }
 
-#wsxkcxcpyj p {
+#slcjfdakks p {
   margin: 0;
   padding: 0;
 }
 
-#wsxkcxcpyj .gt_table {
+#slcjfdakks .gt_table {
   display: table;
   border-collapse: collapse;
   line-height: normal;
@@ -855,12 +961,12 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   border-left-color: #D3D3D3;
 }
 
-#wsxkcxcpyj .gt_caption {
+#slcjfdakks .gt_caption {
   padding-top: 4px;
   padding-bottom: 4px;
 }
 
-#wsxkcxcpyj .gt_title {
+#slcjfdakks .gt_title {
   color: #333333;
   font-size: 125%;
   font-weight: initial;
@@ -872,7 +978,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   border-bottom-width: 0;
 }
 
-#wsxkcxcpyj .gt_subtitle {
+#slcjfdakks .gt_subtitle {
   color: #333333;
   font-size: 85%;
   font-weight: initial;
@@ -884,7 +990,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   border-top-width: 0;
 }
 
-#wsxkcxcpyj .gt_heading {
+#slcjfdakks .gt_heading {
   background-color: #FFFFFF;
   text-align: center;
   border-bottom-color: #FFFFFF;
@@ -896,13 +1002,13 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   border-right-color: #D3D3D3;
 }
 
-#wsxkcxcpyj .gt_bottom_border {
+#slcjfdakks .gt_bottom_border {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
 }
 
-#wsxkcxcpyj .gt_col_headings {
+#slcjfdakks .gt_col_headings {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -917,7 +1023,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   border-right-color: #D3D3D3;
 }
 
-#wsxkcxcpyj .gt_col_heading {
+#slcjfdakks .gt_col_heading {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -937,7 +1043,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   overflow-x: hidden;
 }
 
-#wsxkcxcpyj .gt_column_spanner_outer {
+#slcjfdakks .gt_column_spanner_outer {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -949,15 +1055,15 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   padding-right: 4px;
 }
 
-#wsxkcxcpyj .gt_column_spanner_outer:first-child {
+#slcjfdakks .gt_column_spanner_outer:first-child {
   padding-left: 0;
 }
 
-#wsxkcxcpyj .gt_column_spanner_outer:last-child {
+#slcjfdakks .gt_column_spanner_outer:last-child {
   padding-right: 0;
 }
 
-#wsxkcxcpyj .gt_column_spanner {
+#slcjfdakks .gt_column_spanner {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
@@ -969,11 +1075,11 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   width: 100%;
 }
 
-#wsxkcxcpyj .gt_spanner_row {
+#slcjfdakks .gt_spanner_row {
   border-bottom-style: hidden;
 }
 
-#wsxkcxcpyj .gt_group_heading {
+#slcjfdakks .gt_group_heading {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -999,7 +1105,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   text-align: left;
 }
 
-#wsxkcxcpyj .gt_empty_group_heading {
+#slcjfdakks .gt_empty_group_heading {
   padding: 0.5px;
   color: #333333;
   background-color: #FFFFFF;
@@ -1014,15 +1120,15 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   vertical-align: middle;
 }
 
-#wsxkcxcpyj .gt_from_md > :first-child {
+#slcjfdakks .gt_from_md > :first-child {
   margin-top: 0;
 }
 
-#wsxkcxcpyj .gt_from_md > :last-child {
+#slcjfdakks .gt_from_md > :last-child {
   margin-bottom: 0;
 }
 
-#wsxkcxcpyj .gt_row {
+#slcjfdakks .gt_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1041,7 +1147,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   overflow-x: hidden;
 }
 
-#wsxkcxcpyj .gt_stub {
+#slcjfdakks .gt_stub {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -1054,7 +1160,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   padding-right: 5px;
 }
 
-#wsxkcxcpyj .gt_stub_row_group {
+#slcjfdakks .gt_stub_row_group {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -1068,15 +1174,15 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   vertical-align: top;
 }
 
-#wsxkcxcpyj .gt_row_group_first td {
+#slcjfdakks .gt_row_group_first td {
   border-top-width: 2px;
 }
 
-#wsxkcxcpyj .gt_row_group_first th {
+#slcjfdakks .gt_row_group_first th {
   border-top-width: 2px;
 }
 
-#wsxkcxcpyj .gt_summary_row {
+#slcjfdakks .gt_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -1086,16 +1192,16 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   padding-right: 5px;
 }
 
-#wsxkcxcpyj .gt_first_summary_row {
+#slcjfdakks .gt_first_summary_row {
   border-top-style: solid;
   border-top-color: #D3D3D3;
 }
 
-#wsxkcxcpyj .gt_first_summary_row.thick {
+#slcjfdakks .gt_first_summary_row.thick {
   border-top-width: 2px;
 }
 
-#wsxkcxcpyj .gt_last_summary_row {
+#slcjfdakks .gt_last_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1105,7 +1211,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   border-bottom-color: #D3D3D3;
 }
 
-#wsxkcxcpyj .gt_grand_summary_row {
+#slcjfdakks .gt_grand_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -1115,7 +1221,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   padding-right: 5px;
 }
 
-#wsxkcxcpyj .gt_first_grand_summary_row {
+#slcjfdakks .gt_first_grand_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1125,7 +1231,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   border-top-color: #D3D3D3;
 }
 
-#wsxkcxcpyj .gt_last_grand_summary_row_top {
+#slcjfdakks .gt_last_grand_summary_row_top {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1135,11 +1241,11 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   border-bottom-color: #D3D3D3;
 }
 
-#wsxkcxcpyj .gt_striped {
+#slcjfdakks .gt_striped {
   background-color: rgba(128, 128, 128, 0.05);
 }
 
-#wsxkcxcpyj .gt_table_body {
+#slcjfdakks .gt_table_body {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -1148,7 +1254,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   border-bottom-color: #D3D3D3;
 }
 
-#wsxkcxcpyj .gt_footnotes {
+#slcjfdakks .gt_footnotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -1162,7 +1268,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   border-right-color: #D3D3D3;
 }
 
-#wsxkcxcpyj .gt_footnote {
+#slcjfdakks .gt_footnote {
   margin: 0px;
   font-size: 90%;
   padding-top: 4px;
@@ -1171,7 +1277,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   padding-right: 5px;
 }
 
-#wsxkcxcpyj .gt_sourcenotes {
+#slcjfdakks .gt_sourcenotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -1185,7 +1291,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   border-right-color: #D3D3D3;
 }
 
-#wsxkcxcpyj .gt_sourcenote {
+#slcjfdakks .gt_sourcenote {
   font-size: 90%;
   padding-top: 4px;
   padding-bottom: 4px;
@@ -1193,72 +1299,72 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   padding-right: 5px;
 }
 
-#wsxkcxcpyj .gt_left {
+#slcjfdakks .gt_left {
   text-align: left;
 }
 
-#wsxkcxcpyj .gt_center {
+#slcjfdakks .gt_center {
   text-align: center;
 }
 
-#wsxkcxcpyj .gt_right {
+#slcjfdakks .gt_right {
   text-align: right;
   font-variant-numeric: tabular-nums;
 }
 
-#wsxkcxcpyj .gt_font_normal {
+#slcjfdakks .gt_font_normal {
   font-weight: normal;
 }
 
-#wsxkcxcpyj .gt_font_bold {
+#slcjfdakks .gt_font_bold {
   font-weight: bold;
 }
 
-#wsxkcxcpyj .gt_font_italic {
+#slcjfdakks .gt_font_italic {
   font-style: italic;
 }
 
-#wsxkcxcpyj .gt_super {
+#slcjfdakks .gt_super {
   font-size: 65%;
 }
 
-#wsxkcxcpyj .gt_footnote_marks {
+#slcjfdakks .gt_footnote_marks {
   font-size: 75%;
   vertical-align: 0.4em;
   position: initial;
 }
 
-#wsxkcxcpyj .gt_asterisk {
+#slcjfdakks .gt_asterisk {
   font-size: 100%;
   vertical-align: 0;
 }
 
-#wsxkcxcpyj .gt_indent_1 {
+#slcjfdakks .gt_indent_1 {
   text-indent: 5px;
 }
 
-#wsxkcxcpyj .gt_indent_2 {
+#slcjfdakks .gt_indent_2 {
   text-indent: 10px;
 }
 
-#wsxkcxcpyj .gt_indent_3 {
+#slcjfdakks .gt_indent_3 {
   text-indent: 15px;
 }
 
-#wsxkcxcpyj .gt_indent_4 {
+#slcjfdakks .gt_indent_4 {
   text-indent: 20px;
 }
 
-#wsxkcxcpyj .gt_indent_5 {
+#slcjfdakks .gt_indent_5 {
   text-indent: 25px;
 }
 
-#wsxkcxcpyj .katex-display {
+#slcjfdakks .katex-display {
   display: inline-flex !important;
   margin-bottom: 0.75em !important;
 }
 
-#wsxkcxcpyj div.Reactable > div.rt-table > div.rt-thead > div.rt-tr.rt-tr-group-header > div.rt-th-group:after {
+#slcjfdakks div.Reactable > div.rt-table > div.rt-thead > div.rt-tr.rt-tr-group-header > div.rt-th-group:after {
   height: 0px !important;
 }
 </style>
@@ -1289,8 +1395,21 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 </section>
 </section>
-<section id="beta-diversidad" class="level2">
-<h2 class="anchored" data-anchor-id="beta-diversidad">Beta diversidad</h2>
+</section>
+<section id="beta-diversidad-β-diversidad" class="level2">
+<h2 class="anchored" data-anchor-id="beta-diversidad-β-diversidad">Beta diversidad (β-diversidad)</h2>
+<p>La <strong>beta diversidad</strong> es la relación entre la diversidad regional y la diversidad local de especies. Mide el grado de diferenciación o recambio de especies entre diferentes sitios o comunidades. En microbiología, nos permite comparar qué tan similares o diferentes son las comunidades microbianas entre distintas muestras.</p>
+<section id="características-principales-2" class="level4">
+<h4 class="anchored" data-anchor-id="características-principales-2">Características principales:</h4>
+<ul>
+<li>Mide la variación en composición entre comunidades</li>
+<li>Puede deberse a recambio de especies o anidamiento</li>
+<li>Valores altos indican comunidades muy diferentes</li>
+<li>Valores bajos indican comunidades similares</li>
+</ul>
+<p>La <strong>diversidad β verdadera</strong> se calcula como:</p>
+<p><span class="math display">\[\beta = \frac{\gamma}{\alpha}\]</span></p>
+<p>donde: - <span class="math inline">\(\beta\)</span> = diversidad beta verdadera (número efectivo de comunidades) - <span class="math inline">\(\gamma\)</span> = diversidad total del conjunto de datos - <span class="math inline">\(\alpha\)</span> = diversidad alfa promedio</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb16"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a><span class="ex">qiime</span> diversity beta-group-significance <span class="dt">\</span></span>
 <span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a>--i-distance-matrix core-metrics-results/unweighted_unifrac_distance_matrix.qza <span class="dt">\</span></span>
@@ -1306,6 +1425,29 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb17-4"><a href="#cb17-4" aria-hidden="true" tabindex="-1"></a>--o-visualization core-metrics-results/unweighted-unifrac-significance.qzv <span class="dt">\</span></span>
 <span id="cb17-5"><a href="#cb17-5" aria-hidden="true" tabindex="-1"></a>--p-pairwise</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
+</section>
+</section>
+<section id="unifrac" class="level2">
+<h2 class="anchored" data-anchor-id="unifrac">UniFrac</h2>
+<p><strong>UniFrac</strong> es una métrica de distancia filogenética utilizada para comparar comunidades biológicas. Incorpora información sobre las relaciones filogenéticas entre los organismos observados, diferenciándose de medidas como Bray-Curtis.</p>
+<section id="unifrac-no-ponderado-unweighted" class="level4">
+<h4 class="anchored" data-anchor-id="unifrac-no-ponderado-unweighted">UniFrac No Ponderado (Unweighted):</h4>
+<p><span class="math display">\[U(A,B) = \frac{\sum_{i=1}^{N} l_i \times |A_i - B_i|}{\sum_{i=1}^{N} l_i \times \max(A_i, B_i)}\]</span></p>
+<p>donde: - <span class="math inline">\(U(A,B)\)</span> = distancia UniFrac no ponderada entre muestras A y B - <span class="math inline">\(N\)</span> = número de nodos en el árbol filogenético - <span class="math inline">\(l_i\)</span> = longitud de la rama entre el nodo <span class="math inline">\(i\)</span> y su nodo parental - <span class="math inline">\(A_i\)</span> = indicador (1 o 0) de presencia de la muestra A en las ramas descendientes del nodo <span class="math inline">\(i\)</span> - <span class="math inline">\(B_i\)</span> = indicador (1 o 0) de presencia de la muestra B en las ramas descendientes del nodo <span class="math inline">\(i\)</span></p>
+</section>
+<section id="unifrac-ponderado-weighted" class="level4">
+<h4 class="anchored" data-anchor-id="unifrac-ponderado-weighted">UniFrac Ponderado (Weighted):</h4>
+<p><span class="math display">\[W(A,B) = \sum_{i=1}^{N} l_i \times \left|\frac{A_i}{A_t} - \frac{B_i}{B_t}\right|\]</span></p>
+<p>donde: - <span class="math inline">\(W(A,B)\)</span> = distancia UniFrac ponderada entre muestras A y B - <span class="math inline">\(A_i\)</span> = número de secuencias de la muestra A en las ramas descendientes del nodo <span class="math inline">\(i\)</span> - <span class="math inline">\(A_t\)</span> = número total de secuencias en la muestra A - <span class="math inline">\(B_i\)</span> = número de secuencias de la muestra B en las ramas descendientes del nodo <span class="math inline">\(i\)</span> - <span class="math inline">\(B_t\)</span> = número total de secuencias en la muestra B</p>
+</section>
+<section id="interpretación-3" class="level4">
+<h4 class="anchored" data-anchor-id="interpretación-3">Interpretación:</h4>
+<ul>
+<li>Valores entre 0 y 1</li>
+<li>0 = comunidades idénticas filogenéticamente</li>
+<li>1 = comunidades completamente diferentes filogenéticamente</li>
+</ul>
+</section>
 <section id="unweighted-unifrac-distance-permanova" class="level3">
 <h3 class="anchored" data-anchor-id="unweighted-unifrac-distance-permanova">Unweighted UniFrac Distance: PERMANOVA</h3>
 <div class="cell">
@@ -1326,23 +1468,23 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 <div class="cell">
 <div class="cell-output-display">
-<div id="glbtxrpogg" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
-<style>#glbtxrpogg table {
+<div id="wdhflvlkll" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<style>#wdhflvlkll table {
   font-family: system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
-#glbtxrpogg thead, #glbtxrpogg tbody, #glbtxrpogg tfoot, #glbtxrpogg tr, #glbtxrpogg td, #glbtxrpogg th {
+#wdhflvlkll thead, #wdhflvlkll tbody, #wdhflvlkll tfoot, #wdhflvlkll tr, #wdhflvlkll td, #wdhflvlkll th {
   border-style: none;
 }
 
-#glbtxrpogg p {
+#wdhflvlkll p {
   margin: 0;
   padding: 0;
 }
 
-#glbtxrpogg .gt_table {
+#wdhflvlkll .gt_table {
   display: table;
   border-collapse: collapse;
   line-height: normal;
@@ -1368,12 +1510,12 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   border-left-color: #D3D3D3;
 }
 
-#glbtxrpogg .gt_caption {
+#wdhflvlkll .gt_caption {
   padding-top: 4px;
   padding-bottom: 4px;
 }
 
-#glbtxrpogg .gt_title {
+#wdhflvlkll .gt_title {
   color: #333333;
   font-size: 125%;
   font-weight: initial;
@@ -1385,7 +1527,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   border-bottom-width: 0;
 }
 
-#glbtxrpogg .gt_subtitle {
+#wdhflvlkll .gt_subtitle {
   color: #333333;
   font-size: 85%;
   font-weight: initial;
@@ -1397,7 +1539,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   border-top-width: 0;
 }
 
-#glbtxrpogg .gt_heading {
+#wdhflvlkll .gt_heading {
   background-color: #FFFFFF;
   text-align: center;
   border-bottom-color: #FFFFFF;
@@ -1409,13 +1551,13 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   border-right-color: #D3D3D3;
 }
 
-#glbtxrpogg .gt_bottom_border {
+#wdhflvlkll .gt_bottom_border {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
 }
 
-#glbtxrpogg .gt_col_headings {
+#wdhflvlkll .gt_col_headings {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -1430,7 +1572,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   border-right-color: #D3D3D3;
 }
 
-#glbtxrpogg .gt_col_heading {
+#wdhflvlkll .gt_col_heading {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -1450,7 +1592,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   overflow-x: hidden;
 }
 
-#glbtxrpogg .gt_column_spanner_outer {
+#wdhflvlkll .gt_column_spanner_outer {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -1462,15 +1604,15 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   padding-right: 4px;
 }
 
-#glbtxrpogg .gt_column_spanner_outer:first-child {
+#wdhflvlkll .gt_column_spanner_outer:first-child {
   padding-left: 0;
 }
 
-#glbtxrpogg .gt_column_spanner_outer:last-child {
+#wdhflvlkll .gt_column_spanner_outer:last-child {
   padding-right: 0;
 }
 
-#glbtxrpogg .gt_column_spanner {
+#wdhflvlkll .gt_column_spanner {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
@@ -1482,11 +1624,11 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   width: 100%;
 }
 
-#glbtxrpogg .gt_spanner_row {
+#wdhflvlkll .gt_spanner_row {
   border-bottom-style: hidden;
 }
 
-#glbtxrpogg .gt_group_heading {
+#wdhflvlkll .gt_group_heading {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1512,7 +1654,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   text-align: left;
 }
 
-#glbtxrpogg .gt_empty_group_heading {
+#wdhflvlkll .gt_empty_group_heading {
   padding: 0.5px;
   color: #333333;
   background-color: #FFFFFF;
@@ -1527,15 +1669,15 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   vertical-align: middle;
 }
 
-#glbtxrpogg .gt_from_md > :first-child {
+#wdhflvlkll .gt_from_md > :first-child {
   margin-top: 0;
 }
 
-#glbtxrpogg .gt_from_md > :last-child {
+#wdhflvlkll .gt_from_md > :last-child {
   margin-bottom: 0;
 }
 
-#glbtxrpogg .gt_row {
+#wdhflvlkll .gt_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1554,7 +1696,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   overflow-x: hidden;
 }
 
-#glbtxrpogg .gt_stub {
+#wdhflvlkll .gt_stub {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -1567,7 +1709,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   padding-right: 5px;
 }
 
-#glbtxrpogg .gt_stub_row_group {
+#wdhflvlkll .gt_stub_row_group {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -1581,15 +1723,15 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   vertical-align: top;
 }
 
-#glbtxrpogg .gt_row_group_first td {
+#wdhflvlkll .gt_row_group_first td {
   border-top-width: 2px;
 }
 
-#glbtxrpogg .gt_row_group_first th {
+#wdhflvlkll .gt_row_group_first th {
   border-top-width: 2px;
 }
 
-#glbtxrpogg .gt_summary_row {
+#wdhflvlkll .gt_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -1599,16 +1741,16 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   padding-right: 5px;
 }
 
-#glbtxrpogg .gt_first_summary_row {
+#wdhflvlkll .gt_first_summary_row {
   border-top-style: solid;
   border-top-color: #D3D3D3;
 }
 
-#glbtxrpogg .gt_first_summary_row.thick {
+#wdhflvlkll .gt_first_summary_row.thick {
   border-top-width: 2px;
 }
 
-#glbtxrpogg .gt_last_summary_row {
+#wdhflvlkll .gt_last_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1618,7 +1760,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   border-bottom-color: #D3D3D3;
 }
 
-#glbtxrpogg .gt_grand_summary_row {
+#wdhflvlkll .gt_grand_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -1628,7 +1770,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   padding-right: 5px;
 }
 
-#glbtxrpogg .gt_first_grand_summary_row {
+#wdhflvlkll .gt_first_grand_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1638,7 +1780,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   border-top-color: #D3D3D3;
 }
 
-#glbtxrpogg .gt_last_grand_summary_row_top {
+#wdhflvlkll .gt_last_grand_summary_row_top {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1648,11 +1790,11 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   border-bottom-color: #D3D3D3;
 }
 
-#glbtxrpogg .gt_striped {
+#wdhflvlkll .gt_striped {
   background-color: rgba(128, 128, 128, 0.05);
 }
 
-#glbtxrpogg .gt_table_body {
+#wdhflvlkll .gt_table_body {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -1661,7 +1803,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   border-bottom-color: #D3D3D3;
 }
 
-#glbtxrpogg .gt_footnotes {
+#wdhflvlkll .gt_footnotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -1675,7 +1817,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   border-right-color: #D3D3D3;
 }
 
-#glbtxrpogg .gt_footnote {
+#wdhflvlkll .gt_footnote {
   margin: 0px;
   font-size: 90%;
   padding-top: 4px;
@@ -1684,7 +1826,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   padding-right: 5px;
 }
 
-#glbtxrpogg .gt_sourcenotes {
+#wdhflvlkll .gt_sourcenotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -1698,7 +1840,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   border-right-color: #D3D3D3;
 }
 
-#glbtxrpogg .gt_sourcenote {
+#wdhflvlkll .gt_sourcenote {
   font-size: 90%;
   padding-top: 4px;
   padding-bottom: 4px;
@@ -1706,72 +1848,72 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   padding-right: 5px;
 }
 
-#glbtxrpogg .gt_left {
+#wdhflvlkll .gt_left {
   text-align: left;
 }
 
-#glbtxrpogg .gt_center {
+#wdhflvlkll .gt_center {
   text-align: center;
 }
 
-#glbtxrpogg .gt_right {
+#wdhflvlkll .gt_right {
   text-align: right;
   font-variant-numeric: tabular-nums;
 }
 
-#glbtxrpogg .gt_font_normal {
+#wdhflvlkll .gt_font_normal {
   font-weight: normal;
 }
 
-#glbtxrpogg .gt_font_bold {
+#wdhflvlkll .gt_font_bold {
   font-weight: bold;
 }
 
-#glbtxrpogg .gt_font_italic {
+#wdhflvlkll .gt_font_italic {
   font-style: italic;
 }
 
-#glbtxrpogg .gt_super {
+#wdhflvlkll .gt_super {
   font-size: 65%;
 }
 
-#glbtxrpogg .gt_footnote_marks {
+#wdhflvlkll .gt_footnote_marks {
   font-size: 75%;
   vertical-align: 0.4em;
   position: initial;
 }
 
-#glbtxrpogg .gt_asterisk {
+#wdhflvlkll .gt_asterisk {
   font-size: 100%;
   vertical-align: 0;
 }
 
-#glbtxrpogg .gt_indent_1 {
+#wdhflvlkll .gt_indent_1 {
   text-indent: 5px;
 }
 
-#glbtxrpogg .gt_indent_2 {
+#wdhflvlkll .gt_indent_2 {
   text-indent: 10px;
 }
 
-#glbtxrpogg .gt_indent_3 {
+#wdhflvlkll .gt_indent_3 {
   text-indent: 15px;
 }
 
-#glbtxrpogg .gt_indent_4 {
+#wdhflvlkll .gt_indent_4 {
   text-indent: 20px;
 }
 
-#glbtxrpogg .gt_indent_5 {
+#wdhflvlkll .gt_indent_5 {
   text-indent: 25px;
 }
 
-#glbtxrpogg .katex-display {
+#wdhflvlkll .katex-display {
   display: inline-flex !important;
   margin-bottom: 0.75em !important;
 }
 
-#glbtxrpogg div.Reactable > div.rt-table > div.rt-thead > div.rt-tr.rt-tr-group-header > div.rt-th-group:after {
+#wdhflvlkll div.Reactable > div.rt-table > div.rt-thead > div.rt-tr.rt-tr-group-header > div.rt-th-group:after {
   height: 0px !important;
 }
 </style>
@@ -1818,7 +1960,18 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 <section id="observed-features" class="level3">
 <h3 class="anchored" data-anchor-id="observed-features">Observed Features</h3>
-<p>Los rasgos observados (Observed features) son una métrica de diversidad alfa fundamental que cuantifica la riqueza de una comunidad microbiana contando el número de unidades taxonómicas operativas (OTU) distintas o variantes de secuencia de amplicón (ASV) presentes en una sola muestra.</p>
+<p>Las <strong>Observed Features</strong> representan simplemente el <strong>número de características taxonómicas diferentes</strong> (especies, géneros, familias, etc.) observadas en una muestra. Es la medida más básica de riqueza de especies.</p>
+<section id="características-principales-3" class="level4">
+<h4 class="anchored" data-anchor-id="características-principales-3">Características principales:</h4>
+<ul>
+<li>Medida directa de riqueza taxonómica</li>
+<li>No considera abundancia relativa</li>
+<li>Sensible al esfuerzo de muestreo</li>
+<li>Base para otros índices de diversidad</li>
+</ul>
+<p>La fórmula es simplemente:</p>
+<p><span class="math display">\[S = \text{número total de especies observadas}\]</span></p>
+<p>donde: - <span class="math inline">\(S\)</span> = riqueza de especies observadas</p>
 <div class="cell">
 <div class="cell-output-display">
 <div>
@@ -1829,88 +1982,176 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 </div>
 </section>
+</section>
 <section id="shannon" class="level3">
 <h3 class="anchored" data-anchor-id="shannon">Shannon</h3>
-<p>El índice de diversidad de Shannon es una <strong>métrica comúnmente utilizada para analizar la diversidad alfa, ya que considera tanto la riqueza de especies como la abundancia relativa de cada taxón dentro de una muestra</strong>.</p>
+<p>El <strong>índice de Shannon</strong> (Shannon-Weaver o Shannon-Wiener) mide la biodiversidad específica considerando tanto la riqueza de especies como su abundancia relativa. Está basado en la teoría de la información y mide la incertidumbre para predecir la especie de un individuo tomado al azar.</p>
+<section id="fórmula-del-índice-de-shannon" class="level4">
+<h4 class="anchored" data-anchor-id="fórmula-del-índice-de-shannon">Fórmula del índice de Shannon:</h4>
+<p><span class="math display">\[H' = -\sum_{i=1}^{S} p_i \ln p_i\]</span></p>
+<p>donde: - <span class="math inline">\(H'\)</span> = índice de Shannon - <span class="math inline">\(S\)</span> = número de especies (riqueza de especies) - <span class="math inline">\(p_i\)</span> = proporción de individuos de la especie <span class="math inline">\(i\)</span> respecto al total: <span class="math inline">\(p_i = \frac{n_i}{N}\)</span> - <span class="math inline">\(n_i\)</span> = número de individuos de la especie <span class="math inline">\(i\)</span> - <span class="math inline">\(N\)</span> = número total de individuos de todas las especies - <span class="math inline">\(\ln\)</span> = logaritmo natural</p>
+</section>
+<section id="interpretación-4" class="level4">
+<h4 class="anchored" data-anchor-id="interpretación-4">Interpretación:</h4>
+<ul>
+<li>Valores entre 0.5 y 5 en ecosistemas naturales</li>
+<li>Valores &lt; 2: baja diversidad</li>
+<li>Valores &gt; 3: alta diversidad</li>
+<li>Valores más altos indican mayor diversidad y equitabilidad</li>
+</ul>
+<div class="cell">
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="tomato_16S_files/figure-html/unnamed-chunk-24-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+</section>
+</section>
+<section id="faith-pd" class="level3">
+<h3 class="anchored" data-anchor-id="faith-pd">Faith PD</h3>
+<p>La diversidad filogenética de Faith (PD de Faith) es una medida de la biodiversidad que cuantifica la amplitud de la historia evolutiva representada por un conjunto de especies u otras unidades taxonómicas, definida como la suma de las longitudes de las ramas de un árbol filogenético que conectan los miembros del conjunto.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb19"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a><span class="fu">suppressPackageStartupMessages</span>(<span class="fu">library</span>(tidyverse))</span>
+<span id="cb19-2"><a href="#cb19-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb19-3"><a href="#cb19-3" aria-hidden="true" tabindex="-1"></a>obfe <span class="ot">&lt;-</span> readr<span class="sc">::</span><span class="fu">read_csv</span>(<span class="st">"tables/faith_pd.csv"</span>,</span>
+<span id="cb19-4"><a href="#cb19-4" aria-hidden="true" tabindex="-1"></a>                        <span class="at">col_types =</span> <span class="fu">cols</span>(</span>
+<span id="cb19-5"><a href="#cb19-5" aria-hidden="true" tabindex="-1"></a>                 <span class="st">`</span><span class="at">sample-id</span><span class="st">`</span> <span class="ot">=</span> <span class="fu">col_skip</span>(),</span>
+<span id="cb19-6"><a href="#cb19-6" aria-hidden="true" tabindex="-1"></a>                 <span class="at">accession   =</span> <span class="fu">col_skip</span>(),</span>
+<span id="cb19-7"><a href="#cb19-7" aria-hidden="true" tabindex="-1"></a>                 <span class="at">sra_run     =</span> <span class="fu">col_skip</span>(),</span>
+<span id="cb19-8"><a href="#cb19-8" aria-hidden="true" tabindex="-1"></a>                 <span class="at">Type        =</span> <span class="fu">col_factor</span>(),</span>
+<span id="cb19-9"><a href="#cb19-9" aria-hidden="true" tabindex="-1"></a>                 <span class="at">.default    =</span> <span class="fu">col_double</span>()</span>
+<span id="cb19-10"><a href="#cb19-10" aria-hidden="true" tabindex="-1"></a>               ))</span>
+<span id="cb19-11"><a href="#cb19-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb19-12"><a href="#cb19-12" aria-hidden="true" tabindex="-1"></a>obfe_long <span class="ot">&lt;-</span> obfe <span class="sc">%&gt;%</span></span>
+<span id="cb19-13"><a href="#cb19-13" aria-hidden="true" tabindex="-1"></a>  <span class="fu">pivot_longer</span>(</span>
+<span id="cb19-14"><a href="#cb19-14" aria-hidden="true" tabindex="-1"></a>    <span class="at">cols =</span> <span class="fu">starts_with</span>(<span class="st">"depth-"</span>), </span>
+<span id="cb19-15"><a href="#cb19-15" aria-hidden="true" tabindex="-1"></a>    <span class="at">names_to =</span> <span class="fu">c</span>(<span class="st">"Depth"</span>, <span class="st">"Iter"</span>),            </span>
+<span id="cb19-16"><a href="#cb19-16" aria-hidden="true" tabindex="-1"></a>    <span class="at">names_pattern =</span> <span class="st">"depth-([0-9]+)_iter-([0-9]+)"</span>,</span>
+<span id="cb19-17"><a href="#cb19-17" aria-hidden="true" tabindex="-1"></a>    <span class="at">values_to =</span> <span class="st">"faith"</span>,</span>
+<span id="cb19-18"><a href="#cb19-18" aria-hidden="true" tabindex="-1"></a>    <span class="at">values_drop_na =</span> <span class="cn">TRUE</span>                     </span>
+<span id="cb19-19"><a href="#cb19-19" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">%&gt;%</span></span>
+<span id="cb19-20"><a href="#cb19-20" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(</span>
+<span id="cb19-21"><a href="#cb19-21" aria-hidden="true" tabindex="-1"></a>    <span class="at">Depth =</span> <span class="fu">as.integer</span>(Depth),</span>
+<span id="cb19-22"><a href="#cb19-22" aria-hidden="true" tabindex="-1"></a>    <span class="at">Iter  =</span> <span class="fu">as.integer</span>(Iter)</span>
+<span id="cb19-23"><a href="#cb19-23" aria-hidden="true" tabindex="-1"></a>  )</span>
+<span id="cb19-24"><a href="#cb19-24" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb19-25"><a href="#cb19-25" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb19-26"><a href="#cb19-26" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(obfe_long, <span class="fu">aes</span>(</span>
+<span id="cb19-27"><a href="#cb19-27" aria-hidden="true" tabindex="-1"></a>    <span class="at">x    =</span> <span class="fu">factor</span>(Depth),                   </span>
+<span id="cb19-28"><a href="#cb19-28" aria-hidden="true" tabindex="-1"></a>    <span class="at">y    =</span> faith,</span>
+<span id="cb19-29"><a href="#cb19-29" aria-hidden="true" tabindex="-1"></a>    <span class="at">fill =</span> Type                         </span>
+<span id="cb19-30"><a href="#cb19-30" aria-hidden="true" tabindex="-1"></a>  )) <span class="sc">+</span></span>
+<span id="cb19-31"><a href="#cb19-31" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_boxplot</span>(<span class="at">position =</span> <span class="fu">position_dodge</span>(<span class="at">width =</span> <span class="fl">0.8</span>),</span>
+<span id="cb19-32"><a href="#cb19-32" aria-hidden="true" tabindex="-1"></a>               <span class="at">color =</span> <span class="st">"black"</span>) <span class="sc">+</span></span>
+<span id="cb19-33"><a href="#cb19-33" aria-hidden="true" tabindex="-1"></a>  <span class="fu">stat_summary</span>(</span>
+<span id="cb19-34"><a href="#cb19-34" aria-hidden="true" tabindex="-1"></a>    <span class="fu">aes</span>(</span>
+<span id="cb19-35"><a href="#cb19-35" aria-hidden="true" tabindex="-1"></a>      <span class="at">x      =</span> <span class="fu">as.numeric</span>(<span class="fu">factor</span>(Depth)),</span>
+<span id="cb19-36"><a href="#cb19-36" aria-hidden="true" tabindex="-1"></a>      <span class="at">colour =</span> Type,</span>
+<span id="cb19-37"><a href="#cb19-37" aria-hidden="true" tabindex="-1"></a>      <span class="at">group  =</span> Type</span>
+<span id="cb19-38"><a href="#cb19-38" aria-hidden="true" tabindex="-1"></a>    ),</span>
+<span id="cb19-39"><a href="#cb19-39" aria-hidden="true" tabindex="-1"></a>    <span class="at">fun    =</span> median,</span>
+<span id="cb19-40"><a href="#cb19-40" aria-hidden="true" tabindex="-1"></a>    <span class="at">geom   =</span> <span class="st">"line"</span>,</span>
+<span id="cb19-41"><a href="#cb19-41" aria-hidden="true" tabindex="-1"></a>    <span class="at">size   =</span> <span class="dv">1</span></span>
+<span id="cb19-42"><a href="#cb19-42" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">+</span></span>
+<span id="cb19-43"><a href="#cb19-43" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_x_discrete</span>(<span class="at">name =</span> <span class="st">"Sequencing Depth"</span>) <span class="sc">+</span></span>
+<span id="cb19-44"><a href="#cb19-44" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_y_continuous</span>(<span class="at">name =</span> <span class="st">"Faith PD"</span>) <span class="sc">+</span></span>
+<span id="cb19-45"><a href="#cb19-45" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_minimal</span>(<span class="at">base_size =</span> <span class="dv">15</span>) <span class="sc">+</span></span>
+<span id="cb19-46"><a href="#cb19-46" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(</span>
+<span id="cb19-47"><a href="#cb19-47" aria-hidden="true" tabindex="-1"></a>    <span class="at">legend.title =</span> <span class="fu">element_blank</span>(),</span>
+<span id="cb19-48"><a href="#cb19-48" aria-hidden="true" tabindex="-1"></a>    <span class="at">panel.grid.major.x =</span> <span class="fu">element_blank</span>()</span>
+<span id="cb19-49"><a href="#cb19-49" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">+</span></span>
+<span id="cb19-50"><a href="#cb19-50" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_fill_manual</span>(<span class="at">values =</span> <span class="fu">c</span>( <span class="st">"#8f0052"</span>,<span class="st">"#276518"</span>)) <span class="sc">+</span></span>
+<span id="cb19-51"><a href="#cb19-51" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_color_manual</span>(<span class="at">values =</span> <span class="fu">c</span>( <span class="st">"#8f0052"</span>,<span class="st">"#276518"</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="tomato_16S_files/figure-html/unnamed-chunk-25-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
 </section>
 </section>
 </section>
 <section id="taxonomía" class="level1">
 <h1>Taxonomía</h1>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb19"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a><span class="ex">qiime</span> rescript get-silva-data <span class="dt">\</span></span>
-<span id="cb19-2"><a href="#cb19-2" aria-hidden="true" tabindex="-1"></a>--p-version <span class="st">'138.2'</span> <span class="dt">\</span></span>
-<span id="cb19-3"><a href="#cb19-3" aria-hidden="true" tabindex="-1"></a>--p-target <span class="st">'SSURef_NR99'</span> <span class="dt">\</span></span>
-<span id="cb19-4"><a href="#cb19-4" aria-hidden="true" tabindex="-1"></a>--o-silva-sequences silva-138.2-ssu-nr99-rna-seqs.qza <span class="dt">\</span></span>
-<span id="cb19-5"><a href="#cb19-5" aria-hidden="true" tabindex="-1"></a>--o-silva-taxonomy silva-138.2-ssu-nr99-tax.qza</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb20"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a><span class="ex">qiime</span> rescript get-silva-data <span class="dt">\</span></span>
+<span id="cb20-2"><a href="#cb20-2" aria-hidden="true" tabindex="-1"></a>--p-version <span class="st">'138.2'</span> <span class="dt">\</span></span>
+<span id="cb20-3"><a href="#cb20-3" aria-hidden="true" tabindex="-1"></a>--p-target <span class="st">'SSURef_NR99'</span> <span class="dt">\</span></span>
+<span id="cb20-4"><a href="#cb20-4" aria-hidden="true" tabindex="-1"></a>--o-silva-sequences silva-138.2-ssu-nr99-rna-seqs.qza <span class="dt">\</span></span>
+<span id="cb20-5"><a href="#cb20-5" aria-hidden="true" tabindex="-1"></a>--o-silva-taxonomy silva-138.2-ssu-nr99-tax.qza</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb20"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a><span class="ex">qiime</span> rescript reverse-transcribe <span class="dt">\</span></span>
-<span id="cb20-2"><a href="#cb20-2" aria-hidden="true" tabindex="-1"></a>--i-rna-sequences silva-138.2-ssu-nr99-rna-seqs.qza <span class="dt">\ </span>   <span class="at">--o-dna-sequences</span> silva-138.2-ssu-nr99-seqs.qza</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb21"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a><span class="ex">qiime</span> rescript reverse-transcribe <span class="dt">\</span></span>
+<span id="cb21-2"><a href="#cb21-2" aria-hidden="true" tabindex="-1"></a>--i-rna-sequences silva-138.2-ssu-nr99-rna-seqs.qza <span class="dt">\ </span>   <span class="at">--o-dna-sequences</span> silva-138.2-ssu-nr99-seqs.qza</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb21"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a><span class="ex">qiime</span> rescript cull-seqs <span class="dt">\</span></span>
-<span id="cb21-2"><a href="#cb21-2" aria-hidden="true" tabindex="-1"></a>--i-sequences silva-138.2-ssu-nr99-seqs.qza <span class="dt">\</span></span>
-<span id="cb21-3"><a href="#cb21-3" aria-hidden="true" tabindex="-1"></a>--o-clean-sequences silva-138.2-ssu-nr99-seqs-cleaned.qza</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb22"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a><span class="ex">qiime</span> rescript cull-seqs <span class="dt">\</span></span>
+<span id="cb22-2"><a href="#cb22-2" aria-hidden="true" tabindex="-1"></a>--i-sequences silva-138.2-ssu-nr99-seqs.qza <span class="dt">\</span></span>
+<span id="cb22-3"><a href="#cb22-3" aria-hidden="true" tabindex="-1"></a>--o-clean-sequences silva-138.2-ssu-nr99-seqs-cleaned.qza</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb22"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a><span class="ex">qiime</span> rescript filter-seqs-length-by-taxon <span class="dt">\</span></span>
-<span id="cb22-2"><a href="#cb22-2" aria-hidden="true" tabindex="-1"></a>--i-sequences silva-138.2-ssu-nr99-seqs-cleaned.qza <span class="dt">\</span></span>
-<span id="cb22-3"><a href="#cb22-3" aria-hidden="true" tabindex="-1"></a>--i-taxonomy silva-138.2-ssu-nr99-tax.qza <span class="dt">\</span></span>
-<span id="cb22-4"><a href="#cb22-4" aria-hidden="true" tabindex="-1"></a>--p-labels Archaea Bacteria Eukaryota <span class="dt">\</span></span>
-<span id="cb22-5"><a href="#cb22-5" aria-hidden="true" tabindex="-1"></a>--p-min-lens 900 1200 1400 <span class="dt">\</span></span>
-<span id="cb22-6"><a href="#cb22-6" aria-hidden="true" tabindex="-1"></a>--o-filtered-seqs silva-138.2-ssu-nr99-seqs-filt.qza <span class="dt">\ </span>   <span class="at">--o-discarded-seqs</span> silva-138.2-ssu-nr99-seqs-discard.qza</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb23"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a><span class="ex">qiime</span> rescript filter-seqs-length-by-taxon <span class="dt">\</span></span>
+<span id="cb23-2"><a href="#cb23-2" aria-hidden="true" tabindex="-1"></a>--i-sequences silva-138.2-ssu-nr99-seqs-cleaned.qza <span class="dt">\</span></span>
+<span id="cb23-3"><a href="#cb23-3" aria-hidden="true" tabindex="-1"></a>--i-taxonomy silva-138.2-ssu-nr99-tax.qza <span class="dt">\</span></span>
+<span id="cb23-4"><a href="#cb23-4" aria-hidden="true" tabindex="-1"></a>--p-labels Archaea Bacteria Eukaryota <span class="dt">\</span></span>
+<span id="cb23-5"><a href="#cb23-5" aria-hidden="true" tabindex="-1"></a>--p-min-lens 900 1200 1400 <span class="dt">\</span></span>
+<span id="cb23-6"><a href="#cb23-6" aria-hidden="true" tabindex="-1"></a>--o-filtered-seqs silva-138.2-ssu-nr99-seqs-filt.qza <span class="dt">\ </span>   <span class="at">--o-discarded-seqs</span> silva-138.2-ssu-nr99-seqs-discard.qza</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb23"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a><span class="ex">qiime</span> rescript dereplicate <span class="dt">\</span></span>
-<span id="cb23-2"><a href="#cb23-2" aria-hidden="true" tabindex="-1"></a>--i-sequences silva-138.2-ssu-nr99-seqs-filt.qza  <span class="dt">\</span></span>
-<span id="cb23-3"><a href="#cb23-3" aria-hidden="true" tabindex="-1"></a>--i-taxa silva-138.2-ssu-nr99-tax.qza <span class="dt">\</span></span>
-<span id="cb23-4"><a href="#cb23-4" aria-hidden="true" tabindex="-1"></a>--p-mode <span class="st">'uniq'</span> <span class="dt">\</span></span>
-<span id="cb23-5"><a href="#cb23-5" aria-hidden="true" tabindex="-1"></a>--o-dereplicated-sequences silva-138.2-ssu-nr99-seqs-derep-uniq.qza <span class="dt">\</span></span>
-<span id="cb23-6"><a href="#cb23-6" aria-hidden="true" tabindex="-1"></a>--o-dereplicated-taxa silva-138.2-ssu-nr99-tax-derep-uniq.qza</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb24"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a><span class="ex">qiime</span> rescript dereplicate <span class="dt">\</span></span>
+<span id="cb24-2"><a href="#cb24-2" aria-hidden="true" tabindex="-1"></a>--i-sequences silva-138.2-ssu-nr99-seqs-filt.qza  <span class="dt">\</span></span>
+<span id="cb24-3"><a href="#cb24-3" aria-hidden="true" tabindex="-1"></a>--i-taxa silva-138.2-ssu-nr99-tax.qza <span class="dt">\</span></span>
+<span id="cb24-4"><a href="#cb24-4" aria-hidden="true" tabindex="-1"></a>--p-mode <span class="st">'uniq'</span> <span class="dt">\</span></span>
+<span id="cb24-5"><a href="#cb24-5" aria-hidden="true" tabindex="-1"></a>--o-dereplicated-sequences silva-138.2-ssu-nr99-seqs-derep-uniq.qza <span class="dt">\</span></span>
+<span id="cb24-6"><a href="#cb24-6" aria-hidden="true" tabindex="-1"></a>--o-dereplicated-taxa silva-138.2-ssu-nr99-tax-derep-uniq.qza</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb24"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a><span class="ex">qiime</span> feature-classifier extract-reads <span class="dt">\</span></span>
-<span id="cb24-2"><a href="#cb24-2" aria-hidden="true" tabindex="-1"></a>--i-sequences silva-138.2-ssu-nr99-seqs-derep-uniq.qza <span class="dt">\</span></span>
-<span id="cb24-3"><a href="#cb24-3" aria-hidden="true" tabindex="-1"></a>--p-f-primer GTGYCAGCMGCCGCGGTAA <span class="dt">\</span></span>
-<span id="cb24-4"><a href="#cb24-4" aria-hidden="true" tabindex="-1"></a>--p-r-primer GGACTACNVGGGTWTCTAAT <span class="dt">\</span></span>
-<span id="cb24-5"><a href="#cb24-5" aria-hidden="true" tabindex="-1"></a>--p-n-jobs 5 <span class="dt">\</span></span>
-<span id="cb24-6"><a href="#cb24-6" aria-hidden="true" tabindex="-1"></a>--p-read-orientation <span class="st">'forward'</span> <span class="dt">\</span></span>
-<span id="cb24-7"><a href="#cb24-7" aria-hidden="true" tabindex="-1"></a>--o-reads silva-138.2-ssu-nr99-seqs-515f-806r.qza</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb25"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb25-1"><a href="#cb25-1" aria-hidden="true" tabindex="-1"></a><span class="ex">qiime</span> feature-classifier extract-reads <span class="dt">\</span></span>
+<span id="cb25-2"><a href="#cb25-2" aria-hidden="true" tabindex="-1"></a>--i-sequences silva-138.2-ssu-nr99-seqs-derep-uniq.qza <span class="dt">\</span></span>
+<span id="cb25-3"><a href="#cb25-3" aria-hidden="true" tabindex="-1"></a>--p-f-primer GTGYCAGCMGCCGCGGTAA <span class="dt">\</span></span>
+<span id="cb25-4"><a href="#cb25-4" aria-hidden="true" tabindex="-1"></a>--p-r-primer GGACTACNVGGGTWTCTAAT <span class="dt">\</span></span>
+<span id="cb25-5"><a href="#cb25-5" aria-hidden="true" tabindex="-1"></a>--p-n-jobs 5 <span class="dt">\</span></span>
+<span id="cb25-6"><a href="#cb25-6" aria-hidden="true" tabindex="-1"></a>--p-read-orientation <span class="st">'forward'</span> <span class="dt">\</span></span>
+<span id="cb25-7"><a href="#cb25-7" aria-hidden="true" tabindex="-1"></a>--o-reads silva-138.2-ssu-nr99-seqs-515f-806r.qza</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb25"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb25-1"><a href="#cb25-1" aria-hidden="true" tabindex="-1"></a><span class="ex">iime</span> rescript dereplicate <span class="dt">\</span></span>
-<span id="cb25-2"><a href="#cb25-2" aria-hidden="true" tabindex="-1"></a>--i-sequences silva-138.2-ssu-nr99-seqs-515f-806r.qza <span class="dt">\</span></span>
-<span id="cb25-3"><a href="#cb25-3" aria-hidden="true" tabindex="-1"></a>--i-taxa silva-138.2-ssu-nr99-tax-derep-uniq.qza <span class="dt">\</span></span>
-<span id="cb25-4"><a href="#cb25-4" aria-hidden="true" tabindex="-1"></a>--p-mode <span class="st">'uniq'</span> <span class="dt">\</span></span>
-<span id="cb25-5"><a href="#cb25-5" aria-hidden="true" tabindex="-1"></a>--o-dereplicated-sequences silva-138.2-ssu-nr99-seqs-515f-806r-uniq.qza <span class="dt">\</span></span>
-<span id="cb25-6"><a href="#cb25-6" aria-hidden="true" tabindex="-1"></a>--o-dereplicated-taxa  silva-138.2-ssu-nr99-tax-515f-806r-derep-uniq.qza</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb26"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb26-1"><a href="#cb26-1" aria-hidden="true" tabindex="-1"></a><span class="ex">iime</span> rescript dereplicate <span class="dt">\</span></span>
+<span id="cb26-2"><a href="#cb26-2" aria-hidden="true" tabindex="-1"></a>--i-sequences silva-138.2-ssu-nr99-seqs-515f-806r.qza <span class="dt">\</span></span>
+<span id="cb26-3"><a href="#cb26-3" aria-hidden="true" tabindex="-1"></a>--i-taxa silva-138.2-ssu-nr99-tax-derep-uniq.qza <span class="dt">\</span></span>
+<span id="cb26-4"><a href="#cb26-4" aria-hidden="true" tabindex="-1"></a>--p-mode <span class="st">'uniq'</span> <span class="dt">\</span></span>
+<span id="cb26-5"><a href="#cb26-5" aria-hidden="true" tabindex="-1"></a>--o-dereplicated-sequences silva-138.2-ssu-nr99-seqs-515f-806r-uniq.qza <span class="dt">\</span></span>
+<span id="cb26-6"><a href="#cb26-6" aria-hidden="true" tabindex="-1"></a>--o-dereplicated-taxa  silva-138.2-ssu-nr99-tax-515f-806r-derep-uniq.qza</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb26"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb26-1"><a href="#cb26-1" aria-hidden="true" tabindex="-1"></a><span class="ex">qiime</span> feature-classifier fit-classifier-naive-bayes <span class="dt">\</span></span>
-<span id="cb26-2"><a href="#cb26-2" aria-hidden="true" tabindex="-1"></a>--i-reference-reads silva-138.2-ssu-nr99-seqs-515f-806r-uniq.qza <span class="dt">\</span></span>
-<span id="cb26-3"><a href="#cb26-3" aria-hidden="true" tabindex="-1"></a>--i-reference-taxonomy silva-138.2-ssu-nr99-tax-515f-806r-derep-uniq.qza <span class="dt">\</span></span>
-<span id="cb26-4"><a href="#cb26-4" aria-hidden="true" tabindex="-1"></a>--o-classifier silva-138.2-ssu-nr99-515f-806r-classifier.qza</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb27"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb27-1"><a href="#cb27-1" aria-hidden="true" tabindex="-1"></a><span class="ex">qiime</span> feature-classifier fit-classifier-naive-bayes <span class="dt">\</span></span>
+<span id="cb27-2"><a href="#cb27-2" aria-hidden="true" tabindex="-1"></a>--i-reference-reads silva-138.2-ssu-nr99-seqs-515f-806r-uniq.qza <span class="dt">\</span></span>
+<span id="cb27-3"><a href="#cb27-3" aria-hidden="true" tabindex="-1"></a>--i-reference-taxonomy silva-138.2-ssu-nr99-tax-515f-806r-derep-uniq.qza <span class="dt">\</span></span>
+<span id="cb27-4"><a href="#cb27-4" aria-hidden="true" tabindex="-1"></a>--o-classifier silva-138.2-ssu-nr99-515f-806r-classifier.qza</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <section id="diversidadabundancía" class="level2">
 <h2 class="anchored" data-anchor-id="diversidadabundancía">Diversidad/abundancía</h2>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb27"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb27-1"><a href="#cb27-1" aria-hidden="true" tabindex="-1"></a><span class="ex">qiime</span> feature-classifier classify-sklearn <span class="dt">\</span></span>
-<span id="cb27-2"><a href="#cb27-2" aria-hidden="true" tabindex="-1"></a>  <span class="at">--i-classifier</span> silva-138.2-ssu-nr99-515f-806r-classifier.qza <span class="dt">\</span></span>
-<span id="cb27-3"><a href="#cb27-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">--i-reads</span> rep-seqs-dada2-tomato-16s.qza <span class="dt">\</span></span>
-<span id="cb27-4"><a href="#cb27-4" aria-hidden="true" tabindex="-1"></a>  <span class="at">--o-classification</span> taxonomy.qza</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb28"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb28-1"><a href="#cb28-1" aria-hidden="true" tabindex="-1"></a><span class="ex">qiime</span> feature-classifier classify-sklearn <span class="dt">\</span></span>
+<span id="cb28-2"><a href="#cb28-2" aria-hidden="true" tabindex="-1"></a>  <span class="at">--i-classifier</span> silva-138.2-ssu-nr99-515f-806r-classifier.qza <span class="dt">\</span></span>
+<span id="cb28-3"><a href="#cb28-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">--i-reads</span> rep-seqs-dada2-tomato-16s.qza <span class="dt">\</span></span>
+<span id="cb28-4"><a href="#cb28-4" aria-hidden="true" tabindex="-1"></a>  <span class="at">--o-classification</span> taxonomy.qza</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb28"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb28-1"><a href="#cb28-1" aria-hidden="true" tabindex="-1"></a><span class="ex">qiime</span> metadata tabulate <span class="dt">\</span></span>
-<span id="cb28-2"><a href="#cb28-2" aria-hidden="true" tabindex="-1"></a>  <span class="at">--m-input-file</span> taxonomy.qza <span class="dt">\</span></span>
-<span id="cb28-3"><a href="#cb28-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">--o-visualization</span> taxonomy.qzv</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb29"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb29-1"><a href="#cb29-1" aria-hidden="true" tabindex="-1"></a><span class="ex">qiime</span> metadata tabulate <span class="dt">\</span></span>
+<span id="cb29-2"><a href="#cb29-2" aria-hidden="true" tabindex="-1"></a>  <span class="at">--m-input-file</span> taxonomy.qza <span class="dt">\</span></span>
+<span id="cb29-3"><a href="#cb29-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">--o-visualization</span> taxonomy.qzv</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb29"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb29-1"><a href="#cb29-1" aria-hidden="true" tabindex="-1"></a><span class="ex">qiime</span> taxa barplot <span class="dt">\</span></span>
-<span id="cb29-2"><a href="#cb29-2" aria-hidden="true" tabindex="-1"></a>  <span class="at">--i-table</span> table-dada2-tomato-16s.qza <span class="dt">\</span></span>
-<span id="cb29-3"><a href="#cb29-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">--i-taxonomy</span> taxonomy.qza <span class="dt">\</span></span>
-<span id="cb29-4"><a href="#cb29-4" aria-hidden="true" tabindex="-1"></a>  <span class="at">--m-metadata-file</span> Experiment_Design.tsv <span class="dt">\</span></span>
-<span id="cb29-5"><a href="#cb29-5" aria-hidden="true" tabindex="-1"></a>  <span class="at">--o-visualization</span> taxa-bar-plots.qzv</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb30"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb30-1"><a href="#cb30-1" aria-hidden="true" tabindex="-1"></a><span class="ex">qiime</span> taxa barplot <span class="dt">\</span></span>
+<span id="cb30-2"><a href="#cb30-2" aria-hidden="true" tabindex="-1"></a>  <span class="at">--i-table</span> table-dada2-tomato-16s.qza <span class="dt">\</span></span>
+<span id="cb30-3"><a href="#cb30-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">--i-taxonomy</span> taxonomy.qza <span class="dt">\</span></span>
+<span id="cb30-4"><a href="#cb30-4" aria-hidden="true" tabindex="-1"></a>  <span class="at">--m-metadata-file</span> Experiment_Design.tsv <span class="dt">\</span></span>
+<span id="cb30-5"><a href="#cb30-5" aria-hidden="true" tabindex="-1"></a>  <span class="at">--o-visualization</span> taxa-bar-plots.qzv</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">

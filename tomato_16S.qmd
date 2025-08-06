@@ -199,13 +199,65 @@ qiime diversity core-metrics-phylogenetic \
 
 ### Distancia Bray Curtis
 
+La **distancia de Bray-Curtis** es una medida de disimilitud composicional entre dos sitios basada en las abundancias de especies. Es ampliamente utilizada en ecología microbiana para comparar comunidades.
+
+#### Fórmula de Bray-Curtis:
+
+$$BC_{ij} = 1 - \frac{2C_{ij}}{S_i + S_j}$$
+
+o de forma equivalente:
+
+$$BC_{ij} = \frac{\sum_{k=1}^{n} |x_{ik} - x_{jk}|}{\sum_{k=1}^{n} (x_{ik} + x_{jk})}$$
+
+donde: - $BC_{ij}$ = distancia de Bray-Curtis entre sitios $i$ y $j$ - $C_{ij}$ = suma de los valores menores para especies comunes entre ambos sitios - $S_i$, $S_j$ = número total de individuos contados en los sitios $i$ y $j$ - $x_{ik}$, $x_{jk}$ = abundancia de la especie $k$ en los sitios $i$ y $j$ - $n$ = número total de especies
+
+#### Interpretación:
+
+-   Valores entre 0 y 1
+-   0 = sitios idénticos en composición
+-   1 = sitios completamente diferentes
+-   No considera relaciones filogenéticas
+
 ![](images/bray_curtis.png){fig-align="center"}
 
 ### Distancia de Jaccard
 
+La **distancia de Jaccard** mide la disimilitud entre dos conjuntos basándose únicamente en presencia/ausencia, sin considerar abundancias. Es útil para datos binarios.
+
+#### Fórmula del índice de Jaccard:
+
+$$J(A,B) = \frac{|A \cap B|}{|A \cup B|}$$
+
+#### Fórmula de la distancia de Jaccard:
+
+$$D_J(A,B) = 1 - J(A,B) = 1 - \frac{|A \cap B|}{|A \cup B|}$$
+
+o en términos ecológicos:
+
+$$J = \frac{c}{a + b - c}$$
+
+donde: - $J$ = índice de similitud de Jaccard - $a$ = número de especies presentes en el sitio A - $b$ = número de especies presentes en el sitio B\
+- $c$ = número de especies presentes en ambos sitios A y B - $D_J$ = distancia de Jaccard
+
+#### Interpretación:
+
+-   Valores entre 0 y 1
+-   0 = sitios idénticos (especies presentes son las mismas)
+-   1 = sitios completamente diferentes (no comparten especies)
+-   No considera abundancias, solo presencia/ausencia
+
 ![](images/distancia_jaccard.png){fig-align="center"}
 
-## Alfa diversidad
+## Alfa diversidad (α-diversidad)
+
+La **alfa diversidad** es la diversidad media de especies microbianas en un lugar a escala local. Representa la riqueza de especies y su abundancia relativa dentro de una sola muestra o hábitat. Es uno de los componentes fundamentales de la diversidad biológica junto con la diversidad beta y gamma.
+
+#### Características principales:
+
+-   Mide la diversidad dentro de una muestra individual
+-   Considera tanto el número de especies como su abundancia relativa
+-   Es independiente de la escala espacial específica
+-   Fundamental para caracterizar comunidades microbianas
 
 ```{bash, eval=FALSE}
 qiime diversity alpha-group-significance \
@@ -222,7 +274,21 @@ qiime diversity alpha-group-significance \
 
 ```
 
-### Eveness (Uniformidad de grupo)
+### Eveness (equitabilidad)
+
+La **Evenness** o **equitabilidad** mide qué tan uniformemente están distribuidas las abundancias de las especies en una comunidad. Una alta equitabilidad indica que las especies tienen abundancias similares.
+
+#### Índice de Equitabilidad de Pielou:
+
+$$J' = \frac{H'}{H'_{\max}} = \frac{H'}{\ln S}$$
+
+donde: - $J'$ = índice de equitabilidad de Pielou - $H'$ = índice de Shannon observado - $H'_{\max}$ = diversidad máxima posible = $\ln S$ - $S$ = número de especies
+
+#### Interpretación:
+
+-   Valores entre 0 y 1
+-   0 = máxima inequidad (una especie domina completamente)
+-   1 = máxima equidad (todas las especies igualmente abundantes)
 
 ![](images/alpha-compare.png){fig-align="center"}
 
@@ -234,6 +300,21 @@ gt::gt(df)
 
 ### Faith's Phylogenetic Diversity (PD)
 
+**Faith's Phylogenetic Diversity (PD)** es un índice que incorpora información filogenética para medir la diversidad evolutiva de una comunidad. No solo considera el número de especies sino también sus relaciones evolutivas.
+
+#### Fórmula de Faith PD:
+
+$$PD = \sum_{i=1}^{N} L_i$$
+
+donde: - $PD$ = diversidad filogenética de Faith - $N$ = número de ramas del árbol filogenético que conectan las especies presentes - $L_i$ = longitud de la rama $i$ en el árbol filogenético - Las ramas se suman desde las especies hasta la raíz del árbol
+
+#### Características principales:
+
+-   Incorpora historia evolutiva
+-   Útil para prioridades de conservación
+-   Medida en unidades de tiempo evolutivo
+-   Mayor PD indica mayor diversidad evolutiva
+
 ![](images/alpha-compare_faith.png){fig-align="center"}
 
 ```{r, echo=FALSE, message=FALSE}
@@ -243,7 +324,22 @@ df <- readr::read_csv("tables/kruskal-wallis-pairwise-Type_faith.csv")
 gt::gt(df)
 ```
 
-## Beta diversidad
+## Beta diversidad (β-diversidad)
+
+La **beta diversidad** es la relación entre la diversidad regional y la diversidad local de especies. Mide el grado de diferenciación o recambio de especies entre diferentes sitios o comunidades. En microbiología, nos permite comparar qué tan similares o diferentes son las comunidades microbianas entre distintas muestras.
+
+#### Características principales:
+
+-   Mide la variación en composición entre comunidades
+-   Puede deberse a recambio de especies o anidamiento
+-   Valores altos indican comunidades muy diferentes
+-   Valores bajos indican comunidades similares
+
+La **diversidad β verdadera** se calcula como:
+
+$$\beta = \frac{\gamma}{\alpha}$$
+
+donde: - $\beta$ = diversidad beta verdadera (número efectivo de comunidades) - $\gamma$ = diversidad total del conjunto de datos - $\alpha$ = diversidad alfa promedio
 
 ```{bash, eval=FALSE}
 qiime diversity beta-group-significance \
@@ -261,6 +357,28 @@ qiime diversity beta-group-significance \
 --o-visualization core-metrics-results/unweighted-unifrac-significance.qzv \
 --p-pairwise
 ```
+
+## UniFrac
+
+**UniFrac** es una métrica de distancia filogenética utilizada para comparar comunidades biológicas. Incorpora información sobre las relaciones filogenéticas entre los organismos observados, diferenciándose de medidas como Bray-Curtis.
+
+#### UniFrac No Ponderado (Unweighted):
+
+$$U(A,B) = \frac{\sum_{i=1}^{N} l_i \times |A_i - B_i|}{\sum_{i=1}^{N} l_i \times \max(A_i, B_i)}$$
+
+donde: - $U(A,B)$ = distancia UniFrac no ponderada entre muestras A y B - $N$ = número de nodos en el árbol filogenético - $l_i$ = longitud de la rama entre el nodo $i$ y su nodo parental - $A_i$ = indicador (1 o 0) de presencia de la muestra A en las ramas descendientes del nodo $i$ - $B_i$ = indicador (1 o 0) de presencia de la muestra B en las ramas descendientes del nodo $i$
+
+#### UniFrac Ponderado (Weighted):
+
+$$W(A,B) = \sum_{i=1}^{N} l_i \times \left|\frac{A_i}{A_t} - \frac{B_i}{B_t}\right|$$
+
+donde: - $W(A,B)$ = distancia UniFrac ponderada entre muestras A y B - $A_i$ = número de secuencias de la muestra A en las ramas descendientes del nodo $i$ - $A_t$ = número total de secuencias en la muestra A - $B_i$ = número de secuencias de la muestra B en las ramas descendientes del nodo $i$ - $B_t$ = número total de secuencias en la muestra B
+
+#### Interpretación:
+
+-   Valores entre 0 y 1
+-   0 = comunidades idénticas filogenéticamente
+-   1 = comunidades completamente diferentes filogenéticamente
 
 ### Unweighted UniFrac Distance: PERMANOVA
 
@@ -315,7 +433,20 @@ qiime diversity alpha-rarefaction \
 
 ### Observed Features
 
-Los rasgos observados (Observed features) son una métrica de diversidad alfa fundamental que cuantifica la riqueza de una comunidad microbiana contando el número de unidades taxonómicas operativas (OTU) distintas o variantes de secuencia de amplicón (ASV) presentes en una sola muestra.
+Las **Observed Features** representan simplemente el **número de características taxonómicas diferentes** (especies, géneros, familias, etc.) observadas en una muestra. Es la medida más básica de riqueza de especies.
+
+#### Características principales:
+
+-   Medida directa de riqueza taxonómica
+-   No considera abundancia relativa
+-   Sensible al esfuerzo de muestreo
+-   Base para otros índices de diversidad
+
+La fórmula es simplemente:
+
+$$S = \text{número total de especies observadas}$$
+
+donde: - $S$ = riqueza de especies observadas
 
 ```{r, message=FALSE, echo=FALSE, warning=FALSE}
 
@@ -374,7 +505,132 @@ ggplot(obfe_long, aes(
 
 ### Shannon
 
-El índice de diversidad de Shannon es una **métrica comúnmente utilizada para analizar la diversidad alfa, ya que considera tanto la riqueza de especies como la abundancia relativa de cada taxón dentro de una muestra**.
+El **índice de Shannon** (Shannon-Weaver o Shannon-Wiener) mide la biodiversidad específica considerando tanto la riqueza de especies como su abundancia relativa. Está basado en la teoría de la información y mide la incertidumbre para predecir la especie de un individuo tomado al azar.
+
+#### Fórmula del índice de Shannon:
+
+$$H' = -\sum_{i=1}^{S} p_i \ln p_i$$
+
+donde: - $H'$ = índice de Shannon - $S$ = número de especies (riqueza de especies) - $p_i$ = proporción de individuos de la especie $i$ respecto al total: $p_i = \frac{n_i}{N}$ - $n_i$ = número de individuos de la especie $i$ - $N$ = número total de individuos de todas las especies - $\ln$ = logaritmo natural
+
+#### Interpretación:
+
+-   Valores entre 0.5 y 5 en ecosistemas naturales
+-   Valores \< 2: baja diversidad
+-   Valores \> 3: alta diversidad
+-   Valores más altos indican mayor diversidad y equitabilidad
+
+```{r, message=FALSE, echo=FALSE, warning=FALSE}
+suppressPackageStartupMessages(library(tidyverse))
+
+obfe <- readr::read_csv("tables/shannon.csv",
+                        col_types = cols(
+                 `sample-id` = col_skip(),
+                 accession   = col_skip(),
+                 sra_run     = col_skip(),
+                 Type        = col_factor(),
+                 .default    = col_double()
+               ))
+
+obfe_long <- obfe %>%
+  pivot_longer(
+    cols = starts_with("depth-"), 
+    names_to = c("Depth", "Iter"),            
+    names_pattern = "depth-([0-9]+)_iter-([0-9]+)",
+    values_to = "Shannon_Index",
+    values_drop_na = TRUE                     
+  ) %>%
+  mutate(
+    Depth = as.integer(Depth),
+    Iter  = as.integer(Iter)
+  )
+
+
+ggplot(obfe_long, aes(
+    x    = factor(Depth),                   
+    y    = Shannon_Index,
+    fill = Type                         
+  )) +
+  geom_boxplot(position = position_dodge(width = 0.8),
+               color = "black") +
+  stat_summary(
+    aes(
+      x      = as.numeric(factor(Depth)),
+      colour = Type,
+      group  = Type
+    ),
+    fun    = median,
+    geom   = "line",
+    size   = 1
+  ) +
+  scale_x_discrete(name = "Sequencing Depth") +
+  scale_y_continuous(name = "Shannon Index") +
+  theme_minimal(base_size = 15) +
+  theme(
+    legend.title = element_blank(),
+    panel.grid.major.x = element_blank()
+  ) +
+  scale_fill_manual(values = c( "#8f0052","#276518")) +
+  scale_color_manual(values = c( "#8f0052","#276518"))
+```
+
+### Faith PD
+
+La diversidad filogenética de Faith (PD de Faith) es una medida de la biodiversidad que cuantifica la amplitud de la historia evolutiva representada por un conjunto de especies u otras unidades taxonómicas, definida como la suma de las longitudes de las ramas de un árbol filogenético que conectan los miembros del conjunto.
+
+```{r, message=FALSE, echo=TRUE, warning=FALSE}
+suppressPackageStartupMessages(library(tidyverse))
+
+obfe <- readr::read_csv("tables/faith_pd.csv",
+                        col_types = cols(
+                 `sample-id` = col_skip(),
+                 accession   = col_skip(),
+                 sra_run     = col_skip(),
+                 Type        = col_factor(),
+                 .default    = col_double()
+               ))
+
+obfe_long <- obfe %>%
+  pivot_longer(
+    cols = starts_with("depth-"), 
+    names_to = c("Depth", "Iter"),            
+    names_pattern = "depth-([0-9]+)_iter-([0-9]+)",
+    values_to = "faith",
+    values_drop_na = TRUE                     
+  ) %>%
+  mutate(
+    Depth = as.integer(Depth),
+    Iter  = as.integer(Iter)
+  )
+
+
+ggplot(obfe_long, aes(
+    x    = factor(Depth),                   
+    y    = faith,
+    fill = Type                         
+  )) +
+  geom_boxplot(position = position_dodge(width = 0.8),
+               color = "black") +
+  stat_summary(
+    aes(
+      x      = as.numeric(factor(Depth)),
+      colour = Type,
+      group  = Type
+    ),
+    fun    = median,
+    geom   = "line",
+    size   = 1
+  ) +
+  scale_x_discrete(name = "Sequencing Depth") +
+  scale_y_continuous(name = "Faith PD") +
+  theme_minimal(base_size = 15) +
+  theme(
+    legend.title = element_blank(),
+    panel.grid.major.x = element_blank()
+  ) +
+  scale_fill_manual(values = c( "#8f0052","#276518")) +
+  scale_color_manual(values = c( "#8f0052","#276518"))
+```
 
 # Taxonomía
 
