@@ -139,7 +139,7 @@ qiime tools view stats-dada2-tomato-16s.qzv
 
 Después de terminar el paso de filtrado de calidad, querrás explorar los datos que obtuviste. Este filtrado es importante porque elimina las secuencias de baja calidad o con errores, dejándote datos más confiables para trabajar. Para revisar esos datos, puedes usar dos comandos que te muestran resúmenes visuales fáciles de entender.
 
-EXPERIMENT DESIGN
+Los datos asociados los vamos a depositar en un archivo nombrado `experiment_design.tsv`:
 
 ```{r, echo=FALSE, message=FALSE}
 df <- readr::read_tsv("../2025_Demo_16S_tomate/Experiment_Design.tsv")
@@ -172,19 +172,13 @@ qiime feature-table tabulate-seqs \
 
     -   **Estadísticas básicas**: algunos números que resumen tus datos de forma general, para que tengas una idea rápida de lo que tienes.
 
--   **El comando `feature-table tabulate-seqs`**\
+-   **El comando `feature-table tabulate-seqs`**
 
     Este comando es útil porque:
 
     -   Te da una lista que conecta cada **ID de característica** (un código único para cada característica) con la secuencia de ADN que representa.
 
     -   Además, te ofrece **enlaces** para buscar esas secuencias en una base de datos grande llamada **NCBI nt**.
-
-### ¿Por qué son útiles estos comandos?
-
--   El primero te da una visión general de tus datos: cuántas secuencias tienes y cómo están organizadas.
-
--   El segundo te permite investigar a fondo las características que te interesen, conectando los códigos con las secuencias reales y dándote herramientas para explorar más.
 
 # Medidas de diversidad
 
@@ -223,6 +217,14 @@ qiime diversity alpha-group-significance \
 
 ```
 
+Los siguientes gráficos y tablas de evenness y faith se obtuvieron a partir de los archivos `.qzv` generados, asi como las tablas de significancia `kruskal-wallis-pairwise`.
+
+```{bash, eval=FALSE}
+qiime tools view evenness-group-significance.qzv
+
+qiime tools view faith-pd-group-significance.qzv
+```
+
 ### Eveness (equitabilidad)
 
 La **Evenness** o **equitabilidad** mide qué tan uniformemente están distribuidas las abundancias de las especies en una comunidad. Una alta equitabilidad indica que las especies tienen abundancias similares.
@@ -231,7 +233,15 @@ La **Evenness** o **equitabilidad** mide qué tan uniformemente están distribui
 
 $$J' = \frac{H'}{H'_{\max}} = \frac{H'}{\ln S}$$
 
-donde: - $J'$ = índice de equitabilidad de Pielou - $H'$ = índice de Shannon observado - $H'_{\max}$ = diversidad máxima posible = $\ln S$ - $S$ = número de especies
+donde:
+
+\- $J'$ = índice de equitabilidad de Pielou
+
+\- $H'$ = índice de Shannon observado
+
+\- $H'_{\max}$ = diversidad máxima posible = $\ln S$
+
+\- $S$ = número de especies
 
 #### Interpretación:
 
@@ -255,7 +265,15 @@ gt::gt(df)
 
 $$PD = \sum_{i=1}^{N} L_i$$
 
-donde: - $PD$ = diversidad filogenética de Faith - $N$ = número de ramas del árbol filogenético que conectan las especies presentes - $L_i$ = longitud de la rama $i$ en el árbol filogenético - Las ramas se suman desde las especies hasta la raíz del árbol
+donde:
+
+\- $PD$ = diversidad filogenética de Faith
+
+\- $N$ = número de ramas del árbol filogenético que conectan las especies presentes
+
+\- $L_i$ = longitud de la rama $i$ en el árbol filogenético
+
+\- Las ramas se suman desde las especies hasta la raíz del árbol
 
 #### Características principales:
 
@@ -292,6 +310,20 @@ qiime diversity alpha-rarefaction \
 --o-visualization alpha-rarefaction-dada2-tomato-16s.qzv
 ```
 
+Para los siguientes gráficos se dercargaron los archivos `.csv` a partir del archivo `.qzv`, para posteriormente usar `R` para gráficar.
+
+```{bash, eval=FALSE}
+qiime tools view alpha-rarefaction-dada2-tomato-16s.qzv
+```
+
+Se descargaron los siguientes archivos:
+
+-   `observed_features.csv`
+
+-   `shannon.csv`
+
+-   `faith_pd.csv`
+
 ### Observed Features
 
 Las **Observed Features** representan simplemente el **número de características taxonómicas diferentes** (especies, géneros, familias, etc.) observadas en una muestra. Es la medida más básica de riqueza de especies.
@@ -307,9 +339,13 @@ La fórmula es simplemente:
 
 $$S = \text{número total de especies observadas}$$
 
-donde: - $S$ = riqueza de especies observadas
+donde:
 
-```{r, message=FALSE, echo=FALSE, warning=FALSE}
+\- $S$ = riqueza de especies observadas
+
+En `R`:
+
+```{r, message=FALSE, echo=TRUE, warning=FALSE}
 
 suppressPackageStartupMessages(library(tidyverse))
 
@@ -372,7 +408,19 @@ El **índice de Shannon** (Shannon-Weaver o Shannon-Wiener) mide la biodiversida
 
 $$H' = -\sum_{i=1}^{S} p_i \ln p_i$$
 
-donde: - $H'$ = índice de Shannon - $S$ = número de especies (riqueza de especies) - $p_i$ = proporción de individuos de la especie $i$ respecto al total: $p_i = \frac{n_i}{N}$ - $n_i$ = número de individuos de la especie $i$ - $N$ = número total de individuos de todas las especies - $\ln$ = logaritmo natural
+donde:
+
+\- $H'$ = índice de Shannon
+
+\- $S$ = número de especies (riqueza de especies)
+
+\- $p_i$ = proporción de individuos de la especie $i$ respecto al total: $p_i = \frac{n_i}{N}$
+
+\- $n_i$ = número de individuos de la especie $i$
+
+\- $N$ = número total de individuos de todas las especies
+
+\- $\ln$ = logaritmo natural
 
 #### Interpretación:
 
@@ -381,7 +429,9 @@ donde: - $H'$ = índice de Shannon - $S$ = número de especies (riqueza de espec
 -   Valores \> 3: alta diversidad
 -   Valores más altos indican mayor diversidad y equitabilidad
 
-```{r, message=FALSE, echo=FALSE, warning=FALSE}
+En `R`:
+
+```{r, message=FALSE, echo=TRUE, warning=FALSE}
 suppressPackageStartupMessages(library(tidyverse))
 
 obfe <- readr::read_csv("tables/shannon.csv",
@@ -439,7 +489,9 @@ ggplot(obfe_long, aes(
 
 La diversidad filogenética de Faith (PD de Faith) es una medida de la biodiversidad que cuantifica la amplitud de la historia evolutiva representada por un conjunto de especies u otras unidades taxonómicas, definida como la suma de las longitudes de las ramas de un árbol filogenético que conectan los miembros del conjunto.
 
-```{r, message=FALSE, echo=FALSE, warning=FALSE}
+En `R`:
+
+```{r, message=FALSE, echo=TRUE, warning=FALSE}
 suppressPackageStartupMessages(library(tidyverse))
 
 obfe <- readr::read_csv("tables/faith_pd.csv",
@@ -510,7 +562,13 @@ La **diversidad β verdadera** se calcula como:
 
 $$\beta = \frac{\gamma}{\alpha}$$
 
-donde: - $\beta$ = diversidad beta verdadera (número efectivo de comunidades) - $\gamma$ = diversidad total del conjunto de datos - $\alpha$ = diversidad alfa promedio
+donde:
+
+\- $\beta$ = diversidad beta verdadera (número efectivo de comunidades)
+
+\- $\gamma$ = diversidad total del conjunto de datos
+
+\- $\alpha$ = diversidad alfa promedio
 
 ```{bash, eval=FALSE}
 qiime diversity beta-group-significance \
@@ -531,6 +589,10 @@ qiime diversity beta-group-significance \
 
 ### Distancia Bray Curtis
 
+```{bash, eval=FALSE}
+qiime tools view core-metrics-results/bray_curtis_emperor.qzv
+```
+
 La **distancia de Bray-Curtis** es una medida de disimilitud composicional entre dos sitios basada en las abundancias de especies. Es ampliamente utilizada en ecología microbiana para comparar comunidades.
 
 #### Fórmula de Bray-Curtis:
@@ -541,7 +603,17 @@ o de forma equivalente:
 
 $$BC_{ij} = \frac{\sum_{k=1}^{n} |x_{ik} - x_{jk}|}{\sum_{k=1}^{n} (x_{ik} + x_{jk})}$$
 
-donde: - $BC_{ij}$ = distancia de Bray-Curtis entre sitios $i$ y $j$ - $C_{ij}$ = suma de los valores menores para especies comunes entre ambos sitios - $S_i$, $S_j$ = número total de individuos contados en los sitios $i$ y $j$ - $x_{ik}$, $x_{jk}$ = abundancia de la especie $k$ en los sitios $i$ y $j$ - $n$ = número total de especies
+donde:
+
+\- $BC_{ij}$ = distancia de Bray-Curtis entre sitios $i$ y $j$
+
+\- $C_{ij}$ = suma de los valores menores para especies comunes entre ambos sitios
+
+\- $S_i$, $S_j$ = número total de individuos contados en los sitios $i$ y $j$
+
+\- $x_{ik}$, $x_{jk}$ = abundancia de la especie $k$ en los sitios $i$ y $j$
+
+\- $n$ = número total de especies
 
 #### Interpretación:
 
@@ -555,6 +627,10 @@ donde: - $BC_{ij}$ = distancia de Bray-Curtis entre sitios $i$ y $j$ - $C_{ij}$ 
 ## 
 
 ### Distancia de Jaccard
+
+```{bash, eval=FALSE}
+qiime tools view core-metrics-results/jaccard_emperor.qzv
+```
 
 La **distancia de Jaccard** mide la disimilitud entre dos conjuntos basándose únicamente en presencia/ausencia, sin considerar abundancias. Es útil para datos binarios.
 
@@ -570,8 +646,16 @@ o en términos ecológicos:
 
 $$J = \frac{c}{a + b - c}$$
 
-donde: - $J$ = índice de similitud de Jaccard - $a$ = número de especies presentes en el sitio A - $b$ = número de especies presentes en el sitio B\
-- $c$ = número de especies presentes en ambos sitios A y B - $D_J$ = distancia de Jaccard
+donde:
+
+\- $J$ = índice de similitud de Jaccard
+
+\- $a$ = número de especies presentes en el sitio A
+
+\- $b$ = número de especies presentes en el sitio B\
+- $c$ = número de especies presentes en ambos sitios A y B
+
+\- $D_J$ = distancia de Jaccard
 
 #### Interpretación:
 
@@ -590,13 +674,33 @@ donde: - $J$ = índice de similitud de Jaccard - $a$ = número de especies prese
 
 $$U(A,B) = \frac{\sum_{i=1}^{N} l_i \times |A_i - B_i|}{\sum_{i=1}^{N} l_i \times \max(A_i, B_i)}$$
 
-donde: - $U(A,B)$ = distancia UniFrac no ponderada entre muestras A y B - $N$ = número de nodos en el árbol filogenético - $l_i$ = longitud de la rama entre el nodo $i$ y su nodo parental - $A_i$ = indicador (1 o 0) de presencia de la muestra A en las ramas descendientes del nodo $i$ - $B_i$ = indicador (1 o 0) de presencia de la muestra B en las ramas descendientes del nodo $i$
+donde:
+
+\- $U(A,B)$ = distancia UniFrac no ponderada entre muestras A y B
+
+\- $N$ = número de nodos en el árbol filogenético
+
+\- $l_i$ = longitud de la rama entre el nodo $i$ y su nodo parental
+
+\- $A_i$ = indicador (1 o 0) de presencia de la muestra A en las ramas descendientes del nodo $i$
+
+\- $B_i$ = indicador (1 o 0) de presencia de la muestra B en las ramas descendientes del nodo $i$
 
 #### UniFrac Ponderado (Weighted):
 
 $$W(A,B) = \sum_{i=1}^{N} l_i \times \left|\frac{A_i}{A_t} - \frac{B_i}{B_t}\right|$$
 
-donde: - $W(A,B)$ = distancia UniFrac ponderada entre muestras A y B - $A_i$ = número de secuencias de la muestra A en las ramas descendientes del nodo $i$ - $A_t$ = número total de secuencias en la muestra A - $B_i$ = número de secuencias de la muestra B en las ramas descendientes del nodo $i$ - $B_t$ = número total de secuencias en la muestra B
+donde:
+
+\- $W(A,B)$ = distancia UniFrac ponderada entre muestras A y B
+
+ - $A_i$ = número de secuencias de la muestra A en las ramas descendientes del nodo $i$
+
+\- $A_t$ = número total de secuencias en la muestra A
+
+\- $B_i$ = número de secuencias de la muestra B en las ramas descendientes del nodo $i$
+
+\- $B_t$ = número total de secuencias en la muestra B
 
 #### Interpretación:
 
@@ -604,9 +708,27 @@ donde: - $W(A,B)$ = distancia UniFrac ponderada entre muestras A y B - $A_i$ = n
 -   0 = comunidades idénticas filogenéticamente
 -   1 = comunidades completamente diferentes filogenéticamente
 
-### Unweighted UniFrac Distance: PERMANOVA
+### Unweighted UniFrac  
 
-```{r, message=FALSE, echo=FALSE}
+```{bash, eval=FALSE}
+qiime tools view core-metrics-results/unweighted_unifrac_emperor.qzv
+```
+
+![](images/sin_ponderar.png){fig-align="center"}
+
+#### PERMANOVA
+
+Los siguientes datos se descragaron a partir del siguinete comando en `bash` para posteriormente gráficar en `R`.
+
+En `bash`:
+
+```{bash, eval=FALSE}
+qiime tools view core-metrics-results/unweighted-unifrac-body-site-significance.qzv
+```
+
+En `R`:
+
+```{r, message=FALSE, echo=TRUE}
 suppressPackageStartupMessages(library(tidyverse))
 
 df <- readr::read_tsv("tables/raw_data_permanova.tsv")
@@ -730,7 +852,7 @@ qiime feature-classifier extract-reads \
 Realiza una segunda dereplicación, esta vez sobre las secuencias de la región V4, eliminando duplicados adicionales que puedan haber surgido tras la extracción.
 
 ```{bash, eval=FALSE}
-iime rescript dereplicate \
+qiime rescript dereplicate \
 --i-sequences silva-138.2-ssu-nr99-seqs-515f-806r.qza \
 --i-taxa silva-138.2-ssu-nr99-tax-derep-uniq.qza \
 --p-mode 'uniq' \

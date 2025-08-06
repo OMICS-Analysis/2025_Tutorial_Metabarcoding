@@ -251,7 +251,7 @@ window.Quarto = {
 <span id="cb9-5"><a href="#cb9-5" aria-hidden="true" tabindex="-1"></a><span class="ex">qiime</span> tools view stats-dada2-tomato-16s.qzv</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>Después de terminar el paso de filtrado de calidad, querrás explorar los datos que obtuviste. Este filtrado es importante porque elimina las secuencias de baja calidad o con errores, dejándote datos más confiables para trabajar. Para revisar esos datos, puedes usar dos comandos que te muestran resúmenes visuales fáciles de entender.</p>
-<p>EXPERIMENT DESIGN</p>
+<p>Los datos asociados los vamos a depositar en un archivo nombrado <code>experiment_design.tsv</code>:</p>
 <div class="cell">
 <div class="cell-output cell-output-stdout">
 <pre><code># A tibble: 13 × 4
@@ -293,21 +293,13 @@ window.Quarto = {
 <li><p><strong>Gráficos (histogramas)</strong>: estos te muestran cómo se distribuyen las secuencias.</p></li>
 <li><p><strong>Estadísticas básicas</strong>: algunos números que resumen tus datos de forma general, para que tengas una idea rápida de lo que tienes.</p></li>
 </ul></li>
-<li><p><strong>El comando <code>feature-table tabulate-seqs</code></strong><br>
-</p>
+<li><p><strong>El comando <code>feature-table tabulate-seqs</code></strong></p>
 <p>Este comando es útil porque:</p>
 <ul>
 <li><p>Te da una lista que conecta cada <strong>ID de característica</strong> (un código único para cada característica) con la secuencia de ADN que representa.</p></li>
 <li><p>Además, te ofrece <strong>enlaces</strong> para buscar esas secuencias en una base de datos grande llamada <strong>NCBI nt</strong>.</p></li>
 </ul></li>
 </ul>
-<section id="por-qué-son-útiles-estos-comandos" class="level3">
-<h3 class="anchored" data-anchor-id="por-qué-son-útiles-estos-comandos">¿Por qué son útiles estos comandos?</h3>
-<ul>
-<li><p>El primero te da una visión general de tus datos: cuántas secuencias tienes y cómo están organizadas.</p></li>
-<li><p>El segundo te permite investigar a fondo las características que te interesen, conectando los códigos con las secuencias reales y dándote herramientas para explorar más.</p></li>
-</ul>
-</section>
 </section>
 <section id="medidas-de-diversidad" class="level1">
 <h1>Medidas de diversidad</h1>
@@ -342,6 +334,12 @@ window.Quarto = {
 <span id="cb15-3"><a href="#cb15-3" aria-hidden="true" tabindex="-1"></a>--m-metadata-file Experiment_Design.tsv <span class="dt">\</span></span>
 <span id="cb15-4"><a href="#cb15-4" aria-hidden="true" tabindex="-1"></a>--o-visualization core-metrics-results/evenness-group-significance.qzv</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
+<p>Los siguientes gráficos y tablas de evenness y faith se obtuvieron a partir de los archivos <code>.qzv</code> generados, asi como las tablas de significancia <code>kruskal-wallis-pairwise</code>.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb16"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a><span class="ex">qiime</span> tools view evenness-group-significance.qzv</span>
+<span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-3"><a href="#cb16-3" aria-hidden="true" tabindex="-1"></a><span class="ex">qiime</span> tools view faith-pd-group-significance.qzv</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
 </section>
 <section id="eveness-equitabilidad" class="level3">
 <h3 class="anchored" data-anchor-id="eveness-equitabilidad">Eveness (equitabilidad)</h3>
@@ -349,7 +347,11 @@ window.Quarto = {
 <section id="índice-de-equitabilidad-de-pielou" class="level4">
 <h4 class="anchored" data-anchor-id="índice-de-equitabilidad-de-pielou">Índice de Equitabilidad de Pielou:</h4>
 <p><span class="math display">\[J' = \frac{H'}{H'_{\max}} = \frac{H'}{\ln S}\]</span></p>
-<p>donde: - <span class="math inline">\(J'\)</span> = índice de equitabilidad de Pielou - <span class="math inline">\(H'\)</span> = índice de Shannon observado - <span class="math inline">\(H'_{\max}\)</span> = diversidad máxima posible = <span class="math inline">\(\ln S\)</span> - <span class="math inline">\(S\)</span> = número de especies</p>
+<p>donde:</p>
+<p>- <span class="math inline">\(J'\)</span> = índice de equitabilidad de Pielou</p>
+<p>- <span class="math inline">\(H'\)</span> = índice de Shannon observado</p>
+<p>- <span class="math inline">\(H'_{\max}\)</span> = diversidad máxima posible = <span class="math inline">\(\ln S\)</span></p>
+<p>- <span class="math inline">\(S\)</span> = número de especies</p>
 </section>
 <section id="interpretación" class="level4">
 <h4 class="anchored" data-anchor-id="interpretación">Interpretación:</h4>
@@ -365,23 +367,23 @@ window.Quarto = {
 </div>
 <div class="cell">
 <div class="cell-output-display">
-<div id="gqyqapcypa" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
-<style>#gqyqapcypa table {
+<div id="kidcauzahz" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<style>#kidcauzahz table {
   font-family: system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
-#gqyqapcypa thead, #gqyqapcypa tbody, #gqyqapcypa tfoot, #gqyqapcypa tr, #gqyqapcypa td, #gqyqapcypa th {
+#kidcauzahz thead, #kidcauzahz tbody, #kidcauzahz tfoot, #kidcauzahz tr, #kidcauzahz td, #kidcauzahz th {
   border-style: none;
 }
 
-#gqyqapcypa p {
+#kidcauzahz p {
   margin: 0;
   padding: 0;
 }
 
-#gqyqapcypa .gt_table {
+#kidcauzahz .gt_table {
   display: table;
   border-collapse: collapse;
   line-height: normal;
@@ -407,12 +409,12 @@ window.Quarto = {
   border-left-color: #D3D3D3;
 }
 
-#gqyqapcypa .gt_caption {
+#kidcauzahz .gt_caption {
   padding-top: 4px;
   padding-bottom: 4px;
 }
 
-#gqyqapcypa .gt_title {
+#kidcauzahz .gt_title {
   color: #333333;
   font-size: 125%;
   font-weight: initial;
@@ -424,7 +426,7 @@ window.Quarto = {
   border-bottom-width: 0;
 }
 
-#gqyqapcypa .gt_subtitle {
+#kidcauzahz .gt_subtitle {
   color: #333333;
   font-size: 85%;
   font-weight: initial;
@@ -436,7 +438,7 @@ window.Quarto = {
   border-top-width: 0;
 }
 
-#gqyqapcypa .gt_heading {
+#kidcauzahz .gt_heading {
   background-color: #FFFFFF;
   text-align: center;
   border-bottom-color: #FFFFFF;
@@ -448,13 +450,13 @@ window.Quarto = {
   border-right-color: #D3D3D3;
 }
 
-#gqyqapcypa .gt_bottom_border {
+#kidcauzahz .gt_bottom_border {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
 }
 
-#gqyqapcypa .gt_col_headings {
+#kidcauzahz .gt_col_headings {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -469,7 +471,7 @@ window.Quarto = {
   border-right-color: #D3D3D3;
 }
 
-#gqyqapcypa .gt_col_heading {
+#kidcauzahz .gt_col_heading {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -489,7 +491,7 @@ window.Quarto = {
   overflow-x: hidden;
 }
 
-#gqyqapcypa .gt_column_spanner_outer {
+#kidcauzahz .gt_column_spanner_outer {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -501,15 +503,15 @@ window.Quarto = {
   padding-right: 4px;
 }
 
-#gqyqapcypa .gt_column_spanner_outer:first-child {
+#kidcauzahz .gt_column_spanner_outer:first-child {
   padding-left: 0;
 }
 
-#gqyqapcypa .gt_column_spanner_outer:last-child {
+#kidcauzahz .gt_column_spanner_outer:last-child {
   padding-right: 0;
 }
 
-#gqyqapcypa .gt_column_spanner {
+#kidcauzahz .gt_column_spanner {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
@@ -521,11 +523,11 @@ window.Quarto = {
   width: 100%;
 }
 
-#gqyqapcypa .gt_spanner_row {
+#kidcauzahz .gt_spanner_row {
   border-bottom-style: hidden;
 }
 
-#gqyqapcypa .gt_group_heading {
+#kidcauzahz .gt_group_heading {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -551,7 +553,7 @@ window.Quarto = {
   text-align: left;
 }
 
-#gqyqapcypa .gt_empty_group_heading {
+#kidcauzahz .gt_empty_group_heading {
   padding: 0.5px;
   color: #333333;
   background-color: #FFFFFF;
@@ -566,15 +568,15 @@ window.Quarto = {
   vertical-align: middle;
 }
 
-#gqyqapcypa .gt_from_md > :first-child {
+#kidcauzahz .gt_from_md > :first-child {
   margin-top: 0;
 }
 
-#gqyqapcypa .gt_from_md > :last-child {
+#kidcauzahz .gt_from_md > :last-child {
   margin-bottom: 0;
 }
 
-#gqyqapcypa .gt_row {
+#kidcauzahz .gt_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -593,7 +595,7 @@ window.Quarto = {
   overflow-x: hidden;
 }
 
-#gqyqapcypa .gt_stub {
+#kidcauzahz .gt_stub {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -606,7 +608,7 @@ window.Quarto = {
   padding-right: 5px;
 }
 
-#gqyqapcypa .gt_stub_row_group {
+#kidcauzahz .gt_stub_row_group {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -620,15 +622,15 @@ window.Quarto = {
   vertical-align: top;
 }
 
-#gqyqapcypa .gt_row_group_first td {
+#kidcauzahz .gt_row_group_first td {
   border-top-width: 2px;
 }
 
-#gqyqapcypa .gt_row_group_first th {
+#kidcauzahz .gt_row_group_first th {
   border-top-width: 2px;
 }
 
-#gqyqapcypa .gt_summary_row {
+#kidcauzahz .gt_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -638,16 +640,16 @@ window.Quarto = {
   padding-right: 5px;
 }
 
-#gqyqapcypa .gt_first_summary_row {
+#kidcauzahz .gt_first_summary_row {
   border-top-style: solid;
   border-top-color: #D3D3D3;
 }
 
-#gqyqapcypa .gt_first_summary_row.thick {
+#kidcauzahz .gt_first_summary_row.thick {
   border-top-width: 2px;
 }
 
-#gqyqapcypa .gt_last_summary_row {
+#kidcauzahz .gt_last_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -657,7 +659,7 @@ window.Quarto = {
   border-bottom-color: #D3D3D3;
 }
 
-#gqyqapcypa .gt_grand_summary_row {
+#kidcauzahz .gt_grand_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -667,7 +669,7 @@ window.Quarto = {
   padding-right: 5px;
 }
 
-#gqyqapcypa .gt_first_grand_summary_row {
+#kidcauzahz .gt_first_grand_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -677,7 +679,7 @@ window.Quarto = {
   border-top-color: #D3D3D3;
 }
 
-#gqyqapcypa .gt_last_grand_summary_row_top {
+#kidcauzahz .gt_last_grand_summary_row_top {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -687,11 +689,11 @@ window.Quarto = {
   border-bottom-color: #D3D3D3;
 }
 
-#gqyqapcypa .gt_striped {
+#kidcauzahz .gt_striped {
   background-color: rgba(128, 128, 128, 0.05);
 }
 
-#gqyqapcypa .gt_table_body {
+#kidcauzahz .gt_table_body {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -700,7 +702,7 @@ window.Quarto = {
   border-bottom-color: #D3D3D3;
 }
 
-#gqyqapcypa .gt_footnotes {
+#kidcauzahz .gt_footnotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -714,7 +716,7 @@ window.Quarto = {
   border-right-color: #D3D3D3;
 }
 
-#gqyqapcypa .gt_footnote {
+#kidcauzahz .gt_footnote {
   margin: 0px;
   font-size: 90%;
   padding-top: 4px;
@@ -723,7 +725,7 @@ window.Quarto = {
   padding-right: 5px;
 }
 
-#gqyqapcypa .gt_sourcenotes {
+#kidcauzahz .gt_sourcenotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -737,7 +739,7 @@ window.Quarto = {
   border-right-color: #D3D3D3;
 }
 
-#gqyqapcypa .gt_sourcenote {
+#kidcauzahz .gt_sourcenote {
   font-size: 90%;
   padding-top: 4px;
   padding-bottom: 4px;
@@ -745,72 +747,72 @@ window.Quarto = {
   padding-right: 5px;
 }
 
-#gqyqapcypa .gt_left {
+#kidcauzahz .gt_left {
   text-align: left;
 }
 
-#gqyqapcypa .gt_center {
+#kidcauzahz .gt_center {
   text-align: center;
 }
 
-#gqyqapcypa .gt_right {
+#kidcauzahz .gt_right {
   text-align: right;
   font-variant-numeric: tabular-nums;
 }
 
-#gqyqapcypa .gt_font_normal {
+#kidcauzahz .gt_font_normal {
   font-weight: normal;
 }
 
-#gqyqapcypa .gt_font_bold {
+#kidcauzahz .gt_font_bold {
   font-weight: bold;
 }
 
-#gqyqapcypa .gt_font_italic {
+#kidcauzahz .gt_font_italic {
   font-style: italic;
 }
 
-#gqyqapcypa .gt_super {
+#kidcauzahz .gt_super {
   font-size: 65%;
 }
 
-#gqyqapcypa .gt_footnote_marks {
+#kidcauzahz .gt_footnote_marks {
   font-size: 75%;
   vertical-align: 0.4em;
   position: initial;
 }
 
-#gqyqapcypa .gt_asterisk {
+#kidcauzahz .gt_asterisk {
   font-size: 100%;
   vertical-align: 0;
 }
 
-#gqyqapcypa .gt_indent_1 {
+#kidcauzahz .gt_indent_1 {
   text-indent: 5px;
 }
 
-#gqyqapcypa .gt_indent_2 {
+#kidcauzahz .gt_indent_2 {
   text-indent: 10px;
 }
 
-#gqyqapcypa .gt_indent_3 {
+#kidcauzahz .gt_indent_3 {
   text-indent: 15px;
 }
 
-#gqyqapcypa .gt_indent_4 {
+#kidcauzahz .gt_indent_4 {
   text-indent: 20px;
 }
 
-#gqyqapcypa .gt_indent_5 {
+#kidcauzahz .gt_indent_5 {
   text-indent: 25px;
 }
 
-#gqyqapcypa .katex-display {
+#kidcauzahz .katex-display {
   display: inline-flex !important;
   margin-bottom: 0.75em !important;
 }
 
-#gqyqapcypa div.Reactable > div.rt-table > div.rt-thead > div.rt-tr.rt-tr-group-header > div.rt-th-group:after {
+#kidcauzahz div.Reactable > div.rt-table > div.rt-thead > div.rt-tr.rt-tr-group-header > div.rt-th-group:after {
   height: 0px !important;
 }
 </style>
@@ -847,7 +849,11 @@ window.Quarto = {
 <section id="fórmula-de-faith-pd" class="level4">
 <h4 class="anchored" data-anchor-id="fórmula-de-faith-pd">Fórmula de Faith PD:</h4>
 <p><span class="math display">\[PD = \sum_{i=1}^{N} L_i\]</span></p>
-<p>donde: - <span class="math inline">\(PD\)</span> = diversidad filogenética de Faith - <span class="math inline">\(N\)</span> = número de ramas del árbol filogenético que conectan las especies presentes - <span class="math inline">\(L_i\)</span> = longitud de la rama <span class="math inline">\(i\)</span> en el árbol filogenético - Las ramas se suman desde las especies hasta la raíz del árbol</p>
+<p>donde:</p>
+<p>- <span class="math inline">\(PD\)</span> = diversidad filogenética de Faith</p>
+<p>- <span class="math inline">\(N\)</span> = número de ramas del árbol filogenético que conectan las especies presentes</p>
+<p>- <span class="math inline">\(L_i\)</span> = longitud de la rama <span class="math inline">\(i\)</span> en el árbol filogenético</p>
+<p>- Las ramas se suman desde las especies hasta la raíz del árbol</p>
 </section>
 <section id="características-principales-1" class="level4">
 <h4 class="anchored" data-anchor-id="características-principales-1">Características principales:</h4>
@@ -864,23 +870,23 @@ window.Quarto = {
 </div>
 <div class="cell">
 <div class="cell-output-display">
-<div id="bklogibioa" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
-<style>#bklogibioa table {
+<div id="dvnseayvif" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<style>#dvnseayvif table {
   font-family: system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
-#bklogibioa thead, #bklogibioa tbody, #bklogibioa tfoot, #bklogibioa tr, #bklogibioa td, #bklogibioa th {
+#dvnseayvif thead, #dvnseayvif tbody, #dvnseayvif tfoot, #dvnseayvif tr, #dvnseayvif td, #dvnseayvif th {
   border-style: none;
 }
 
-#bklogibioa p {
+#dvnseayvif p {
   margin: 0;
   padding: 0;
 }
 
-#bklogibioa .gt_table {
+#dvnseayvif .gt_table {
   display: table;
   border-collapse: collapse;
   line-height: normal;
@@ -906,12 +912,12 @@ window.Quarto = {
   border-left-color: #D3D3D3;
 }
 
-#bklogibioa .gt_caption {
+#dvnseayvif .gt_caption {
   padding-top: 4px;
   padding-bottom: 4px;
 }
 
-#bklogibioa .gt_title {
+#dvnseayvif .gt_title {
   color: #333333;
   font-size: 125%;
   font-weight: initial;
@@ -923,7 +929,7 @@ window.Quarto = {
   border-bottom-width: 0;
 }
 
-#bklogibioa .gt_subtitle {
+#dvnseayvif .gt_subtitle {
   color: #333333;
   font-size: 85%;
   font-weight: initial;
@@ -935,7 +941,7 @@ window.Quarto = {
   border-top-width: 0;
 }
 
-#bklogibioa .gt_heading {
+#dvnseayvif .gt_heading {
   background-color: #FFFFFF;
   text-align: center;
   border-bottom-color: #FFFFFF;
@@ -947,13 +953,13 @@ window.Quarto = {
   border-right-color: #D3D3D3;
 }
 
-#bklogibioa .gt_bottom_border {
+#dvnseayvif .gt_bottom_border {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
 }
 
-#bklogibioa .gt_col_headings {
+#dvnseayvif .gt_col_headings {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -968,7 +974,7 @@ window.Quarto = {
   border-right-color: #D3D3D3;
 }
 
-#bklogibioa .gt_col_heading {
+#dvnseayvif .gt_col_heading {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -988,7 +994,7 @@ window.Quarto = {
   overflow-x: hidden;
 }
 
-#bklogibioa .gt_column_spanner_outer {
+#dvnseayvif .gt_column_spanner_outer {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -1000,15 +1006,15 @@ window.Quarto = {
   padding-right: 4px;
 }
 
-#bklogibioa .gt_column_spanner_outer:first-child {
+#dvnseayvif .gt_column_spanner_outer:first-child {
   padding-left: 0;
 }
 
-#bklogibioa .gt_column_spanner_outer:last-child {
+#dvnseayvif .gt_column_spanner_outer:last-child {
   padding-right: 0;
 }
 
-#bklogibioa .gt_column_spanner {
+#dvnseayvif .gt_column_spanner {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
@@ -1020,11 +1026,11 @@ window.Quarto = {
   width: 100%;
 }
 
-#bklogibioa .gt_spanner_row {
+#dvnseayvif .gt_spanner_row {
   border-bottom-style: hidden;
 }
 
-#bklogibioa .gt_group_heading {
+#dvnseayvif .gt_group_heading {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1050,7 +1056,7 @@ window.Quarto = {
   text-align: left;
 }
 
-#bklogibioa .gt_empty_group_heading {
+#dvnseayvif .gt_empty_group_heading {
   padding: 0.5px;
   color: #333333;
   background-color: #FFFFFF;
@@ -1065,15 +1071,15 @@ window.Quarto = {
   vertical-align: middle;
 }
 
-#bklogibioa .gt_from_md > :first-child {
+#dvnseayvif .gt_from_md > :first-child {
   margin-top: 0;
 }
 
-#bklogibioa .gt_from_md > :last-child {
+#dvnseayvif .gt_from_md > :last-child {
   margin-bottom: 0;
 }
 
-#bklogibioa .gt_row {
+#dvnseayvif .gt_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1092,7 +1098,7 @@ window.Quarto = {
   overflow-x: hidden;
 }
 
-#bklogibioa .gt_stub {
+#dvnseayvif .gt_stub {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -1105,7 +1111,7 @@ window.Quarto = {
   padding-right: 5px;
 }
 
-#bklogibioa .gt_stub_row_group {
+#dvnseayvif .gt_stub_row_group {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -1119,15 +1125,15 @@ window.Quarto = {
   vertical-align: top;
 }
 
-#bklogibioa .gt_row_group_first td {
+#dvnseayvif .gt_row_group_first td {
   border-top-width: 2px;
 }
 
-#bklogibioa .gt_row_group_first th {
+#dvnseayvif .gt_row_group_first th {
   border-top-width: 2px;
 }
 
-#bklogibioa .gt_summary_row {
+#dvnseayvif .gt_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -1137,16 +1143,16 @@ window.Quarto = {
   padding-right: 5px;
 }
 
-#bklogibioa .gt_first_summary_row {
+#dvnseayvif .gt_first_summary_row {
   border-top-style: solid;
   border-top-color: #D3D3D3;
 }
 
-#bklogibioa .gt_first_summary_row.thick {
+#dvnseayvif .gt_first_summary_row.thick {
   border-top-width: 2px;
 }
 
-#bklogibioa .gt_last_summary_row {
+#dvnseayvif .gt_last_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1156,7 +1162,7 @@ window.Quarto = {
   border-bottom-color: #D3D3D3;
 }
 
-#bklogibioa .gt_grand_summary_row {
+#dvnseayvif .gt_grand_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -1166,7 +1172,7 @@ window.Quarto = {
   padding-right: 5px;
 }
 
-#bklogibioa .gt_first_grand_summary_row {
+#dvnseayvif .gt_first_grand_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1176,7 +1182,7 @@ window.Quarto = {
   border-top-color: #D3D3D3;
 }
 
-#bklogibioa .gt_last_grand_summary_row_top {
+#dvnseayvif .gt_last_grand_summary_row_top {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1186,11 +1192,11 @@ window.Quarto = {
   border-bottom-color: #D3D3D3;
 }
 
-#bklogibioa .gt_striped {
+#dvnseayvif .gt_striped {
   background-color: rgba(128, 128, 128, 0.05);
 }
 
-#bklogibioa .gt_table_body {
+#dvnseayvif .gt_table_body {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -1199,7 +1205,7 @@ window.Quarto = {
   border-bottom-color: #D3D3D3;
 }
 
-#bklogibioa .gt_footnotes {
+#dvnseayvif .gt_footnotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -1213,7 +1219,7 @@ window.Quarto = {
   border-right-color: #D3D3D3;
 }
 
-#bklogibioa .gt_footnote {
+#dvnseayvif .gt_footnote {
   margin: 0px;
   font-size: 90%;
   padding-top: 4px;
@@ -1222,7 +1228,7 @@ window.Quarto = {
   padding-right: 5px;
 }
 
-#bklogibioa .gt_sourcenotes {
+#dvnseayvif .gt_sourcenotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -1236,7 +1242,7 @@ window.Quarto = {
   border-right-color: #D3D3D3;
 }
 
-#bklogibioa .gt_sourcenote {
+#dvnseayvif .gt_sourcenote {
   font-size: 90%;
   padding-top: 4px;
   padding-bottom: 4px;
@@ -1244,72 +1250,72 @@ window.Quarto = {
   padding-right: 5px;
 }
 
-#bklogibioa .gt_left {
+#dvnseayvif .gt_left {
   text-align: left;
 }
 
-#bklogibioa .gt_center {
+#dvnseayvif .gt_center {
   text-align: center;
 }
 
-#bklogibioa .gt_right {
+#dvnseayvif .gt_right {
   text-align: right;
   font-variant-numeric: tabular-nums;
 }
 
-#bklogibioa .gt_font_normal {
+#dvnseayvif .gt_font_normal {
   font-weight: normal;
 }
 
-#bklogibioa .gt_font_bold {
+#dvnseayvif .gt_font_bold {
   font-weight: bold;
 }
 
-#bklogibioa .gt_font_italic {
+#dvnseayvif .gt_font_italic {
   font-style: italic;
 }
 
-#bklogibioa .gt_super {
+#dvnseayvif .gt_super {
   font-size: 65%;
 }
 
-#bklogibioa .gt_footnote_marks {
+#dvnseayvif .gt_footnote_marks {
   font-size: 75%;
   vertical-align: 0.4em;
   position: initial;
 }
 
-#bklogibioa .gt_asterisk {
+#dvnseayvif .gt_asterisk {
   font-size: 100%;
   vertical-align: 0;
 }
 
-#bklogibioa .gt_indent_1 {
+#dvnseayvif .gt_indent_1 {
   text-indent: 5px;
 }
 
-#bklogibioa .gt_indent_2 {
+#dvnseayvif .gt_indent_2 {
   text-indent: 10px;
 }
 
-#bklogibioa .gt_indent_3 {
+#dvnseayvif .gt_indent_3 {
   text-indent: 15px;
 }
 
-#bklogibioa .gt_indent_4 {
+#dvnseayvif .gt_indent_4 {
   text-indent: 20px;
 }
 
-#bklogibioa .gt_indent_5 {
+#dvnseayvif .gt_indent_5 {
   text-indent: 25px;
 }
 
-#bklogibioa .katex-display {
+#dvnseayvif .katex-display {
   display: inline-flex !important;
   margin-bottom: 0.75em !important;
 }
 
-#bklogibioa div.Reactable > div.rt-table > div.rt-thead > div.rt-tr.rt-tr-group-header > div.rt-th-group:after {
+#dvnseayvif div.Reactable > div.rt-table > div.rt-thead > div.rt-tr.rt-tr-group-header > div.rt-th-group:after {
   height: 0px !important;
 }
 </style>
@@ -1350,13 +1356,23 @@ window.Quarto = {
 <li><p><strong>Trazar</strong> ese índice frente al número de lecturas: obtienes una curva de rarefacción.</p></li>
 </ol>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb16"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a><span class="ex">qiime</span> diversity alpha-rarefaction <span class="dt">\</span></span>
-<span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a>--i-table table-dada2-tomato-16s.qza <span class="dt">\</span></span>
-<span id="cb16-3"><a href="#cb16-3" aria-hidden="true" tabindex="-1"></a>--i-phylogeny rooted-tree-dada2-tomato-16s.qza <span class="dt">\</span></span>
-<span id="cb16-4"><a href="#cb16-4" aria-hidden="true" tabindex="-1"></a>--p-max-depth 4000 <span class="dt">\</span></span>
-<span id="cb16-5"><a href="#cb16-5" aria-hidden="true" tabindex="-1"></a>--m-metadata-file Experiment_Design.tsv <span class="dt">\</span></span>
-<span id="cb16-6"><a href="#cb16-6" aria-hidden="true" tabindex="-1"></a>--o-visualization alpha-rarefaction-dada2-tomato-16s.qzv</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb17"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a><span class="ex">qiime</span> diversity alpha-rarefaction <span class="dt">\</span></span>
+<span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a>--i-table table-dada2-tomato-16s.qza <span class="dt">\</span></span>
+<span id="cb17-3"><a href="#cb17-3" aria-hidden="true" tabindex="-1"></a>--i-phylogeny rooted-tree-dada2-tomato-16s.qza <span class="dt">\</span></span>
+<span id="cb17-4"><a href="#cb17-4" aria-hidden="true" tabindex="-1"></a>--p-max-depth 4000 <span class="dt">\</span></span>
+<span id="cb17-5"><a href="#cb17-5" aria-hidden="true" tabindex="-1"></a>--m-metadata-file Experiment_Design.tsv <span class="dt">\</span></span>
+<span id="cb17-6"><a href="#cb17-6" aria-hidden="true" tabindex="-1"></a>--o-visualization alpha-rarefaction-dada2-tomato-16s.qzv</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
+<p>Para los siguientes gráficos se dercargaron los archivos <code>.csv</code> a partir del archivo <code>.qzv</code>, para posteriormente usar <code>R</code> para gráficar.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb18"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a><span class="ex">qiime</span> tools view alpha-rarefaction-dada2-tomato-16s.qzv</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>Se descargaron los siguientes archivos:</p>
+<ul>
+<li><p><code>observed_features.csv</code></p></li>
+<li><p><code>shannon.csv</code></p></li>
+<li><p><code>faith_pd.csv</code></p></li>
+</ul>
 <section id="observed-features" class="level3">
 <h3 class="anchored" data-anchor-id="observed-features">Observed Features</h3>
 <p>Las <strong>Observed Features</strong> representan simplemente el <strong>número de características taxonómicas diferentes</strong> (especies, géneros, familias, etc.) observadas en una muestra. Es la medida más básica de riqueza de especies.</p>
@@ -1370,12 +1386,65 @@ window.Quarto = {
 </ul>
 <p>La fórmula es simplemente:</p>
 <p><span class="math display">\[S = \text{número total de especies observadas}\]</span></p>
-<p>donde: - <span class="math inline">\(S\)</span> = riqueza de especies observadas</p>
+<p>donde:</p>
+<p>- <span class="math inline">\(S\)</span> = riqueza de especies observadas</p>
+<p>En <code>R</code>:</p>
 <div class="cell">
+<div class="sourceCode cell-code" id="cb19"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a><span class="fu">suppressPackageStartupMessages</span>(<span class="fu">library</span>(tidyverse))</span>
+<span id="cb19-2"><a href="#cb19-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb19-3"><a href="#cb19-3" aria-hidden="true" tabindex="-1"></a>obfe <span class="ot">&lt;-</span> readr<span class="sc">::</span><span class="fu">read_csv</span>(<span class="st">"tables/observed_features.csv"</span>,</span>
+<span id="cb19-4"><a href="#cb19-4" aria-hidden="true" tabindex="-1"></a>                        <span class="at">col_types =</span> <span class="fu">cols</span>(</span>
+<span id="cb19-5"><a href="#cb19-5" aria-hidden="true" tabindex="-1"></a>                 <span class="st">`</span><span class="at">sample-id</span><span class="st">`</span> <span class="ot">=</span> <span class="fu">col_skip</span>(),</span>
+<span id="cb19-6"><a href="#cb19-6" aria-hidden="true" tabindex="-1"></a>                 <span class="at">accession   =</span> <span class="fu">col_skip</span>(),</span>
+<span id="cb19-7"><a href="#cb19-7" aria-hidden="true" tabindex="-1"></a>                 <span class="at">sra_run     =</span> <span class="fu">col_skip</span>(),</span>
+<span id="cb19-8"><a href="#cb19-8" aria-hidden="true" tabindex="-1"></a>                 <span class="at">Type        =</span> <span class="fu">col_factor</span>(),</span>
+<span id="cb19-9"><a href="#cb19-9" aria-hidden="true" tabindex="-1"></a>                 <span class="at">.default    =</span> <span class="fu">col_double</span>()</span>
+<span id="cb19-10"><a href="#cb19-10" aria-hidden="true" tabindex="-1"></a>               ))</span>
+<span id="cb19-11"><a href="#cb19-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb19-12"><a href="#cb19-12" aria-hidden="true" tabindex="-1"></a>obfe_long <span class="ot">&lt;-</span> obfe <span class="sc">%&gt;%</span></span>
+<span id="cb19-13"><a href="#cb19-13" aria-hidden="true" tabindex="-1"></a>  <span class="fu">pivot_longer</span>(</span>
+<span id="cb19-14"><a href="#cb19-14" aria-hidden="true" tabindex="-1"></a>    <span class="at">cols =</span> <span class="fu">starts_with</span>(<span class="st">"depth-"</span>), </span>
+<span id="cb19-15"><a href="#cb19-15" aria-hidden="true" tabindex="-1"></a>    <span class="at">names_to =</span> <span class="fu">c</span>(<span class="st">"Depth"</span>, <span class="st">"Iter"</span>),            </span>
+<span id="cb19-16"><a href="#cb19-16" aria-hidden="true" tabindex="-1"></a>    <span class="at">names_pattern =</span> <span class="st">"depth-([0-9]+)_iter-([0-9]+)"</span>,</span>
+<span id="cb19-17"><a href="#cb19-17" aria-hidden="true" tabindex="-1"></a>    <span class="at">values_to =</span> <span class="st">"observed_features"</span>,</span>
+<span id="cb19-18"><a href="#cb19-18" aria-hidden="true" tabindex="-1"></a>    <span class="at">values_drop_na =</span> <span class="cn">TRUE</span>                     </span>
+<span id="cb19-19"><a href="#cb19-19" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">%&gt;%</span></span>
+<span id="cb19-20"><a href="#cb19-20" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(</span>
+<span id="cb19-21"><a href="#cb19-21" aria-hidden="true" tabindex="-1"></a>    <span class="at">Depth =</span> <span class="fu">as.integer</span>(Depth),</span>
+<span id="cb19-22"><a href="#cb19-22" aria-hidden="true" tabindex="-1"></a>    <span class="at">Iter  =</span> <span class="fu">as.integer</span>(Iter)</span>
+<span id="cb19-23"><a href="#cb19-23" aria-hidden="true" tabindex="-1"></a>  )</span>
+<span id="cb19-24"><a href="#cb19-24" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb19-25"><a href="#cb19-25" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb19-26"><a href="#cb19-26" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(obfe_long, <span class="fu">aes</span>(</span>
+<span id="cb19-27"><a href="#cb19-27" aria-hidden="true" tabindex="-1"></a>    <span class="at">x    =</span> <span class="fu">factor</span>(Depth),                   </span>
+<span id="cb19-28"><a href="#cb19-28" aria-hidden="true" tabindex="-1"></a>    <span class="at">y    =</span> observed_features,</span>
+<span id="cb19-29"><a href="#cb19-29" aria-hidden="true" tabindex="-1"></a>    <span class="at">fill =</span> Type                         </span>
+<span id="cb19-30"><a href="#cb19-30" aria-hidden="true" tabindex="-1"></a>  )) <span class="sc">+</span></span>
+<span id="cb19-31"><a href="#cb19-31" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_boxplot</span>(<span class="at">position =</span> <span class="fu">position_dodge</span>(<span class="at">width =</span> <span class="fl">0.8</span>),</span>
+<span id="cb19-32"><a href="#cb19-32" aria-hidden="true" tabindex="-1"></a>               <span class="at">color =</span> <span class="st">"black"</span>) <span class="sc">+</span></span>
+<span id="cb19-33"><a href="#cb19-33" aria-hidden="true" tabindex="-1"></a>  <span class="fu">stat_summary</span>(</span>
+<span id="cb19-34"><a href="#cb19-34" aria-hidden="true" tabindex="-1"></a>    <span class="fu">aes</span>(</span>
+<span id="cb19-35"><a href="#cb19-35" aria-hidden="true" tabindex="-1"></a>      <span class="at">x      =</span> <span class="fu">as.numeric</span>(<span class="fu">factor</span>(Depth)),</span>
+<span id="cb19-36"><a href="#cb19-36" aria-hidden="true" tabindex="-1"></a>      <span class="at">colour =</span> Type,</span>
+<span id="cb19-37"><a href="#cb19-37" aria-hidden="true" tabindex="-1"></a>      <span class="at">group  =</span> Type</span>
+<span id="cb19-38"><a href="#cb19-38" aria-hidden="true" tabindex="-1"></a>    ),</span>
+<span id="cb19-39"><a href="#cb19-39" aria-hidden="true" tabindex="-1"></a>    <span class="at">fun    =</span> median,</span>
+<span id="cb19-40"><a href="#cb19-40" aria-hidden="true" tabindex="-1"></a>    <span class="at">geom   =</span> <span class="st">"line"</span>,</span>
+<span id="cb19-41"><a href="#cb19-41" aria-hidden="true" tabindex="-1"></a>    <span class="at">size   =</span> <span class="dv">1</span></span>
+<span id="cb19-42"><a href="#cb19-42" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">+</span></span>
+<span id="cb19-43"><a href="#cb19-43" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_x_discrete</span>(<span class="at">name =</span> <span class="st">"Sequencing Depth"</span>) <span class="sc">+</span></span>
+<span id="cb19-44"><a href="#cb19-44" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_y_continuous</span>(<span class="at">name =</span> <span class="st">"Observed Features"</span>) <span class="sc">+</span></span>
+<span id="cb19-45"><a href="#cb19-45" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_minimal</span>(<span class="at">base_size =</span> <span class="dv">15</span>) <span class="sc">+</span></span>
+<span id="cb19-46"><a href="#cb19-46" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(</span>
+<span id="cb19-47"><a href="#cb19-47" aria-hidden="true" tabindex="-1"></a>    <span class="at">legend.title =</span> <span class="fu">element_blank</span>(),</span>
+<span id="cb19-48"><a href="#cb19-48" aria-hidden="true" tabindex="-1"></a>    <span class="at">panel.grid.major.x =</span> <span class="fu">element_blank</span>()</span>
+<span id="cb19-49"><a href="#cb19-49" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">+</span></span>
+<span id="cb19-50"><a href="#cb19-50" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_fill_manual</span>(<span class="at">values =</span> <span class="fu">c</span>( <span class="st">"#8f0052"</span>,<span class="st">"#276518"</span>)) <span class="sc">+</span></span>
+<span id="cb19-51"><a href="#cb19-51" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_color_manual</span>(<span class="at">values =</span> <span class="fu">c</span>( <span class="st">"#8f0052"</span>,<span class="st">"#276518"</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <div>
 <figure class="figure">
-<p><img src="tomato_16S_files/figure-html/unnamed-chunk-19-1.png" class="img-fluid figure-img" width="672"></p>
+<p><img src="tomato_16S_files/figure-html/unnamed-chunk-21-1.png" class="img-fluid figure-img" width="672"></p>
 </figure>
 </div>
 </div>
@@ -1388,7 +1457,13 @@ window.Quarto = {
 <section id="fórmula-del-índice-de-shannon" class="level4">
 <h4 class="anchored" data-anchor-id="fórmula-del-índice-de-shannon">Fórmula del índice de Shannon:</h4>
 <p><span class="math display">\[H' = -\sum_{i=1}^{S} p_i \ln p_i\]</span></p>
-<p>donde: - <span class="math inline">\(H'\)</span> = índice de Shannon - <span class="math inline">\(S\)</span> = número de especies (riqueza de especies) - <span class="math inline">\(p_i\)</span> = proporción de individuos de la especie <span class="math inline">\(i\)</span> respecto al total: <span class="math inline">\(p_i = \frac{n_i}{N}\)</span> - <span class="math inline">\(n_i\)</span> = número de individuos de la especie <span class="math inline">\(i\)</span> - <span class="math inline">\(N\)</span> = número total de individuos de todas las especies - <span class="math inline">\(\ln\)</span> = logaritmo natural</p>
+<p>donde:</p>
+<p>- <span class="math inline">\(H'\)</span> = índice de Shannon</p>
+<p>- <span class="math inline">\(S\)</span> = número de especies (riqueza de especies)</p>
+<p>- <span class="math inline">\(p_i\)</span> = proporción de individuos de la especie <span class="math inline">\(i\)</span> respecto al total: <span class="math inline">\(p_i = \frac{n_i}{N}\)</span></p>
+<p>- <span class="math inline">\(n_i\)</span> = número de individuos de la especie <span class="math inline">\(i\)</span></p>
+<p>- <span class="math inline">\(N\)</span> = número total de individuos de todas las especies</p>
+<p>- <span class="math inline">\(\ln\)</span> = logaritmo natural</p>
 </section>
 <section id="interpretación-1" class="level4">
 <h4 class="anchored" data-anchor-id="interpretación-1">Interpretación:</h4>
@@ -1398,11 +1473,63 @@ window.Quarto = {
 <li>Valores &gt; 3: alta diversidad</li>
 <li>Valores más altos indican mayor diversidad y equitabilidad</li>
 </ul>
+<p>En <code>R</code>:</p>
 <div class="cell">
+<div class="sourceCode cell-code" id="cb20"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a><span class="fu">suppressPackageStartupMessages</span>(<span class="fu">library</span>(tidyverse))</span>
+<span id="cb20-2"><a href="#cb20-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb20-3"><a href="#cb20-3" aria-hidden="true" tabindex="-1"></a>obfe <span class="ot">&lt;-</span> readr<span class="sc">::</span><span class="fu">read_csv</span>(<span class="st">"tables/shannon.csv"</span>,</span>
+<span id="cb20-4"><a href="#cb20-4" aria-hidden="true" tabindex="-1"></a>                        <span class="at">col_types =</span> <span class="fu">cols</span>(</span>
+<span id="cb20-5"><a href="#cb20-5" aria-hidden="true" tabindex="-1"></a>                 <span class="st">`</span><span class="at">sample-id</span><span class="st">`</span> <span class="ot">=</span> <span class="fu">col_skip</span>(),</span>
+<span id="cb20-6"><a href="#cb20-6" aria-hidden="true" tabindex="-1"></a>                 <span class="at">accession   =</span> <span class="fu">col_skip</span>(),</span>
+<span id="cb20-7"><a href="#cb20-7" aria-hidden="true" tabindex="-1"></a>                 <span class="at">sra_run     =</span> <span class="fu">col_skip</span>(),</span>
+<span id="cb20-8"><a href="#cb20-8" aria-hidden="true" tabindex="-1"></a>                 <span class="at">Type        =</span> <span class="fu">col_factor</span>(),</span>
+<span id="cb20-9"><a href="#cb20-9" aria-hidden="true" tabindex="-1"></a>                 <span class="at">.default    =</span> <span class="fu">col_double</span>()</span>
+<span id="cb20-10"><a href="#cb20-10" aria-hidden="true" tabindex="-1"></a>               ))</span>
+<span id="cb20-11"><a href="#cb20-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb20-12"><a href="#cb20-12" aria-hidden="true" tabindex="-1"></a>obfe_long <span class="ot">&lt;-</span> obfe <span class="sc">%&gt;%</span></span>
+<span id="cb20-13"><a href="#cb20-13" aria-hidden="true" tabindex="-1"></a>  <span class="fu">pivot_longer</span>(</span>
+<span id="cb20-14"><a href="#cb20-14" aria-hidden="true" tabindex="-1"></a>    <span class="at">cols =</span> <span class="fu">starts_with</span>(<span class="st">"depth-"</span>), </span>
+<span id="cb20-15"><a href="#cb20-15" aria-hidden="true" tabindex="-1"></a>    <span class="at">names_to =</span> <span class="fu">c</span>(<span class="st">"Depth"</span>, <span class="st">"Iter"</span>),            </span>
+<span id="cb20-16"><a href="#cb20-16" aria-hidden="true" tabindex="-1"></a>    <span class="at">names_pattern =</span> <span class="st">"depth-([0-9]+)_iter-([0-9]+)"</span>,</span>
+<span id="cb20-17"><a href="#cb20-17" aria-hidden="true" tabindex="-1"></a>    <span class="at">values_to =</span> <span class="st">"Shannon_Index"</span>,</span>
+<span id="cb20-18"><a href="#cb20-18" aria-hidden="true" tabindex="-1"></a>    <span class="at">values_drop_na =</span> <span class="cn">TRUE</span>                     </span>
+<span id="cb20-19"><a href="#cb20-19" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">%&gt;%</span></span>
+<span id="cb20-20"><a href="#cb20-20" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(</span>
+<span id="cb20-21"><a href="#cb20-21" aria-hidden="true" tabindex="-1"></a>    <span class="at">Depth =</span> <span class="fu">as.integer</span>(Depth),</span>
+<span id="cb20-22"><a href="#cb20-22" aria-hidden="true" tabindex="-1"></a>    <span class="at">Iter  =</span> <span class="fu">as.integer</span>(Iter)</span>
+<span id="cb20-23"><a href="#cb20-23" aria-hidden="true" tabindex="-1"></a>  )</span>
+<span id="cb20-24"><a href="#cb20-24" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb20-25"><a href="#cb20-25" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb20-26"><a href="#cb20-26" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(obfe_long, <span class="fu">aes</span>(</span>
+<span id="cb20-27"><a href="#cb20-27" aria-hidden="true" tabindex="-1"></a>    <span class="at">x    =</span> <span class="fu">factor</span>(Depth),                   </span>
+<span id="cb20-28"><a href="#cb20-28" aria-hidden="true" tabindex="-1"></a>    <span class="at">y    =</span> Shannon_Index,</span>
+<span id="cb20-29"><a href="#cb20-29" aria-hidden="true" tabindex="-1"></a>    <span class="at">fill =</span> Type                         </span>
+<span id="cb20-30"><a href="#cb20-30" aria-hidden="true" tabindex="-1"></a>  )) <span class="sc">+</span></span>
+<span id="cb20-31"><a href="#cb20-31" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_boxplot</span>(<span class="at">position =</span> <span class="fu">position_dodge</span>(<span class="at">width =</span> <span class="fl">0.8</span>),</span>
+<span id="cb20-32"><a href="#cb20-32" aria-hidden="true" tabindex="-1"></a>               <span class="at">color =</span> <span class="st">"black"</span>) <span class="sc">+</span></span>
+<span id="cb20-33"><a href="#cb20-33" aria-hidden="true" tabindex="-1"></a>  <span class="fu">stat_summary</span>(</span>
+<span id="cb20-34"><a href="#cb20-34" aria-hidden="true" tabindex="-1"></a>    <span class="fu">aes</span>(</span>
+<span id="cb20-35"><a href="#cb20-35" aria-hidden="true" tabindex="-1"></a>      <span class="at">x      =</span> <span class="fu">as.numeric</span>(<span class="fu">factor</span>(Depth)),</span>
+<span id="cb20-36"><a href="#cb20-36" aria-hidden="true" tabindex="-1"></a>      <span class="at">colour =</span> Type,</span>
+<span id="cb20-37"><a href="#cb20-37" aria-hidden="true" tabindex="-1"></a>      <span class="at">group  =</span> Type</span>
+<span id="cb20-38"><a href="#cb20-38" aria-hidden="true" tabindex="-1"></a>    ),</span>
+<span id="cb20-39"><a href="#cb20-39" aria-hidden="true" tabindex="-1"></a>    <span class="at">fun    =</span> median,</span>
+<span id="cb20-40"><a href="#cb20-40" aria-hidden="true" tabindex="-1"></a>    <span class="at">geom   =</span> <span class="st">"line"</span>,</span>
+<span id="cb20-41"><a href="#cb20-41" aria-hidden="true" tabindex="-1"></a>    <span class="at">size   =</span> <span class="dv">1</span></span>
+<span id="cb20-42"><a href="#cb20-42" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">+</span></span>
+<span id="cb20-43"><a href="#cb20-43" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_x_discrete</span>(<span class="at">name =</span> <span class="st">"Sequencing Depth"</span>) <span class="sc">+</span></span>
+<span id="cb20-44"><a href="#cb20-44" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_y_continuous</span>(<span class="at">name =</span> <span class="st">"Shannon Index"</span>) <span class="sc">+</span></span>
+<span id="cb20-45"><a href="#cb20-45" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_minimal</span>(<span class="at">base_size =</span> <span class="dv">15</span>) <span class="sc">+</span></span>
+<span id="cb20-46"><a href="#cb20-46" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(</span>
+<span id="cb20-47"><a href="#cb20-47" aria-hidden="true" tabindex="-1"></a>    <span class="at">legend.title =</span> <span class="fu">element_blank</span>(),</span>
+<span id="cb20-48"><a href="#cb20-48" aria-hidden="true" tabindex="-1"></a>    <span class="at">panel.grid.major.x =</span> <span class="fu">element_blank</span>()</span>
+<span id="cb20-49"><a href="#cb20-49" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">+</span></span>
+<span id="cb20-50"><a href="#cb20-50" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_fill_manual</span>(<span class="at">values =</span> <span class="fu">c</span>( <span class="st">"#8f0052"</span>,<span class="st">"#276518"</span>)) <span class="sc">+</span></span>
+<span id="cb20-51"><a href="#cb20-51" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_color_manual</span>(<span class="at">values =</span> <span class="fu">c</span>( <span class="st">"#8f0052"</span>,<span class="st">"#276518"</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <div>
 <figure class="figure">
-<p><img src="tomato_16S_files/figure-html/unnamed-chunk-20-1.png" class="img-fluid figure-img" width="672"></p>
+<p><img src="tomato_16S_files/figure-html/unnamed-chunk-22-1.png" class="img-fluid figure-img" width="672"></p>
 </figure>
 </div>
 </div>
@@ -1412,11 +1539,63 @@ window.Quarto = {
 <section id="faith-pd" class="level3">
 <h3 class="anchored" data-anchor-id="faith-pd">Faith PD</h3>
 <p>La diversidad filogenética de Faith (PD de Faith) es una medida de la biodiversidad que cuantifica la amplitud de la historia evolutiva representada por un conjunto de especies u otras unidades taxonómicas, definida como la suma de las longitudes de las ramas de un árbol filogenético que conectan los miembros del conjunto.</p>
+<p>En <code>R</code>:</p>
 <div class="cell">
+<div class="sourceCode cell-code" id="cb21"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a><span class="fu">suppressPackageStartupMessages</span>(<span class="fu">library</span>(tidyverse))</span>
+<span id="cb21-2"><a href="#cb21-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb21-3"><a href="#cb21-3" aria-hidden="true" tabindex="-1"></a>obfe <span class="ot">&lt;-</span> readr<span class="sc">::</span><span class="fu">read_csv</span>(<span class="st">"tables/faith_pd.csv"</span>,</span>
+<span id="cb21-4"><a href="#cb21-4" aria-hidden="true" tabindex="-1"></a>                        <span class="at">col_types =</span> <span class="fu">cols</span>(</span>
+<span id="cb21-5"><a href="#cb21-5" aria-hidden="true" tabindex="-1"></a>                 <span class="st">`</span><span class="at">sample-id</span><span class="st">`</span> <span class="ot">=</span> <span class="fu">col_skip</span>(),</span>
+<span id="cb21-6"><a href="#cb21-6" aria-hidden="true" tabindex="-1"></a>                 <span class="at">accession   =</span> <span class="fu">col_skip</span>(),</span>
+<span id="cb21-7"><a href="#cb21-7" aria-hidden="true" tabindex="-1"></a>                 <span class="at">sra_run     =</span> <span class="fu">col_skip</span>(),</span>
+<span id="cb21-8"><a href="#cb21-8" aria-hidden="true" tabindex="-1"></a>                 <span class="at">Type        =</span> <span class="fu">col_factor</span>(),</span>
+<span id="cb21-9"><a href="#cb21-9" aria-hidden="true" tabindex="-1"></a>                 <span class="at">.default    =</span> <span class="fu">col_double</span>()</span>
+<span id="cb21-10"><a href="#cb21-10" aria-hidden="true" tabindex="-1"></a>               ))</span>
+<span id="cb21-11"><a href="#cb21-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb21-12"><a href="#cb21-12" aria-hidden="true" tabindex="-1"></a>obfe_long <span class="ot">&lt;-</span> obfe <span class="sc">%&gt;%</span></span>
+<span id="cb21-13"><a href="#cb21-13" aria-hidden="true" tabindex="-1"></a>  <span class="fu">pivot_longer</span>(</span>
+<span id="cb21-14"><a href="#cb21-14" aria-hidden="true" tabindex="-1"></a>    <span class="at">cols =</span> <span class="fu">starts_with</span>(<span class="st">"depth-"</span>), </span>
+<span id="cb21-15"><a href="#cb21-15" aria-hidden="true" tabindex="-1"></a>    <span class="at">names_to =</span> <span class="fu">c</span>(<span class="st">"Depth"</span>, <span class="st">"Iter"</span>),            </span>
+<span id="cb21-16"><a href="#cb21-16" aria-hidden="true" tabindex="-1"></a>    <span class="at">names_pattern =</span> <span class="st">"depth-([0-9]+)_iter-([0-9]+)"</span>,</span>
+<span id="cb21-17"><a href="#cb21-17" aria-hidden="true" tabindex="-1"></a>    <span class="at">values_to =</span> <span class="st">"faith"</span>,</span>
+<span id="cb21-18"><a href="#cb21-18" aria-hidden="true" tabindex="-1"></a>    <span class="at">values_drop_na =</span> <span class="cn">TRUE</span>                     </span>
+<span id="cb21-19"><a href="#cb21-19" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">%&gt;%</span></span>
+<span id="cb21-20"><a href="#cb21-20" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(</span>
+<span id="cb21-21"><a href="#cb21-21" aria-hidden="true" tabindex="-1"></a>    <span class="at">Depth =</span> <span class="fu">as.integer</span>(Depth),</span>
+<span id="cb21-22"><a href="#cb21-22" aria-hidden="true" tabindex="-1"></a>    <span class="at">Iter  =</span> <span class="fu">as.integer</span>(Iter)</span>
+<span id="cb21-23"><a href="#cb21-23" aria-hidden="true" tabindex="-1"></a>  )</span>
+<span id="cb21-24"><a href="#cb21-24" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb21-25"><a href="#cb21-25" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb21-26"><a href="#cb21-26" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(obfe_long, <span class="fu">aes</span>(</span>
+<span id="cb21-27"><a href="#cb21-27" aria-hidden="true" tabindex="-1"></a>    <span class="at">x    =</span> <span class="fu">factor</span>(Depth),                   </span>
+<span id="cb21-28"><a href="#cb21-28" aria-hidden="true" tabindex="-1"></a>    <span class="at">y    =</span> faith,</span>
+<span id="cb21-29"><a href="#cb21-29" aria-hidden="true" tabindex="-1"></a>    <span class="at">fill =</span> Type                         </span>
+<span id="cb21-30"><a href="#cb21-30" aria-hidden="true" tabindex="-1"></a>  )) <span class="sc">+</span></span>
+<span id="cb21-31"><a href="#cb21-31" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_boxplot</span>(<span class="at">position =</span> <span class="fu">position_dodge</span>(<span class="at">width =</span> <span class="fl">0.8</span>),</span>
+<span id="cb21-32"><a href="#cb21-32" aria-hidden="true" tabindex="-1"></a>               <span class="at">color =</span> <span class="st">"black"</span>) <span class="sc">+</span></span>
+<span id="cb21-33"><a href="#cb21-33" aria-hidden="true" tabindex="-1"></a>  <span class="fu">stat_summary</span>(</span>
+<span id="cb21-34"><a href="#cb21-34" aria-hidden="true" tabindex="-1"></a>    <span class="fu">aes</span>(</span>
+<span id="cb21-35"><a href="#cb21-35" aria-hidden="true" tabindex="-1"></a>      <span class="at">x      =</span> <span class="fu">as.numeric</span>(<span class="fu">factor</span>(Depth)),</span>
+<span id="cb21-36"><a href="#cb21-36" aria-hidden="true" tabindex="-1"></a>      <span class="at">colour =</span> Type,</span>
+<span id="cb21-37"><a href="#cb21-37" aria-hidden="true" tabindex="-1"></a>      <span class="at">group  =</span> Type</span>
+<span id="cb21-38"><a href="#cb21-38" aria-hidden="true" tabindex="-1"></a>    ),</span>
+<span id="cb21-39"><a href="#cb21-39" aria-hidden="true" tabindex="-1"></a>    <span class="at">fun    =</span> median,</span>
+<span id="cb21-40"><a href="#cb21-40" aria-hidden="true" tabindex="-1"></a>    <span class="at">geom   =</span> <span class="st">"line"</span>,</span>
+<span id="cb21-41"><a href="#cb21-41" aria-hidden="true" tabindex="-1"></a>    <span class="at">size   =</span> <span class="dv">1</span></span>
+<span id="cb21-42"><a href="#cb21-42" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">+</span></span>
+<span id="cb21-43"><a href="#cb21-43" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_x_discrete</span>(<span class="at">name =</span> <span class="st">"Sequencing Depth"</span>) <span class="sc">+</span></span>
+<span id="cb21-44"><a href="#cb21-44" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_y_continuous</span>(<span class="at">name =</span> <span class="st">"Faith PD"</span>) <span class="sc">+</span></span>
+<span id="cb21-45"><a href="#cb21-45" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_minimal</span>(<span class="at">base_size =</span> <span class="dv">15</span>) <span class="sc">+</span></span>
+<span id="cb21-46"><a href="#cb21-46" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(</span>
+<span id="cb21-47"><a href="#cb21-47" aria-hidden="true" tabindex="-1"></a>    <span class="at">legend.title =</span> <span class="fu">element_blank</span>(),</span>
+<span id="cb21-48"><a href="#cb21-48" aria-hidden="true" tabindex="-1"></a>    <span class="at">panel.grid.major.x =</span> <span class="fu">element_blank</span>()</span>
+<span id="cb21-49"><a href="#cb21-49" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">+</span></span>
+<span id="cb21-50"><a href="#cb21-50" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_fill_manual</span>(<span class="at">values =</span> <span class="fu">c</span>( <span class="st">"#8f0052"</span>,<span class="st">"#276518"</span>)) <span class="sc">+</span></span>
+<span id="cb21-51"><a href="#cb21-51" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_color_manual</span>(<span class="at">values =</span> <span class="fu">c</span>( <span class="st">"#8f0052"</span>,<span class="st">"#276518"</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <div>
 <figure class="figure">
-<p><img src="tomato_16S_files/figure-html/unnamed-chunk-21-1.png" class="img-fluid figure-img" width="672"></p>
+<p><img src="tomato_16S_files/figure-html/unnamed-chunk-23-1.png" class="img-fluid figure-img" width="672"></p>
 </figure>
 </div>
 </div>
@@ -1439,32 +1618,43 @@ window.Quarto = {
 </ul>
 <p>La <strong>diversidad β verdadera</strong> se calcula como:</p>
 <p><span class="math display">\[\beta = \frac{\gamma}{\alpha}\]</span></p>
-<p>donde: - <span class="math inline">\(\beta\)</span> = diversidad beta verdadera (número efectivo de comunidades) - <span class="math inline">\(\gamma\)</span> = diversidad total del conjunto de datos - <span class="math inline">\(\alpha\)</span> = diversidad alfa promedio</p>
+<p>donde:</p>
+<p>- <span class="math inline">\(\beta\)</span> = diversidad beta verdadera (número efectivo de comunidades)</p>
+<p>- <span class="math inline">\(\gamma\)</span> = diversidad total del conjunto de datos</p>
+<p>- <span class="math inline">\(\alpha\)</span> = diversidad alfa promedio</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb17"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a><span class="ex">qiime</span> diversity beta-group-significance <span class="dt">\</span></span>
-<span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a>--i-distance-matrix core-metrics-results/unweighted_unifrac_distance_matrix.qza <span class="dt">\</span></span>
-<span id="cb17-3"><a href="#cb17-3" aria-hidden="true" tabindex="-1"></a>--m-metadata-file Experiment_Design.tsv <span class="dt">\</span></span>
-<span id="cb17-4"><a href="#cb17-4" aria-hidden="true" tabindex="-1"></a>--m-metadata-column Type <span class="dt">\</span></span>
-<span id="cb17-5"><a href="#cb17-5" aria-hidden="true" tabindex="-1"></a>--o-visualization core-metrics-results/unweighted-unifrac-body-site-significance.qzv <span class="dt">\</span></span>
-<span id="cb17-6"><a href="#cb17-6" aria-hidden="true" tabindex="-1"></a>--p-pairwise</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb22"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a><span class="ex">qiime</span> diversity beta-group-significance <span class="dt">\</span></span>
+<span id="cb22-2"><a href="#cb22-2" aria-hidden="true" tabindex="-1"></a>--i-distance-matrix core-metrics-results/unweighted_unifrac_distance_matrix.qza <span class="dt">\</span></span>
+<span id="cb22-3"><a href="#cb22-3" aria-hidden="true" tabindex="-1"></a>--m-metadata-file Experiment_Design.tsv <span class="dt">\</span></span>
+<span id="cb22-4"><a href="#cb22-4" aria-hidden="true" tabindex="-1"></a>--m-metadata-column Type <span class="dt">\</span></span>
+<span id="cb22-5"><a href="#cb22-5" aria-hidden="true" tabindex="-1"></a>--o-visualization core-metrics-results/unweighted-unifrac-body-site-significance.qzv <span class="dt">\</span></span>
+<span id="cb22-6"><a href="#cb22-6" aria-hidden="true" tabindex="-1"></a>--p-pairwise</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb18"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a><span class="ex">qiime</span> diversity beta-group-significance <span class="dt">\</span></span>
-<span id="cb18-2"><a href="#cb18-2" aria-hidden="true" tabindex="-1"></a>--i-distance-matrix core-metrics-results/unweighted_unifrac_distance_matrix.qza <span class="dt">\</span></span>
-<span id="cb18-3"><a href="#cb18-3" aria-hidden="true" tabindex="-1"></a>--m-metadata-file Experiment_Design.tsv <span class="dt">\</span></span>
-<span id="cb18-4"><a href="#cb18-4" aria-hidden="true" tabindex="-1"></a>--o-visualization core-metrics-results/unweighted-unifrac-significance.qzv <span class="dt">\</span></span>
-<span id="cb18-5"><a href="#cb18-5" aria-hidden="true" tabindex="-1"></a>--p-pairwise</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb23"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a><span class="ex">qiime</span> diversity beta-group-significance <span class="dt">\</span></span>
+<span id="cb23-2"><a href="#cb23-2" aria-hidden="true" tabindex="-1"></a>--i-distance-matrix core-metrics-results/unweighted_unifrac_distance_matrix.qza <span class="dt">\</span></span>
+<span id="cb23-3"><a href="#cb23-3" aria-hidden="true" tabindex="-1"></a>--m-metadata-file Experiment_Design.tsv <span class="dt">\</span></span>
+<span id="cb23-4"><a href="#cb23-4" aria-hidden="true" tabindex="-1"></a>--o-visualization core-metrics-results/unweighted-unifrac-significance.qzv <span class="dt">\</span></span>
+<span id="cb23-5"><a href="#cb23-5" aria-hidden="true" tabindex="-1"></a>--p-pairwise</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </section>
 <section id="distancia-bray-curtis" class="level3">
 <h3 class="anchored" data-anchor-id="distancia-bray-curtis">Distancia Bray Curtis</h3>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb24"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a><span class="ex">qiime</span> tools view core-metrics-results/bray_curtis_emperor.qzv</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
 <p>La <strong>distancia de Bray-Curtis</strong> es una medida de disimilitud composicional entre dos sitios basada en las abundancias de especies. Es ampliamente utilizada en ecología microbiana para comparar comunidades.</p>
 <section id="fórmula-de-bray-curtis" class="level4">
 <h4 class="anchored" data-anchor-id="fórmula-de-bray-curtis">Fórmula de Bray-Curtis:</h4>
 <p><span class="math display">\[BC_{ij} = 1 - \frac{2C_{ij}}{S_i + S_j}\]</span></p>
 <p>o de forma equivalente:</p>
 <p><span class="math display">\[BC_{ij} = \frac{\sum_{k=1}^{n} |x_{ik} - x_{jk}|}{\sum_{k=1}^{n} (x_{ik} + x_{jk})}\]</span></p>
-<p>donde: - <span class="math inline">\(BC_{ij}\)</span> = distancia de Bray-Curtis entre sitios <span class="math inline">\(i\)</span> y <span class="math inline">\(j\)</span> - <span class="math inline">\(C_{ij}\)</span> = suma de los valores menores para especies comunes entre ambos sitios - <span class="math inline">\(S_i\)</span>, <span class="math inline">\(S_j\)</span> = número total de individuos contados en los sitios <span class="math inline">\(i\)</span> y <span class="math inline">\(j\)</span> - <span class="math inline">\(x_{ik}\)</span>, <span class="math inline">\(x_{jk}\)</span> = abundancia de la especie <span class="math inline">\(k\)</span> en los sitios <span class="math inline">\(i\)</span> y <span class="math inline">\(j\)</span> - <span class="math inline">\(n\)</span> = número total de especies</p>
+<p>donde:</p>
+<p>- <span class="math inline">\(BC_{ij}\)</span> = distancia de Bray-Curtis entre sitios <span class="math inline">\(i\)</span> y <span class="math inline">\(j\)</span></p>
+<p>- <span class="math inline">\(C_{ij}\)</span> = suma de los valores menores para especies comunes entre ambos sitios</p>
+<p>- <span class="math inline">\(S_i\)</span>, <span class="math inline">\(S_j\)</span> = número total de individuos contados en los sitios <span class="math inline">\(i\)</span> y <span class="math inline">\(j\)</span></p>
+<p>- <span class="math inline">\(x_{ik}\)</span>, <span class="math inline">\(x_{jk}\)</span> = abundancia de la especie <span class="math inline">\(k\)</span> en los sitios <span class="math inline">\(i\)</span> y <span class="math inline">\(j\)</span></p>
+<p>- <span class="math inline">\(n\)</span> = número total de especies</p>
 </section>
 <section id="interpretación-2" class="level4">
 <h4 class="anchored" data-anchor-id="interpretación-2">Interpretación:</h4>
@@ -1486,6 +1676,9 @@ window.Quarto = {
 <h2 class="anchored" data-anchor-id="section-1"></h2>
 <section id="distancia-de-jaccard" class="level3">
 <h3 class="anchored" data-anchor-id="distancia-de-jaccard">Distancia de Jaccard</h3>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb25"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb25-1"><a href="#cb25-1" aria-hidden="true" tabindex="-1"></a><span class="ex">qiime</span> tools view core-metrics-results/jaccard_emperor.qzv</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
 <p>La <strong>distancia de Jaccard</strong> mide la disimilitud entre dos conjuntos basándose únicamente en presencia/ausencia, sin considerar abundancias. Es útil para datos binarios.</p>
 <section id="fórmula-del-índice-de-jaccard" class="level4">
 <h4 class="anchored" data-anchor-id="fórmula-del-índice-de-jaccard">Fórmula del índice de Jaccard:</h4>
@@ -1496,8 +1689,12 @@ window.Quarto = {
 <p><span class="math display">\[D_J(A,B) = 1 - J(A,B) = 1 - \frac{|A \cap B|}{|A \cup B|}\]</span></p>
 <p>o en términos ecológicos:</p>
 <p><span class="math display">\[J = \frac{c}{a + b - c}\]</span></p>
-<p>donde: - <span class="math inline">\(J\)</span> = índice de similitud de Jaccard - <span class="math inline">\(a\)</span> = número de especies presentes en el sitio A - <span class="math inline">\(b\)</span> = número de especies presentes en el sitio B<br>
-- <span class="math inline">\(c\)</span> = número de especies presentes en ambos sitios A y B - <span class="math inline">\(D_J\)</span> = distancia de Jaccard</p>
+<p>donde:</p>
+<p>- <span class="math inline">\(J\)</span> = índice de similitud de Jaccard</p>
+<p>- <span class="math inline">\(a\)</span> = número de especies presentes en el sitio A</p>
+<p>- <span class="math inline">\(b\)</span> = número de especies presentes en el sitio B<br>
+- <span class="math inline">\(c\)</span> = número de especies presentes en ambos sitios A y B</p>
+<p>- <span class="math inline">\(D_J\)</span> = distancia de Jaccard</p>
 </section>
 <section id="interpretación-3" class="level4">
 <h4 class="anchored" data-anchor-id="interpretación-3">Interpretación:</h4>
@@ -1521,12 +1718,24 @@ window.Quarto = {
 <section id="unifrac-no-ponderado-unweighted" class="level4">
 <h4 class="anchored" data-anchor-id="unifrac-no-ponderado-unweighted">UniFrac No Ponderado (Unweighted):</h4>
 <p><span class="math display">\[U(A,B) = \frac{\sum_{i=1}^{N} l_i \times |A_i - B_i|}{\sum_{i=1}^{N} l_i \times \max(A_i, B_i)}\]</span></p>
-<p>donde: - <span class="math inline">\(U(A,B)\)</span> = distancia UniFrac no ponderada entre muestras A y B - <span class="math inline">\(N\)</span> = número de nodos en el árbol filogenético - <span class="math inline">\(l_i\)</span> = longitud de la rama entre el nodo <span class="math inline">\(i\)</span> y su nodo parental - <span class="math inline">\(A_i\)</span> = indicador (1 o 0) de presencia de la muestra A en las ramas descendientes del nodo <span class="math inline">\(i\)</span> - <span class="math inline">\(B_i\)</span> = indicador (1 o 0) de presencia de la muestra B en las ramas descendientes del nodo <span class="math inline">\(i\)</span></p>
+<p>donde:</p>
+<p>- <span class="math inline">\(U(A,B)\)</span> = distancia UniFrac no ponderada entre muestras A y B</p>
+<p>- <span class="math inline">\(N\)</span> = número de nodos en el árbol filogenético</p>
+<p>- <span class="math inline">\(l_i\)</span> = longitud de la rama entre el nodo <span class="math inline">\(i\)</span> y su nodo parental</p>
+<p>- <span class="math inline">\(A_i\)</span> = indicador (1 o 0) de presencia de la muestra A en las ramas descendientes del nodo <span class="math inline">\(i\)</span></p>
+<p>- <span class="math inline">\(B_i\)</span> = indicador (1 o 0) de presencia de la muestra B en las ramas descendientes del nodo <span class="math inline">\(i\)</span></p>
 </section>
 <section id="unifrac-ponderado-weighted" class="level4">
 <h4 class="anchored" data-anchor-id="unifrac-ponderado-weighted">UniFrac Ponderado (Weighted):</h4>
 <p><span class="math display">\[W(A,B) = \sum_{i=1}^{N} l_i \times \left|\frac{A_i}{A_t} - \frac{B_i}{B_t}\right|\]</span></p>
-<p>donde: - <span class="math inline">\(W(A,B)\)</span> = distancia UniFrac ponderada entre muestras A y B - <span class="math inline">\(A_i\)</span> = número de secuencias de la muestra A en las ramas descendientes del nodo <span class="math inline">\(i\)</span> - <span class="math inline">\(A_t\)</span> = número total de secuencias en la muestra A - <span class="math inline">\(B_i\)</span> = número de secuencias de la muestra B en las ramas descendientes del nodo <span class="math inline">\(i\)</span> - <span class="math inline">\(B_t\)</span> = número total de secuencias en la muestra B</p>
+<p>donde:</p>
+<p>- <span class="math inline">\(W(A,B)\)</span> = distancia UniFrac ponderada entre muestras A y B</p>
+<ul>
+<li><span class="math inline">\(A_i\)</span> = número de secuencias de la muestra A en las ramas descendientes del nodo <span class="math inline">\(i\)</span></li>
+</ul>
+<p>- <span class="math inline">\(A_t\)</span> = número total de secuencias en la muestra A</p>
+<p>- <span class="math inline">\(B_i\)</span> = número de secuencias de la muestra B en las ramas descendientes del nodo <span class="math inline">\(i\)</span></p>
+<p>- <span class="math inline">\(B_t\)</span> = número total de secuencias en la muestra B</p>
 </section>
 <section id="interpretación-4" class="level4">
 <h4 class="anchored" data-anchor-id="interpretación-4">Interpretación:</h4>
@@ -1536,43 +1745,83 @@ window.Quarto = {
 <li>1 = comunidades completamente diferentes filogenéticamente</li>
 </ul>
 </section>
-<section id="unweighted-unifrac-distance-permanova" class="level3">
-<h3 class="anchored" data-anchor-id="unweighted-unifrac-distance-permanova">Unweighted UniFrac Distance: PERMANOVA</h3>
+<section id="unweighted-unifrac" class="level3">
+<h3 class="anchored" data-anchor-id="unweighted-unifrac">Unweighted UniFrac</h3>
 <div class="cell">
+<div class="sourceCode cell-code" id="cb26"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb26-1"><a href="#cb26-1" aria-hidden="true" tabindex="-1"></a><span class="ex">qiime</span> tools view core-metrics-results/unweighted_unifrac_emperor.qzv</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="images/sin_ponderar.png" class="img-fluid quarto-figure quarto-figure-center figure-img"></p>
+</figure>
+</div>
+<section id="permanova" class="level4">
+<h4 class="anchored" data-anchor-id="permanova">PERMANOVA</h4>
+<p>Los siguientes datos se descragaron a partir del siguinete comando en <code>bash</code> para posteriormente gráficar en <code>R</code>.</p>
+<p>En <code>bash</code>:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb27"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb27-1"><a href="#cb27-1" aria-hidden="true" tabindex="-1"></a><span class="ex">qiime</span> tools view core-metrics-results/unweighted-unifrac-body-site-significance.qzv</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>En <code>R</code>:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb28"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb28-1"><a href="#cb28-1" aria-hidden="true" tabindex="-1"></a><span class="fu">suppressPackageStartupMessages</span>(<span class="fu">library</span>(tidyverse))</span>
+<span id="cb28-2"><a href="#cb28-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb28-3"><a href="#cb28-3" aria-hidden="true" tabindex="-1"></a>df <span class="ot">&lt;-</span> readr<span class="sc">::</span><span class="fu">read_tsv</span>(<span class="st">"tables/raw_data_permanova.tsv"</span>)</span>
+<span id="cb28-4"><a href="#cb28-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb28-5"><a href="#cb28-5" aria-hidden="true" tabindex="-1"></a>h1 <span class="ot">&lt;-</span> df <span class="sc">%&gt;%</span> </span>
+<span id="cb28-6"><a href="#cb28-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(Group1 <span class="sc">==</span> <span class="st">"NC"</span>)</span>
+<span id="cb28-7"><a href="#cb28-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb28-8"><a href="#cb28-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb28-9"><a href="#cb28-9" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(h1, <span class="fu">aes</span>(<span class="at">y =</span> Distance, <span class="at">x =</span> Group2, <span class="at">fill =</span> Group2)) <span class="sc">+</span></span>
+<span id="cb28-10"><a href="#cb28-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_boxplot</span>(<span class="at">color =</span> <span class="st">"black"</span>) <span class="sc">+</span> <span class="fu">theme_classic</span>() <span class="sc">+</span></span>
+<span id="cb28-11"><a href="#cb28-11" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">"Distance to NC"</span>, <span class="at">fill =</span> <span class="st">"Group"</span>) <span class="sc">+</span></span>
+<span id="cb28-12"><a href="#cb28-12" aria-hidden="true" tabindex="-1"></a>  <span class="fu">xlab</span>(<span class="st">"Group"</span>) <span class="sc">+</span> </span>
+<span id="cb28-13"><a href="#cb28-13" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(<span class="at">text =</span> <span class="fu">element_text</span>(<span class="at">size =</span> <span class="dv">20</span>)) <span class="sc">+</span></span>
+<span id="cb28-14"><a href="#cb28-14" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_fill_manual</span>(<span class="at">values =</span> <span class="fu">c</span>( <span class="st">"#8f0052"</span>,<span class="st">"#276518"</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <div>
 <figure class="figure">
-<p><img src="tomato_16S_files/figure-html/unnamed-chunk-24-1.png" class="img-fluid figure-img" width="672"></p>
+<p><img src="tomato_16S_files/figure-html/unnamed-chunk-30-1.png" class="img-fluid figure-img" width="672"></p>
 </figure>
 </div>
 </div>
+<div class="sourceCode cell-code" id="cb29"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb29-1"><a href="#cb29-1" aria-hidden="true" tabindex="-1"></a>h2 <span class="ot">&lt;-</span> df <span class="sc">%&gt;%</span> </span>
+<span id="cb29-2"><a href="#cb29-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(Group1 <span class="sc">==</span> <span class="st">"Tomato"</span>)</span>
+<span id="cb29-3"><a href="#cb29-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb29-4"><a href="#cb29-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb29-5"><a href="#cb29-5" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(h2, <span class="fu">aes</span>(<span class="at">y =</span> Distance, <span class="at">x =</span> Group2, <span class="at">fill =</span> Group2)) <span class="sc">+</span></span>
+<span id="cb29-6"><a href="#cb29-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_boxplot</span>(<span class="at">color =</span> <span class="st">"black"</span>) <span class="sc">+</span> <span class="fu">theme_classic</span>() <span class="sc">+</span></span>
+<span id="cb29-7"><a href="#cb29-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">"Distance to Tomato"</span>, <span class="at">fill =</span> <span class="st">"Group"</span>) <span class="sc">+</span></span>
+<span id="cb29-8"><a href="#cb29-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">xlab</span>(<span class="st">"Group"</span>) <span class="sc">+</span> </span>
+<span id="cb29-9"><a href="#cb29-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(<span class="at">text =</span> <span class="fu">element_text</span>(<span class="at">size =</span> <span class="dv">20</span>)) <span class="sc">+</span></span>
+<span id="cb29-10"><a href="#cb29-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_fill_manual</span>(<span class="at">values =</span> <span class="fu">c</span>( <span class="st">"#8f0052"</span>,<span class="st">"#276518"</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <div>
 <figure class="figure">
-<p><img src="tomato_16S_files/figure-html/unnamed-chunk-24-2.png" class="img-fluid figure-img" width="672"></p>
+<p><img src="tomato_16S_files/figure-html/unnamed-chunk-30-2.png" class="img-fluid figure-img" width="672"></p>
 </figure>
 </div>
 </div>
 </div>
 <div class="cell">
 <div class="cell-output-display">
-<div id="gjvyybgokl" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
-<style>#gjvyybgokl table {
+<div id="totxvvobie" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<style>#totxvvobie table {
   font-family: system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
-#gjvyybgokl thead, #gjvyybgokl tbody, #gjvyybgokl tfoot, #gjvyybgokl tr, #gjvyybgokl td, #gjvyybgokl th {
+#totxvvobie thead, #totxvvobie tbody, #totxvvobie tfoot, #totxvvobie tr, #totxvvobie td, #totxvvobie th {
   border-style: none;
 }
 
-#gjvyybgokl p {
+#totxvvobie p {
   margin: 0;
   padding: 0;
 }
 
-#gjvyybgokl .gt_table {
+#totxvvobie .gt_table {
   display: table;
   border-collapse: collapse;
   line-height: normal;
@@ -1598,12 +1847,12 @@ window.Quarto = {
   border-left-color: #D3D3D3;
 }
 
-#gjvyybgokl .gt_caption {
+#totxvvobie .gt_caption {
   padding-top: 4px;
   padding-bottom: 4px;
 }
 
-#gjvyybgokl .gt_title {
+#totxvvobie .gt_title {
   color: #333333;
   font-size: 125%;
   font-weight: initial;
@@ -1615,7 +1864,7 @@ window.Quarto = {
   border-bottom-width: 0;
 }
 
-#gjvyybgokl .gt_subtitle {
+#totxvvobie .gt_subtitle {
   color: #333333;
   font-size: 85%;
   font-weight: initial;
@@ -1627,7 +1876,7 @@ window.Quarto = {
   border-top-width: 0;
 }
 
-#gjvyybgokl .gt_heading {
+#totxvvobie .gt_heading {
   background-color: #FFFFFF;
   text-align: center;
   border-bottom-color: #FFFFFF;
@@ -1639,13 +1888,13 @@ window.Quarto = {
   border-right-color: #D3D3D3;
 }
 
-#gjvyybgokl .gt_bottom_border {
+#totxvvobie .gt_bottom_border {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
 }
 
-#gjvyybgokl .gt_col_headings {
+#totxvvobie .gt_col_headings {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -1660,7 +1909,7 @@ window.Quarto = {
   border-right-color: #D3D3D3;
 }
 
-#gjvyybgokl .gt_col_heading {
+#totxvvobie .gt_col_heading {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -1680,7 +1929,7 @@ window.Quarto = {
   overflow-x: hidden;
 }
 
-#gjvyybgokl .gt_column_spanner_outer {
+#totxvvobie .gt_column_spanner_outer {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -1692,15 +1941,15 @@ window.Quarto = {
   padding-right: 4px;
 }
 
-#gjvyybgokl .gt_column_spanner_outer:first-child {
+#totxvvobie .gt_column_spanner_outer:first-child {
   padding-left: 0;
 }
 
-#gjvyybgokl .gt_column_spanner_outer:last-child {
+#totxvvobie .gt_column_spanner_outer:last-child {
   padding-right: 0;
 }
 
-#gjvyybgokl .gt_column_spanner {
+#totxvvobie .gt_column_spanner {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
@@ -1712,11 +1961,11 @@ window.Quarto = {
   width: 100%;
 }
 
-#gjvyybgokl .gt_spanner_row {
+#totxvvobie .gt_spanner_row {
   border-bottom-style: hidden;
 }
 
-#gjvyybgokl .gt_group_heading {
+#totxvvobie .gt_group_heading {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1742,7 +1991,7 @@ window.Quarto = {
   text-align: left;
 }
 
-#gjvyybgokl .gt_empty_group_heading {
+#totxvvobie .gt_empty_group_heading {
   padding: 0.5px;
   color: #333333;
   background-color: #FFFFFF;
@@ -1757,15 +2006,15 @@ window.Quarto = {
   vertical-align: middle;
 }
 
-#gjvyybgokl .gt_from_md > :first-child {
+#totxvvobie .gt_from_md > :first-child {
   margin-top: 0;
 }
 
-#gjvyybgokl .gt_from_md > :last-child {
+#totxvvobie .gt_from_md > :last-child {
   margin-bottom: 0;
 }
 
-#gjvyybgokl .gt_row {
+#totxvvobie .gt_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1784,7 +2033,7 @@ window.Quarto = {
   overflow-x: hidden;
 }
 
-#gjvyybgokl .gt_stub {
+#totxvvobie .gt_stub {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -1797,7 +2046,7 @@ window.Quarto = {
   padding-right: 5px;
 }
 
-#gjvyybgokl .gt_stub_row_group {
+#totxvvobie .gt_stub_row_group {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -1811,15 +2060,15 @@ window.Quarto = {
   vertical-align: top;
 }
 
-#gjvyybgokl .gt_row_group_first td {
+#totxvvobie .gt_row_group_first td {
   border-top-width: 2px;
 }
 
-#gjvyybgokl .gt_row_group_first th {
+#totxvvobie .gt_row_group_first th {
   border-top-width: 2px;
 }
 
-#gjvyybgokl .gt_summary_row {
+#totxvvobie .gt_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -1829,16 +2078,16 @@ window.Quarto = {
   padding-right: 5px;
 }
 
-#gjvyybgokl .gt_first_summary_row {
+#totxvvobie .gt_first_summary_row {
   border-top-style: solid;
   border-top-color: #D3D3D3;
 }
 
-#gjvyybgokl .gt_first_summary_row.thick {
+#totxvvobie .gt_first_summary_row.thick {
   border-top-width: 2px;
 }
 
-#gjvyybgokl .gt_last_summary_row {
+#totxvvobie .gt_last_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1848,7 +2097,7 @@ window.Quarto = {
   border-bottom-color: #D3D3D3;
 }
 
-#gjvyybgokl .gt_grand_summary_row {
+#totxvvobie .gt_grand_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -1858,7 +2107,7 @@ window.Quarto = {
   padding-right: 5px;
 }
 
-#gjvyybgokl .gt_first_grand_summary_row {
+#totxvvobie .gt_first_grand_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1868,7 +2117,7 @@ window.Quarto = {
   border-top-color: #D3D3D3;
 }
 
-#gjvyybgokl .gt_last_grand_summary_row_top {
+#totxvvobie .gt_last_grand_summary_row_top {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1878,11 +2127,11 @@ window.Quarto = {
   border-bottom-color: #D3D3D3;
 }
 
-#gjvyybgokl .gt_striped {
+#totxvvobie .gt_striped {
   background-color: rgba(128, 128, 128, 0.05);
 }
 
-#gjvyybgokl .gt_table_body {
+#totxvvobie .gt_table_body {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -1891,7 +2140,7 @@ window.Quarto = {
   border-bottom-color: #D3D3D3;
 }
 
-#gjvyybgokl .gt_footnotes {
+#totxvvobie .gt_footnotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -1905,7 +2154,7 @@ window.Quarto = {
   border-right-color: #D3D3D3;
 }
 
-#gjvyybgokl .gt_footnote {
+#totxvvobie .gt_footnote {
   margin: 0px;
   font-size: 90%;
   padding-top: 4px;
@@ -1914,7 +2163,7 @@ window.Quarto = {
   padding-right: 5px;
 }
 
-#gjvyybgokl .gt_sourcenotes {
+#totxvvobie .gt_sourcenotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -1928,7 +2177,7 @@ window.Quarto = {
   border-right-color: #D3D3D3;
 }
 
-#gjvyybgokl .gt_sourcenote {
+#totxvvobie .gt_sourcenote {
   font-size: 90%;
   padding-top: 4px;
   padding-bottom: 4px;
@@ -1936,72 +2185,72 @@ window.Quarto = {
   padding-right: 5px;
 }
 
-#gjvyybgokl .gt_left {
+#totxvvobie .gt_left {
   text-align: left;
 }
 
-#gjvyybgokl .gt_center {
+#totxvvobie .gt_center {
   text-align: center;
 }
 
-#gjvyybgokl .gt_right {
+#totxvvobie .gt_right {
   text-align: right;
   font-variant-numeric: tabular-nums;
 }
 
-#gjvyybgokl .gt_font_normal {
+#totxvvobie .gt_font_normal {
   font-weight: normal;
 }
 
-#gjvyybgokl .gt_font_bold {
+#totxvvobie .gt_font_bold {
   font-weight: bold;
 }
 
-#gjvyybgokl .gt_font_italic {
+#totxvvobie .gt_font_italic {
   font-style: italic;
 }
 
-#gjvyybgokl .gt_super {
+#totxvvobie .gt_super {
   font-size: 65%;
 }
 
-#gjvyybgokl .gt_footnote_marks {
+#totxvvobie .gt_footnote_marks {
   font-size: 75%;
   vertical-align: 0.4em;
   position: initial;
 }
 
-#gjvyybgokl .gt_asterisk {
+#totxvvobie .gt_asterisk {
   font-size: 100%;
   vertical-align: 0;
 }
 
-#gjvyybgokl .gt_indent_1 {
+#totxvvobie .gt_indent_1 {
   text-indent: 5px;
 }
 
-#gjvyybgokl .gt_indent_2 {
+#totxvvobie .gt_indent_2 {
   text-indent: 10px;
 }
 
-#gjvyybgokl .gt_indent_3 {
+#totxvvobie .gt_indent_3 {
   text-indent: 15px;
 }
 
-#gjvyybgokl .gt_indent_4 {
+#totxvvobie .gt_indent_4 {
   text-indent: 20px;
 }
 
-#gjvyybgokl .gt_indent_5 {
+#totxvvobie .gt_indent_5 {
   text-indent: 25px;
 }
 
-#gjvyybgokl .katex-display {
+#totxvvobie .katex-display {
   display: inline-flex !important;
   margin-bottom: 0.75em !important;
 }
 
-#gjvyybgokl div.Reactable > div.rt-table > div.rt-thead > div.rt-tr.rt-tr-group-header > div.rt-th-group:after {
+#totxvvobie div.Reactable > div.rt-table > div.rt-thead > div.rt-tr.rt-tr-group-header > div.rt-th-group:after {
   height: 0px !important;
 }
 </style>
@@ -2037,34 +2286,35 @@ window.Quarto = {
 </section>
 </section>
 </section>
+</section>
 <section id="taxonomía" class="level1">
 <h1>Taxonomía</h1>
 <section id="descarga-de-la-base-de-datos-silva" class="level3">
 <h3 class="anchored" data-anchor-id="descarga-de-la-base-de-datos-silva">Descarga de la base de datos SILVA</h3>
 <p>Descarga la base de datos SILVA en su versión 138.2, específicamente el conjunto de datos SSURef_NR99. Este conjunto contiene secuencias del gen 16S rRNA agrupadas al 99% de similitud, lo que reduce redundancia y facilita el procesamiento.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb19"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a><span class="ex">qiime</span> rescript get-silva-data <span class="dt">\</span></span>
-<span id="cb19-2"><a href="#cb19-2" aria-hidden="true" tabindex="-1"></a>--p-version <span class="st">'138.2'</span> <span class="dt">\</span></span>
-<span id="cb19-3"><a href="#cb19-3" aria-hidden="true" tabindex="-1"></a>--p-target <span class="st">'SSURef_NR99'</span> <span class="dt">\</span></span>
-<span id="cb19-4"><a href="#cb19-4" aria-hidden="true" tabindex="-1"></a>--o-silva-sequences silva-138.2-ssu-nr99-rna-seqs.qza <span class="dt">\</span></span>
-<span id="cb19-5"><a href="#cb19-5" aria-hidden="true" tabindex="-1"></a>--o-silva-taxonomy silva-138.2-ssu-nr99-tax.qza</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb30"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb30-1"><a href="#cb30-1" aria-hidden="true" tabindex="-1"></a><span class="ex">qiime</span> rescript get-silva-data <span class="dt">\</span></span>
+<span id="cb30-2"><a href="#cb30-2" aria-hidden="true" tabindex="-1"></a>--p-version <span class="st">'138.2'</span> <span class="dt">\</span></span>
+<span id="cb30-3"><a href="#cb30-3" aria-hidden="true" tabindex="-1"></a>--p-target <span class="st">'SSURef_NR99'</span> <span class="dt">\</span></span>
+<span id="cb30-4"><a href="#cb30-4" aria-hidden="true" tabindex="-1"></a>--o-silva-sequences silva-138.2-ssu-nr99-rna-seqs.qza <span class="dt">\</span></span>
+<span id="cb30-5"><a href="#cb30-5" aria-hidden="true" tabindex="-1"></a>--o-silva-taxonomy silva-138.2-ssu-nr99-tax.qza</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </section>
 <section id="conversión-de-rna-a-dna" class="level3">
 <h3 class="anchored" data-anchor-id="conversión-de-rna-a-dna">Conversión de RNA a DNA</h3>
 <p>Convierte las secuencias de RNA descargadas a secuencias de DNA. Esto es necesario porque los análisis posteriores, incluyendo el entrenamiento del clasificador.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb20"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a><span class="ex">qiime</span> rescript reverse-transcribe <span class="dt">\</span></span>
-<span id="cb20-2"><a href="#cb20-2" aria-hidden="true" tabindex="-1"></a>--i-rna-sequences silva-138.2-ssu-nr99-rna-seqs.qza <span class="dt">\ </span>   <span class="at">--o-dna-sequences</span> silva-138.2-ssu-nr99-seqs.qza</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb31"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb31-1"><a href="#cb31-1" aria-hidden="true" tabindex="-1"></a><span class="ex">qiime</span> rescript reverse-transcribe <span class="dt">\</span></span>
+<span id="cb31-2"><a href="#cb31-2" aria-hidden="true" tabindex="-1"></a>--i-rna-sequences silva-138.2-ssu-nr99-rna-seqs.qza <span class="dt">\ </span>   <span class="at">--o-dna-sequences</span> silva-138.2-ssu-nr99-seqs.qza</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </section>
 <section id="eliminación-de-secuencias-de-baja-calidad" class="level3">
 <h3 class="anchored" data-anchor-id="eliminación-de-secuencias-de-baja-calidad">Eliminación de secuencias de baja calidad</h3>
 <p>Filtra y elimina secuencias de baja calidad o con posibles errores, como aquellas con bases ambiguas (ej. ‘N’) o secuencias con regiones repetitivas largas que podrían afectar la precisión del clasificador.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb21"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a><span class="ex">qiime</span> rescript cull-seqs <span class="dt">\</span></span>
-<span id="cb21-2"><a href="#cb21-2" aria-hidden="true" tabindex="-1"></a>--i-sequences silva-138.2-ssu-nr99-seqs.qza <span class="dt">\</span></span>
-<span id="cb21-3"><a href="#cb21-3" aria-hidden="true" tabindex="-1"></a>--o-clean-sequences silva-138.2-ssu-nr99-seqs-cleaned.qza</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb32"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb32-1"><a href="#cb32-1" aria-hidden="true" tabindex="-1"></a><span class="ex">qiime</span> rescript cull-seqs <span class="dt">\</span></span>
+<span id="cb32-2"><a href="#cb32-2" aria-hidden="true" tabindex="-1"></a>--i-sequences silva-138.2-ssu-nr99-seqs.qza <span class="dt">\</span></span>
+<span id="cb32-3"><a href="#cb32-3" aria-hidden="true" tabindex="-1"></a>--o-clean-sequences silva-138.2-ssu-nr99-seqs-cleaned.qza</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </section>
 <section id="filtrado-de-secuencias-por-longitud-y-taxón" class="level3">
@@ -2077,80 +2327,80 @@ window.Quarto = {
 </ul>
 <p>Esto asegura que solo se utilicen secuencias completas o casi completas.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb22"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a><span class="ex">qiime</span> rescript filter-seqs-length-by-taxon <span class="dt">\</span></span>
-<span id="cb22-2"><a href="#cb22-2" aria-hidden="true" tabindex="-1"></a>--i-sequences silva-138.2-ssu-nr99-seqs-cleaned.qza <span class="dt">\</span></span>
-<span id="cb22-3"><a href="#cb22-3" aria-hidden="true" tabindex="-1"></a>--i-taxonomy silva-138.2-ssu-nr99-tax.qza <span class="dt">\</span></span>
-<span id="cb22-4"><a href="#cb22-4" aria-hidden="true" tabindex="-1"></a>--p-labels Archaea Bacteria Eukaryota <span class="dt">\</span></span>
-<span id="cb22-5"><a href="#cb22-5" aria-hidden="true" tabindex="-1"></a>--p-min-lens 900 1200 1400 <span class="dt">\</span></span>
-<span id="cb22-6"><a href="#cb22-6" aria-hidden="true" tabindex="-1"></a>--o-filtered-seqs silva-138.2-ssu-nr99-seqs-filt.qza <span class="dt">\ </span>   <span class="at">--o-discarded-seqs</span> silva-138.2-ssu-nr99-seqs-discard.qza</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb33"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb33-1"><a href="#cb33-1" aria-hidden="true" tabindex="-1"></a><span class="ex">qiime</span> rescript filter-seqs-length-by-taxon <span class="dt">\</span></span>
+<span id="cb33-2"><a href="#cb33-2" aria-hidden="true" tabindex="-1"></a>--i-sequences silva-138.2-ssu-nr99-seqs-cleaned.qza <span class="dt">\</span></span>
+<span id="cb33-3"><a href="#cb33-3" aria-hidden="true" tabindex="-1"></a>--i-taxonomy silva-138.2-ssu-nr99-tax.qza <span class="dt">\</span></span>
+<span id="cb33-4"><a href="#cb33-4" aria-hidden="true" tabindex="-1"></a>--p-labels Archaea Bacteria Eukaryota <span class="dt">\</span></span>
+<span id="cb33-5"><a href="#cb33-5" aria-hidden="true" tabindex="-1"></a>--p-min-lens 900 1200 1400 <span class="dt">\</span></span>
+<span id="cb33-6"><a href="#cb33-6" aria-hidden="true" tabindex="-1"></a>--o-filtered-seqs silva-138.2-ssu-nr99-seqs-filt.qza <span class="dt">\ </span>   <span class="at">--o-discarded-seqs</span> silva-138.2-ssu-nr99-seqs-discard.qza</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </section>
 <section id="dereplicación-de-secuencias" class="level3">
 <h3 class="anchored" data-anchor-id="dereplicación-de-secuencias">Dereplicación de secuencias</h3>
 <p>Elimina secuencias duplicadas, manteniendo solo las únicas junto con su información taxonómica. Esto reduce la carga computacional sin perder diversidad taxonómica.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb23"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a><span class="ex">qiime</span> rescript dereplicate <span class="dt">\</span></span>
-<span id="cb23-2"><a href="#cb23-2" aria-hidden="true" tabindex="-1"></a>--i-sequences silva-138.2-ssu-nr99-seqs-filt.qza  <span class="dt">\</span></span>
-<span id="cb23-3"><a href="#cb23-3" aria-hidden="true" tabindex="-1"></a>--i-taxa silva-138.2-ssu-nr99-tax.qza <span class="dt">\</span></span>
-<span id="cb23-4"><a href="#cb23-4" aria-hidden="true" tabindex="-1"></a>--p-mode <span class="st">'uniq'</span> <span class="dt">\</span></span>
-<span id="cb23-5"><a href="#cb23-5" aria-hidden="true" tabindex="-1"></a>--o-dereplicated-sequences silva-138.2-ssu-nr99-seqs-derep-uniq.qza <span class="dt">\</span></span>
-<span id="cb23-6"><a href="#cb23-6" aria-hidden="true" tabindex="-1"></a>--o-dereplicated-taxa silva-138.2-ssu-nr99-tax-derep-uniq.qza</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb34"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb34-1"><a href="#cb34-1" aria-hidden="true" tabindex="-1"></a><span class="ex">qiime</span> rescript dereplicate <span class="dt">\</span></span>
+<span id="cb34-2"><a href="#cb34-2" aria-hidden="true" tabindex="-1"></a>--i-sequences silva-138.2-ssu-nr99-seqs-filt.qza  <span class="dt">\</span></span>
+<span id="cb34-3"><a href="#cb34-3" aria-hidden="true" tabindex="-1"></a>--i-taxa silva-138.2-ssu-nr99-tax.qza <span class="dt">\</span></span>
+<span id="cb34-4"><a href="#cb34-4" aria-hidden="true" tabindex="-1"></a>--p-mode <span class="st">'uniq'</span> <span class="dt">\</span></span>
+<span id="cb34-5"><a href="#cb34-5" aria-hidden="true" tabindex="-1"></a>--o-dereplicated-sequences silva-138.2-ssu-nr99-seqs-derep-uniq.qza <span class="dt">\</span></span>
+<span id="cb34-6"><a href="#cb34-6" aria-hidden="true" tabindex="-1"></a>--o-dereplicated-taxa silva-138.2-ssu-nr99-tax-derep-uniq.qza</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </section>
 <section id="extracción-de-la-región-v4" class="level3">
 <h3 class="anchored" data-anchor-id="extracción-de-la-región-v4">Extracción de la región V4</h3>
 <p>Extrae la región hipervariable V4 del gen 16S rRNA usando los cebadores 515F (forward) y 806R (reverse). Esta región es comúnmente utilizada en estudios de microbiomas, por lo que el clasificador se optimiza para datos que la contengan.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb24"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a><span class="ex">qiime</span> feature-classifier extract-reads <span class="dt">\</span></span>
-<span id="cb24-2"><a href="#cb24-2" aria-hidden="true" tabindex="-1"></a>--i-sequences silva-138.2-ssu-nr99-seqs-derep-uniq.qza <span class="dt">\</span></span>
-<span id="cb24-3"><a href="#cb24-3" aria-hidden="true" tabindex="-1"></a>--p-f-primer GTGYCAGCMGCCGCGGTAA <span class="dt">\</span></span>
-<span id="cb24-4"><a href="#cb24-4" aria-hidden="true" tabindex="-1"></a>--p-r-primer GGACTACNVGGGTWTCTAAT <span class="dt">\</span></span>
-<span id="cb24-5"><a href="#cb24-5" aria-hidden="true" tabindex="-1"></a>--p-n-jobs 5 <span class="dt">\</span></span>
-<span id="cb24-6"><a href="#cb24-6" aria-hidden="true" tabindex="-1"></a>--p-read-orientation <span class="st">'forward'</span> <span class="dt">\</span></span>
-<span id="cb24-7"><a href="#cb24-7" aria-hidden="true" tabindex="-1"></a>--o-reads silva-138.2-ssu-nr99-seqs-515f-806r.qza</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb35"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb35-1"><a href="#cb35-1" aria-hidden="true" tabindex="-1"></a><span class="ex">qiime</span> feature-classifier extract-reads <span class="dt">\</span></span>
+<span id="cb35-2"><a href="#cb35-2" aria-hidden="true" tabindex="-1"></a>--i-sequences silva-138.2-ssu-nr99-seqs-derep-uniq.qza <span class="dt">\</span></span>
+<span id="cb35-3"><a href="#cb35-3" aria-hidden="true" tabindex="-1"></a>--p-f-primer GTGYCAGCMGCCGCGGTAA <span class="dt">\</span></span>
+<span id="cb35-4"><a href="#cb35-4" aria-hidden="true" tabindex="-1"></a>--p-r-primer GGACTACNVGGGTWTCTAAT <span class="dt">\</span></span>
+<span id="cb35-5"><a href="#cb35-5" aria-hidden="true" tabindex="-1"></a>--p-n-jobs 5 <span class="dt">\</span></span>
+<span id="cb35-6"><a href="#cb35-6" aria-hidden="true" tabindex="-1"></a>--p-read-orientation <span class="st">'forward'</span> <span class="dt">\</span></span>
+<span id="cb35-7"><a href="#cb35-7" aria-hidden="true" tabindex="-1"></a>--o-reads silva-138.2-ssu-nr99-seqs-515f-806r.qza</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </section>
 <section id="dereplicación-de-la-región-v4" class="level3">
 <h3 class="anchored" data-anchor-id="dereplicación-de-la-región-v4">Dereplicación de la región V4</h3>
 <p>Realiza una segunda dereplicación, esta vez sobre las secuencias de la región V4, eliminando duplicados adicionales que puedan haber surgido tras la extracción.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb25"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb25-1"><a href="#cb25-1" aria-hidden="true" tabindex="-1"></a><span class="ex">iime</span> rescript dereplicate <span class="dt">\</span></span>
-<span id="cb25-2"><a href="#cb25-2" aria-hidden="true" tabindex="-1"></a>--i-sequences silva-138.2-ssu-nr99-seqs-515f-806r.qza <span class="dt">\</span></span>
-<span id="cb25-3"><a href="#cb25-3" aria-hidden="true" tabindex="-1"></a>--i-taxa silva-138.2-ssu-nr99-tax-derep-uniq.qza <span class="dt">\</span></span>
-<span id="cb25-4"><a href="#cb25-4" aria-hidden="true" tabindex="-1"></a>--p-mode <span class="st">'uniq'</span> <span class="dt">\</span></span>
-<span id="cb25-5"><a href="#cb25-5" aria-hidden="true" tabindex="-1"></a>--o-dereplicated-sequences silva-138.2-ssu-nr99-seqs-515f-806r-uniq.qza <span class="dt">\</span></span>
-<span id="cb25-6"><a href="#cb25-6" aria-hidden="true" tabindex="-1"></a>--o-dereplicated-taxa  silva-138.2-ssu-nr99-tax-515f-806r-derep-uniq.qza</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb36"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb36-1"><a href="#cb36-1" aria-hidden="true" tabindex="-1"></a><span class="ex">qiime</span> rescript dereplicate <span class="dt">\</span></span>
+<span id="cb36-2"><a href="#cb36-2" aria-hidden="true" tabindex="-1"></a>--i-sequences silva-138.2-ssu-nr99-seqs-515f-806r.qza <span class="dt">\</span></span>
+<span id="cb36-3"><a href="#cb36-3" aria-hidden="true" tabindex="-1"></a>--i-taxa silva-138.2-ssu-nr99-tax-derep-uniq.qza <span class="dt">\</span></span>
+<span id="cb36-4"><a href="#cb36-4" aria-hidden="true" tabindex="-1"></a>--p-mode <span class="st">'uniq'</span> <span class="dt">\</span></span>
+<span id="cb36-5"><a href="#cb36-5" aria-hidden="true" tabindex="-1"></a>--o-dereplicated-sequences silva-138.2-ssu-nr99-seqs-515f-806r-uniq.qza <span class="dt">\</span></span>
+<span id="cb36-6"><a href="#cb36-6" aria-hidden="true" tabindex="-1"></a>--o-dereplicated-taxa  silva-138.2-ssu-nr99-tax-515f-806r-derep-uniq.qza</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </section>
 <section id="entrenamiento-del-clasificador-naive-bayes" class="level3">
 <h3 class="anchored" data-anchor-id="entrenamiento-del-clasificador-naive-bayes">Entrenamiento del clasificador Naive Bayes</h3>
 <p>Entrena un clasificador Naive Bayes utilizando las secuencias únicas de la región V4 y su taxonomía. Este clasificador puede usarse luego para asignar taxonomía a secuencias 16S de muestras de microbiomas.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb26"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb26-1"><a href="#cb26-1" aria-hidden="true" tabindex="-1"></a><span class="ex">qiime</span> feature-classifier fit-classifier-naive-bayes <span class="dt">\</span></span>
-<span id="cb26-2"><a href="#cb26-2" aria-hidden="true" tabindex="-1"></a>--i-reference-reads silva-138.2-ssu-nr99-seqs-515f-806r-uniq.qza <span class="dt">\</span></span>
-<span id="cb26-3"><a href="#cb26-3" aria-hidden="true" tabindex="-1"></a>--i-reference-taxonomy silva-138.2-ssu-nr99-tax-515f-806r-derep-uniq.qza <span class="dt">\</span></span>
-<span id="cb26-4"><a href="#cb26-4" aria-hidden="true" tabindex="-1"></a>--o-classifier silva-138.2-ssu-nr99-515f-806r-classifier.qza</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb37"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb37-1"><a href="#cb37-1" aria-hidden="true" tabindex="-1"></a><span class="ex">qiime</span> feature-classifier fit-classifier-naive-bayes <span class="dt">\</span></span>
+<span id="cb37-2"><a href="#cb37-2" aria-hidden="true" tabindex="-1"></a>--i-reference-reads silva-138.2-ssu-nr99-seqs-515f-806r-uniq.qza <span class="dt">\</span></span>
+<span id="cb37-3"><a href="#cb37-3" aria-hidden="true" tabindex="-1"></a>--i-reference-taxonomy silva-138.2-ssu-nr99-tax-515f-806r-derep-uniq.qza <span class="dt">\</span></span>
+<span id="cb37-4"><a href="#cb37-4" aria-hidden="true" tabindex="-1"></a>--o-classifier silva-138.2-ssu-nr99-515f-806r-classifier.qza</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </section>
 <section id="diversidadabundancía" class="level2">
 <h2 class="anchored" data-anchor-id="diversidadabundancía">Diversidad/abundancía</h2>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb27"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb27-1"><a href="#cb27-1" aria-hidden="true" tabindex="-1"></a><span class="ex">qiime</span> feature-classifier classify-sklearn <span class="dt">\</span></span>
-<span id="cb27-2"><a href="#cb27-2" aria-hidden="true" tabindex="-1"></a>  <span class="at">--i-classifier</span> silva-138.2-ssu-nr99-515f-806r-classifier.qza <span class="dt">\</span></span>
-<span id="cb27-3"><a href="#cb27-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">--i-reads</span> rep-seqs-dada2-tomato-16s.qza <span class="dt">\</span></span>
-<span id="cb27-4"><a href="#cb27-4" aria-hidden="true" tabindex="-1"></a>  <span class="at">--o-classification</span> taxonomy.qza</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb38"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb38-1"><a href="#cb38-1" aria-hidden="true" tabindex="-1"></a><span class="ex">qiime</span> feature-classifier classify-sklearn <span class="dt">\</span></span>
+<span id="cb38-2"><a href="#cb38-2" aria-hidden="true" tabindex="-1"></a>  <span class="at">--i-classifier</span> silva-138.2-ssu-nr99-515f-806r-classifier.qza <span class="dt">\</span></span>
+<span id="cb38-3"><a href="#cb38-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">--i-reads</span> rep-seqs-dada2-tomato-16s.qza <span class="dt">\</span></span>
+<span id="cb38-4"><a href="#cb38-4" aria-hidden="true" tabindex="-1"></a>  <span class="at">--o-classification</span> taxonomy.qza</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb28"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb28-1"><a href="#cb28-1" aria-hidden="true" tabindex="-1"></a><span class="ex">qiime</span> metadata tabulate <span class="dt">\</span></span>
-<span id="cb28-2"><a href="#cb28-2" aria-hidden="true" tabindex="-1"></a>  <span class="at">--m-input-file</span> taxonomy.qza <span class="dt">\</span></span>
-<span id="cb28-3"><a href="#cb28-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">--o-visualization</span> taxonomy.qzv</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb39"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb39-1"><a href="#cb39-1" aria-hidden="true" tabindex="-1"></a><span class="ex">qiime</span> metadata tabulate <span class="dt">\</span></span>
+<span id="cb39-2"><a href="#cb39-2" aria-hidden="true" tabindex="-1"></a>  <span class="at">--m-input-file</span> taxonomy.qza <span class="dt">\</span></span>
+<span id="cb39-3"><a href="#cb39-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">--o-visualization</span> taxonomy.qzv</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb29"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb29-1"><a href="#cb29-1" aria-hidden="true" tabindex="-1"></a><span class="ex">qiime</span> taxa barplot <span class="dt">\</span></span>
-<span id="cb29-2"><a href="#cb29-2" aria-hidden="true" tabindex="-1"></a>  <span class="at">--i-table</span> table-dada2-tomato-16s.qza <span class="dt">\</span></span>
-<span id="cb29-3"><a href="#cb29-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">--i-taxonomy</span> taxonomy.qza <span class="dt">\</span></span>
-<span id="cb29-4"><a href="#cb29-4" aria-hidden="true" tabindex="-1"></a>  <span class="at">--m-metadata-file</span> Experiment_Design.tsv <span class="dt">\</span></span>
-<span id="cb29-5"><a href="#cb29-5" aria-hidden="true" tabindex="-1"></a>  <span class="at">--o-visualization</span> taxa-bar-plots.qzv</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb40"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb40-1"><a href="#cb40-1" aria-hidden="true" tabindex="-1"></a><span class="ex">qiime</span> taxa barplot <span class="dt">\</span></span>
+<span id="cb40-2"><a href="#cb40-2" aria-hidden="true" tabindex="-1"></a>  <span class="at">--i-table</span> table-dada2-tomato-16s.qza <span class="dt">\</span></span>
+<span id="cb40-3"><a href="#cb40-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">--i-taxonomy</span> taxonomy.qza <span class="dt">\</span></span>
+<span id="cb40-4"><a href="#cb40-4" aria-hidden="true" tabindex="-1"></a>  <span class="at">--m-metadata-file</span> Experiment_Design.tsv <span class="dt">\</span></span>
+<span id="cb40-5"><a href="#cb40-5" aria-hidden="true" tabindex="-1"></a>  <span class="at">--o-visualization</span> taxa-bar-plots.qzv</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
