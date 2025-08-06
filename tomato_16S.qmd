@@ -275,6 +275,14 @@ gt::gt(df)
 
 ## Alfa rarefacción
 
+La **alfa-rarefacción** es una técnica para evaluar cómo crece la diversidad “intra-muestra” (α-diversidad) a medida que aumentas el número de lecturas secuenciadas. En metagenómica o secuenciación 16S, su objetivo principal es:
+
+1.  **Submuestrear** tu biblioteca de lecturas a distintos “depths” (profundidades de secuenciación): por ejemplo, tomar aleatoriamente 100, 200, …, 4 000 lecturas de cada muestra.
+
+2.  **Calcular un índice de α-diversidad** (observed OTUs, Shannon, Simpson, Faith’s PD, etc.) en cada submuestra.
+
+3.  **Trazar** ese índice frente al número de lecturas: obtienes una curva de rarefacción.
+
 ```{bash, eval=FALSE}
 qiime diversity alpha-rarefaction \
 --i-table table-dada2-tomato-16s.qza \
