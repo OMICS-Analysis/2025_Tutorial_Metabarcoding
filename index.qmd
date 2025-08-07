@@ -854,6 +854,8 @@ qiime tools view l6-da-barplot-subject.qzv
 
 ![](images/visualization_level6.png){fig-align="center"}
 
+Para explorar clados especificos puede revisar el materíal del Apédice [Boxplots para algunos clados importantes].
+
 # Apéndice
 
 ## Abrir archivos de Qiime2 en R
@@ -1260,13 +1262,36 @@ p <- ggboxplot(Lyso_df, x = "Type", y = "Lysobacteraceae",
 
 
 my_comparisons <- list( c("NC", "Tomato"))
-p + stat_compare_means(comparisons = my_comparisons, label = "p.signif", paired = TRUE)+ 
+p + stat_compare_means(comparisons = my_comparisons, label = "p.signif", paired = TRUE, method = "t.test")+ 
   stat_compare_means(label.y = 50)  +
   theme_classic() +
   theme(text = element_text(size = 20)) +
   ylab("Lysobacteraceae ASV")
 
-p
 ```
 
 ### ***Micropepsis***
+
+```{r, message=FALSE, warning=FALSE}
+df <- readr::read_csv("tables/level-6.csv")
+
+Micropepsis <- colnames(df)[stringr::str_detect(colnames(df), "Micropepsis")]
+
+
+sub_df <- df[, c("Type", Micropepsis)]
+colnames(sub_df) <- c("Type", "micropepsis")
+
+
+library(ggpubr)
+p <- ggboxplot(sub_df, x = "Type", y = "micropepsis",
+               color = "black", palette =c("#8f0052","#276518"),
+               add = "jitter", shape = "Type",
+               fill = "Type")
+
+my_comparisons <- list( c("NC", "Tomato"))
+p + stat_compare_means(comparisons = my_comparisons, label = "p.signif", paired = TRUE, 
+                       method = "t.test")+ 
+  theme_classic() +
+  theme(text = element_text(size = 20)) +
+  ylab("Micropepsis ASV")
+```
