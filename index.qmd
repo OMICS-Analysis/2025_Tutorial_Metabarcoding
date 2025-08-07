@@ -46,7 +46,7 @@ df <- readr::read_tsv("../2025_Demo_16S_tomate/tomato_manifest")
 
 df <- data.frame(df)
 
-head(df)
+head(df, 13)
 ```
 
 Este archivo lo vamos a nombrar como `tomato_manifest`, este archivo es de tipo `tab-separate-value`. Puedes descargar el archivo `manifiesto` [aquí](https://drive.google.com/file/d/1hIzzApEfZfKqOlxhjVDsSvKVmqUbEA1d/view?usp=drive_link).
