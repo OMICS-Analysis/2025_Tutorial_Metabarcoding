@@ -11,6 +11,8 @@ execute:
   engine: knitr
 ---
 
+
+
 ![](images/logo_OAN_for_white.png){fig-align="center" width="300"}
 
 # Introducción
@@ -21,9 +23,13 @@ Para este tutorial vamos a utilizar [Qiime2](https://qiime2.org/)**,** [aquí](h
 
 Una vez instalado `qiime` activa el ambiente conda.
 
+
+
 ```{bash, eval=FALSE, echo=TRUE}
 conda activate qiime2-amplicon-2024.10
 ```
+
+
 
 **Primer paso:** Genera una carpeta (directorio) exclusiva para llevar a cabo el proyecto, en este caso el nombre de la carpeta es `2025_Demo_tomato_16S`, en ella se va generar una carpeta para guardar los genomas 16S que tendrá por nombre `data`.
 
@@ -31,21 +37,29 @@ Lo genomas 16S los podrás encontrar [**aquí**](https://drive.google.com/drive/
 
 Escribe los siguiente comando en la terminal para crear el directorio.
 
+
+
 ```{bash, eval=FALSE, echo=TRUE}
 mkdir 2025_Demo_tomato_16S
 cd 2025_Demo_tomato_16S
 mkdir data
 ```
 
+
+
 # Importar datos pareados con Qiime2
 
 Vamos a generar un archivo `manifiesto` en el vamos a indicar la localización de las lecturas pareadas. El archivo se ve de la siguiente manera:
+
+
 
 ```{r, echo=FALSE, message=FALSE}
 df <- readr::read_tsv("../2025_Demo_16S_tomate/tomato_manifest")
 
 df
 ```
+
+
 
 Este archivo lo vamos a nombrar como `tomato_manifest`, este archivo es de tipo `tab-separate-value`. Puedes descargar el archivo `manifiesto` [aquí](https://drive.google.com/file/d/1hIzzApEfZfKqOlxhjVDsSvKVmqUbEA1d/view?usp=drive_link).
 
@@ -59,6 +73,8 @@ Para ver todos los archivos `.qzv` basta con utilizar el comando `qiime tools vi
 
 Para importar los secuencias 16S pareadas vamos a utilizar el siguiente código:
 
+
+
 ```{bash, eval=FALSE, echo=TRUE}
 qiime tools import \
 --type 'SampleData[PairedEndSequencesWithQuality]' \
@@ -68,7 +84,11 @@ qiime tools import \
 
 ```
 
+
+
 Para visualizar la calidad de los archivos importado podemos usar el siguiente comando:
+
+
 
 ```{bash, eval=FALSE}
 qiime demux summarize \
@@ -78,20 +98,28 @@ qiime demux summarize \
 qiime tools view summary_tmp_tomato_16s.qzv
 ```
 
+
+
 ![](images/forwdard_q1.png){fig-align="center"}
 
 ![](images/reverse_q1.png){fig-align="center"}
 
 **Número de lecturas por muestra**
 
+
+
 ```{r, echo=FALSE, message=FALSE}
 df <- readr::read_tsv("tables/per-sample-fastq-counts.tsv")
 gt::gt(df)
 ```
 
+
+
 ## Cutadapt
 
 Una vez importadas las secuencias, vamos a realizar un preprocesmaiento con [`cutadapt`](https://cutadapt.readthedocs.io/en/stable/) para eliminar adapdores, `qiime2` nos permite hacer esto utilizando la siguiente instrucción:
+
+
 
 ```{bash, eval=FALSE, echo=TRUE}
 qiime cutadapt trim-paired \
@@ -104,6 +132,8 @@ qiime cutadapt trim-paired \
 --p-discard-untrimmed \
 --o-trimmed-sequences trimmed_paired-end-tomato-16s.qza --p-cores 5
 ```
+
+
 
 ### Explicación del comando:
 
@@ -137,26 +167,40 @@ qiime cutadapt trim-paired \
 
 Qiime permite generar un reporte HTML para ver la cantidad de lecturas por muestras y métricas generales de secuencia. Para ello podemos generar el siguiente archivo:
 
+
+
 ```{bash, eval=FALSE, echo=TRUE}
 qiime demux summarize \
 --i-data trimmed_paired-end-tomato-16s.qza \
 --o-visualization summary_tomato_16s.qzv
 ```
 
+
+
 Para visualizar este archivo utiliza el siguiente código:
+
+
 
 ```{bash, eval=FALSE, echo=TRUE}
 qiime tools view summary_tomato_16s.qzv
 ```
 
+
+
 **Número de cuentas por muestras después de cuatadapt**
+
+
 
 ```{r, echo=FALSE, message=FALSE}
 df <- readr::read_tsv("tables/per-sample-fastq-counts_after_qadapt.tsv")
 gt::gt(df)
 ```
 
+
+
 # Filtrado de lecturas con [DADA2](https://benjjneb.github.io/dada2/)
+
+
 
 ```{bash, eval=FALSE, echo=TRUE}
 qiime dada2 denoise-paired \
@@ -169,7 +213,11 @@ qiime dada2 denoise-paired \
 --p-n-threads 5
 ```
 
+
+
 Con esto podemos ver un reporte de la cantidad de lecturas filtradas:
+
+
 
 ```{bash, eval=FALSE, echo=TRUE}
 qiime metadata tabulate \
@@ -179,7 +227,11 @@ qiime metadata tabulate \
 qiime tools view stats-dada2-tomato-16s.qzv
 ```
 
+
+
 **Lecturas filtradas con DADA2**
+
+
 
 ```{r, echo=FALSE, message=FALSE}
 df <- readr::read_tsv("tables/metadata_dada2.tsv")
@@ -187,9 +239,13 @@ df <- readr::read_tsv("tables/metadata_dada2.tsv")
 gt::gt(df)
 ```
 
+
+
 Después de terminar el paso de filtrado de calidad, querrás explorar los datos que obtuviste. Este filtrado es importante porque elimina las secuencias de baja calidad o con errores, dejándote datos más confiables para trabajar. Para revisar esos datos, puedes usar dos comandos que te muestran resúmenes visuales fáciles de entender.
 
 Los datos asociados los vamos a depositar en un archivo nombrado `Experiment_Design.tsv`:
+
+
 
 ```{r, echo=FALSE, message=FALSE}
 df <- readr::read_tsv("../2025_Demo_16S_tomate/Experiment_Design.tsv")
@@ -210,7 +266,11 @@ qiime feature-table tabulate-seqs \
   --o-visualization rep-seqs-dada2-tomato-16s.qza
 ```
 
+
+
 El archivo `table-dada2-tomato-16s.qza` contiene la matriz de cuentas; en el apéndice [Abrir archivos de Qiime2 en R] podrás ver a detlla como trabajar con los archivos `.qza` en `R`; los primeros 10 ASV se ven del siguiente modo:
+
+
 
 ```{r, echo=FALSE}
 df_tmp <- qiime2R::read_qza("../2025_Demo_16S_tomate/table-dada2-tomato-16s.qza")
@@ -220,6 +280,8 @@ df_tmp <- cbind(ASV=rownames(df), df)
 
 gt::gt(df_tmp)
 ```
+
+
 
 -   **El comando `feature-table summarize`**
 
@@ -245,6 +307,8 @@ gt::gt(df_tmp)
 
 ### Generación de un árbol filogenético
 
+
+
 ```{bash, eval=FALSE}
 qiime phylogeny align-to-tree-mafft-fasttree \
   --i-sequences rep-seqs-dada2-tomato-16s.qza \
@@ -254,7 +318,11 @@ qiime phylogeny align-to-tree-mafft-fasttree \
   --o-rooted-tree rooted-tree-dada2-tomato-16s.qza
 ```
 
+
+
 ### Métricas general de filogenética
+
+
 
 ```{bash, eval=FALSE}
 qiime diversity core-metrics-phylogenetic \
@@ -264,6 +332,8 @@ qiime diversity core-metrics-phylogenetic \
 --m-metadata-file Experiment_Design.tsv \
 --output-dir core-metrics-results
 ```
+
+
 
 ## Alfa diversidad (α-diversidad)
 
@@ -307,6 +377,8 @@ Algunas variantes:
 -   $D$ cercano a 1 indica alta diversidad (baja dominancia)
 -   $D$ cercano a 0 indica baja diversidad (alta dominancia)
 
+
+
 ```{bash, eval=FALSE}
 qiime diversity alpha-group-significance \
   --i-alpha-diversity simpson_diversity.qza \             
@@ -325,7 +397,11 @@ qiime diversity alpha-group-significance \
 qiime tools view core-metrics-results/simpson-group-significance.qzv
 ```
 
+
+
 ![](images/simpson_index.png){fig-align="center"}
+
+
 
 ```{r, echo=FALSE, message=FALSE}
 df <- readr::read_csv("tables/kruskal-wallis-pairwise-Type_simpson.csv")
@@ -333,7 +409,11 @@ df <- readr::read_csv("tables/kruskal-wallis-pairwise-Type_simpson.csv")
 gt::gt(df)
 ```
 
+
+
 ### Otras métricas
+
+
 
 ```{bash, eval=FALSE}
 qiime diversity alpha-group-significance \
@@ -350,13 +430,19 @@ qiime diversity alpha-group-significance \
 
 ```
 
+
+
 Los siguientes gráficos y tablas de evenness y faith se obtuvieron a partir de los archivos `.qzv` generados, asi como las tablas de significancia `kruskal-wallis-pairwise`.
+
+
 
 ```{bash, eval=FALSE}
 qiime tools view evenness-group-significance.qzv
 
 qiime tools view faith-pd-group-significance.qzv
 ```
+
+
 
 ### Eveness (equitabilidad)
 
@@ -384,11 +470,15 @@ donde:
 
 ![](images/alpha-compare.png){fig-align="center"}
 
+
+
 ```{r, echo=FALSE, message=FALSE}
 df <- readr::read_csv("tables/kruskal-wallis-pairwise-Type_evenness.csv")
 
 gt::gt(df)
 ```
+
+
 
 ### Faith's Phylogenetic Diversity (PD)
 
@@ -417,12 +507,16 @@ donde:
 
 ![](images/alpha-compare_faith.png){fig-align="center"}
 
+
+
 ```{r, echo=FALSE, message=FALSE}
 
 df <- readr::read_csv("tables/kruskal-wallis-pairwise-Type_faith.csv")
 
 gt::gt(df)
 ```
+
+
 
 ## Curvas de rarefacción
 
@@ -433,6 +527,8 @@ La **alfa-rarefacción** es una técnica para evaluar cómo crece la diversidad 
 2.  **Calcular un índice de α-diversidad** (observed OTUs, Shannon, Simpson, Faith’s PD, etc.) en cada submuestra.
 
 3.  **Trazar** ese índice frente al número de lecturas: obtienes una curva de rarefacción.
+
+
 
 ```{bash, eval=FALSE}
 qiime diversity alpha-rarefaction \
@@ -446,6 +542,8 @@ qiime diversity alpha-rarefaction \
 ```{bash, eval=FALSE}
 qiime tools view alpha-rarefaction-dada2-tomato-16s.qzv
 ```
+
+
 
 ### Observed Features
 
@@ -559,13 +657,19 @@ donde:
 -   1 = sitios completamente diferentes
 -   No considera relaciones filogenéticas
 
+
+
 ```{bash, eval=FALSE}
 qiime tools view core-metrics-results/bray_curtis_emperor.qzv
 ```
 
+
+
 ![](images/bray_curtis.png){fig-align="center"}
 
 #### PERMANOVA
+
+
 
 ```{bash, eval=FALSE}
 qiime diversity beta-group-significance \
@@ -578,6 +682,8 @@ qiime diversity beta-group-significance \
 ```{bash, eval=FALSE}
 qiime tools view core-metrics-results/curtis-significance.qzv
 ```
+
+
 
 ![](images/permanova_curtis_boxplot.png){fig-align="center"}
 
@@ -617,13 +723,19 @@ donde:
 -   1 = sitios completamente diferentes (no comparten especies)
 -   No considera abundancias, solo presencia/ausencia
 
+
+
 ```{bash, eval=FALSE}
 qiime tools view core-metrics-results/jaccard_emperor.qzv
 ```
 
+
+
 ![](images/distancia_jaccard.png){fig-align="center"}
 
 #### PERMANOVA
+
+
 
 ```{bash, eval=FALSE}
 qiime diversity beta-group-significance \
@@ -636,6 +748,8 @@ qiime diversity beta-group-significance \
 ```{bash, eval=FALSE}
 qiime tools view core-metrics-results/jaccard-significance.qzv
 ```
+
+
 
 ![](images/permanova_jaccard_boxplot.png){fig-align="center"}
 
@@ -683,6 +797,8 @@ donde:
 -   0 = comunidades idénticas filogenéticamente
 -   1 = comunidades completamente diferentes filogenéticamente
 
+
+
 ```{bash, eval=FALSE}
 qiime diversity beta-group-significance \
 --i-distance-matrix core-metrics-results/unweighted_unifrac_distance_matrix.qza \
@@ -692,19 +808,29 @@ qiime diversity beta-group-significance \
 --p-pairwise
 ```
 
+
+
 ### Unweighted UniFrac
+
+
 
 ```{bash, eval=FALSE}
 qiime tools view core-metrics-results/unweighted_unifrac_emperor.qzv
 ```
 
+
+
 ![](images/sin_ponderar.png){fig-align="center"}
 
 #### PERMANOVA
 
+
+
 ```{bash, eval=FALSE}
 qiime tools view core-metrics-results/unweighted-unifrac-body-site-significance.qzv
 ```
+
+
 
 ![](images/permanova_boxplots.png){fig-align="center"}
 
@@ -718,6 +844,8 @@ qiime tools view core-metrics-results/unweighted-unifrac-body-site-significance.
 
 Este comando asigna taxonomía a las secuencias representativas (como ASVs u OTUs) obtenidas de un experimento de secuenciación 16S. Utiliza un clasificador preentrenado basado en machine learning (Naive Bayes) para identificar los taxones a los que pertenecen las secuencias. Este paso es esencial para determinar qué microorganismos están presentes en las muestras según sus secuencias.
 
+
+
 ```{bash, eval=FALSE}
 qiime feature-classifier classify-sklearn \
   --i-classifier silva-138.2-ssu-nr99-515f-806r-classifier.qza \
@@ -725,7 +853,11 @@ qiime feature-classifier classify-sklearn \
   --o-classification taxonomy.qza
 ```
 
+
+
 El siguiente comando es útil para revisar las asignaciones taxonómicas y explorar la composición de las secuencias de forma interactiva.
+
+
 
 ```{bash, eval=FALSE}
 qiime metadata tabulate \
@@ -733,7 +865,11 @@ qiime metadata tabulate \
   --o-visualization taxonomy.qzv
 ```
 
+
+
 Este gráfico facilita el análisis visual de cómo varía la microbiota entre diferentes condiciones del experimento.
+
+
 
 ```{bash, eval=FALSE}
 qiime taxa barplot \
@@ -746,6 +882,8 @@ qiime taxa barplot \
 ```{bash}
 qiime tools view taxa-bar-plots.qzv
 ```
+
+
 
 ![](images/rect469.png){fig-align="center"}
 
@@ -787,6 +925,8 @@ ANCOM-BC es especialmente útil en metabarcoding porque:
 
 -   Proporciona estimaciones robustas de cambios en abundancia
 
+
+
 ```{bash, eval=FALSE}
 qiime composition ancombc \
   --i-table table-dada2-tomato-16s.qza \ 
@@ -806,9 +946,13 @@ qiime composition da-barplot \
 qiime tools view da-barplot-type.qzv
 ```
 
+
+
 ![](images/visualization.png){fig-align="center"}
 
 Ahora lo puedes hacer para cada ASV anotado por niveles, en este caso lo haremos con en `nivel 3` y usaremos de los metadata a `Type`:
+
+
 
 ```{bash, eval=FALSE}
 qiime taxa collapse \
@@ -836,9 +980,13 @@ qiime composition da-barplot \
 qiime tools view l3-da-barplot-subject.qzv
 ```
 
+
+
 ![](images/visualization_level3.png){fig-align="center"}
 
 Para el caso de el `nivel 6` solo habría que cambiar en ese flag:
+
+
 
 ```{bash, eval=FALSE}
 qiime taxa collapse \                     
@@ -862,6 +1010,8 @@ qiime composition da-barplot \
 qiime tools view l6-da-barplot-subject.qzv
 ```
 
+
+
 ![](images/visualization_level6.png){fig-align="center"}
 
 Para explorar clados especificos puede revisar el materíal del Apédice [Boxplots para algunos clados importantes].
@@ -872,14 +1022,20 @@ Para explorar clados especificos puede revisar el materíal del Apédice [Boxplo
 
 Primero instala la paquetería [`qiime2R`](https://github.com/jbisanz/qiime2R/)
 
+
+
 ```{r, message=FALSE, warning=FALSE}
 if (!requireNamespace("devtools", quietly = TRUE)){install.packages("devtools")}
 devtools::install_github("jbisanz/qiime2R")
 ```
 
+
+
 Esta paquetería nos permite leer los archivos `.qza` **QIIME Zipped Artifact**.
 
 Por ejemplo, si buscas acceder a la matriz de cuentas de los ASV del archivo `table-dada2-tomato-16s.qza`, puede utilizar el siguiente código:
+
+
 
 ```{r, message=FALSE, warning=FALSE}
 library(qiime2R)
@@ -889,13 +1045,19 @@ df_counts <- data.frame(df_tmp$data)
 head(df_counts, 5)
 ```
 
+
+
 ## Otras métricas de Alfa Diversidad
 
 Para los siguientes gráficos se dercargaron los archivos `.csv` a partir del archivo `.qzv`, para posteriormente usar `R` para gráficar.
 
+
+
 ```{bash, eval=FALSE}
 qiime tools view alpha-rarefaction-dada2-tomato-16s.qzv
 ```
+
+
 
 Se descargaron los siguientes archivos:
 
@@ -908,6 +1070,8 @@ Se descargaron los siguientes archivos:
 ### Usando R para gŕaficar
 
 #### Observed Features
+
+
 
 ```{r, message=FALSE, echo=TRUE, warning=FALSE}
 
@@ -964,9 +1128,13 @@ ggplot(obfe_long, aes(
   scale_color_manual(values = c( "#8f0052","#276518"))
 ```
 
+
+
 #### Shannon
 
 En `R`:
+
+
 
 ```{r, message=FALSE, echo=TRUE, warning=FALSE}
 suppressPackageStartupMessages(library(tidyverse))
@@ -1022,9 +1190,13 @@ ggplot(obfe_long, aes(
   scale_color_manual(values = c( "#8f0052","#276518"))
 ```
 
+
+
 ### Faith-PD
 
 En `R`:
+
+
 
 ```{r, message=FALSE, echo=TRUE, warning=FALSE}
 suppressPackageStartupMessages(library(tidyverse))
@@ -1080,6 +1252,8 @@ ggplot(obfe_long, aes(
   scale_color_manual(values = c( "#8f0052","#276518"))
 ```
 
+
+
 ## 
 
 ## Otras métricas de Beta Diversidad
@@ -1088,15 +1262,21 @@ Los siguientes datos se descargaron a partir del siguinete comando en `bash` par
 
 En `bash`:
 
+
+
 ```{bash, eval=FALSE}
 qiime tools view core-metrics-results/unweighted-unifrac-body-site-significance.qzv
 ```
+
+
 
 ### Usando R para gráficar
 
 #### PERMANOVA
 
 En `R`:
+
+
 
 ```{r, message=FALSE, echo=TRUE}
 suppressPackageStartupMessages(library(tidyverse))
@@ -1136,6 +1316,8 @@ gt::gt(df)
 
 ```
 
+
+
 ## Entrenamiento base de datos SILVA
 
 **NOTA** ⚠️: para entrenar el clasificador debes contar con al menos **8GB** de RAM en tu máquina.
@@ -1143,6 +1325,8 @@ gt::gt(df)
 ### Descarga de la base de datos SILVA
 
 Descarga la base de datos SILVA en su versión 138.2, específicamente el conjunto de datos SSURef_NR99. Este conjunto contiene secuencias del gen 16S rRNA agrupadas al 99% de similitud, lo que reduce redundancia y facilita el procesamiento.
+
+
 
 ```{bash, eval=FALSE}
 qiime rescript get-silva-data \
@@ -1152,24 +1336,34 @@ qiime rescript get-silva-data \
 --o-silva-taxonomy silva-138.2-ssu-nr99-tax.qza
 ```
 
+
+
 ### Conversión de RNA a DNA
 
 Convierte las secuencias de RNA descargadas a secuencias de DNA. Esto es necesario porque los análisis posteriores, incluyendo el entrenamiento del clasificador.
+
+
 
 ```{bash, eval=FALSE}
 qiime rescript reverse-transcribe \
 --i-rna-sequences silva-138.2-ssu-nr99-rna-seqs.qza \    --o-dna-sequences silva-138.2-ssu-nr99-seqs.qza
 ```
 
+
+
 ### Eliminación de secuencias de baja calidad
 
 Filtra y elimina secuencias de baja calidad o con posibles errores, como aquellas con bases ambiguas (ej. 'N') o secuencias con regiones repetitivas largas que podrían afectar la precisión del clasificador.
+
+
 
 ```{bash, eval=FALSE}
 qiime rescript cull-seqs \
 --i-sequences silva-138.2-ssu-nr99-seqs.qza \
 --o-clean-sequences silva-138.2-ssu-nr99-seqs-cleaned.qza
 ```
+
+
 
 ### Filtrado de secuencias por longitud y taxón
 
@@ -1183,6 +1377,8 @@ Filtra las secuencias según su longitud mínima, dependiendo del grupo taxonóm
 
 Esto asegura que solo se utilicen secuencias completas o casi completas.
 
+
+
 ```{bash, eval=FALSE}
 qiime rescript filter-seqs-length-by-taxon \
 --i-sequences silva-138.2-ssu-nr99-seqs-cleaned.qza \
@@ -1192,9 +1388,13 @@ qiime rescript filter-seqs-length-by-taxon \
 --o-filtered-seqs silva-138.2-ssu-nr99-seqs-filt.qza \    --o-discarded-seqs silva-138.2-ssu-nr99-seqs-discard.qza
 ```
 
+
+
 ### Dereplicación de secuencias
 
 Elimina secuencias duplicadas, manteniendo solo las únicas junto con su información taxonómica. Esto reduce la carga computacional sin perder diversidad taxonómica.
+
+
 
 ```{bash, eval=FALSE}
 qiime rescript dereplicate \
@@ -1205,9 +1405,13 @@ qiime rescript dereplicate \
 --o-dereplicated-taxa silva-138.2-ssu-nr99-tax-derep-uniq.qza
 ```
 
+
+
 ### Extracción de la región V4
 
 Extrae la región hipervariable V4 del gen 16S rRNA usando los cebadores 515F (forward) y 806R (reverse). Esta región es comúnmente utilizada en estudios de microbiomas, por lo que el clasificador se optimiza para datos que la contengan.
+
+
 
 ```{bash, eval=FALSE}
 qiime feature-classifier extract-reads \
@@ -1219,9 +1423,13 @@ qiime feature-classifier extract-reads \
 --o-reads silva-138.2-ssu-nr99-seqs-515f-806r.qza
 ```
 
+
+
 ### Dereplicación de la región V4
 
 Realiza una segunda dereplicación, esta vez sobre las secuencias de la región V4, eliminando duplicados adicionales que puedan haber surgido tras la extracción.
+
+
 
 ```{bash, eval=FALSE}
 qiime rescript dereplicate \
@@ -1232,9 +1440,13 @@ qiime rescript dereplicate \
 --o-dereplicated-taxa  silva-138.2-ssu-nr99-tax-515f-806r-derep-uniq.qza
 ```
 
+
+
 ### Entrenamiento del clasificador Naive Bayes
 
 Entrena un clasificador Naive Bayes utilizando las secuencias únicas de la región V4 y su taxonomía. Este clasificador puede usarse luego para asignar taxonomía a secuencias 16S de muestras de microbiomas.
+
+
 
 ```{bash, eval=FALSE}
 qiime feature-classifier fit-classifier-naive-bayes \
@@ -1243,6 +1455,8 @@ qiime feature-classifier fit-classifier-naive-bayes \
 --o-classifier silva-138.2-ssu-nr99-515f-806r-classifier.qza
 ```
 
+
+
 ## Boxplots para algunos clados importantes
 
 Para este punto bajamos los archivos .csv del nivel 6 al acceder al archivo `taxa-bar-plots.qzv`
@@ -1250,6 +1464,8 @@ Para este punto bajamos los archivos .csv del nivel 6 al acceder al archivo `tax
 Para este ejemplo vamos a explorar los Generos *Lysobacteraceae* y *Micropepsis.*
 
 ### ***Lysobacteraceae***
+
+
 
 ```{r, message=FALSE, warning=FALSE}
 df <- readr::read_csv("tables/level-6.csv")
@@ -1279,7 +1495,11 @@ p + stat_compare_means(comparisons = my_comparisons, label = "p.signif", paired 
 
 ```
 
+
+
 ### ***Micropepsis***
+
+
 
 ```{r, message=FALSE, warning=FALSE}
 df <- readr::read_csv("tables/level-6.csv")
@@ -1304,3 +1524,4 @@ p + stat_compare_means(comparisons = my_comparisons, label = "p.signif", paired 
   theme(text = element_text(size = 20)) +
   ylab("Micropepsis ASV")
 ```
+
