@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="es" xml:lang="es"><head>
 
 <meta charset="utf-8">
 <meta name="generator" content="quarto-1.6.42">
@@ -106,7 +106,7 @@ window.Quarto = {
 <div id="quarto-content" class="page-columns page-rows-contents page-layout-article">
 <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
   <nav id="TOC" role="doc-toc" class="toc-active">
-    <h2 id="toc-title">Table of contents</h2>
+    <h2 id="toc-title">Tabla de contenidos</h2>
    
   <ul>
   <li><a href="#introducción" id="toc-introducción" class="nav-link active" data-scroll-target="#introducción">Introducción</a></li>
@@ -201,7 +201,7 @@ window.Quarto = {
 <div class="quarto-title-meta">
 
     <div>
-    <div class="quarto-title-meta-heading">Author</div>
+    <div class="quarto-title-meta-heading">Autor/a</div>
     <div class="quarto-title-meta-contents">
              <p>OMICs analysis </p>
           </div>
@@ -227,7 +227,7 @@ window.Quarto = {
 <p>Para este tutorial vamos a utilizar <a href="https://qiime2.org/">Qiime2</a><strong>,</strong> <a href="https://library.qiime2.org/quickstart">aquí</a> lo puedes instalar según sea tu sistema operativo. Para los siguientes pasos vamos a autilizar la distribución “<a href="https://amplicon-docs.qiime2.org/">amplicon</a>”. Este tutorial se hizo utilizando el sistema operativo <code>Ubuntu 22.04.5 LTS</code>, en un equipo con <code>24 Gb</code> de <code>RAM</code> <code>Intel® Core™ i7-3610QM CPU @ 2.30GHz × 8</code>. Todo se hizo usando la <code>terminal</code>.</p>
 <p>Una vez instalado <code>qiime</code> activa el ambiente conda.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="ex">conda</span> activate qiime2-amplicon-2024.10</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="ex">conda</span> activate qiime2-amplicon-2024.10</span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p><strong>Primer paso:</strong> Genera una carpeta (directorio) exclusiva para llevar a cabo el proyecto, en este caso el nombre de la carpeta es <code>2025_Demo_tomato_16S</code>, en ella se va generar una carpeta para guardar los genomas 16S que tendrá por nombre <code>data</code>.</p>
 <p>Lo genomas 16S los podrás encontrar <a href="https://drive.google.com/drive/folders/1mQRMfCqHzCaF9_sc_az1Cj3l6YCAAB5V?usp=drive_link"><strong>aquí</strong></a> para descargar.</p>
@@ -235,7 +235,7 @@ window.Quarto = {
 <div class="cell">
 <div class="sourceCode cell-code" id="cb2"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="fu">mkdir</span> 2025_Demo_tomato_16S</span>
 <span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="bu">cd</span> 2025_Demo_tomato_16S</span>
-<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a><span class="fu">mkdir</span> data</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a><span class="fu">mkdir</span> data</span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </section>
 <section id="importar-datos-pareados-con-qiime2" class="level1">
@@ -271,7 +271,7 @@ window.Quarto = {
 <span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>--type <span class="st">'SampleData[PairedEndSequencesWithQuality]'</span> <span class="dt">\</span></span>
 <span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>--input-path tomato_manifest <span class="dt">\</span></span>
 <span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a>--output-path paired-end-tomato-16s.qza <span class="dt">\</span></span>
-<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a>--input-format PairedEndFastqManifestPhred33V2</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a>--input-format PairedEndFastqManifestPhred33V2</span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>Para visualizar la calidad de los archivos importado podemos usar el siguiente comando:</p>
 <div class="cell">
@@ -279,7 +279,7 @@ window.Quarto = {
 <span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>--i-data paired-end-tomato-16s.qza <span class="dt">\ </span></span>
 <span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a><span class="ex">--o-visualization</span> summary_tmp_tomato_16s.qzv</span>
 <span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a><span class="ex">qiime</span> tools view summary_tmp_tomato_16s.qzv</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a><span class="ex">qiime</span> tools view summary_tmp_tomato_16s.qzv</span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
@@ -294,23 +294,23 @@ window.Quarto = {
 <p><strong>Número de lecturas por muestra</strong></p>
 <div class="cell">
 <div class="cell-output-display">
-<div id="quazhqfdxa" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
-<style>#quazhqfdxa table {
+<div id="jbsngbclee" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<style>#jbsngbclee table {
   font-family: system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
-#quazhqfdxa thead, #quazhqfdxa tbody, #quazhqfdxa tfoot, #quazhqfdxa tr, #quazhqfdxa td, #quazhqfdxa th {
+#jbsngbclee thead, #jbsngbclee tbody, #jbsngbclee tfoot, #jbsngbclee tr, #jbsngbclee td, #jbsngbclee th {
   border-style: none;
 }
 
-#quazhqfdxa p {
+#jbsngbclee p {
   margin: 0;
   padding: 0;
 }
 
-#quazhqfdxa .gt_table {
+#jbsngbclee .gt_table {
   display: table;
   border-collapse: collapse;
   line-height: normal;
@@ -336,12 +336,12 @@ window.Quarto = {
   border-left-color: #D3D3D3;
 }
 
-#quazhqfdxa .gt_caption {
+#jbsngbclee .gt_caption {
   padding-top: 4px;
   padding-bottom: 4px;
 }
 
-#quazhqfdxa .gt_title {
+#jbsngbclee .gt_title {
   color: #333333;
   font-size: 125%;
   font-weight: initial;
@@ -353,7 +353,7 @@ window.Quarto = {
   border-bottom-width: 0;
 }
 
-#quazhqfdxa .gt_subtitle {
+#jbsngbclee .gt_subtitle {
   color: #333333;
   font-size: 85%;
   font-weight: initial;
@@ -365,7 +365,7 @@ window.Quarto = {
   border-top-width: 0;
 }
 
-#quazhqfdxa .gt_heading {
+#jbsngbclee .gt_heading {
   background-color: #FFFFFF;
   text-align: center;
   border-bottom-color: #FFFFFF;
@@ -377,13 +377,13 @@ window.Quarto = {
   border-right-color: #D3D3D3;
 }
 
-#quazhqfdxa .gt_bottom_border {
+#jbsngbclee .gt_bottom_border {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
 }
 
-#quazhqfdxa .gt_col_headings {
+#jbsngbclee .gt_col_headings {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -398,7 +398,7 @@ window.Quarto = {
   border-right-color: #D3D3D3;
 }
 
-#quazhqfdxa .gt_col_heading {
+#jbsngbclee .gt_col_heading {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -418,7 +418,7 @@ window.Quarto = {
   overflow-x: hidden;
 }
 
-#quazhqfdxa .gt_column_spanner_outer {
+#jbsngbclee .gt_column_spanner_outer {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -430,15 +430,15 @@ window.Quarto = {
   padding-right: 4px;
 }
 
-#quazhqfdxa .gt_column_spanner_outer:first-child {
+#jbsngbclee .gt_column_spanner_outer:first-child {
   padding-left: 0;
 }
 
-#quazhqfdxa .gt_column_spanner_outer:last-child {
+#jbsngbclee .gt_column_spanner_outer:last-child {
   padding-right: 0;
 }
 
-#quazhqfdxa .gt_column_spanner {
+#jbsngbclee .gt_column_spanner {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
@@ -450,11 +450,11 @@ window.Quarto = {
   width: 100%;
 }
 
-#quazhqfdxa .gt_spanner_row {
+#jbsngbclee .gt_spanner_row {
   border-bottom-style: hidden;
 }
 
-#quazhqfdxa .gt_group_heading {
+#jbsngbclee .gt_group_heading {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -480,7 +480,7 @@ window.Quarto = {
   text-align: left;
 }
 
-#quazhqfdxa .gt_empty_group_heading {
+#jbsngbclee .gt_empty_group_heading {
   padding: 0.5px;
   color: #333333;
   background-color: #FFFFFF;
@@ -495,15 +495,15 @@ window.Quarto = {
   vertical-align: middle;
 }
 
-#quazhqfdxa .gt_from_md > :first-child {
+#jbsngbclee .gt_from_md > :first-child {
   margin-top: 0;
 }
 
-#quazhqfdxa .gt_from_md > :last-child {
+#jbsngbclee .gt_from_md > :last-child {
   margin-bottom: 0;
 }
 
-#quazhqfdxa .gt_row {
+#jbsngbclee .gt_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -522,7 +522,7 @@ window.Quarto = {
   overflow-x: hidden;
 }
 
-#quazhqfdxa .gt_stub {
+#jbsngbclee .gt_stub {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -535,7 +535,7 @@ window.Quarto = {
   padding-right: 5px;
 }
 
-#quazhqfdxa .gt_stub_row_group {
+#jbsngbclee .gt_stub_row_group {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -549,15 +549,15 @@ window.Quarto = {
   vertical-align: top;
 }
 
-#quazhqfdxa .gt_row_group_first td {
+#jbsngbclee .gt_row_group_first td {
   border-top-width: 2px;
 }
 
-#quazhqfdxa .gt_row_group_first th {
+#jbsngbclee .gt_row_group_first th {
   border-top-width: 2px;
 }
 
-#quazhqfdxa .gt_summary_row {
+#jbsngbclee .gt_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -567,16 +567,16 @@ window.Quarto = {
   padding-right: 5px;
 }
 
-#quazhqfdxa .gt_first_summary_row {
+#jbsngbclee .gt_first_summary_row {
   border-top-style: solid;
   border-top-color: #D3D3D3;
 }
 
-#quazhqfdxa .gt_first_summary_row.thick {
+#jbsngbclee .gt_first_summary_row.thick {
   border-top-width: 2px;
 }
 
-#quazhqfdxa .gt_last_summary_row {
+#jbsngbclee .gt_last_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -586,7 +586,7 @@ window.Quarto = {
   border-bottom-color: #D3D3D3;
 }
 
-#quazhqfdxa .gt_grand_summary_row {
+#jbsngbclee .gt_grand_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -596,7 +596,7 @@ window.Quarto = {
   padding-right: 5px;
 }
 
-#quazhqfdxa .gt_first_grand_summary_row {
+#jbsngbclee .gt_first_grand_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -606,7 +606,7 @@ window.Quarto = {
   border-top-color: #D3D3D3;
 }
 
-#quazhqfdxa .gt_last_grand_summary_row_top {
+#jbsngbclee .gt_last_grand_summary_row_top {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -616,11 +616,11 @@ window.Quarto = {
   border-bottom-color: #D3D3D3;
 }
 
-#quazhqfdxa .gt_striped {
+#jbsngbclee .gt_striped {
   background-color: rgba(128, 128, 128, 0.05);
 }
 
-#quazhqfdxa .gt_table_body {
+#jbsngbclee .gt_table_body {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -629,7 +629,7 @@ window.Quarto = {
   border-bottom-color: #D3D3D3;
 }
 
-#quazhqfdxa .gt_footnotes {
+#jbsngbclee .gt_footnotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -643,7 +643,7 @@ window.Quarto = {
   border-right-color: #D3D3D3;
 }
 
-#quazhqfdxa .gt_footnote {
+#jbsngbclee .gt_footnote {
   margin: 0px;
   font-size: 90%;
   padding-top: 4px;
@@ -652,7 +652,7 @@ window.Quarto = {
   padding-right: 5px;
 }
 
-#quazhqfdxa .gt_sourcenotes {
+#jbsngbclee .gt_sourcenotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -666,7 +666,7 @@ window.Quarto = {
   border-right-color: #D3D3D3;
 }
 
-#quazhqfdxa .gt_sourcenote {
+#jbsngbclee .gt_sourcenote {
   font-size: 90%;
   padding-top: 4px;
   padding-bottom: 4px;
@@ -674,72 +674,72 @@ window.Quarto = {
   padding-right: 5px;
 }
 
-#quazhqfdxa .gt_left {
+#jbsngbclee .gt_left {
   text-align: left;
 }
 
-#quazhqfdxa .gt_center {
+#jbsngbclee .gt_center {
   text-align: center;
 }
 
-#quazhqfdxa .gt_right {
+#jbsngbclee .gt_right {
   text-align: right;
   font-variant-numeric: tabular-nums;
 }
 
-#quazhqfdxa .gt_font_normal {
+#jbsngbclee .gt_font_normal {
   font-weight: normal;
 }
 
-#quazhqfdxa .gt_font_bold {
+#jbsngbclee .gt_font_bold {
   font-weight: bold;
 }
 
-#quazhqfdxa .gt_font_italic {
+#jbsngbclee .gt_font_italic {
   font-style: italic;
 }
 
-#quazhqfdxa .gt_super {
+#jbsngbclee .gt_super {
   font-size: 65%;
 }
 
-#quazhqfdxa .gt_footnote_marks {
+#jbsngbclee .gt_footnote_marks {
   font-size: 75%;
   vertical-align: 0.4em;
   position: initial;
 }
 
-#quazhqfdxa .gt_asterisk {
+#jbsngbclee .gt_asterisk {
   font-size: 100%;
   vertical-align: 0;
 }
 
-#quazhqfdxa .gt_indent_1 {
+#jbsngbclee .gt_indent_1 {
   text-indent: 5px;
 }
 
-#quazhqfdxa .gt_indent_2 {
+#jbsngbclee .gt_indent_2 {
   text-indent: 10px;
 }
 
-#quazhqfdxa .gt_indent_3 {
+#jbsngbclee .gt_indent_3 {
   text-indent: 15px;
 }
 
-#quazhqfdxa .gt_indent_4 {
+#jbsngbclee .gt_indent_4 {
   text-indent: 20px;
 }
 
-#quazhqfdxa .gt_indent_5 {
+#jbsngbclee .gt_indent_5 {
   text-indent: 25px;
 }
 
-#quazhqfdxa .katex-display {
+#jbsngbclee .katex-display {
   display: inline-flex !important;
   margin-bottom: 0.75em !important;
 }
 
-#quazhqfdxa div.Reactable > div.rt-table > div.rt-thead > div.rt-tr.rt-tr-group-header > div.rt-th-group:after {
+#jbsngbclee div.Reactable > div.rt-table > div.rt-thead > div.rt-tr.rt-tr-group-header > div.rt-th-group:after {
   height: 0px !important;
 }
 </style>
@@ -831,7 +831,7 @@ window.Quarto = {
 <span id="cb6-6"><a href="#cb6-6" aria-hidden="true" tabindex="-1"></a>--p-adapter-r CTGCWGCCNCCCGTAGG <span class="dt">\</span></span>
 <span id="cb6-7"><a href="#cb6-7" aria-hidden="true" tabindex="-1"></a>--p-match-read-wildcards <span class="dt">\</span></span>
 <span id="cb6-8"><a href="#cb6-8" aria-hidden="true" tabindex="-1"></a>--p-discard-untrimmed <span class="dt">\</span></span>
-<span id="cb6-9"><a href="#cb6-9" aria-hidden="true" tabindex="-1"></a>--o-trimmed-sequences trimmed_paired-end-tomato-16s.qza <span class="at">--p-cores</span> 5</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb6-9"><a href="#cb6-9" aria-hidden="true" tabindex="-1"></a>--o-trimmed-sequences trimmed_paired-end-tomato-16s.qza <span class="at">--p-cores</span> 5</span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <section id="explicación-del-comando" class="level3">
 <h3 class="anchored" data-anchor-id="explicación-del-comando">Explicación del comando:</h3>
@@ -863,32 +863,32 @@ window.Quarto = {
 <div class="cell">
 <div class="sourceCode cell-code" id="cb7"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="ex">qiime</span> demux summarize <span class="dt">\</span></span>
 <span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>--i-data trimmed_paired-end-tomato-16s.qza <span class="dt">\</span></span>
-<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a>--o-visualization summary_tomato_16s.qzv</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a>--o-visualization summary_tomato_16s.qzv</span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>Para visualizar este archivo utiliza el siguiente código:</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="ex">qiime</span> tools view summary_tomato_16s.qzv</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="ex">qiime</span> tools view summary_tomato_16s.qzv</span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p><strong>Número de cuentas por muestras después de cuatadapt</strong></p>
 <div class="cell">
 <div class="cell-output-display">
-<div id="fxlplomvhe" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
-<style>#fxlplomvhe table {
+<div id="rkmowijtqs" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<style>#rkmowijtqs table {
   font-family: system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
-#fxlplomvhe thead, #fxlplomvhe tbody, #fxlplomvhe tfoot, #fxlplomvhe tr, #fxlplomvhe td, #fxlplomvhe th {
+#rkmowijtqs thead, #rkmowijtqs tbody, #rkmowijtqs tfoot, #rkmowijtqs tr, #rkmowijtqs td, #rkmowijtqs th {
   border-style: none;
 }
 
-#fxlplomvhe p {
+#rkmowijtqs p {
   margin: 0;
   padding: 0;
 }
 
-#fxlplomvhe .gt_table {
+#rkmowijtqs .gt_table {
   display: table;
   border-collapse: collapse;
   line-height: normal;
@@ -914,12 +914,12 @@ window.Quarto = {
   border-left-color: #D3D3D3;
 }
 
-#fxlplomvhe .gt_caption {
+#rkmowijtqs .gt_caption {
   padding-top: 4px;
   padding-bottom: 4px;
 }
 
-#fxlplomvhe .gt_title {
+#rkmowijtqs .gt_title {
   color: #333333;
   font-size: 125%;
   font-weight: initial;
@@ -931,7 +931,7 @@ window.Quarto = {
   border-bottom-width: 0;
 }
 
-#fxlplomvhe .gt_subtitle {
+#rkmowijtqs .gt_subtitle {
   color: #333333;
   font-size: 85%;
   font-weight: initial;
@@ -943,7 +943,7 @@ window.Quarto = {
   border-top-width: 0;
 }
 
-#fxlplomvhe .gt_heading {
+#rkmowijtqs .gt_heading {
   background-color: #FFFFFF;
   text-align: center;
   border-bottom-color: #FFFFFF;
@@ -955,13 +955,13 @@ window.Quarto = {
   border-right-color: #D3D3D3;
 }
 
-#fxlplomvhe .gt_bottom_border {
+#rkmowijtqs .gt_bottom_border {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
 }
 
-#fxlplomvhe .gt_col_headings {
+#rkmowijtqs .gt_col_headings {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -976,7 +976,7 @@ window.Quarto = {
   border-right-color: #D3D3D3;
 }
 
-#fxlplomvhe .gt_col_heading {
+#rkmowijtqs .gt_col_heading {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -996,7 +996,7 @@ window.Quarto = {
   overflow-x: hidden;
 }
 
-#fxlplomvhe .gt_column_spanner_outer {
+#rkmowijtqs .gt_column_spanner_outer {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -1008,15 +1008,15 @@ window.Quarto = {
   padding-right: 4px;
 }
 
-#fxlplomvhe .gt_column_spanner_outer:first-child {
+#rkmowijtqs .gt_column_spanner_outer:first-child {
   padding-left: 0;
 }
 
-#fxlplomvhe .gt_column_spanner_outer:last-child {
+#rkmowijtqs .gt_column_spanner_outer:last-child {
   padding-right: 0;
 }
 
-#fxlplomvhe .gt_column_spanner {
+#rkmowijtqs .gt_column_spanner {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
@@ -1028,11 +1028,11 @@ window.Quarto = {
   width: 100%;
 }
 
-#fxlplomvhe .gt_spanner_row {
+#rkmowijtqs .gt_spanner_row {
   border-bottom-style: hidden;
 }
 
-#fxlplomvhe .gt_group_heading {
+#rkmowijtqs .gt_group_heading {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1058,7 +1058,7 @@ window.Quarto = {
   text-align: left;
 }
 
-#fxlplomvhe .gt_empty_group_heading {
+#rkmowijtqs .gt_empty_group_heading {
   padding: 0.5px;
   color: #333333;
   background-color: #FFFFFF;
@@ -1073,15 +1073,15 @@ window.Quarto = {
   vertical-align: middle;
 }
 
-#fxlplomvhe .gt_from_md > :first-child {
+#rkmowijtqs .gt_from_md > :first-child {
   margin-top: 0;
 }
 
-#fxlplomvhe .gt_from_md > :last-child {
+#rkmowijtqs .gt_from_md > :last-child {
   margin-bottom: 0;
 }
 
-#fxlplomvhe .gt_row {
+#rkmowijtqs .gt_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1100,7 +1100,7 @@ window.Quarto = {
   overflow-x: hidden;
 }
 
-#fxlplomvhe .gt_stub {
+#rkmowijtqs .gt_stub {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -1113,7 +1113,7 @@ window.Quarto = {
   padding-right: 5px;
 }
 
-#fxlplomvhe .gt_stub_row_group {
+#rkmowijtqs .gt_stub_row_group {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -1127,15 +1127,15 @@ window.Quarto = {
   vertical-align: top;
 }
 
-#fxlplomvhe .gt_row_group_first td {
+#rkmowijtqs .gt_row_group_first td {
   border-top-width: 2px;
 }
 
-#fxlplomvhe .gt_row_group_first th {
+#rkmowijtqs .gt_row_group_first th {
   border-top-width: 2px;
 }
 
-#fxlplomvhe .gt_summary_row {
+#rkmowijtqs .gt_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -1145,16 +1145,16 @@ window.Quarto = {
   padding-right: 5px;
 }
 
-#fxlplomvhe .gt_first_summary_row {
+#rkmowijtqs .gt_first_summary_row {
   border-top-style: solid;
   border-top-color: #D3D3D3;
 }
 
-#fxlplomvhe .gt_first_summary_row.thick {
+#rkmowijtqs .gt_first_summary_row.thick {
   border-top-width: 2px;
 }
 
-#fxlplomvhe .gt_last_summary_row {
+#rkmowijtqs .gt_last_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1164,7 +1164,7 @@ window.Quarto = {
   border-bottom-color: #D3D3D3;
 }
 
-#fxlplomvhe .gt_grand_summary_row {
+#rkmowijtqs .gt_grand_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -1174,7 +1174,7 @@ window.Quarto = {
   padding-right: 5px;
 }
 
-#fxlplomvhe .gt_first_grand_summary_row {
+#rkmowijtqs .gt_first_grand_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1184,7 +1184,7 @@ window.Quarto = {
   border-top-color: #D3D3D3;
 }
 
-#fxlplomvhe .gt_last_grand_summary_row_top {
+#rkmowijtqs .gt_last_grand_summary_row_top {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1194,11 +1194,11 @@ window.Quarto = {
   border-bottom-color: #D3D3D3;
 }
 
-#fxlplomvhe .gt_striped {
+#rkmowijtqs .gt_striped {
   background-color: rgba(128, 128, 128, 0.05);
 }
 
-#fxlplomvhe .gt_table_body {
+#rkmowijtqs .gt_table_body {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -1207,7 +1207,7 @@ window.Quarto = {
   border-bottom-color: #D3D3D3;
 }
 
-#fxlplomvhe .gt_footnotes {
+#rkmowijtqs .gt_footnotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -1221,7 +1221,7 @@ window.Quarto = {
   border-right-color: #D3D3D3;
 }
 
-#fxlplomvhe .gt_footnote {
+#rkmowijtqs .gt_footnote {
   margin: 0px;
   font-size: 90%;
   padding-top: 4px;
@@ -1230,7 +1230,7 @@ window.Quarto = {
   padding-right: 5px;
 }
 
-#fxlplomvhe .gt_sourcenotes {
+#rkmowijtqs .gt_sourcenotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -1244,7 +1244,7 @@ window.Quarto = {
   border-right-color: #D3D3D3;
 }
 
-#fxlplomvhe .gt_sourcenote {
+#rkmowijtqs .gt_sourcenote {
   font-size: 90%;
   padding-top: 4px;
   padding-bottom: 4px;
@@ -1252,72 +1252,72 @@ window.Quarto = {
   padding-right: 5px;
 }
 
-#fxlplomvhe .gt_left {
+#rkmowijtqs .gt_left {
   text-align: left;
 }
 
-#fxlplomvhe .gt_center {
+#rkmowijtqs .gt_center {
   text-align: center;
 }
 
-#fxlplomvhe .gt_right {
+#rkmowijtqs .gt_right {
   text-align: right;
   font-variant-numeric: tabular-nums;
 }
 
-#fxlplomvhe .gt_font_normal {
+#rkmowijtqs .gt_font_normal {
   font-weight: normal;
 }
 
-#fxlplomvhe .gt_font_bold {
+#rkmowijtqs .gt_font_bold {
   font-weight: bold;
 }
 
-#fxlplomvhe .gt_font_italic {
+#rkmowijtqs .gt_font_italic {
   font-style: italic;
 }
 
-#fxlplomvhe .gt_super {
+#rkmowijtqs .gt_super {
   font-size: 65%;
 }
 
-#fxlplomvhe .gt_footnote_marks {
+#rkmowijtqs .gt_footnote_marks {
   font-size: 75%;
   vertical-align: 0.4em;
   position: initial;
 }
 
-#fxlplomvhe .gt_asterisk {
+#rkmowijtqs .gt_asterisk {
   font-size: 100%;
   vertical-align: 0;
 }
 
-#fxlplomvhe .gt_indent_1 {
+#rkmowijtqs .gt_indent_1 {
   text-indent: 5px;
 }
 
-#fxlplomvhe .gt_indent_2 {
+#rkmowijtqs .gt_indent_2 {
   text-indent: 10px;
 }
 
-#fxlplomvhe .gt_indent_3 {
+#rkmowijtqs .gt_indent_3 {
   text-indent: 15px;
 }
 
-#fxlplomvhe .gt_indent_4 {
+#rkmowijtqs .gt_indent_4 {
   text-indent: 20px;
 }
 
-#fxlplomvhe .gt_indent_5 {
+#rkmowijtqs .gt_indent_5 {
   text-indent: 25px;
 }
 
-#fxlplomvhe .katex-display {
+#rkmowijtqs .katex-display {
   display: inline-flex !important;
   margin-bottom: 0.75em !important;
 }
 
-#fxlplomvhe div.Reactable > div.rt-table > div.rt-thead > div.rt-tr.rt-tr-group-header > div.rt-th-group:after {
+#rkmowijtqs div.Reactable > div.rt-table > div.rt-thead > div.rt-tr.rt-tr-group-header > div.rt-th-group:after {
   height: 0px !important;
 }
 </style>
@@ -1410,7 +1410,7 @@ window.Quarto = {
 <span id="cb9-5"><a href="#cb9-5" aria-hidden="true" tabindex="-1"></a>--o-representative-sequences rep-seqs-dada2-tomato-16s.qza <span class="dt">\</span></span>
 <span id="cb9-6"><a href="#cb9-6" aria-hidden="true" tabindex="-1"></a>--o-table table-dada2-tomato-16s.qza <span class="dt">\</span></span>
 <span id="cb9-7"><a href="#cb9-7" aria-hidden="true" tabindex="-1"></a>--o-denoising-stats stats-dada2-tomato-16s.qza <span class="dt">\</span></span>
-<span id="cb9-8"><a href="#cb9-8" aria-hidden="true" tabindex="-1"></a>--p-n-threads 5</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb9-8"><a href="#cb9-8" aria-hidden="true" tabindex="-1"></a>--p-n-threads 5</span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>Con esto podemos ver un reporte de la cantidad de lecturas filtradas:</p>
 <div class="cell">
@@ -1418,28 +1418,28 @@ window.Quarto = {
 <span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a>  <span class="at">--m-input-file</span> stats-dada2-tomato-16s.qza <span class="dt">\</span></span>
 <span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">--o-visualization</span> stats-dada2-tomato-16s.qzv</span>
 <span id="cb10-4"><a href="#cb10-4" aria-hidden="true" tabindex="-1"></a>  </span>
-<span id="cb10-5"><a href="#cb10-5" aria-hidden="true" tabindex="-1"></a><span class="ex">qiime</span> tools view stats-dada2-tomato-16s.qzv</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb10-5"><a href="#cb10-5" aria-hidden="true" tabindex="-1"></a><span class="ex">qiime</span> tools view stats-dada2-tomato-16s.qzv</span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p><strong>Lecturas filtradas con DADA2</strong></p>
 <div class="cell">
 <div class="cell-output-display">
-<div id="mdupcbeubq" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
-<style>#mdupcbeubq table {
+<div id="lllpxfhgxx" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<style>#lllpxfhgxx table {
   font-family: system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
-#mdupcbeubq thead, #mdupcbeubq tbody, #mdupcbeubq tfoot, #mdupcbeubq tr, #mdupcbeubq td, #mdupcbeubq th {
+#lllpxfhgxx thead, #lllpxfhgxx tbody, #lllpxfhgxx tfoot, #lllpxfhgxx tr, #lllpxfhgxx td, #lllpxfhgxx th {
   border-style: none;
 }
 
-#mdupcbeubq p {
+#lllpxfhgxx p {
   margin: 0;
   padding: 0;
 }
 
-#mdupcbeubq .gt_table {
+#lllpxfhgxx .gt_table {
   display: table;
   border-collapse: collapse;
   line-height: normal;
@@ -1465,12 +1465,12 @@ window.Quarto = {
   border-left-color: #D3D3D3;
 }
 
-#mdupcbeubq .gt_caption {
+#lllpxfhgxx .gt_caption {
   padding-top: 4px;
   padding-bottom: 4px;
 }
 
-#mdupcbeubq .gt_title {
+#lllpxfhgxx .gt_title {
   color: #333333;
   font-size: 125%;
   font-weight: initial;
@@ -1482,7 +1482,7 @@ window.Quarto = {
   border-bottom-width: 0;
 }
 
-#mdupcbeubq .gt_subtitle {
+#lllpxfhgxx .gt_subtitle {
   color: #333333;
   font-size: 85%;
   font-weight: initial;
@@ -1494,7 +1494,7 @@ window.Quarto = {
   border-top-width: 0;
 }
 
-#mdupcbeubq .gt_heading {
+#lllpxfhgxx .gt_heading {
   background-color: #FFFFFF;
   text-align: center;
   border-bottom-color: #FFFFFF;
@@ -1506,13 +1506,13 @@ window.Quarto = {
   border-right-color: #D3D3D3;
 }
 
-#mdupcbeubq .gt_bottom_border {
+#lllpxfhgxx .gt_bottom_border {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
 }
 
-#mdupcbeubq .gt_col_headings {
+#lllpxfhgxx .gt_col_headings {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -1527,7 +1527,7 @@ window.Quarto = {
   border-right-color: #D3D3D3;
 }
 
-#mdupcbeubq .gt_col_heading {
+#lllpxfhgxx .gt_col_heading {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -1547,7 +1547,7 @@ window.Quarto = {
   overflow-x: hidden;
 }
 
-#mdupcbeubq .gt_column_spanner_outer {
+#lllpxfhgxx .gt_column_spanner_outer {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -1559,15 +1559,15 @@ window.Quarto = {
   padding-right: 4px;
 }
 
-#mdupcbeubq .gt_column_spanner_outer:first-child {
+#lllpxfhgxx .gt_column_spanner_outer:first-child {
   padding-left: 0;
 }
 
-#mdupcbeubq .gt_column_spanner_outer:last-child {
+#lllpxfhgxx .gt_column_spanner_outer:last-child {
   padding-right: 0;
 }
 
-#mdupcbeubq .gt_column_spanner {
+#lllpxfhgxx .gt_column_spanner {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
@@ -1579,11 +1579,11 @@ window.Quarto = {
   width: 100%;
 }
 
-#mdupcbeubq .gt_spanner_row {
+#lllpxfhgxx .gt_spanner_row {
   border-bottom-style: hidden;
 }
 
-#mdupcbeubq .gt_group_heading {
+#lllpxfhgxx .gt_group_heading {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1609,7 +1609,7 @@ window.Quarto = {
   text-align: left;
 }
 
-#mdupcbeubq .gt_empty_group_heading {
+#lllpxfhgxx .gt_empty_group_heading {
   padding: 0.5px;
   color: #333333;
   background-color: #FFFFFF;
@@ -1624,15 +1624,15 @@ window.Quarto = {
   vertical-align: middle;
 }
 
-#mdupcbeubq .gt_from_md > :first-child {
+#lllpxfhgxx .gt_from_md > :first-child {
   margin-top: 0;
 }
 
-#mdupcbeubq .gt_from_md > :last-child {
+#lllpxfhgxx .gt_from_md > :last-child {
   margin-bottom: 0;
 }
 
-#mdupcbeubq .gt_row {
+#lllpxfhgxx .gt_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1651,7 +1651,7 @@ window.Quarto = {
   overflow-x: hidden;
 }
 
-#mdupcbeubq .gt_stub {
+#lllpxfhgxx .gt_stub {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -1664,7 +1664,7 @@ window.Quarto = {
   padding-right: 5px;
 }
 
-#mdupcbeubq .gt_stub_row_group {
+#lllpxfhgxx .gt_stub_row_group {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -1678,15 +1678,15 @@ window.Quarto = {
   vertical-align: top;
 }
 
-#mdupcbeubq .gt_row_group_first td {
+#lllpxfhgxx .gt_row_group_first td {
   border-top-width: 2px;
 }
 
-#mdupcbeubq .gt_row_group_first th {
+#lllpxfhgxx .gt_row_group_first th {
   border-top-width: 2px;
 }
 
-#mdupcbeubq .gt_summary_row {
+#lllpxfhgxx .gt_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -1696,16 +1696,16 @@ window.Quarto = {
   padding-right: 5px;
 }
 
-#mdupcbeubq .gt_first_summary_row {
+#lllpxfhgxx .gt_first_summary_row {
   border-top-style: solid;
   border-top-color: #D3D3D3;
 }
 
-#mdupcbeubq .gt_first_summary_row.thick {
+#lllpxfhgxx .gt_first_summary_row.thick {
   border-top-width: 2px;
 }
 
-#mdupcbeubq .gt_last_summary_row {
+#lllpxfhgxx .gt_last_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1715,7 +1715,7 @@ window.Quarto = {
   border-bottom-color: #D3D3D3;
 }
 
-#mdupcbeubq .gt_grand_summary_row {
+#lllpxfhgxx .gt_grand_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -1725,7 +1725,7 @@ window.Quarto = {
   padding-right: 5px;
 }
 
-#mdupcbeubq .gt_first_grand_summary_row {
+#lllpxfhgxx .gt_first_grand_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1735,7 +1735,7 @@ window.Quarto = {
   border-top-color: #D3D3D3;
 }
 
-#mdupcbeubq .gt_last_grand_summary_row_top {
+#lllpxfhgxx .gt_last_grand_summary_row_top {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1745,11 +1745,11 @@ window.Quarto = {
   border-bottom-color: #D3D3D3;
 }
 
-#mdupcbeubq .gt_striped {
+#lllpxfhgxx .gt_striped {
   background-color: rgba(128, 128, 128, 0.05);
 }
 
-#mdupcbeubq .gt_table_body {
+#lllpxfhgxx .gt_table_body {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -1758,7 +1758,7 @@ window.Quarto = {
   border-bottom-color: #D3D3D3;
 }
 
-#mdupcbeubq .gt_footnotes {
+#lllpxfhgxx .gt_footnotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -1772,7 +1772,7 @@ window.Quarto = {
   border-right-color: #D3D3D3;
 }
 
-#mdupcbeubq .gt_footnote {
+#lllpxfhgxx .gt_footnote {
   margin: 0px;
   font-size: 90%;
   padding-top: 4px;
@@ -1781,7 +1781,7 @@ window.Quarto = {
   padding-right: 5px;
 }
 
-#mdupcbeubq .gt_sourcenotes {
+#lllpxfhgxx .gt_sourcenotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -1795,7 +1795,7 @@ window.Quarto = {
   border-right-color: #D3D3D3;
 }
 
-#mdupcbeubq .gt_sourcenote {
+#lllpxfhgxx .gt_sourcenote {
   font-size: 90%;
   padding-top: 4px;
   padding-bottom: 4px;
@@ -1803,72 +1803,72 @@ window.Quarto = {
   padding-right: 5px;
 }
 
-#mdupcbeubq .gt_left {
+#lllpxfhgxx .gt_left {
   text-align: left;
 }
 
-#mdupcbeubq .gt_center {
+#lllpxfhgxx .gt_center {
   text-align: center;
 }
 
-#mdupcbeubq .gt_right {
+#lllpxfhgxx .gt_right {
   text-align: right;
   font-variant-numeric: tabular-nums;
 }
 
-#mdupcbeubq .gt_font_normal {
+#lllpxfhgxx .gt_font_normal {
   font-weight: normal;
 }
 
-#mdupcbeubq .gt_font_bold {
+#lllpxfhgxx .gt_font_bold {
   font-weight: bold;
 }
 
-#mdupcbeubq .gt_font_italic {
+#lllpxfhgxx .gt_font_italic {
   font-style: italic;
 }
 
-#mdupcbeubq .gt_super {
+#lllpxfhgxx .gt_super {
   font-size: 65%;
 }
 
-#mdupcbeubq .gt_footnote_marks {
+#lllpxfhgxx .gt_footnote_marks {
   font-size: 75%;
   vertical-align: 0.4em;
   position: initial;
 }
 
-#mdupcbeubq .gt_asterisk {
+#lllpxfhgxx .gt_asterisk {
   font-size: 100%;
   vertical-align: 0;
 }
 
-#mdupcbeubq .gt_indent_1 {
+#lllpxfhgxx .gt_indent_1 {
   text-indent: 5px;
 }
 
-#mdupcbeubq .gt_indent_2 {
+#lllpxfhgxx .gt_indent_2 {
   text-indent: 10px;
 }
 
-#mdupcbeubq .gt_indent_3 {
+#lllpxfhgxx .gt_indent_3 {
   text-indent: 15px;
 }
 
-#mdupcbeubq .gt_indent_4 {
+#lllpxfhgxx .gt_indent_4 {
   text-indent: 20px;
 }
 
-#mdupcbeubq .gt_indent_5 {
+#lllpxfhgxx .gt_indent_5 {
   text-indent: 25px;
 }
 
-#mdupcbeubq .katex-display {
+#lllpxfhgxx .katex-display {
   display: inline-flex !important;
   margin-bottom: 0.75em !important;
 }
 
-#mdupcbeubq div.Reactable > div.rt-table > div.rt-thead > div.rt-tr.rt-tr-group-header > div.rt-th-group:after {
+#lllpxfhgxx div.Reactable > div.rt-table > div.rt-thead > div.rt-tr.rt-tr-group-header > div.rt-th-group:after {
   height: 0px !important;
 }
 </style>
@@ -2063,33 +2063,33 @@ window.Quarto = {
 <div class="sourceCode cell-code" id="cb12"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="ex">qiime</span> feature-table summarize <span class="dt">\</span></span>
 <span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a>  <span class="at">--i-table</span> table-dada2-tomato-16s.qza <span class="dt">\</span></span>
 <span id="cb12-3"><a href="#cb12-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">--o-visualization</span> table-dada2-tomato-16s.qzv <span class="dt">\</span></span>
-<span id="cb12-4"><a href="#cb12-4" aria-hidden="true" tabindex="-1"></a>  <span class="at">--m-sample-metadata-file</span> Experiment_Design.tsv</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb12-4"><a href="#cb12-4" aria-hidden="true" tabindex="-1"></a>  <span class="at">--m-sample-metadata-file</span> Experiment_Design.tsv</span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb13"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="ex">qiime</span> feature-table tabulate-seqs <span class="dt">\</span></span>
 <span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a>  <span class="at">--i-data</span> rep-seqs-dada2-tomato-16s.qza <span class="dt">\</span></span>
-<span id="cb13-3"><a href="#cb13-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">--o-visualization</span> rep-seqs-dada2-tomato-16s.qza</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb13-3"><a href="#cb13-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">--o-visualization</span> rep-seqs-dada2-tomato-16s.qza</span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>El archivo <code>table-dada2-tomato-16s.qza</code> contiene la matriz de cuentas; en el apéndice <a href="#abrir-archivos-de-qiime2-en-r">Abrir archivos de Qiime2 en R</a> podrás ver a detlla como trabajar con los archivos <code>.qza</code> en <code>R</code>; los primeros 10 ASV se ven del siguiente modo:</p>
 <div class="cell">
 <div class="cell-output-display">
-<div id="mobzjhiuxn" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
-<style>#mobzjhiuxn table {
+<div id="kcjqbuyyoq" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<style>#kcjqbuyyoq table {
   font-family: system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
-#mobzjhiuxn thead, #mobzjhiuxn tbody, #mobzjhiuxn tfoot, #mobzjhiuxn tr, #mobzjhiuxn td, #mobzjhiuxn th {
+#kcjqbuyyoq thead, #kcjqbuyyoq tbody, #kcjqbuyyoq tfoot, #kcjqbuyyoq tr, #kcjqbuyyoq td, #kcjqbuyyoq th {
   border-style: none;
 }
 
-#mobzjhiuxn p {
+#kcjqbuyyoq p {
   margin: 0;
   padding: 0;
 }
 
-#mobzjhiuxn .gt_table {
+#kcjqbuyyoq .gt_table {
   display: table;
   border-collapse: collapse;
   line-height: normal;
@@ -2115,12 +2115,12 @@ window.Quarto = {
   border-left-color: #D3D3D3;
 }
 
-#mobzjhiuxn .gt_caption {
+#kcjqbuyyoq .gt_caption {
   padding-top: 4px;
   padding-bottom: 4px;
 }
 
-#mobzjhiuxn .gt_title {
+#kcjqbuyyoq .gt_title {
   color: #333333;
   font-size: 125%;
   font-weight: initial;
@@ -2132,7 +2132,7 @@ window.Quarto = {
   border-bottom-width: 0;
 }
 
-#mobzjhiuxn .gt_subtitle {
+#kcjqbuyyoq .gt_subtitle {
   color: #333333;
   font-size: 85%;
   font-weight: initial;
@@ -2144,7 +2144,7 @@ window.Quarto = {
   border-top-width: 0;
 }
 
-#mobzjhiuxn .gt_heading {
+#kcjqbuyyoq .gt_heading {
   background-color: #FFFFFF;
   text-align: center;
   border-bottom-color: #FFFFFF;
@@ -2156,13 +2156,13 @@ window.Quarto = {
   border-right-color: #D3D3D3;
 }
 
-#mobzjhiuxn .gt_bottom_border {
+#kcjqbuyyoq .gt_bottom_border {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
 }
 
-#mobzjhiuxn .gt_col_headings {
+#kcjqbuyyoq .gt_col_headings {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -2177,7 +2177,7 @@ window.Quarto = {
   border-right-color: #D3D3D3;
 }
 
-#mobzjhiuxn .gt_col_heading {
+#kcjqbuyyoq .gt_col_heading {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -2197,7 +2197,7 @@ window.Quarto = {
   overflow-x: hidden;
 }
 
-#mobzjhiuxn .gt_column_spanner_outer {
+#kcjqbuyyoq .gt_column_spanner_outer {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -2209,15 +2209,15 @@ window.Quarto = {
   padding-right: 4px;
 }
 
-#mobzjhiuxn .gt_column_spanner_outer:first-child {
+#kcjqbuyyoq .gt_column_spanner_outer:first-child {
   padding-left: 0;
 }
 
-#mobzjhiuxn .gt_column_spanner_outer:last-child {
+#kcjqbuyyoq .gt_column_spanner_outer:last-child {
   padding-right: 0;
 }
 
-#mobzjhiuxn .gt_column_spanner {
+#kcjqbuyyoq .gt_column_spanner {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
@@ -2229,11 +2229,11 @@ window.Quarto = {
   width: 100%;
 }
 
-#mobzjhiuxn .gt_spanner_row {
+#kcjqbuyyoq .gt_spanner_row {
   border-bottom-style: hidden;
 }
 
-#mobzjhiuxn .gt_group_heading {
+#kcjqbuyyoq .gt_group_heading {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -2259,7 +2259,7 @@ window.Quarto = {
   text-align: left;
 }
 
-#mobzjhiuxn .gt_empty_group_heading {
+#kcjqbuyyoq .gt_empty_group_heading {
   padding: 0.5px;
   color: #333333;
   background-color: #FFFFFF;
@@ -2274,15 +2274,15 @@ window.Quarto = {
   vertical-align: middle;
 }
 
-#mobzjhiuxn .gt_from_md > :first-child {
+#kcjqbuyyoq .gt_from_md > :first-child {
   margin-top: 0;
 }
 
-#mobzjhiuxn .gt_from_md > :last-child {
+#kcjqbuyyoq .gt_from_md > :last-child {
   margin-bottom: 0;
 }
 
-#mobzjhiuxn .gt_row {
+#kcjqbuyyoq .gt_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -2301,7 +2301,7 @@ window.Quarto = {
   overflow-x: hidden;
 }
 
-#mobzjhiuxn .gt_stub {
+#kcjqbuyyoq .gt_stub {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -2314,7 +2314,7 @@ window.Quarto = {
   padding-right: 5px;
 }
 
-#mobzjhiuxn .gt_stub_row_group {
+#kcjqbuyyoq .gt_stub_row_group {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -2328,15 +2328,15 @@ window.Quarto = {
   vertical-align: top;
 }
 
-#mobzjhiuxn .gt_row_group_first td {
+#kcjqbuyyoq .gt_row_group_first td {
   border-top-width: 2px;
 }
 
-#mobzjhiuxn .gt_row_group_first th {
+#kcjqbuyyoq .gt_row_group_first th {
   border-top-width: 2px;
 }
 
-#mobzjhiuxn .gt_summary_row {
+#kcjqbuyyoq .gt_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -2346,16 +2346,16 @@ window.Quarto = {
   padding-right: 5px;
 }
 
-#mobzjhiuxn .gt_first_summary_row {
+#kcjqbuyyoq .gt_first_summary_row {
   border-top-style: solid;
   border-top-color: #D3D3D3;
 }
 
-#mobzjhiuxn .gt_first_summary_row.thick {
+#kcjqbuyyoq .gt_first_summary_row.thick {
   border-top-width: 2px;
 }
 
-#mobzjhiuxn .gt_last_summary_row {
+#kcjqbuyyoq .gt_last_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -2365,7 +2365,7 @@ window.Quarto = {
   border-bottom-color: #D3D3D3;
 }
 
-#mobzjhiuxn .gt_grand_summary_row {
+#kcjqbuyyoq .gt_grand_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -2375,7 +2375,7 @@ window.Quarto = {
   padding-right: 5px;
 }
 
-#mobzjhiuxn .gt_first_grand_summary_row {
+#kcjqbuyyoq .gt_first_grand_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -2385,7 +2385,7 @@ window.Quarto = {
   border-top-color: #D3D3D3;
 }
 
-#mobzjhiuxn .gt_last_grand_summary_row_top {
+#kcjqbuyyoq .gt_last_grand_summary_row_top {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -2395,11 +2395,11 @@ window.Quarto = {
   border-bottom-color: #D3D3D3;
 }
 
-#mobzjhiuxn .gt_striped {
+#kcjqbuyyoq .gt_striped {
   background-color: rgba(128, 128, 128, 0.05);
 }
 
-#mobzjhiuxn .gt_table_body {
+#kcjqbuyyoq .gt_table_body {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -2408,7 +2408,7 @@ window.Quarto = {
   border-bottom-color: #D3D3D3;
 }
 
-#mobzjhiuxn .gt_footnotes {
+#kcjqbuyyoq .gt_footnotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -2422,7 +2422,7 @@ window.Quarto = {
   border-right-color: #D3D3D3;
 }
 
-#mobzjhiuxn .gt_footnote {
+#kcjqbuyyoq .gt_footnote {
   margin: 0px;
   font-size: 90%;
   padding-top: 4px;
@@ -2431,7 +2431,7 @@ window.Quarto = {
   padding-right: 5px;
 }
 
-#mobzjhiuxn .gt_sourcenotes {
+#kcjqbuyyoq .gt_sourcenotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -2445,7 +2445,7 @@ window.Quarto = {
   border-right-color: #D3D3D3;
 }
 
-#mobzjhiuxn .gt_sourcenote {
+#kcjqbuyyoq .gt_sourcenote {
   font-size: 90%;
   padding-top: 4px;
   padding-bottom: 4px;
@@ -2453,72 +2453,72 @@ window.Quarto = {
   padding-right: 5px;
 }
 
-#mobzjhiuxn .gt_left {
+#kcjqbuyyoq .gt_left {
   text-align: left;
 }
 
-#mobzjhiuxn .gt_center {
+#kcjqbuyyoq .gt_center {
   text-align: center;
 }
 
-#mobzjhiuxn .gt_right {
+#kcjqbuyyoq .gt_right {
   text-align: right;
   font-variant-numeric: tabular-nums;
 }
 
-#mobzjhiuxn .gt_font_normal {
+#kcjqbuyyoq .gt_font_normal {
   font-weight: normal;
 }
 
-#mobzjhiuxn .gt_font_bold {
+#kcjqbuyyoq .gt_font_bold {
   font-weight: bold;
 }
 
-#mobzjhiuxn .gt_font_italic {
+#kcjqbuyyoq .gt_font_italic {
   font-style: italic;
 }
 
-#mobzjhiuxn .gt_super {
+#kcjqbuyyoq .gt_super {
   font-size: 65%;
 }
 
-#mobzjhiuxn .gt_footnote_marks {
+#kcjqbuyyoq .gt_footnote_marks {
   font-size: 75%;
   vertical-align: 0.4em;
   position: initial;
 }
 
-#mobzjhiuxn .gt_asterisk {
+#kcjqbuyyoq .gt_asterisk {
   font-size: 100%;
   vertical-align: 0;
 }
 
-#mobzjhiuxn .gt_indent_1 {
+#kcjqbuyyoq .gt_indent_1 {
   text-indent: 5px;
 }
 
-#mobzjhiuxn .gt_indent_2 {
+#kcjqbuyyoq .gt_indent_2 {
   text-indent: 10px;
 }
 
-#mobzjhiuxn .gt_indent_3 {
+#kcjqbuyyoq .gt_indent_3 {
   text-indent: 15px;
 }
 
-#mobzjhiuxn .gt_indent_4 {
+#kcjqbuyyoq .gt_indent_4 {
   text-indent: 20px;
 }
 
-#mobzjhiuxn .gt_indent_5 {
+#kcjqbuyyoq .gt_indent_5 {
   text-indent: 25px;
 }
 
-#mobzjhiuxn .katex-display {
+#kcjqbuyyoq .katex-display {
   display: inline-flex !important;
   margin-bottom: 0.75em !important;
 }
 
-#mobzjhiuxn div.Reactable > div.rt-table > div.rt-thead > div.rt-tr.rt-tr-group-header > div.rt-th-group:after {
+#kcjqbuyyoq div.Reactable > div.rt-table > div.rt-thead > div.rt-tr.rt-tr-group-header > div.rt-th-group:after {
   height: 0px !important;
 }
 </style>
@@ -2725,7 +2725,7 @@ window.Quarto = {
 <span id="cb14-3"><a href="#cb14-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">--o-alignment</span> aligned-rep-seqs-dada2-tomato-16s.qza <span class="dt">\</span></span>
 <span id="cb14-4"><a href="#cb14-4" aria-hidden="true" tabindex="-1"></a>  <span class="at">--o-masked-alignment</span> masked-aligned-rep-seqs-dada2-tomato-16s.qza <span class="dt">\</span></span>
 <span id="cb14-5"><a href="#cb14-5" aria-hidden="true" tabindex="-1"></a>  <span class="at">--o-tree</span> unrooted-tree.qza <span class="dt">\</span></span>
-<span id="cb14-6"><a href="#cb14-6" aria-hidden="true" tabindex="-1"></a>  <span class="at">--o-rooted-tree</span> rooted-tree-dada2-tomato-16s.qza</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb14-6"><a href="#cb14-6" aria-hidden="true" tabindex="-1"></a>  <span class="at">--o-rooted-tree</span> rooted-tree-dada2-tomato-16s.qza</span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </section>
 <section id="métricas-general-de-filogenética" class="level3">
@@ -2736,7 +2736,7 @@ window.Quarto = {
 <span id="cb15-3"><a href="#cb15-3" aria-hidden="true" tabindex="-1"></a>--i-table table-dada2-tomato-16s.qza <span class="dt">\</span></span>
 <span id="cb15-4"><a href="#cb15-4" aria-hidden="true" tabindex="-1"></a>--p-sampling-depth 16890 <span class="dt">\</span></span>
 <span id="cb15-5"><a href="#cb15-5" aria-hidden="true" tabindex="-1"></a>--m-metadata-file Experiment_Design.tsv <span class="dt">\</span></span>
-<span id="cb15-6"><a href="#cb15-6" aria-hidden="true" tabindex="-1"></a>--output-dir core-metrics-results</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb15-6"><a href="#cb15-6" aria-hidden="true" tabindex="-1"></a>--output-dir core-metrics-results</span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </section>
 <section id="alfa-diversidad-α-diversidad" class="level2">
@@ -2780,16 +2780,16 @@ window.Quarto = {
 <div class="sourceCode cell-code" id="cb16"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a><span class="ex">qiime</span> diversity alpha-group-significance <span class="dt">\</span></span>
 <span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a>  <span class="at">--i-alpha-diversity</span> simpson_diversity.qza <span class="dt">\ </span>            </span>
 <span id="cb16-3"><a href="#cb16-3" aria-hidden="true" tabindex="-1"></a>  <span class="ex">--m-metadata-file</span> Experiment_Design.tsv <span class="dt">\ </span></span>
-<span id="cb16-4"><a href="#cb16-4" aria-hidden="true" tabindex="-1"></a>  <span class="ex">--o-visualization</span> core-metrics-results/simpson-group-significance.qzv</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb16-4"><a href="#cb16-4" aria-hidden="true" tabindex="-1"></a>  <span class="ex">--o-visualization</span> core-metrics-results/simpson-group-significance.qzv</span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb17"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a><span class="ex">qiime</span> diversity alpha-group-significance <span class="dt">\</span></span>
 <span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a>  <span class="at">--i-alpha-diversity</span> simpson_diversity.qza <span class="dt">\ </span>                  </span>
 <span id="cb17-3"><a href="#cb17-3" aria-hidden="true" tabindex="-1"></a>  <span class="ex">--m-metadata-file</span> Experiment_Design.tsv <span class="dt">\ </span></span>
-<span id="cb17-4"><a href="#cb17-4" aria-hidden="true" tabindex="-1"></a>  <span class="ex">--o-visualization</span> core-metrics-results/simpson-group-significance.qzv</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb17-4"><a href="#cb17-4" aria-hidden="true" tabindex="-1"></a>  <span class="ex">--o-visualization</span> core-metrics-results/simpson-group-significance.qzv</span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb18"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a><span class="ex">qiime</span> tools view core-metrics-results/simpson-group-significance.qzv</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb18"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a><span class="ex">qiime</span> tools view core-metrics-results/simpson-group-significance.qzv</span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
@@ -2798,23 +2798,23 @@ window.Quarto = {
 </div>
 <div class="cell">
 <div class="cell-output-display">
-<div id="qkbgbaqonr" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
-<style>#qkbgbaqonr table {
+<div id="gncaiwcroy" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<style>#gncaiwcroy table {
   font-family: system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
-#qkbgbaqonr thead, #qkbgbaqonr tbody, #qkbgbaqonr tfoot, #qkbgbaqonr tr, #qkbgbaqonr td, #qkbgbaqonr th {
+#gncaiwcroy thead, #gncaiwcroy tbody, #gncaiwcroy tfoot, #gncaiwcroy tr, #gncaiwcroy td, #gncaiwcroy th {
   border-style: none;
 }
 
-#qkbgbaqonr p {
+#gncaiwcroy p {
   margin: 0;
   padding: 0;
 }
 
-#qkbgbaqonr .gt_table {
+#gncaiwcroy .gt_table {
   display: table;
   border-collapse: collapse;
   line-height: normal;
@@ -2840,12 +2840,12 @@ window.Quarto = {
   border-left-color: #D3D3D3;
 }
 
-#qkbgbaqonr .gt_caption {
+#gncaiwcroy .gt_caption {
   padding-top: 4px;
   padding-bottom: 4px;
 }
 
-#qkbgbaqonr .gt_title {
+#gncaiwcroy .gt_title {
   color: #333333;
   font-size: 125%;
   font-weight: initial;
@@ -2857,7 +2857,7 @@ window.Quarto = {
   border-bottom-width: 0;
 }
 
-#qkbgbaqonr .gt_subtitle {
+#gncaiwcroy .gt_subtitle {
   color: #333333;
   font-size: 85%;
   font-weight: initial;
@@ -2869,7 +2869,7 @@ window.Quarto = {
   border-top-width: 0;
 }
 
-#qkbgbaqonr .gt_heading {
+#gncaiwcroy .gt_heading {
   background-color: #FFFFFF;
   text-align: center;
   border-bottom-color: #FFFFFF;
@@ -2881,13 +2881,13 @@ window.Quarto = {
   border-right-color: #D3D3D3;
 }
 
-#qkbgbaqonr .gt_bottom_border {
+#gncaiwcroy .gt_bottom_border {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
 }
 
-#qkbgbaqonr .gt_col_headings {
+#gncaiwcroy .gt_col_headings {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -2902,7 +2902,7 @@ window.Quarto = {
   border-right-color: #D3D3D3;
 }
 
-#qkbgbaqonr .gt_col_heading {
+#gncaiwcroy .gt_col_heading {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -2922,7 +2922,7 @@ window.Quarto = {
   overflow-x: hidden;
 }
 
-#qkbgbaqonr .gt_column_spanner_outer {
+#gncaiwcroy .gt_column_spanner_outer {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -2934,15 +2934,15 @@ window.Quarto = {
   padding-right: 4px;
 }
 
-#qkbgbaqonr .gt_column_spanner_outer:first-child {
+#gncaiwcroy .gt_column_spanner_outer:first-child {
   padding-left: 0;
 }
 
-#qkbgbaqonr .gt_column_spanner_outer:last-child {
+#gncaiwcroy .gt_column_spanner_outer:last-child {
   padding-right: 0;
 }
 
-#qkbgbaqonr .gt_column_spanner {
+#gncaiwcroy .gt_column_spanner {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
@@ -2954,11 +2954,11 @@ window.Quarto = {
   width: 100%;
 }
 
-#qkbgbaqonr .gt_spanner_row {
+#gncaiwcroy .gt_spanner_row {
   border-bottom-style: hidden;
 }
 
-#qkbgbaqonr .gt_group_heading {
+#gncaiwcroy .gt_group_heading {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -2984,7 +2984,7 @@ window.Quarto = {
   text-align: left;
 }
 
-#qkbgbaqonr .gt_empty_group_heading {
+#gncaiwcroy .gt_empty_group_heading {
   padding: 0.5px;
   color: #333333;
   background-color: #FFFFFF;
@@ -2999,15 +2999,15 @@ window.Quarto = {
   vertical-align: middle;
 }
 
-#qkbgbaqonr .gt_from_md > :first-child {
+#gncaiwcroy .gt_from_md > :first-child {
   margin-top: 0;
 }
 
-#qkbgbaqonr .gt_from_md > :last-child {
+#gncaiwcroy .gt_from_md > :last-child {
   margin-bottom: 0;
 }
 
-#qkbgbaqonr .gt_row {
+#gncaiwcroy .gt_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -3026,7 +3026,7 @@ window.Quarto = {
   overflow-x: hidden;
 }
 
-#qkbgbaqonr .gt_stub {
+#gncaiwcroy .gt_stub {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -3039,7 +3039,7 @@ window.Quarto = {
   padding-right: 5px;
 }
 
-#qkbgbaqonr .gt_stub_row_group {
+#gncaiwcroy .gt_stub_row_group {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -3053,15 +3053,15 @@ window.Quarto = {
   vertical-align: top;
 }
 
-#qkbgbaqonr .gt_row_group_first td {
+#gncaiwcroy .gt_row_group_first td {
   border-top-width: 2px;
 }
 
-#qkbgbaqonr .gt_row_group_first th {
+#gncaiwcroy .gt_row_group_first th {
   border-top-width: 2px;
 }
 
-#qkbgbaqonr .gt_summary_row {
+#gncaiwcroy .gt_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -3071,16 +3071,16 @@ window.Quarto = {
   padding-right: 5px;
 }
 
-#qkbgbaqonr .gt_first_summary_row {
+#gncaiwcroy .gt_first_summary_row {
   border-top-style: solid;
   border-top-color: #D3D3D3;
 }
 
-#qkbgbaqonr .gt_first_summary_row.thick {
+#gncaiwcroy .gt_first_summary_row.thick {
   border-top-width: 2px;
 }
 
-#qkbgbaqonr .gt_last_summary_row {
+#gncaiwcroy .gt_last_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -3090,7 +3090,7 @@ window.Quarto = {
   border-bottom-color: #D3D3D3;
 }
 
-#qkbgbaqonr .gt_grand_summary_row {
+#gncaiwcroy .gt_grand_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -3100,7 +3100,7 @@ window.Quarto = {
   padding-right: 5px;
 }
 
-#qkbgbaqonr .gt_first_grand_summary_row {
+#gncaiwcroy .gt_first_grand_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -3110,7 +3110,7 @@ window.Quarto = {
   border-top-color: #D3D3D3;
 }
 
-#qkbgbaqonr .gt_last_grand_summary_row_top {
+#gncaiwcroy .gt_last_grand_summary_row_top {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -3120,11 +3120,11 @@ window.Quarto = {
   border-bottom-color: #D3D3D3;
 }
 
-#qkbgbaqonr .gt_striped {
+#gncaiwcroy .gt_striped {
   background-color: rgba(128, 128, 128, 0.05);
 }
 
-#qkbgbaqonr .gt_table_body {
+#gncaiwcroy .gt_table_body {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -3133,7 +3133,7 @@ window.Quarto = {
   border-bottom-color: #D3D3D3;
 }
 
-#qkbgbaqonr .gt_footnotes {
+#gncaiwcroy .gt_footnotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -3147,7 +3147,7 @@ window.Quarto = {
   border-right-color: #D3D3D3;
 }
 
-#qkbgbaqonr .gt_footnote {
+#gncaiwcroy .gt_footnote {
   margin: 0px;
   font-size: 90%;
   padding-top: 4px;
@@ -3156,7 +3156,7 @@ window.Quarto = {
   padding-right: 5px;
 }
 
-#qkbgbaqonr .gt_sourcenotes {
+#gncaiwcroy .gt_sourcenotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -3170,7 +3170,7 @@ window.Quarto = {
   border-right-color: #D3D3D3;
 }
 
-#qkbgbaqonr .gt_sourcenote {
+#gncaiwcroy .gt_sourcenote {
   font-size: 90%;
   padding-top: 4px;
   padding-bottom: 4px;
@@ -3178,72 +3178,72 @@ window.Quarto = {
   padding-right: 5px;
 }
 
-#qkbgbaqonr .gt_left {
+#gncaiwcroy .gt_left {
   text-align: left;
 }
 
-#qkbgbaqonr .gt_center {
+#gncaiwcroy .gt_center {
   text-align: center;
 }
 
-#qkbgbaqonr .gt_right {
+#gncaiwcroy .gt_right {
   text-align: right;
   font-variant-numeric: tabular-nums;
 }
 
-#qkbgbaqonr .gt_font_normal {
+#gncaiwcroy .gt_font_normal {
   font-weight: normal;
 }
 
-#qkbgbaqonr .gt_font_bold {
+#gncaiwcroy .gt_font_bold {
   font-weight: bold;
 }
 
-#qkbgbaqonr .gt_font_italic {
+#gncaiwcroy .gt_font_italic {
   font-style: italic;
 }
 
-#qkbgbaqonr .gt_super {
+#gncaiwcroy .gt_super {
   font-size: 65%;
 }
 
-#qkbgbaqonr .gt_footnote_marks {
+#gncaiwcroy .gt_footnote_marks {
   font-size: 75%;
   vertical-align: 0.4em;
   position: initial;
 }
 
-#qkbgbaqonr .gt_asterisk {
+#gncaiwcroy .gt_asterisk {
   font-size: 100%;
   vertical-align: 0;
 }
 
-#qkbgbaqonr .gt_indent_1 {
+#gncaiwcroy .gt_indent_1 {
   text-indent: 5px;
 }
 
-#qkbgbaqonr .gt_indent_2 {
+#gncaiwcroy .gt_indent_2 {
   text-indent: 10px;
 }
 
-#qkbgbaqonr .gt_indent_3 {
+#gncaiwcroy .gt_indent_3 {
   text-indent: 15px;
 }
 
-#qkbgbaqonr .gt_indent_4 {
+#gncaiwcroy .gt_indent_4 {
   text-indent: 20px;
 }
 
-#qkbgbaqonr .gt_indent_5 {
+#gncaiwcroy .gt_indent_5 {
   text-indent: 25px;
 }
 
-#qkbgbaqonr .katex-display {
+#gncaiwcroy .katex-display {
   display: inline-flex !important;
   margin-bottom: 0.75em !important;
 }
 
-#qkbgbaqonr div.Reactable > div.rt-table > div.rt-thead > div.rt-tr.rt-tr-group-header > div.rt-th-group:after {
+#gncaiwcroy div.Reactable > div.rt-table > div.rt-thead > div.rt-tr.rt-tr-group-header > div.rt-th-group:after {
   height: 0px !important;
 }
 </style>
@@ -3279,19 +3279,19 @@ window.Quarto = {
 <div class="sourceCode cell-code" id="cb19"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a><span class="ex">qiime</span> diversity alpha-group-significance <span class="dt">\</span></span>
 <span id="cb19-2"><a href="#cb19-2" aria-hidden="true" tabindex="-1"></a>--i-alpha-diversity core-metrics-results/faith_pd_vector.qza <span class="dt">\</span></span>
 <span id="cb19-3"><a href="#cb19-3" aria-hidden="true" tabindex="-1"></a>--m-metadata-file Experiment_Design.tsv <span class="dt">\</span></span>
-<span id="cb19-4"><a href="#cb19-4" aria-hidden="true" tabindex="-1"></a>--o-visualization core-metrics-results/faith-pd-group-significance.qzv</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb19-4"><a href="#cb19-4" aria-hidden="true" tabindex="-1"></a>--o-visualization core-metrics-results/faith-pd-group-significance.qzv</span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb20"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a><span class="ex">qiime</span> diversity alpha-group-significance <span class="dt">\</span></span>
 <span id="cb20-2"><a href="#cb20-2" aria-hidden="true" tabindex="-1"></a>--i-alpha-diversity core-metrics-results/evenness_vector.qza <span class="dt">\</span></span>
 <span id="cb20-3"><a href="#cb20-3" aria-hidden="true" tabindex="-1"></a>--m-metadata-file Experiment_Design.tsv <span class="dt">\</span></span>
-<span id="cb20-4"><a href="#cb20-4" aria-hidden="true" tabindex="-1"></a>--o-visualization core-metrics-results/evenness-group-significance.qzv</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb20-4"><a href="#cb20-4" aria-hidden="true" tabindex="-1"></a>--o-visualization core-metrics-results/evenness-group-significance.qzv</span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>Los siguientes gráficos y tablas de evenness y faith se obtuvieron a partir de los archivos <code>.qzv</code> generados, asi como las tablas de significancia <code>kruskal-wallis-pairwise</code>.</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb21"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a><span class="ex">qiime</span> tools view evenness-group-significance.qzv</span>
 <span id="cb21-2"><a href="#cb21-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb21-3"><a href="#cb21-3" aria-hidden="true" tabindex="-1"></a><span class="ex">qiime</span> tools view faith-pd-group-significance.qzv</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb21-3"><a href="#cb21-3" aria-hidden="true" tabindex="-1"></a><span class="ex">qiime</span> tools view faith-pd-group-significance.qzv</span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </section>
 <section id="eveness-equitabilidad" class="level3">
@@ -3320,23 +3320,23 @@ window.Quarto = {
 </div>
 <div class="cell">
 <div class="cell-output-display">
-<div id="ndmahjaxzo" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
-<style>#ndmahjaxzo table {
+<div id="elhhirpfio" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<style>#elhhirpfio table {
   font-family: system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
-#ndmahjaxzo thead, #ndmahjaxzo tbody, #ndmahjaxzo tfoot, #ndmahjaxzo tr, #ndmahjaxzo td, #ndmahjaxzo th {
+#elhhirpfio thead, #elhhirpfio tbody, #elhhirpfio tfoot, #elhhirpfio tr, #elhhirpfio td, #elhhirpfio th {
   border-style: none;
 }
 
-#ndmahjaxzo p {
+#elhhirpfio p {
   margin: 0;
   padding: 0;
 }
 
-#ndmahjaxzo .gt_table {
+#elhhirpfio .gt_table {
   display: table;
   border-collapse: collapse;
   line-height: normal;
@@ -3362,12 +3362,12 @@ window.Quarto = {
   border-left-color: #D3D3D3;
 }
 
-#ndmahjaxzo .gt_caption {
+#elhhirpfio .gt_caption {
   padding-top: 4px;
   padding-bottom: 4px;
 }
 
-#ndmahjaxzo .gt_title {
+#elhhirpfio .gt_title {
   color: #333333;
   font-size: 125%;
   font-weight: initial;
@@ -3379,7 +3379,7 @@ window.Quarto = {
   border-bottom-width: 0;
 }
 
-#ndmahjaxzo .gt_subtitle {
+#elhhirpfio .gt_subtitle {
   color: #333333;
   font-size: 85%;
   font-weight: initial;
@@ -3391,7 +3391,7 @@ window.Quarto = {
   border-top-width: 0;
 }
 
-#ndmahjaxzo .gt_heading {
+#elhhirpfio .gt_heading {
   background-color: #FFFFFF;
   text-align: center;
   border-bottom-color: #FFFFFF;
@@ -3403,13 +3403,13 @@ window.Quarto = {
   border-right-color: #D3D3D3;
 }
 
-#ndmahjaxzo .gt_bottom_border {
+#elhhirpfio .gt_bottom_border {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
 }
 
-#ndmahjaxzo .gt_col_headings {
+#elhhirpfio .gt_col_headings {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -3424,7 +3424,7 @@ window.Quarto = {
   border-right-color: #D3D3D3;
 }
 
-#ndmahjaxzo .gt_col_heading {
+#elhhirpfio .gt_col_heading {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -3444,7 +3444,7 @@ window.Quarto = {
   overflow-x: hidden;
 }
 
-#ndmahjaxzo .gt_column_spanner_outer {
+#elhhirpfio .gt_column_spanner_outer {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -3456,15 +3456,15 @@ window.Quarto = {
   padding-right: 4px;
 }
 
-#ndmahjaxzo .gt_column_spanner_outer:first-child {
+#elhhirpfio .gt_column_spanner_outer:first-child {
   padding-left: 0;
 }
 
-#ndmahjaxzo .gt_column_spanner_outer:last-child {
+#elhhirpfio .gt_column_spanner_outer:last-child {
   padding-right: 0;
 }
 
-#ndmahjaxzo .gt_column_spanner {
+#elhhirpfio .gt_column_spanner {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
@@ -3476,11 +3476,11 @@ window.Quarto = {
   width: 100%;
 }
 
-#ndmahjaxzo .gt_spanner_row {
+#elhhirpfio .gt_spanner_row {
   border-bottom-style: hidden;
 }
 
-#ndmahjaxzo .gt_group_heading {
+#elhhirpfio .gt_group_heading {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -3506,7 +3506,7 @@ window.Quarto = {
   text-align: left;
 }
 
-#ndmahjaxzo .gt_empty_group_heading {
+#elhhirpfio .gt_empty_group_heading {
   padding: 0.5px;
   color: #333333;
   background-color: #FFFFFF;
@@ -3521,15 +3521,15 @@ window.Quarto = {
   vertical-align: middle;
 }
 
-#ndmahjaxzo .gt_from_md > :first-child {
+#elhhirpfio .gt_from_md > :first-child {
   margin-top: 0;
 }
 
-#ndmahjaxzo .gt_from_md > :last-child {
+#elhhirpfio .gt_from_md > :last-child {
   margin-bottom: 0;
 }
 
-#ndmahjaxzo .gt_row {
+#elhhirpfio .gt_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -3548,7 +3548,7 @@ window.Quarto = {
   overflow-x: hidden;
 }
 
-#ndmahjaxzo .gt_stub {
+#elhhirpfio .gt_stub {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -3561,7 +3561,7 @@ window.Quarto = {
   padding-right: 5px;
 }
 
-#ndmahjaxzo .gt_stub_row_group {
+#elhhirpfio .gt_stub_row_group {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -3575,15 +3575,15 @@ window.Quarto = {
   vertical-align: top;
 }
 
-#ndmahjaxzo .gt_row_group_first td {
+#elhhirpfio .gt_row_group_first td {
   border-top-width: 2px;
 }
 
-#ndmahjaxzo .gt_row_group_first th {
+#elhhirpfio .gt_row_group_first th {
   border-top-width: 2px;
 }
 
-#ndmahjaxzo .gt_summary_row {
+#elhhirpfio .gt_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -3593,16 +3593,16 @@ window.Quarto = {
   padding-right: 5px;
 }
 
-#ndmahjaxzo .gt_first_summary_row {
+#elhhirpfio .gt_first_summary_row {
   border-top-style: solid;
   border-top-color: #D3D3D3;
 }
 
-#ndmahjaxzo .gt_first_summary_row.thick {
+#elhhirpfio .gt_first_summary_row.thick {
   border-top-width: 2px;
 }
 
-#ndmahjaxzo .gt_last_summary_row {
+#elhhirpfio .gt_last_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -3612,7 +3612,7 @@ window.Quarto = {
   border-bottom-color: #D3D3D3;
 }
 
-#ndmahjaxzo .gt_grand_summary_row {
+#elhhirpfio .gt_grand_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -3622,7 +3622,7 @@ window.Quarto = {
   padding-right: 5px;
 }
 
-#ndmahjaxzo .gt_first_grand_summary_row {
+#elhhirpfio .gt_first_grand_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -3632,7 +3632,7 @@ window.Quarto = {
   border-top-color: #D3D3D3;
 }
 
-#ndmahjaxzo .gt_last_grand_summary_row_top {
+#elhhirpfio .gt_last_grand_summary_row_top {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -3642,11 +3642,11 @@ window.Quarto = {
   border-bottom-color: #D3D3D3;
 }
 
-#ndmahjaxzo .gt_striped {
+#elhhirpfio .gt_striped {
   background-color: rgba(128, 128, 128, 0.05);
 }
 
-#ndmahjaxzo .gt_table_body {
+#elhhirpfio .gt_table_body {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -3655,7 +3655,7 @@ window.Quarto = {
   border-bottom-color: #D3D3D3;
 }
 
-#ndmahjaxzo .gt_footnotes {
+#elhhirpfio .gt_footnotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -3669,7 +3669,7 @@ window.Quarto = {
   border-right-color: #D3D3D3;
 }
 
-#ndmahjaxzo .gt_footnote {
+#elhhirpfio .gt_footnote {
   margin: 0px;
   font-size: 90%;
   padding-top: 4px;
@@ -3678,7 +3678,7 @@ window.Quarto = {
   padding-right: 5px;
 }
 
-#ndmahjaxzo .gt_sourcenotes {
+#elhhirpfio .gt_sourcenotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -3692,7 +3692,7 @@ window.Quarto = {
   border-right-color: #D3D3D3;
 }
 
-#ndmahjaxzo .gt_sourcenote {
+#elhhirpfio .gt_sourcenote {
   font-size: 90%;
   padding-top: 4px;
   padding-bottom: 4px;
@@ -3700,72 +3700,72 @@ window.Quarto = {
   padding-right: 5px;
 }
 
-#ndmahjaxzo .gt_left {
+#elhhirpfio .gt_left {
   text-align: left;
 }
 
-#ndmahjaxzo .gt_center {
+#elhhirpfio .gt_center {
   text-align: center;
 }
 
-#ndmahjaxzo .gt_right {
+#elhhirpfio .gt_right {
   text-align: right;
   font-variant-numeric: tabular-nums;
 }
 
-#ndmahjaxzo .gt_font_normal {
+#elhhirpfio .gt_font_normal {
   font-weight: normal;
 }
 
-#ndmahjaxzo .gt_font_bold {
+#elhhirpfio .gt_font_bold {
   font-weight: bold;
 }
 
-#ndmahjaxzo .gt_font_italic {
+#elhhirpfio .gt_font_italic {
   font-style: italic;
 }
 
-#ndmahjaxzo .gt_super {
+#elhhirpfio .gt_super {
   font-size: 65%;
 }
 
-#ndmahjaxzo .gt_footnote_marks {
+#elhhirpfio .gt_footnote_marks {
   font-size: 75%;
   vertical-align: 0.4em;
   position: initial;
 }
 
-#ndmahjaxzo .gt_asterisk {
+#elhhirpfio .gt_asterisk {
   font-size: 100%;
   vertical-align: 0;
 }
 
-#ndmahjaxzo .gt_indent_1 {
+#elhhirpfio .gt_indent_1 {
   text-indent: 5px;
 }
 
-#ndmahjaxzo .gt_indent_2 {
+#elhhirpfio .gt_indent_2 {
   text-indent: 10px;
 }
 
-#ndmahjaxzo .gt_indent_3 {
+#elhhirpfio .gt_indent_3 {
   text-indent: 15px;
 }
 
-#ndmahjaxzo .gt_indent_4 {
+#elhhirpfio .gt_indent_4 {
   text-indent: 20px;
 }
 
-#ndmahjaxzo .gt_indent_5 {
+#elhhirpfio .gt_indent_5 {
   text-indent: 25px;
 }
 
-#ndmahjaxzo .katex-display {
+#elhhirpfio .katex-display {
   display: inline-flex !important;
   margin-bottom: 0.75em !important;
 }
 
-#ndmahjaxzo div.Reactable > div.rt-table > div.rt-thead > div.rt-tr.rt-tr-group-header > div.rt-th-group:after {
+#elhhirpfio div.Reactable > div.rt-table > div.rt-thead > div.rt-tr.rt-tr-group-header > div.rt-th-group:after {
   height: 0px !important;
 }
 </style>
@@ -3823,23 +3823,23 @@ window.Quarto = {
 </div>
 <div class="cell">
 <div class="cell-output-display">
-<div id="nrpkgbpkip" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
-<style>#nrpkgbpkip table {
+<div id="gujeelrawe" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<style>#gujeelrawe table {
   font-family: system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
-#nrpkgbpkip thead, #nrpkgbpkip tbody, #nrpkgbpkip tfoot, #nrpkgbpkip tr, #nrpkgbpkip td, #nrpkgbpkip th {
+#gujeelrawe thead, #gujeelrawe tbody, #gujeelrawe tfoot, #gujeelrawe tr, #gujeelrawe td, #gujeelrawe th {
   border-style: none;
 }
 
-#nrpkgbpkip p {
+#gujeelrawe p {
   margin: 0;
   padding: 0;
 }
 
-#nrpkgbpkip .gt_table {
+#gujeelrawe .gt_table {
   display: table;
   border-collapse: collapse;
   line-height: normal;
@@ -3865,12 +3865,12 @@ window.Quarto = {
   border-left-color: #D3D3D3;
 }
 
-#nrpkgbpkip .gt_caption {
+#gujeelrawe .gt_caption {
   padding-top: 4px;
   padding-bottom: 4px;
 }
 
-#nrpkgbpkip .gt_title {
+#gujeelrawe .gt_title {
   color: #333333;
   font-size: 125%;
   font-weight: initial;
@@ -3882,7 +3882,7 @@ window.Quarto = {
   border-bottom-width: 0;
 }
 
-#nrpkgbpkip .gt_subtitle {
+#gujeelrawe .gt_subtitle {
   color: #333333;
   font-size: 85%;
   font-weight: initial;
@@ -3894,7 +3894,7 @@ window.Quarto = {
   border-top-width: 0;
 }
 
-#nrpkgbpkip .gt_heading {
+#gujeelrawe .gt_heading {
   background-color: #FFFFFF;
   text-align: center;
   border-bottom-color: #FFFFFF;
@@ -3906,13 +3906,13 @@ window.Quarto = {
   border-right-color: #D3D3D3;
 }
 
-#nrpkgbpkip .gt_bottom_border {
+#gujeelrawe .gt_bottom_border {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
 }
 
-#nrpkgbpkip .gt_col_headings {
+#gujeelrawe .gt_col_headings {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -3927,7 +3927,7 @@ window.Quarto = {
   border-right-color: #D3D3D3;
 }
 
-#nrpkgbpkip .gt_col_heading {
+#gujeelrawe .gt_col_heading {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -3947,7 +3947,7 @@ window.Quarto = {
   overflow-x: hidden;
 }
 
-#nrpkgbpkip .gt_column_spanner_outer {
+#gujeelrawe .gt_column_spanner_outer {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -3959,15 +3959,15 @@ window.Quarto = {
   padding-right: 4px;
 }
 
-#nrpkgbpkip .gt_column_spanner_outer:first-child {
+#gujeelrawe .gt_column_spanner_outer:first-child {
   padding-left: 0;
 }
 
-#nrpkgbpkip .gt_column_spanner_outer:last-child {
+#gujeelrawe .gt_column_spanner_outer:last-child {
   padding-right: 0;
 }
 
-#nrpkgbpkip .gt_column_spanner {
+#gujeelrawe .gt_column_spanner {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
@@ -3979,11 +3979,11 @@ window.Quarto = {
   width: 100%;
 }
 
-#nrpkgbpkip .gt_spanner_row {
+#gujeelrawe .gt_spanner_row {
   border-bottom-style: hidden;
 }
 
-#nrpkgbpkip .gt_group_heading {
+#gujeelrawe .gt_group_heading {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -4009,7 +4009,7 @@ window.Quarto = {
   text-align: left;
 }
 
-#nrpkgbpkip .gt_empty_group_heading {
+#gujeelrawe .gt_empty_group_heading {
   padding: 0.5px;
   color: #333333;
   background-color: #FFFFFF;
@@ -4024,15 +4024,15 @@ window.Quarto = {
   vertical-align: middle;
 }
 
-#nrpkgbpkip .gt_from_md > :first-child {
+#gujeelrawe .gt_from_md > :first-child {
   margin-top: 0;
 }
 
-#nrpkgbpkip .gt_from_md > :last-child {
+#gujeelrawe .gt_from_md > :last-child {
   margin-bottom: 0;
 }
 
-#nrpkgbpkip .gt_row {
+#gujeelrawe .gt_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -4051,7 +4051,7 @@ window.Quarto = {
   overflow-x: hidden;
 }
 
-#nrpkgbpkip .gt_stub {
+#gujeelrawe .gt_stub {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -4064,7 +4064,7 @@ window.Quarto = {
   padding-right: 5px;
 }
 
-#nrpkgbpkip .gt_stub_row_group {
+#gujeelrawe .gt_stub_row_group {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -4078,15 +4078,15 @@ window.Quarto = {
   vertical-align: top;
 }
 
-#nrpkgbpkip .gt_row_group_first td {
+#gujeelrawe .gt_row_group_first td {
   border-top-width: 2px;
 }
 
-#nrpkgbpkip .gt_row_group_first th {
+#gujeelrawe .gt_row_group_first th {
   border-top-width: 2px;
 }
 
-#nrpkgbpkip .gt_summary_row {
+#gujeelrawe .gt_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -4096,16 +4096,16 @@ window.Quarto = {
   padding-right: 5px;
 }
 
-#nrpkgbpkip .gt_first_summary_row {
+#gujeelrawe .gt_first_summary_row {
   border-top-style: solid;
   border-top-color: #D3D3D3;
 }
 
-#nrpkgbpkip .gt_first_summary_row.thick {
+#gujeelrawe .gt_first_summary_row.thick {
   border-top-width: 2px;
 }
 
-#nrpkgbpkip .gt_last_summary_row {
+#gujeelrawe .gt_last_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -4115,7 +4115,7 @@ window.Quarto = {
   border-bottom-color: #D3D3D3;
 }
 
-#nrpkgbpkip .gt_grand_summary_row {
+#gujeelrawe .gt_grand_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -4125,7 +4125,7 @@ window.Quarto = {
   padding-right: 5px;
 }
 
-#nrpkgbpkip .gt_first_grand_summary_row {
+#gujeelrawe .gt_first_grand_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -4135,7 +4135,7 @@ window.Quarto = {
   border-top-color: #D3D3D3;
 }
 
-#nrpkgbpkip .gt_last_grand_summary_row_top {
+#gujeelrawe .gt_last_grand_summary_row_top {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -4145,11 +4145,11 @@ window.Quarto = {
   border-bottom-color: #D3D3D3;
 }
 
-#nrpkgbpkip .gt_striped {
+#gujeelrawe .gt_striped {
   background-color: rgba(128, 128, 128, 0.05);
 }
 
-#nrpkgbpkip .gt_table_body {
+#gujeelrawe .gt_table_body {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -4158,7 +4158,7 @@ window.Quarto = {
   border-bottom-color: #D3D3D3;
 }
 
-#nrpkgbpkip .gt_footnotes {
+#gujeelrawe .gt_footnotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -4172,7 +4172,7 @@ window.Quarto = {
   border-right-color: #D3D3D3;
 }
 
-#nrpkgbpkip .gt_footnote {
+#gujeelrawe .gt_footnote {
   margin: 0px;
   font-size: 90%;
   padding-top: 4px;
@@ -4181,7 +4181,7 @@ window.Quarto = {
   padding-right: 5px;
 }
 
-#nrpkgbpkip .gt_sourcenotes {
+#gujeelrawe .gt_sourcenotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -4195,7 +4195,7 @@ window.Quarto = {
   border-right-color: #D3D3D3;
 }
 
-#nrpkgbpkip .gt_sourcenote {
+#gujeelrawe .gt_sourcenote {
   font-size: 90%;
   padding-top: 4px;
   padding-bottom: 4px;
@@ -4203,72 +4203,72 @@ window.Quarto = {
   padding-right: 5px;
 }
 
-#nrpkgbpkip .gt_left {
+#gujeelrawe .gt_left {
   text-align: left;
 }
 
-#nrpkgbpkip .gt_center {
+#gujeelrawe .gt_center {
   text-align: center;
 }
 
-#nrpkgbpkip .gt_right {
+#gujeelrawe .gt_right {
   text-align: right;
   font-variant-numeric: tabular-nums;
 }
 
-#nrpkgbpkip .gt_font_normal {
+#gujeelrawe .gt_font_normal {
   font-weight: normal;
 }
 
-#nrpkgbpkip .gt_font_bold {
+#gujeelrawe .gt_font_bold {
   font-weight: bold;
 }
 
-#nrpkgbpkip .gt_font_italic {
+#gujeelrawe .gt_font_italic {
   font-style: italic;
 }
 
-#nrpkgbpkip .gt_super {
+#gujeelrawe .gt_super {
   font-size: 65%;
 }
 
-#nrpkgbpkip .gt_footnote_marks {
+#gujeelrawe .gt_footnote_marks {
   font-size: 75%;
   vertical-align: 0.4em;
   position: initial;
 }
 
-#nrpkgbpkip .gt_asterisk {
+#gujeelrawe .gt_asterisk {
   font-size: 100%;
   vertical-align: 0;
 }
 
-#nrpkgbpkip .gt_indent_1 {
+#gujeelrawe .gt_indent_1 {
   text-indent: 5px;
 }
 
-#nrpkgbpkip .gt_indent_2 {
+#gujeelrawe .gt_indent_2 {
   text-indent: 10px;
 }
 
-#nrpkgbpkip .gt_indent_3 {
+#gujeelrawe .gt_indent_3 {
   text-indent: 15px;
 }
 
-#nrpkgbpkip .gt_indent_4 {
+#gujeelrawe .gt_indent_4 {
   text-indent: 20px;
 }
 
-#nrpkgbpkip .gt_indent_5 {
+#gujeelrawe .gt_indent_5 {
   text-indent: 25px;
 }
 
-#nrpkgbpkip .katex-display {
+#gujeelrawe .katex-display {
   display: inline-flex !important;
   margin-bottom: 0.75em !important;
 }
 
-#nrpkgbpkip div.Reactable > div.rt-table > div.rt-thead > div.rt-tr.rt-tr-group-header > div.rt-th-group:after {
+#gujeelrawe div.Reactable > div.rt-table > div.rt-thead > div.rt-tr.rt-tr-group-header > div.rt-th-group:after {
   height: 0px !important;
 }
 </style>
@@ -4314,10 +4314,10 @@ window.Quarto = {
 <span id="cb22-3"><a href="#cb22-3" aria-hidden="true" tabindex="-1"></a>--i-phylogeny rooted-tree-dada2-tomato-16s.qza <span class="dt">\</span></span>
 <span id="cb22-4"><a href="#cb22-4" aria-hidden="true" tabindex="-1"></a>--p-max-depth 20000 <span class="dt">\</span></span>
 <span id="cb22-5"><a href="#cb22-5" aria-hidden="true" tabindex="-1"></a>--m-metadata-file Experiment_Design.tsv <span class="dt">\</span></span>
-<span id="cb22-6"><a href="#cb22-6" aria-hidden="true" tabindex="-1"></a>--o-visualization alpha-rarefaction-dada2-tomato-16s.qzv</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb22-6"><a href="#cb22-6" aria-hidden="true" tabindex="-1"></a>--o-visualization alpha-rarefaction-dada2-tomato-16s.qzv</span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb23"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a><span class="ex">qiime</span> tools view alpha-rarefaction-dada2-tomato-16s.qzv</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb23"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a><span class="ex">qiime</span> tools view alpha-rarefaction-dada2-tomato-16s.qzv</span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <section id="observed-features" class="level3">
 <h3 class="anchored" data-anchor-id="observed-features">Observed Features</h3>
@@ -4422,7 +4422,7 @@ window.Quarto = {
 <li>No considera relaciones filogenéticas</li>
 </ul>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb24"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a><span class="ex">qiime</span> tools view core-metrics-results/bray_curtis_emperor.qzv</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb24"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a><span class="ex">qiime</span> tools view core-metrics-results/bray_curtis_emperor.qzv</span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
@@ -4437,10 +4437,10 @@ window.Quarto = {
 <span id="cb25-2"><a href="#cb25-2" aria-hidden="true" tabindex="-1"></a>--i-distance-matrix core-metrics-results/bray_curtis_distance_matrix.qza <span class="dt">\ </span>    </span>
 <span id="cb25-3"><a href="#cb25-3" aria-hidden="true" tabindex="-1"></a><span class="ex">--m-metadata-file</span> Experiment_Design.tsv <span class="dt">\</span></span>
 <span id="cb25-4"><a href="#cb25-4" aria-hidden="true" tabindex="-1"></a>--o-visualization core-metrics-results/curtis-significance.qzv <span class="dt">\</span></span>
-<span id="cb25-5"><a href="#cb25-5" aria-hidden="true" tabindex="-1"></a>--p-pairwise <span class="at">--m-metadata-column</span> Type</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb25-5"><a href="#cb25-5" aria-hidden="true" tabindex="-1"></a>--p-pairwise <span class="at">--m-metadata-column</span> Type</span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb26"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb26-1"><a href="#cb26-1" aria-hidden="true" tabindex="-1"></a><span class="ex">qiime</span> tools view core-metrics-results/curtis-significance.qzv</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb26"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb26-1"><a href="#cb26-1" aria-hidden="true" tabindex="-1"></a><span class="ex">qiime</span> tools view core-metrics-results/curtis-significance.qzv</span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
@@ -4482,7 +4482,7 @@ window.Quarto = {
 <li>No considera abundancias, solo presencia/ausencia</li>
 </ul>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb27"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb27-1"><a href="#cb27-1" aria-hidden="true" tabindex="-1"></a><span class="ex">qiime</span> tools view core-metrics-results/jaccard_emperor.qzv</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb27"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb27-1"><a href="#cb27-1" aria-hidden="true" tabindex="-1"></a><span class="ex">qiime</span> tools view core-metrics-results/jaccard_emperor.qzv</span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
@@ -4497,10 +4497,10 @@ window.Quarto = {
 <span id="cb28-2"><a href="#cb28-2" aria-hidden="true" tabindex="-1"></a>--i-distance-matrix core-metrics-results/jaccard_distance_matrix.qza <span class="dt">\ </span></span>
 <span id="cb28-3"><a href="#cb28-3" aria-hidden="true" tabindex="-1"></a><span class="ex">--m-metadata-file</span> Experiment_Design.tsv <span class="dt">\</span></span>
 <span id="cb28-4"><a href="#cb28-4" aria-hidden="true" tabindex="-1"></a>--o-visualization core-metrics-results/jaccard-significance.qzv <span class="dt">\</span></span>
-<span id="cb28-5"><a href="#cb28-5" aria-hidden="true" tabindex="-1"></a>--p-pairwise <span class="at">--m-metadata-column</span> Type</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb28-5"><a href="#cb28-5" aria-hidden="true" tabindex="-1"></a>--p-pairwise <span class="at">--m-metadata-column</span> Type</span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb29"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb29-1"><a href="#cb29-1" aria-hidden="true" tabindex="-1"></a><span class="ex">qiime</span> tools view core-metrics-results/jaccard-significance.qzv</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb29"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb29-1"><a href="#cb29-1" aria-hidden="true" tabindex="-1"></a><span class="ex">qiime</span> tools view core-metrics-results/jaccard-significance.qzv</span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
@@ -4552,14 +4552,14 @@ window.Quarto = {
 <span id="cb30-3"><a href="#cb30-3" aria-hidden="true" tabindex="-1"></a>--m-metadata-file Experiment_Design.tsv <span class="dt">\</span></span>
 <span id="cb30-4"><a href="#cb30-4" aria-hidden="true" tabindex="-1"></a>--m-metadata-column Type <span class="dt">\</span></span>
 <span id="cb30-5"><a href="#cb30-5" aria-hidden="true" tabindex="-1"></a>--o-visualization core-metrics-results/unweighted-unifrac-body-site-significance.qzv <span class="dt">\</span></span>
-<span id="cb30-6"><a href="#cb30-6" aria-hidden="true" tabindex="-1"></a>--p-pairwise</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb30-6"><a href="#cb30-6" aria-hidden="true" tabindex="-1"></a>--p-pairwise</span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </section>
 </section>
 <section id="unweighted-unifrac" class="level3">
 <h3 class="anchored" data-anchor-id="unweighted-unifrac">Unweighted UniFrac</h3>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb31"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb31-1"><a href="#cb31-1" aria-hidden="true" tabindex="-1"></a><span class="ex">qiime</span> tools view core-metrics-results/unweighted_unifrac_emperor.qzv</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb31"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb31-1"><a href="#cb31-1" aria-hidden="true" tabindex="-1"></a><span class="ex">qiime</span> tools view core-metrics-results/unweighted_unifrac_emperor.qzv</span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
@@ -4569,7 +4569,7 @@ window.Quarto = {
 <section id="permanova-2" class="level4">
 <h4 class="anchored" data-anchor-id="permanova-2">PERMANOVA</h4>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb32"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb32-1"><a href="#cb32-1" aria-hidden="true" tabindex="-1"></a><span class="ex">qiime</span> tools view core-metrics-results/unweighted-unifrac-body-site-significance.qzv</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb32"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb32-1"><a href="#cb32-1" aria-hidden="true" tabindex="-1"></a><span class="ex">qiime</span> tools view core-metrics-results/unweighted-unifrac-body-site-significance.qzv</span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
@@ -4595,13 +4595,13 @@ window.Quarto = {
 <div class="sourceCode cell-code" id="cb33"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb33-1"><a href="#cb33-1" aria-hidden="true" tabindex="-1"></a><span class="ex">qiime</span> feature-classifier classify-sklearn <span class="dt">\</span></span>
 <span id="cb33-2"><a href="#cb33-2" aria-hidden="true" tabindex="-1"></a>  <span class="at">--i-classifier</span> silva-138.2-ssu-nr99-515f-806r-classifier.qza <span class="dt">\</span></span>
 <span id="cb33-3"><a href="#cb33-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">--i-reads</span> rep-seqs-dada2-tomato-16s.qza <span class="dt">\</span></span>
-<span id="cb33-4"><a href="#cb33-4" aria-hidden="true" tabindex="-1"></a>  <span class="at">--o-classification</span> taxonomy.qza</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb33-4"><a href="#cb33-4" aria-hidden="true" tabindex="-1"></a>  <span class="at">--o-classification</span> taxonomy.qza</span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>El siguiente comando es útil para revisar las asignaciones taxonómicas y explorar la composición de las secuencias de forma interactiva.</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb34"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb34-1"><a href="#cb34-1" aria-hidden="true" tabindex="-1"></a><span class="ex">qiime</span> metadata tabulate <span class="dt">\</span></span>
 <span id="cb34-2"><a href="#cb34-2" aria-hidden="true" tabindex="-1"></a>  <span class="at">--m-input-file</span> taxonomy.qza <span class="dt">\</span></span>
-<span id="cb34-3"><a href="#cb34-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">--o-visualization</span> taxonomy.qzv</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb34-3"><a href="#cb34-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">--o-visualization</span> taxonomy.qzv</span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>Este gráfico facilita el análisis visual de cómo varía la microbiota entre diferentes condiciones del experimento.</p>
 <div class="cell">
@@ -4609,10 +4609,10 @@ window.Quarto = {
 <span id="cb35-2"><a href="#cb35-2" aria-hidden="true" tabindex="-1"></a>  <span class="at">--i-table</span> table-dada2-tomato-16s.qza <span class="dt">\</span></span>
 <span id="cb35-3"><a href="#cb35-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">--i-taxonomy</span> taxonomy.qza <span class="dt">\</span></span>
 <span id="cb35-4"><a href="#cb35-4" aria-hidden="true" tabindex="-1"></a>  <span class="at">--m-metadata-file</span> Experiment_Design.tsv <span class="dt">\</span></span>
-<span id="cb35-5"><a href="#cb35-5" aria-hidden="true" tabindex="-1"></a>  <span class="at">--o-visualization</span> taxa-bar-plots.qzv</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb35-5"><a href="#cb35-5" aria-hidden="true" tabindex="-1"></a>  <span class="at">--o-visualization</span> taxa-bar-plots.qzv</span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb36"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb36-1"><a href="#cb36-1" aria-hidden="true" tabindex="-1"></a><span class="ex">qiime</span> tools view taxa-bar-plots.qzv</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb36"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb36-1"><a href="#cb36-1" aria-hidden="true" tabindex="-1"></a><span class="ex">qiime</span> tools view taxa-bar-plots.qzv</span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
@@ -4659,16 +4659,16 @@ window.Quarto = {
 <span id="cb37-2"><a href="#cb37-2" aria-hidden="true" tabindex="-1"></a>  <span class="at">--i-table</span> table-dada2-tomato-16s.qza <span class="dt">\ </span></span>
 <span id="cb37-3"><a href="#cb37-3" aria-hidden="true" tabindex="-1"></a>  <span class="ex">--m-metadata-file</span> Experiment_Design.tsv <span class="dt">\</span></span>
 <span id="cb37-4"><a href="#cb37-4" aria-hidden="true" tabindex="-1"></a>  <span class="at">--p-formula</span> <span class="st">'Type'</span> <span class="dt">\ </span>  </span>
-<span id="cb37-5"><a href="#cb37-5" aria-hidden="true" tabindex="-1"></a>  <span class="ex">--o-differentials</span> ancombc-subject.qza</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb37-5"><a href="#cb37-5" aria-hidden="true" tabindex="-1"></a>  <span class="ex">--o-differentials</span> ancombc-subject.qza</span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb38"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb38-1"><a href="#cb38-1" aria-hidden="true" tabindex="-1"></a><span class="ex">qiime</span> composition da-barplot <span class="dt">\</span></span>
 <span id="cb38-2"><a href="#cb38-2" aria-hidden="true" tabindex="-1"></a>  <span class="at">--i-data</span> ancombc-subject.qza <span class="dt">\</span></span>
 <span id="cb38-3"><a href="#cb38-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">--p-significance-threshold</span> 0.001 <span class="dt">\</span></span>
-<span id="cb38-4"><a href="#cb38-4" aria-hidden="true" tabindex="-1"></a>  <span class="at">--o-visualization</span> da-barplot-type.qzv</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb38-4"><a href="#cb38-4" aria-hidden="true" tabindex="-1"></a>  <span class="at">--o-visualization</span> da-barplot-type.qzv</span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb39"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb39-1"><a href="#cb39-1" aria-hidden="true" tabindex="-1"></a><span class="ex">qiime</span> tools view da-barplot-type.qzv</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb39"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb39-1"><a href="#cb39-1" aria-hidden="true" tabindex="-1"></a><span class="ex">qiime</span> tools view da-barplot-type.qzv</span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
@@ -4681,14 +4681,14 @@ window.Quarto = {
 <span id="cb40-2"><a href="#cb40-2" aria-hidden="true" tabindex="-1"></a>  <span class="at">--i-table</span> table-dada2-tomato-16s.qza <span class="dt">\</span></span>
 <span id="cb40-3"><a href="#cb40-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">--i-taxonomy</span> taxonomy.qza <span class="dt">\</span></span>
 <span id="cb40-4"><a href="#cb40-4" aria-hidden="true" tabindex="-1"></a>  <span class="at">--p-level</span> 3 <span class="dt">\</span></span>
-<span id="cb40-5"><a href="#cb40-5" aria-hidden="true" tabindex="-1"></a>  <span class="at">--o-collapsed-table</span> tomato-table-l3.qza</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb40-5"><a href="#cb40-5" aria-hidden="true" tabindex="-1"></a>  <span class="at">--o-collapsed-table</span> tomato-table-l3.qza</span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb41"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb41-1"><a href="#cb41-1" aria-hidden="true" tabindex="-1"></a><span class="ex">qiime</span> composition ancombc <span class="dt">\</span></span>
 <span id="cb41-2"><a href="#cb41-2" aria-hidden="true" tabindex="-1"></a>  <span class="at">--i-table</span> tomato-table-l3.qza <span class="dt">\ </span></span>
 <span id="cb41-3"><a href="#cb41-3" aria-hidden="true" tabindex="-1"></a>  <span class="ex">--m-metadata-file</span> Experiment_Design.tsv <span class="dt">\ </span></span>
 <span id="cb41-4"><a href="#cb41-4" aria-hidden="true" tabindex="-1"></a>  <span class="ex">--p-formula</span> <span class="st">'Type'</span> <span class="dt">\ </span>  </span>
-<span id="cb41-5"><a href="#cb41-5" aria-hidden="true" tabindex="-1"></a>  <span class="ex">--o-differentials</span> l3-ancombc-type.qza  </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb41-5"><a href="#cb41-5" aria-hidden="true" tabindex="-1"></a>  <span class="ex">--o-differentials</span> l3-ancombc-type.qza  </span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb42"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb42-1"><a href="#cb42-1" aria-hidden="true" tabindex="-1"></a><span class="ex">qiime</span> composition da-barplot <span class="dt">\</span></span>
@@ -4697,7 +4697,7 @@ window.Quarto = {
 <span id="cb42-4"><a href="#cb42-4" aria-hidden="true" tabindex="-1"></a>  <span class="at">--p-level-delimiter</span> <span class="st">';'</span> <span class="dt">\</span></span>
 <span id="cb42-5"><a href="#cb42-5" aria-hidden="true" tabindex="-1"></a>  <span class="at">--o-visualization</span> l3-da-barplot-subject.qzv</span>
 <span id="cb42-6"><a href="#cb42-6" aria-hidden="true" tabindex="-1"></a>  </span>
-<span id="cb42-7"><a href="#cb42-7" aria-hidden="true" tabindex="-1"></a><span class="ex">qiime</span> tools view l3-da-barplot-subject.qzv</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb42-7"><a href="#cb42-7" aria-hidden="true" tabindex="-1"></a><span class="ex">qiime</span> tools view l3-da-barplot-subject.qzv</span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
@@ -4724,7 +4724,7 @@ window.Quarto = {
 <span id="cb43-16"><a href="#cb43-16" aria-hidden="true" tabindex="-1"></a>  <span class="at">--p-level-delimiter</span> <span class="st">';'</span> <span class="dt">\</span></span>
 <span id="cb43-17"><a href="#cb43-17" aria-hidden="true" tabindex="-1"></a>  <span class="at">--o-visualization</span> l6-da-barplot-subject.qzv</span>
 <span id="cb43-18"><a href="#cb43-18" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb43-19"><a href="#cb43-19" aria-hidden="true" tabindex="-1"></a><span class="ex">qiime</span> tools view l6-da-barplot-subject.qzv</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb43-19"><a href="#cb43-19" aria-hidden="true" tabindex="-1"></a><span class="ex">qiime</span> tools view l6-da-barplot-subject.qzv</span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
@@ -4742,7 +4742,7 @@ window.Quarto = {
 <p>Primero instala la paquetería <a href="https://github.com/jbisanz/qiime2R/"><code>qiime2R</code></a></p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb44"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb44-1"><a href="#cb44-1" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> (<span class="sc">!</span><span class="fu">requireNamespace</span>(<span class="st">"devtools"</span>, <span class="at">quietly =</span> <span class="cn">TRUE</span>)){<span class="fu">install.packages</span>(<span class="st">"devtools"</span>)}</span>
-<span id="cb44-2"><a href="#cb44-2" aria-hidden="true" tabindex="-1"></a>devtools<span class="sc">::</span><span class="fu">install_github</span>(<span class="st">"jbisanz/qiime2R"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb44-2"><a href="#cb44-2" aria-hidden="true" tabindex="-1"></a>devtools<span class="sc">::</span><span class="fu">install_github</span>(<span class="st">"jbisanz/qiime2R"</span>)</span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>Esta paquetería nos permite leer los archivos <code>.qza</code> <strong>QIIME Zipped Artifact</strong>.</p>
 <p>Por ejemplo, si buscas acceder a la matriz de cuentas de los ASV del archivo <code>table-dada2-tomato-16s.qza</code>, puede utilizar el siguiente código:</p>
@@ -4751,7 +4751,7 @@ window.Quarto = {
 <span id="cb45-2"><a href="#cb45-2" aria-hidden="true" tabindex="-1"></a>df_tmp <span class="ot">&lt;-</span> <span class="fu">read_qza</span>(<span class="st">"../2025_Demo_16S_tomate/table-dada2-tomato-16s.qza"</span>)</span>
 <span id="cb45-3"><a href="#cb45-3" aria-hidden="true" tabindex="-1"></a>df_counts <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(df_tmp<span class="sc">$</span>data)</span>
 <span id="cb45-4"><a href="#cb45-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb45-5"><a href="#cb45-5" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(df_counts, <span class="dv">5</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb45-5"><a href="#cb45-5" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(df_counts, <span class="dv">5</span>)</span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>                                 NC_1 NC_2 NC_3 NC_4 NC_5 NC_6 Tomato_1
 9002efc8d0aae0e00570a0ef34a8f2f4    0    0    0    0    0    0     1280
@@ -4772,7 +4772,7 @@ d1316b26e5350da36e6456499ecdfe18      694      498      355      426      819
 <h2 class="anchored" data-anchor-id="otras-métricas-de-alfa-diversidad">Otras métricas de Alfa Diversidad</h2>
 <p>Para los siguientes gráficos se dercargaron los archivos <code>.csv</code> a partir del archivo <code>.qzv</code>, para posteriormente usar <code>R</code> para gráficar.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb47"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb47-1"><a href="#cb47-1" aria-hidden="true" tabindex="-1"></a><span class="ex">qiime</span> tools view alpha-rarefaction-dada2-tomato-16s.qzv</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb47"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb47-1"><a href="#cb47-1" aria-hidden="true" tabindex="-1"></a><span class="ex">qiime</span> tools view alpha-rarefaction-dada2-tomato-16s.qzv</span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>Se descargaron los siguientes archivos:</p>
 <ul>
@@ -4835,7 +4835,7 @@ d1316b26e5350da36e6456499ecdfe18      694      498      355      426      819
 <span id="cb48-48"><a href="#cb48-48" aria-hidden="true" tabindex="-1"></a>    <span class="at">panel.grid.major.x =</span> <span class="fu">element_blank</span>()</span>
 <span id="cb48-49"><a href="#cb48-49" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">+</span></span>
 <span id="cb48-50"><a href="#cb48-50" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_fill_manual</span>(<span class="at">values =</span> <span class="fu">c</span>( <span class="st">"#8f0052"</span>,<span class="st">"#276518"</span>)) <span class="sc">+</span></span>
-<span id="cb48-51"><a href="#cb48-51" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_color_manual</span>(<span class="at">values =</span> <span class="fu">c</span>( <span class="st">"#8f0052"</span>,<span class="st">"#276518"</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb48-51"><a href="#cb48-51" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_color_manual</span>(<span class="at">values =</span> <span class="fu">c</span>( <span class="st">"#8f0052"</span>,<span class="st">"#276518"</span>))</span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <div>
 <figure class="figure">
@@ -4899,7 +4899,7 @@ d1316b26e5350da36e6456499ecdfe18      694      498      355      426      819
 <span id="cb49-48"><a href="#cb49-48" aria-hidden="true" tabindex="-1"></a>    <span class="at">panel.grid.major.x =</span> <span class="fu">element_blank</span>()</span>
 <span id="cb49-49"><a href="#cb49-49" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">+</span></span>
 <span id="cb49-50"><a href="#cb49-50" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_fill_manual</span>(<span class="at">values =</span> <span class="fu">c</span>( <span class="st">"#8f0052"</span>,<span class="st">"#276518"</span>)) <span class="sc">+</span></span>
-<span id="cb49-51"><a href="#cb49-51" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_color_manual</span>(<span class="at">values =</span> <span class="fu">c</span>( <span class="st">"#8f0052"</span>,<span class="st">"#276518"</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb49-51"><a href="#cb49-51" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_color_manual</span>(<span class="at">values =</span> <span class="fu">c</span>( <span class="st">"#8f0052"</span>,<span class="st">"#276518"</span>))</span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <div>
 <figure class="figure">
@@ -4964,7 +4964,7 @@ d1316b26e5350da36e6456499ecdfe18      694      498      355      426      819
 <span id="cb50-48"><a href="#cb50-48" aria-hidden="true" tabindex="-1"></a>    <span class="at">panel.grid.major.x =</span> <span class="fu">element_blank</span>()</span>
 <span id="cb50-49"><a href="#cb50-49" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">+</span></span>
 <span id="cb50-50"><a href="#cb50-50" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_fill_manual</span>(<span class="at">values =</span> <span class="fu">c</span>( <span class="st">"#8f0052"</span>,<span class="st">"#276518"</span>)) <span class="sc">+</span></span>
-<span id="cb50-51"><a href="#cb50-51" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_color_manual</span>(<span class="at">values =</span> <span class="fu">c</span>( <span class="st">"#8f0052"</span>,<span class="st">"#276518"</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb50-51"><a href="#cb50-51" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_color_manual</span>(<span class="at">values =</span> <span class="fu">c</span>( <span class="st">"#8f0052"</span>,<span class="st">"#276518"</span>))</span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <div>
 <figure class="figure">
@@ -4983,7 +4983,7 @@ d1316b26e5350da36e6456499ecdfe18      694      498      355      426      819
 <p>Los siguientes datos se descargaron a partir del siguinete comando en <code>bash</code> para posteriormente gráficar en <code>R</code>.</p>
 <p>En <code>bash</code>:</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb51"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb51-1"><a href="#cb51-1" aria-hidden="true" tabindex="-1"></a><span class="ex">qiime</span> tools view core-metrics-results/unweighted-unifrac-body-site-significance.qzv</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb51"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb51-1"><a href="#cb51-1" aria-hidden="true" tabindex="-1"></a><span class="ex">qiime</span> tools view core-metrics-results/unweighted-unifrac-body-site-significance.qzv</span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <section id="usando-r-para-gráficar" class="level3">
 <h3 class="anchored" data-anchor-id="usando-r-para-gráficar">Usando R para gráficar</h3>
@@ -5004,7 +5004,7 @@ d1316b26e5350da36e6456499ecdfe18      694      498      355      426      819
 <span id="cb52-11"><a href="#cb52-11" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">"Distance to NC"</span>, <span class="at">fill =</span> <span class="st">"Group"</span>) <span class="sc">+</span></span>
 <span id="cb52-12"><a href="#cb52-12" aria-hidden="true" tabindex="-1"></a>  <span class="fu">xlab</span>(<span class="st">"Group"</span>) <span class="sc">+</span> </span>
 <span id="cb52-13"><a href="#cb52-13" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(<span class="at">text =</span> <span class="fu">element_text</span>(<span class="at">size =</span> <span class="dv">20</span>)) <span class="sc">+</span></span>
-<span id="cb52-14"><a href="#cb52-14" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_fill_manual</span>(<span class="at">values =</span> <span class="fu">c</span>( <span class="st">"#8f0052"</span>,<span class="st">"#276518"</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb52-14"><a href="#cb52-14" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_fill_manual</span>(<span class="at">values =</span> <span class="fu">c</span>( <span class="st">"#8f0052"</span>,<span class="st">"#276518"</span>))</span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <div>
 <figure class="figure">
@@ -5021,7 +5021,7 @@ d1316b26e5350da36e6456499ecdfe18      694      498      355      426      819
 <span id="cb53-7"><a href="#cb53-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">"Distance to Tomato"</span>, <span class="at">fill =</span> <span class="st">"Group"</span>) <span class="sc">+</span></span>
 <span id="cb53-8"><a href="#cb53-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">xlab</span>(<span class="st">"Group"</span>) <span class="sc">+</span> </span>
 <span id="cb53-9"><a href="#cb53-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(<span class="at">text =</span> <span class="fu">element_text</span>(<span class="at">size =</span> <span class="dv">20</span>)) <span class="sc">+</span></span>
-<span id="cb53-10"><a href="#cb53-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_fill_manual</span>(<span class="at">values =</span> <span class="fu">c</span>( <span class="st">"#8f0052"</span>,<span class="st">"#276518"</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb53-10"><a href="#cb53-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_fill_manual</span>(<span class="at">values =</span> <span class="fu">c</span>( <span class="st">"#8f0052"</span>,<span class="st">"#276518"</span>))</span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <div>
 <figure class="figure">
@@ -5032,23 +5032,23 @@ d1316b26e5350da36e6456499ecdfe18      694      498      355      426      819
 </div>
 <div class="cell">
 <div class="cell-output-display">
-<div id="udqscdmakm" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
-<style>#udqscdmakm table {
+<div id="mjagcamnfn" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<style>#mjagcamnfn table {
   font-family: system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
-#udqscdmakm thead, #udqscdmakm tbody, #udqscdmakm tfoot, #udqscdmakm tr, #udqscdmakm td, #udqscdmakm th {
+#mjagcamnfn thead, #mjagcamnfn tbody, #mjagcamnfn tfoot, #mjagcamnfn tr, #mjagcamnfn td, #mjagcamnfn th {
   border-style: none;
 }
 
-#udqscdmakm p {
+#mjagcamnfn p {
   margin: 0;
   padding: 0;
 }
 
-#udqscdmakm .gt_table {
+#mjagcamnfn .gt_table {
   display: table;
   border-collapse: collapse;
   line-height: normal;
@@ -5074,12 +5074,12 @@ d1316b26e5350da36e6456499ecdfe18      694      498      355      426      819
   border-left-color: #D3D3D3;
 }
 
-#udqscdmakm .gt_caption {
+#mjagcamnfn .gt_caption {
   padding-top: 4px;
   padding-bottom: 4px;
 }
 
-#udqscdmakm .gt_title {
+#mjagcamnfn .gt_title {
   color: #333333;
   font-size: 125%;
   font-weight: initial;
@@ -5091,7 +5091,7 @@ d1316b26e5350da36e6456499ecdfe18      694      498      355      426      819
   border-bottom-width: 0;
 }
 
-#udqscdmakm .gt_subtitle {
+#mjagcamnfn .gt_subtitle {
   color: #333333;
   font-size: 85%;
   font-weight: initial;
@@ -5103,7 +5103,7 @@ d1316b26e5350da36e6456499ecdfe18      694      498      355      426      819
   border-top-width: 0;
 }
 
-#udqscdmakm .gt_heading {
+#mjagcamnfn .gt_heading {
   background-color: #FFFFFF;
   text-align: center;
   border-bottom-color: #FFFFFF;
@@ -5115,13 +5115,13 @@ d1316b26e5350da36e6456499ecdfe18      694      498      355      426      819
   border-right-color: #D3D3D3;
 }
 
-#udqscdmakm .gt_bottom_border {
+#mjagcamnfn .gt_bottom_border {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
 }
 
-#udqscdmakm .gt_col_headings {
+#mjagcamnfn .gt_col_headings {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -5136,7 +5136,7 @@ d1316b26e5350da36e6456499ecdfe18      694      498      355      426      819
   border-right-color: #D3D3D3;
 }
 
-#udqscdmakm .gt_col_heading {
+#mjagcamnfn .gt_col_heading {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -5156,7 +5156,7 @@ d1316b26e5350da36e6456499ecdfe18      694      498      355      426      819
   overflow-x: hidden;
 }
 
-#udqscdmakm .gt_column_spanner_outer {
+#mjagcamnfn .gt_column_spanner_outer {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -5168,15 +5168,15 @@ d1316b26e5350da36e6456499ecdfe18      694      498      355      426      819
   padding-right: 4px;
 }
 
-#udqscdmakm .gt_column_spanner_outer:first-child {
+#mjagcamnfn .gt_column_spanner_outer:first-child {
   padding-left: 0;
 }
 
-#udqscdmakm .gt_column_spanner_outer:last-child {
+#mjagcamnfn .gt_column_spanner_outer:last-child {
   padding-right: 0;
 }
 
-#udqscdmakm .gt_column_spanner {
+#mjagcamnfn .gt_column_spanner {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
@@ -5188,11 +5188,11 @@ d1316b26e5350da36e6456499ecdfe18      694      498      355      426      819
   width: 100%;
 }
 
-#udqscdmakm .gt_spanner_row {
+#mjagcamnfn .gt_spanner_row {
   border-bottom-style: hidden;
 }
 
-#udqscdmakm .gt_group_heading {
+#mjagcamnfn .gt_group_heading {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -5218,7 +5218,7 @@ d1316b26e5350da36e6456499ecdfe18      694      498      355      426      819
   text-align: left;
 }
 
-#udqscdmakm .gt_empty_group_heading {
+#mjagcamnfn .gt_empty_group_heading {
   padding: 0.5px;
   color: #333333;
   background-color: #FFFFFF;
@@ -5233,15 +5233,15 @@ d1316b26e5350da36e6456499ecdfe18      694      498      355      426      819
   vertical-align: middle;
 }
 
-#udqscdmakm .gt_from_md > :first-child {
+#mjagcamnfn .gt_from_md > :first-child {
   margin-top: 0;
 }
 
-#udqscdmakm .gt_from_md > :last-child {
+#mjagcamnfn .gt_from_md > :last-child {
   margin-bottom: 0;
 }
 
-#udqscdmakm .gt_row {
+#mjagcamnfn .gt_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -5260,7 +5260,7 @@ d1316b26e5350da36e6456499ecdfe18      694      498      355      426      819
   overflow-x: hidden;
 }
 
-#udqscdmakm .gt_stub {
+#mjagcamnfn .gt_stub {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -5273,7 +5273,7 @@ d1316b26e5350da36e6456499ecdfe18      694      498      355      426      819
   padding-right: 5px;
 }
 
-#udqscdmakm .gt_stub_row_group {
+#mjagcamnfn .gt_stub_row_group {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -5287,15 +5287,15 @@ d1316b26e5350da36e6456499ecdfe18      694      498      355      426      819
   vertical-align: top;
 }
 
-#udqscdmakm .gt_row_group_first td {
+#mjagcamnfn .gt_row_group_first td {
   border-top-width: 2px;
 }
 
-#udqscdmakm .gt_row_group_first th {
+#mjagcamnfn .gt_row_group_first th {
   border-top-width: 2px;
 }
 
-#udqscdmakm .gt_summary_row {
+#mjagcamnfn .gt_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -5305,16 +5305,16 @@ d1316b26e5350da36e6456499ecdfe18      694      498      355      426      819
   padding-right: 5px;
 }
 
-#udqscdmakm .gt_first_summary_row {
+#mjagcamnfn .gt_first_summary_row {
   border-top-style: solid;
   border-top-color: #D3D3D3;
 }
 
-#udqscdmakm .gt_first_summary_row.thick {
+#mjagcamnfn .gt_first_summary_row.thick {
   border-top-width: 2px;
 }
 
-#udqscdmakm .gt_last_summary_row {
+#mjagcamnfn .gt_last_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -5324,7 +5324,7 @@ d1316b26e5350da36e6456499ecdfe18      694      498      355      426      819
   border-bottom-color: #D3D3D3;
 }
 
-#udqscdmakm .gt_grand_summary_row {
+#mjagcamnfn .gt_grand_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -5334,7 +5334,7 @@ d1316b26e5350da36e6456499ecdfe18      694      498      355      426      819
   padding-right: 5px;
 }
 
-#udqscdmakm .gt_first_grand_summary_row {
+#mjagcamnfn .gt_first_grand_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -5344,7 +5344,7 @@ d1316b26e5350da36e6456499ecdfe18      694      498      355      426      819
   border-top-color: #D3D3D3;
 }
 
-#udqscdmakm .gt_last_grand_summary_row_top {
+#mjagcamnfn .gt_last_grand_summary_row_top {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -5354,11 +5354,11 @@ d1316b26e5350da36e6456499ecdfe18      694      498      355      426      819
   border-bottom-color: #D3D3D3;
 }
 
-#udqscdmakm .gt_striped {
+#mjagcamnfn .gt_striped {
   background-color: rgba(128, 128, 128, 0.05);
 }
 
-#udqscdmakm .gt_table_body {
+#mjagcamnfn .gt_table_body {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -5367,7 +5367,7 @@ d1316b26e5350da36e6456499ecdfe18      694      498      355      426      819
   border-bottom-color: #D3D3D3;
 }
 
-#udqscdmakm .gt_footnotes {
+#mjagcamnfn .gt_footnotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -5381,7 +5381,7 @@ d1316b26e5350da36e6456499ecdfe18      694      498      355      426      819
   border-right-color: #D3D3D3;
 }
 
-#udqscdmakm .gt_footnote {
+#mjagcamnfn .gt_footnote {
   margin: 0px;
   font-size: 90%;
   padding-top: 4px;
@@ -5390,7 +5390,7 @@ d1316b26e5350da36e6456499ecdfe18      694      498      355      426      819
   padding-right: 5px;
 }
 
-#udqscdmakm .gt_sourcenotes {
+#mjagcamnfn .gt_sourcenotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -5404,7 +5404,7 @@ d1316b26e5350da36e6456499ecdfe18      694      498      355      426      819
   border-right-color: #D3D3D3;
 }
 
-#udqscdmakm .gt_sourcenote {
+#mjagcamnfn .gt_sourcenote {
   font-size: 90%;
   padding-top: 4px;
   padding-bottom: 4px;
@@ -5412,72 +5412,72 @@ d1316b26e5350da36e6456499ecdfe18      694      498      355      426      819
   padding-right: 5px;
 }
 
-#udqscdmakm .gt_left {
+#mjagcamnfn .gt_left {
   text-align: left;
 }
 
-#udqscdmakm .gt_center {
+#mjagcamnfn .gt_center {
   text-align: center;
 }
 
-#udqscdmakm .gt_right {
+#mjagcamnfn .gt_right {
   text-align: right;
   font-variant-numeric: tabular-nums;
 }
 
-#udqscdmakm .gt_font_normal {
+#mjagcamnfn .gt_font_normal {
   font-weight: normal;
 }
 
-#udqscdmakm .gt_font_bold {
+#mjagcamnfn .gt_font_bold {
   font-weight: bold;
 }
 
-#udqscdmakm .gt_font_italic {
+#mjagcamnfn .gt_font_italic {
   font-style: italic;
 }
 
-#udqscdmakm .gt_super {
+#mjagcamnfn .gt_super {
   font-size: 65%;
 }
 
-#udqscdmakm .gt_footnote_marks {
+#mjagcamnfn .gt_footnote_marks {
   font-size: 75%;
   vertical-align: 0.4em;
   position: initial;
 }
 
-#udqscdmakm .gt_asterisk {
+#mjagcamnfn .gt_asterisk {
   font-size: 100%;
   vertical-align: 0;
 }
 
-#udqscdmakm .gt_indent_1 {
+#mjagcamnfn .gt_indent_1 {
   text-indent: 5px;
 }
 
-#udqscdmakm .gt_indent_2 {
+#mjagcamnfn .gt_indent_2 {
   text-indent: 10px;
 }
 
-#udqscdmakm .gt_indent_3 {
+#mjagcamnfn .gt_indent_3 {
   text-indent: 15px;
 }
 
-#udqscdmakm .gt_indent_4 {
+#mjagcamnfn .gt_indent_4 {
   text-indent: 20px;
 }
 
-#udqscdmakm .gt_indent_5 {
+#mjagcamnfn .gt_indent_5 {
   text-indent: 25px;
 }
 
-#udqscdmakm .katex-display {
+#mjagcamnfn .katex-display {
   display: inline-flex !important;
   margin-bottom: 0.75em !important;
 }
 
-#udqscdmakm div.Reactable > div.rt-table > div.rt-thead > div.rt-tr.rt-tr-group-header > div.rt-th-group:after {
+#mjagcamnfn div.Reactable > div.rt-table > div.rt-thead > div.rt-tr.rt-tr-group-header > div.rt-th-group:after {
   height: 0px !important;
 }
 </style>
@@ -5524,7 +5524,7 @@ d1316b26e5350da36e6456499ecdfe18      694      498      355      426      819
 <span id="cb54-2"><a href="#cb54-2" aria-hidden="true" tabindex="-1"></a>--p-version <span class="st">'138.2'</span> <span class="dt">\</span></span>
 <span id="cb54-3"><a href="#cb54-3" aria-hidden="true" tabindex="-1"></a>--p-target <span class="st">'SSURef_NR99'</span> <span class="dt">\</span></span>
 <span id="cb54-4"><a href="#cb54-4" aria-hidden="true" tabindex="-1"></a>--o-silva-sequences silva-138.2-ssu-nr99-rna-seqs.qza <span class="dt">\</span></span>
-<span id="cb54-5"><a href="#cb54-5" aria-hidden="true" tabindex="-1"></a>--o-silva-taxonomy silva-138.2-ssu-nr99-tax.qza</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb54-5"><a href="#cb54-5" aria-hidden="true" tabindex="-1"></a>--o-silva-taxonomy silva-138.2-ssu-nr99-tax.qza</span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </section>
 <section id="conversión-de-rna-a-dna" class="level3">
@@ -5532,7 +5532,7 @@ d1316b26e5350da36e6456499ecdfe18      694      498      355      426      819
 <p>Convierte las secuencias de RNA descargadas a secuencias de DNA. Esto es necesario porque los análisis posteriores, incluyendo el entrenamiento del clasificador.</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb55"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb55-1"><a href="#cb55-1" aria-hidden="true" tabindex="-1"></a><span class="ex">qiime</span> rescript reverse-transcribe <span class="dt">\</span></span>
-<span id="cb55-2"><a href="#cb55-2" aria-hidden="true" tabindex="-1"></a>--i-rna-sequences silva-138.2-ssu-nr99-rna-seqs.qza <span class="dt">\ </span>   <span class="at">--o-dna-sequences</span> silva-138.2-ssu-nr99-seqs.qza</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb55-2"><a href="#cb55-2" aria-hidden="true" tabindex="-1"></a>--i-rna-sequences silva-138.2-ssu-nr99-rna-seqs.qza <span class="dt">\ </span>   <span class="at">--o-dna-sequences</span> silva-138.2-ssu-nr99-seqs.qza</span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </section>
 <section id="eliminación-de-secuencias-de-baja-calidad" class="level3">
@@ -5541,7 +5541,7 @@ d1316b26e5350da36e6456499ecdfe18      694      498      355      426      819
 <div class="cell">
 <div class="sourceCode cell-code" id="cb56"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb56-1"><a href="#cb56-1" aria-hidden="true" tabindex="-1"></a><span class="ex">qiime</span> rescript cull-seqs <span class="dt">\</span></span>
 <span id="cb56-2"><a href="#cb56-2" aria-hidden="true" tabindex="-1"></a>--i-sequences silva-138.2-ssu-nr99-seqs.qza <span class="dt">\</span></span>
-<span id="cb56-3"><a href="#cb56-3" aria-hidden="true" tabindex="-1"></a>--o-clean-sequences silva-138.2-ssu-nr99-seqs-cleaned.qza</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb56-3"><a href="#cb56-3" aria-hidden="true" tabindex="-1"></a>--o-clean-sequences silva-138.2-ssu-nr99-seqs-cleaned.qza</span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </section>
 <section id="filtrado-de-secuencias-por-longitud-y-taxón" class="level3">
@@ -5559,7 +5559,7 @@ d1316b26e5350da36e6456499ecdfe18      694      498      355      426      819
 <span id="cb57-3"><a href="#cb57-3" aria-hidden="true" tabindex="-1"></a>--i-taxonomy silva-138.2-ssu-nr99-tax.qza <span class="dt">\</span></span>
 <span id="cb57-4"><a href="#cb57-4" aria-hidden="true" tabindex="-1"></a>--p-labels Archaea Bacteria Eukaryota <span class="dt">\</span></span>
 <span id="cb57-5"><a href="#cb57-5" aria-hidden="true" tabindex="-1"></a>--p-min-lens 900 1200 1400 <span class="dt">\</span></span>
-<span id="cb57-6"><a href="#cb57-6" aria-hidden="true" tabindex="-1"></a>--o-filtered-seqs silva-138.2-ssu-nr99-seqs-filt.qza <span class="dt">\ </span>   <span class="at">--o-discarded-seqs</span> silva-138.2-ssu-nr99-seqs-discard.qza</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb57-6"><a href="#cb57-6" aria-hidden="true" tabindex="-1"></a>--o-filtered-seqs silva-138.2-ssu-nr99-seqs-filt.qza <span class="dt">\ </span>   <span class="at">--o-discarded-seqs</span> silva-138.2-ssu-nr99-seqs-discard.qza</span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </section>
 <section id="dereplicación-de-secuencias" class="level3">
@@ -5571,7 +5571,7 @@ d1316b26e5350da36e6456499ecdfe18      694      498      355      426      819
 <span id="cb58-3"><a href="#cb58-3" aria-hidden="true" tabindex="-1"></a>--i-taxa silva-138.2-ssu-nr99-tax.qza <span class="dt">\</span></span>
 <span id="cb58-4"><a href="#cb58-4" aria-hidden="true" tabindex="-1"></a>--p-mode <span class="st">'uniq'</span> <span class="dt">\</span></span>
 <span id="cb58-5"><a href="#cb58-5" aria-hidden="true" tabindex="-1"></a>--o-dereplicated-sequences silva-138.2-ssu-nr99-seqs-derep-uniq.qza <span class="dt">\</span></span>
-<span id="cb58-6"><a href="#cb58-6" aria-hidden="true" tabindex="-1"></a>--o-dereplicated-taxa silva-138.2-ssu-nr99-tax-derep-uniq.qza</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb58-6"><a href="#cb58-6" aria-hidden="true" tabindex="-1"></a>--o-dereplicated-taxa silva-138.2-ssu-nr99-tax-derep-uniq.qza</span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </section>
 <section id="extracción-de-la-región-v4" class="level3">
@@ -5584,7 +5584,7 @@ d1316b26e5350da36e6456499ecdfe18      694      498      355      426      819
 <span id="cb59-4"><a href="#cb59-4" aria-hidden="true" tabindex="-1"></a>--p-r-primer GGACTACNVGGGTWTCTAAT <span class="dt">\</span></span>
 <span id="cb59-5"><a href="#cb59-5" aria-hidden="true" tabindex="-1"></a>--p-n-jobs 5 <span class="dt">\</span></span>
 <span id="cb59-6"><a href="#cb59-6" aria-hidden="true" tabindex="-1"></a>--p-read-orientation <span class="st">'forward'</span> <span class="dt">\</span></span>
-<span id="cb59-7"><a href="#cb59-7" aria-hidden="true" tabindex="-1"></a>--o-reads silva-138.2-ssu-nr99-seqs-515f-806r.qza</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb59-7"><a href="#cb59-7" aria-hidden="true" tabindex="-1"></a>--o-reads silva-138.2-ssu-nr99-seqs-515f-806r.qza</span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </section>
 <section id="dereplicación-de-la-región-v4" class="level3">
@@ -5596,7 +5596,7 @@ d1316b26e5350da36e6456499ecdfe18      694      498      355      426      819
 <span id="cb60-3"><a href="#cb60-3" aria-hidden="true" tabindex="-1"></a>--i-taxa silva-138.2-ssu-nr99-tax-derep-uniq.qza <span class="dt">\</span></span>
 <span id="cb60-4"><a href="#cb60-4" aria-hidden="true" tabindex="-1"></a>--p-mode <span class="st">'uniq'</span> <span class="dt">\</span></span>
 <span id="cb60-5"><a href="#cb60-5" aria-hidden="true" tabindex="-1"></a>--o-dereplicated-sequences silva-138.2-ssu-nr99-seqs-515f-806r-uniq.qza <span class="dt">\</span></span>
-<span id="cb60-6"><a href="#cb60-6" aria-hidden="true" tabindex="-1"></a>--o-dereplicated-taxa  silva-138.2-ssu-nr99-tax-515f-806r-derep-uniq.qza</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb60-6"><a href="#cb60-6" aria-hidden="true" tabindex="-1"></a>--o-dereplicated-taxa  silva-138.2-ssu-nr99-tax-515f-806r-derep-uniq.qza</span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </section>
 <section id="entrenamiento-del-clasificador-naive-bayes" class="level3">
@@ -5606,7 +5606,7 @@ d1316b26e5350da36e6456499ecdfe18      694      498      355      426      819
 <div class="sourceCode cell-code" id="cb61"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb61-1"><a href="#cb61-1" aria-hidden="true" tabindex="-1"></a><span class="ex">qiime</span> feature-classifier fit-classifier-naive-bayes <span class="dt">\</span></span>
 <span id="cb61-2"><a href="#cb61-2" aria-hidden="true" tabindex="-1"></a>--i-reference-reads silva-138.2-ssu-nr99-seqs-515f-806r-uniq.qza <span class="dt">\</span></span>
 <span id="cb61-3"><a href="#cb61-3" aria-hidden="true" tabindex="-1"></a>--i-reference-taxonomy silva-138.2-ssu-nr99-tax-515f-806r-derep-uniq.qza <span class="dt">\</span></span>
-<span id="cb61-4"><a href="#cb61-4" aria-hidden="true" tabindex="-1"></a>--o-classifier silva-138.2-ssu-nr99-515f-806r-classifier.qza</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb61-4"><a href="#cb61-4" aria-hidden="true" tabindex="-1"></a>--o-classifier silva-138.2-ssu-nr99-515f-806r-classifier.qza</span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </section>
 </section>
@@ -5640,7 +5640,7 @@ d1316b26e5350da36e6456499ecdfe18      694      498      355      426      819
 <span id="cb62-21"><a href="#cb62-21" aria-hidden="true" tabindex="-1"></a>p <span class="sc">+</span> <span class="fu">stat_compare_means</span>(<span class="at">comparisons =</span> my_comparisons, <span class="at">label =</span> <span class="st">"p.signif"</span>, <span class="at">paired =</span> <span class="cn">TRUE</span>, <span class="at">method =</span> <span class="st">"t.test"</span>)<span class="sc">+</span> </span>
 <span id="cb62-22"><a href="#cb62-22" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_classic</span>() <span class="sc">+</span></span>
 <span id="cb62-23"><a href="#cb62-23" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(<span class="at">text =</span> <span class="fu">element_text</span>(<span class="at">size =</span> <span class="dv">20</span>)) <span class="sc">+</span></span>
-<span id="cb62-24"><a href="#cb62-24" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ylab</span>(<span class="st">"Lysobacteraceae ASV"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb62-24"><a href="#cb62-24" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ylab</span>(<span class="st">"Lysobacteraceae ASV"</span>)</span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <div>
 <figure class="figure">
@@ -5673,7 +5673,7 @@ d1316b26e5350da36e6456499ecdfe18      694      498      355      426      819
 <span id="cb63-18"><a href="#cb63-18" aria-hidden="true" tabindex="-1"></a>                       <span class="at">method =</span> <span class="st">"t.test"</span>)<span class="sc">+</span> </span>
 <span id="cb63-19"><a href="#cb63-19" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_classic</span>() <span class="sc">+</span></span>
 <span id="cb63-20"><a href="#cb63-20" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(<span class="at">text =</span> <span class="fu">element_text</span>(<span class="at">size =</span> <span class="dv">20</span>)) <span class="sc">+</span></span>
-<span id="cb63-21"><a href="#cb63-21" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ylab</span>(<span class="st">"Micropepsis ASV"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb63-21"><a href="#cb63-21" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ylab</span>(<span class="st">"Micropepsis ASV"</span>)</span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <div>
 <figure class="figure">
@@ -5731,12 +5731,12 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
     // flash "checked"
     button.classList.add('code-copy-button-checked');
     var currentTitle = button.getAttribute("title");
-    button.setAttribute("title", "Copied!");
+    button.setAttribute("title", "Copiado");
     let tooltip;
     if (window.bootstrap) {
       button.setAttribute("data-bs-toggle", "tooltip");
       button.setAttribute("data-bs-placement", "left");
-      button.setAttribute("data-bs-title", "Copied!");
+      button.setAttribute("data-bs-title", "Copiado");
       tooltip = new bootstrap.Tooltip(button, 
         { trigger: "manual", 
           customClass: "code-copy-button-tooltip",

@@ -9,6 +9,7 @@ format:
 editor: visual
 execute:
   engine: knitr
+lang: es
 ---
 
 ![](images/logo_OAN_for_white.png){fig-align="center" width="300"}
