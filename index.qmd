@@ -189,7 +189,7 @@ gt::gt(df)
 
 Después de terminar el paso de filtrado de calidad, querrás explorar los datos que obtuviste. Este filtrado es importante porque elimina las secuencias de baja calidad o con errores, dejándote datos más confiables para trabajar. Para revisar esos datos, puedes usar dos comandos que te muestran resúmenes visuales fáciles de entender.
 
-Los datos asociados los vamos a depositar en un archivo nombrado `experiment_design.tsv`:
+Los datos asociados los vamos a depositar en un archivo nombrado `Experiment_Design.tsv`:
 
 ```{r, echo=FALSE, message=FALSE}
 df <- readr::read_tsv("../2025_Demo_16S_tomate/Experiment_Design.tsv")
