@@ -752,7 +752,7 @@ qiime taxa barplot \
 
 ### Ecuación general de log-fold change estimado:
 
-$$\hat{\eta}_i = \log\left(\frac{\hat{\mu}_{i,1}}{\hat{\mu}_{i,0}}\right)$$
+\$\$\\hat{\\eta}\_i = \\log\\!\\left(\\frac{\\hat{\\mu}\_{i,1}}{\\hat{\\mu}\_{i,0}}\\right)\$\$
 
 donde:
 
