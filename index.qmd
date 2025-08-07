@@ -286,11 +286,11 @@ $$D = 1 - \sum_{i=1}^{S} p_i^2$$
 
 donde:
 
- - $D$ = índice de Simpson (diversidad)
+-   $D$ = índice de Simpson (diversidad)
 
- - $S$ = número de especies (riqueza)
+-   $S$ = número de especies (riqueza)
 
- - $p_i$ = proporción de la especie $i$ en la muestra: \$p_i = ra
+-   $p_i$ = proporción de la especie $i$ en la muestra: \$p_i = ra
 
 c{n_i}{N}\$
 
@@ -333,7 +333,7 @@ df <- readr::read_csv("tables/kruskal-wallis-pairwise-Type_simpson.csv")
 gt::gt(df)
 ```
 
-### Otras métricas 
+### Otras métricas
 
 ```{bash, eval=FALSE}
 qiime diversity alpha-group-significance \
@@ -669,7 +669,7 @@ donde:
 
 \- $W(A,B)$ = distancia UniFrac ponderada entre muestras A y B
 
- - $A_i$ = número de secuencias de la muestra A en las ramas descendientes del nodo $i$
+-   $A_i$ = número de secuencias de la muestra A en las ramas descendientes del nodo $i$
 
 \- $A_t$ = número total de secuencias en la muestra A
 
@@ -692,7 +692,7 @@ qiime diversity beta-group-significance \
 --p-pairwise
 ```
 
-### Unweighted UniFrac  
+### Unweighted UniFrac
 
 ```{bash, eval=FALSE}
 qiime tools view core-metrics-results/unweighted_unifrac_emperor.qzv
@@ -771,11 +771,11 @@ donde:
 
 ANCOM-BC es especialmente útil en metabarcoding porque:
 
- - Corrige sesgos de muestreo
+-   Corrige sesgos de muestreo
 
- - Maneja datos escasos y muy dispersos
+-   Maneja datos escasos y muy dispersos
 
- - Proporciona estimaciones robustas de cambios en abundancia
+-   Proporciona estimaciones robustas de cambios en abundancia
 
 ```{bash, eval=FALSE}
 qiime composition ancombc \
@@ -854,7 +854,7 @@ qiime tools view l6-da-barplot-subject.qzv
 
 ![](images/visualization_level6.png){fig-align="center"}
 
-# Apéndice 
+# Apéndice
 
 ## Abrir archivos de Qiime2 en R
 
@@ -1230,3 +1230,43 @@ qiime feature-classifier fit-classifier-naive-bayes \
 --i-reference-taxonomy silva-138.2-ssu-nr99-tax-515f-806r-derep-uniq.qza \
 --o-classifier silva-138.2-ssu-nr99-515f-806r-classifier.qza
 ```
+
+## Boxplots para algunos clados importantes
+
+Para este punto bajamos los archivos .csv del nivel 6 al acceder al archivo `taxa-bar-plots.qzv`
+
+Para este ejemplo vamos a explorar los Generos *Lysobacteraceae* y *Micropepsis.*
+
+### ***Lysobacteraceae***
+
+```{r, message=FALSE, warning=FALSE}
+df <- readr::read_csv("tables/level-6.csv")
+
+lysobacter <- colnames(df)[stringr::str_detect(colnames(df), "Lysobacteraceae")]
+
+
+sub_df <- df[, c("Type", lysobacter)]
+colnames(sub_df) <- c("Type", "Lyso1", "Lyso2", "Lyso3")
+
+library(dplyr)
+Lyso_df <- sub_df %>% rowwise() %>%
+  mutate(Lysobacteraceae = sum(c(Lyso1, Lyso2, Lyso3)))
+
+library(ggpubr)
+p <- ggboxplot(Lyso_df, x = "Type", y = "Lysobacteraceae",
+               color = "black", palette =c("#8f0052","#276518"),
+               add = "jitter", shape = "Type",
+               fill = "Type")
+
+
+my_comparisons <- list( c("NC", "Tomato"))
+p + stat_compare_means(comparisons = my_comparisons, label = "p.signif", paired = TRUE)+ 
+  stat_compare_means(label.y = 50)  +
+  theme_classic() +
+  theme(text = element_text(size = 20)) +
+  ylab("Lysobacteraceae ASV")
+
+p
+```
+
+### ***Micropepsis***
