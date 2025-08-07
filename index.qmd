@@ -11,6 +11,8 @@ execute:
   engine: knitr
 ---
 
+![](images/logo_OAN_for_white.png){fig-align="center" width="300"}
+
 # Introducción
 
 Datos de partida "[Disentangling the genetic basis of rhizosphere microbiome assembly in tomato](https://www.ncbi.nlm.nih.gov/sra/?term=SRX13358039)"
