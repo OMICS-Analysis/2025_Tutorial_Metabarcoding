@@ -44,7 +44,9 @@ Vamos a generar un archivo `manifiesto` en el vamos a indicar la localización d
 ```{r, echo=FALSE, message=FALSE}
 df <- readr::read_tsv("../2025_Demo_16S_tomate/tomato_manifest")
 
-df
+df <- data.frame(df)
+
+head(df)
 ```
 
 Este archivo lo vamos a nombrar como `tomato_manifest`, este archivo es de tipo `tab-separate-value`. Puedes descargar el archivo `manifiesto` [aquí](https://drive.google.com/file/d/1hIzzApEfZfKqOlxhjVDsSvKVmqUbEA1d/view?usp=drive_link).
@@ -743,7 +745,7 @@ qiime taxa barplot \
   --o-visualization taxa-bar-plots.qzv
 ```
 
-```{bash}
+```{bash, eval=FALSE}
 qiime tools view taxa-bar-plots.qzv
 ```
 
