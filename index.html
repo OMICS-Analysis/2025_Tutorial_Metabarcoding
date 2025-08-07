@@ -126,6 +126,8 @@ window.Quarto = {
   <li><a href="#alfa-diversidad-α-diversidad" id="toc-alfa-diversidad-α-diversidad" class="nav-link" data-scroll-target="#alfa-diversidad-α-diversidad">Alfa diversidad (α-diversidad)</a>
   <ul class="collapse">
   <li><a href="#simpson-index" id="toc-simpson-index" class="nav-link" data-scroll-target="#simpson-index">Simpson Index</a></li>
+  <li><a href="#fórmula-del-índice-de-simpson" id="toc-fórmula-del-índice-de-simpson" class="nav-link" data-scroll-target="#fórmula-del-índice-de-simpson">Fórmula del Índice de Simpson:</a></li>
+  <li><a href="#interpretación" id="toc-interpretación" class="nav-link" data-scroll-target="#interpretación">Interpretación:</a></li>
   <li><a href="#otras-métricas" id="toc-otras-métricas" class="nav-link" data-scroll-target="#otras-métricas">Otras métricas</a></li>
   <li><a href="#eveness-equitabilidad" id="toc-eveness-equitabilidad" class="nav-link" data-scroll-target="#eveness-equitabilidad">Eveness (equitabilidad)</a></li>
   <li><a href="#faiths-phylogenetic-diversity-pd" id="toc-faiths-phylogenetic-diversity-pd" class="nav-link" data-scroll-target="#faiths-phylogenetic-diversity-pd">Faith’s Phylogenetic Diversity (PD)</a></li>
@@ -147,7 +149,12 @@ window.Quarto = {
   <li><a href="#taxonomía" id="toc-taxonomía" class="nav-link" data-scroll-target="#taxonomía">Taxonomía</a>
   <ul class="collapse">
   <li><a href="#diversidadabundancía" id="toc-diversidadabundancía" class="nav-link" data-scroll-target="#diversidadabundancía">Diversidad/abundancía</a></li>
-  <li><a href="#pruebas-de-abundancia-diferencial-con-ancom-bc" id="toc-pruebas-de-abundancia-diferencial-con-ancom-bc" class="nav-link" data-scroll-target="#pruebas-de-abundancia-diferencial-con-ancom-bc">Pruebas de abundancia diferencial con ANCOM-BC</a></li>
+  <li><a href="#pruebas-de-abundancia-diferencial-con-ancom-bc" id="toc-pruebas-de-abundancia-diferencial-con-ancom-bc" class="nav-link" data-scroll-target="#pruebas-de-abundancia-diferencial-con-ancom-bc">Pruebas de abundancia diferencial con ANCOM-BC</a>
+  <ul class="collapse">
+  <li><a href="#pasos-principales-de-ancom-bc" id="toc-pasos-principales-de-ancom-bc" class="nav-link" data-scroll-target="#pasos-principales-de-ancom-bc">Pasos Principales de ANCOM-BC:</a></li>
+  <li><a href="#ecuación-general-de-log-fold-change-estimado" id="toc-ecuación-general-de-log-fold-change-estimado" class="nav-link" data-scroll-target="#ecuación-general-de-log-fold-change-estimado">Ecuación general de log-fold change estimado:</a></li>
+  <li><a href="#interpretación-de-resultados" id="toc-interpretación-de-resultados" class="nav-link" data-scroll-target="#interpretación-de-resultados">Interpretación de resultados:</a></li>
+  </ul></li>
   </ul></li>
   <li><a href="#apéndice" id="toc-apéndice" class="nav-link" data-scroll-target="#apéndice">Apéndice</a>
   <ul class="collapse">
@@ -244,6 +251,12 @@ window.Quarto = {
 </div>
 </div>
 <p>Este archivo lo vamos a nombrar como <code>tomato_manifest</code>, este archivo es de tipo <code>tab-separate-value</code>. Puedes descargar el archivo <code>manifiesto</code> <a href="https://drive.google.com/file/d/1hIzzApEfZfKqOlxhjVDsSvKVmqUbEA1d/view?usp=drive_link">aquí</a>.</p>
+<p><strong>NOTA</strong> ⚠️<strong>: Durante todo este tutorial vamos a ir generando dos clases de archivos</strong></p>
+<ul>
+<li><p><code>.qza</code> <strong>QIIME Zipped Artifact</strong></p></li>
+<li><p><code>.qzv</code> <strong>QIIME Zipped Visualization</strong></p></li>
+</ul>
+<p>Para ver todos los archivos <code>.qzv</code> basta con utilizar el comando <code>qiime tools view</code> seguido del nombre de tu archivo. Más adelante lo verás más claro.</p>
 <p>Para importar los secuencias 16S pareadas vamos a utilizar el siguiente código:</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb4"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="ex">qiime</span> tools import <span class="dt">\</span></span>
@@ -273,23 +286,23 @@ window.Quarto = {
 <p><strong>Número de lecturas por muestra</strong></p>
 <div class="cell">
 <div class="cell-output-display">
-<div id="nelltfhlmp" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
-<style>#nelltfhlmp table {
+<div id="qfiplybiav" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<style>#qfiplybiav table {
   font-family: system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
-#nelltfhlmp thead, #nelltfhlmp tbody, #nelltfhlmp tfoot, #nelltfhlmp tr, #nelltfhlmp td, #nelltfhlmp th {
+#qfiplybiav thead, #qfiplybiav tbody, #qfiplybiav tfoot, #qfiplybiav tr, #qfiplybiav td, #qfiplybiav th {
   border-style: none;
 }
 
-#nelltfhlmp p {
+#qfiplybiav p {
   margin: 0;
   padding: 0;
 }
 
-#nelltfhlmp .gt_table {
+#qfiplybiav .gt_table {
   display: table;
   border-collapse: collapse;
   line-height: normal;
@@ -315,12 +328,12 @@ window.Quarto = {
   border-left-color: #D3D3D3;
 }
 
-#nelltfhlmp .gt_caption {
+#qfiplybiav .gt_caption {
   padding-top: 4px;
   padding-bottom: 4px;
 }
 
-#nelltfhlmp .gt_title {
+#qfiplybiav .gt_title {
   color: #333333;
   font-size: 125%;
   font-weight: initial;
@@ -332,7 +345,7 @@ window.Quarto = {
   border-bottom-width: 0;
 }
 
-#nelltfhlmp .gt_subtitle {
+#qfiplybiav .gt_subtitle {
   color: #333333;
   font-size: 85%;
   font-weight: initial;
@@ -344,7 +357,7 @@ window.Quarto = {
   border-top-width: 0;
 }
 
-#nelltfhlmp .gt_heading {
+#qfiplybiav .gt_heading {
   background-color: #FFFFFF;
   text-align: center;
   border-bottom-color: #FFFFFF;
@@ -356,13 +369,13 @@ window.Quarto = {
   border-right-color: #D3D3D3;
 }
 
-#nelltfhlmp .gt_bottom_border {
+#qfiplybiav .gt_bottom_border {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
 }
 
-#nelltfhlmp .gt_col_headings {
+#qfiplybiav .gt_col_headings {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -377,7 +390,7 @@ window.Quarto = {
   border-right-color: #D3D3D3;
 }
 
-#nelltfhlmp .gt_col_heading {
+#qfiplybiav .gt_col_heading {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -397,7 +410,7 @@ window.Quarto = {
   overflow-x: hidden;
 }
 
-#nelltfhlmp .gt_column_spanner_outer {
+#qfiplybiav .gt_column_spanner_outer {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -409,15 +422,15 @@ window.Quarto = {
   padding-right: 4px;
 }
 
-#nelltfhlmp .gt_column_spanner_outer:first-child {
+#qfiplybiav .gt_column_spanner_outer:first-child {
   padding-left: 0;
 }
 
-#nelltfhlmp .gt_column_spanner_outer:last-child {
+#qfiplybiav .gt_column_spanner_outer:last-child {
   padding-right: 0;
 }
 
-#nelltfhlmp .gt_column_spanner {
+#qfiplybiav .gt_column_spanner {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
@@ -429,11 +442,11 @@ window.Quarto = {
   width: 100%;
 }
 
-#nelltfhlmp .gt_spanner_row {
+#qfiplybiav .gt_spanner_row {
   border-bottom-style: hidden;
 }
 
-#nelltfhlmp .gt_group_heading {
+#qfiplybiav .gt_group_heading {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -459,7 +472,7 @@ window.Quarto = {
   text-align: left;
 }
 
-#nelltfhlmp .gt_empty_group_heading {
+#qfiplybiav .gt_empty_group_heading {
   padding: 0.5px;
   color: #333333;
   background-color: #FFFFFF;
@@ -474,15 +487,15 @@ window.Quarto = {
   vertical-align: middle;
 }
 
-#nelltfhlmp .gt_from_md > :first-child {
+#qfiplybiav .gt_from_md > :first-child {
   margin-top: 0;
 }
 
-#nelltfhlmp .gt_from_md > :last-child {
+#qfiplybiav .gt_from_md > :last-child {
   margin-bottom: 0;
 }
 
-#nelltfhlmp .gt_row {
+#qfiplybiav .gt_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -501,7 +514,7 @@ window.Quarto = {
   overflow-x: hidden;
 }
 
-#nelltfhlmp .gt_stub {
+#qfiplybiav .gt_stub {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -514,7 +527,7 @@ window.Quarto = {
   padding-right: 5px;
 }
 
-#nelltfhlmp .gt_stub_row_group {
+#qfiplybiav .gt_stub_row_group {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -528,15 +541,15 @@ window.Quarto = {
   vertical-align: top;
 }
 
-#nelltfhlmp .gt_row_group_first td {
+#qfiplybiav .gt_row_group_first td {
   border-top-width: 2px;
 }
 
-#nelltfhlmp .gt_row_group_first th {
+#qfiplybiav .gt_row_group_first th {
   border-top-width: 2px;
 }
 
-#nelltfhlmp .gt_summary_row {
+#qfiplybiav .gt_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -546,16 +559,16 @@ window.Quarto = {
   padding-right: 5px;
 }
 
-#nelltfhlmp .gt_first_summary_row {
+#qfiplybiav .gt_first_summary_row {
   border-top-style: solid;
   border-top-color: #D3D3D3;
 }
 
-#nelltfhlmp .gt_first_summary_row.thick {
+#qfiplybiav .gt_first_summary_row.thick {
   border-top-width: 2px;
 }
 
-#nelltfhlmp .gt_last_summary_row {
+#qfiplybiav .gt_last_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -565,7 +578,7 @@ window.Quarto = {
   border-bottom-color: #D3D3D3;
 }
 
-#nelltfhlmp .gt_grand_summary_row {
+#qfiplybiav .gt_grand_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -575,7 +588,7 @@ window.Quarto = {
   padding-right: 5px;
 }
 
-#nelltfhlmp .gt_first_grand_summary_row {
+#qfiplybiav .gt_first_grand_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -585,7 +598,7 @@ window.Quarto = {
   border-top-color: #D3D3D3;
 }
 
-#nelltfhlmp .gt_last_grand_summary_row_top {
+#qfiplybiav .gt_last_grand_summary_row_top {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -595,11 +608,11 @@ window.Quarto = {
   border-bottom-color: #D3D3D3;
 }
 
-#nelltfhlmp .gt_striped {
+#qfiplybiav .gt_striped {
   background-color: rgba(128, 128, 128, 0.05);
 }
 
-#nelltfhlmp .gt_table_body {
+#qfiplybiav .gt_table_body {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -608,7 +621,7 @@ window.Quarto = {
   border-bottom-color: #D3D3D3;
 }
 
-#nelltfhlmp .gt_footnotes {
+#qfiplybiav .gt_footnotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -622,7 +635,7 @@ window.Quarto = {
   border-right-color: #D3D3D3;
 }
 
-#nelltfhlmp .gt_footnote {
+#qfiplybiav .gt_footnote {
   margin: 0px;
   font-size: 90%;
   padding-top: 4px;
@@ -631,7 +644,7 @@ window.Quarto = {
   padding-right: 5px;
 }
 
-#nelltfhlmp .gt_sourcenotes {
+#qfiplybiav .gt_sourcenotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -645,7 +658,7 @@ window.Quarto = {
   border-right-color: #D3D3D3;
 }
 
-#nelltfhlmp .gt_sourcenote {
+#qfiplybiav .gt_sourcenote {
   font-size: 90%;
   padding-top: 4px;
   padding-bottom: 4px;
@@ -653,72 +666,72 @@ window.Quarto = {
   padding-right: 5px;
 }
 
-#nelltfhlmp .gt_left {
+#qfiplybiav .gt_left {
   text-align: left;
 }
 
-#nelltfhlmp .gt_center {
+#qfiplybiav .gt_center {
   text-align: center;
 }
 
-#nelltfhlmp .gt_right {
+#qfiplybiav .gt_right {
   text-align: right;
   font-variant-numeric: tabular-nums;
 }
 
-#nelltfhlmp .gt_font_normal {
+#qfiplybiav .gt_font_normal {
   font-weight: normal;
 }
 
-#nelltfhlmp .gt_font_bold {
+#qfiplybiav .gt_font_bold {
   font-weight: bold;
 }
 
-#nelltfhlmp .gt_font_italic {
+#qfiplybiav .gt_font_italic {
   font-style: italic;
 }
 
-#nelltfhlmp .gt_super {
+#qfiplybiav .gt_super {
   font-size: 65%;
 }
 
-#nelltfhlmp .gt_footnote_marks {
+#qfiplybiav .gt_footnote_marks {
   font-size: 75%;
   vertical-align: 0.4em;
   position: initial;
 }
 
-#nelltfhlmp .gt_asterisk {
+#qfiplybiav .gt_asterisk {
   font-size: 100%;
   vertical-align: 0;
 }
 
-#nelltfhlmp .gt_indent_1 {
+#qfiplybiav .gt_indent_1 {
   text-indent: 5px;
 }
 
-#nelltfhlmp .gt_indent_2 {
+#qfiplybiav .gt_indent_2 {
   text-indent: 10px;
 }
 
-#nelltfhlmp .gt_indent_3 {
+#qfiplybiav .gt_indent_3 {
   text-indent: 15px;
 }
 
-#nelltfhlmp .gt_indent_4 {
+#qfiplybiav .gt_indent_4 {
   text-indent: 20px;
 }
 
-#nelltfhlmp .gt_indent_5 {
+#qfiplybiav .gt_indent_5 {
   text-indent: 25px;
 }
 
-#nelltfhlmp .katex-display {
+#qfiplybiav .katex-display {
   display: inline-flex !important;
   margin-bottom: 0.75em !important;
 }
 
-#nelltfhlmp div.Reactable > div.rt-table > div.rt-thead > div.rt-tr.rt-tr-group-header > div.rt-th-group:after {
+#qfiplybiav div.Reactable > div.rt-table > div.rt-thead > div.rt-tr.rt-tr-group-header > div.rt-th-group:after {
   height: 0px !important;
 }
 </style>
@@ -851,23 +864,23 @@ window.Quarto = {
 <p><strong>Número de cuentas por muestras después de cuatadapt</strong></p>
 <div class="cell">
 <div class="cell-output-display">
-<div id="cmeohpvdbj" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
-<style>#cmeohpvdbj table {
+<div id="esujitsvtk" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<style>#esujitsvtk table {
   font-family: system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
-#cmeohpvdbj thead, #cmeohpvdbj tbody, #cmeohpvdbj tfoot, #cmeohpvdbj tr, #cmeohpvdbj td, #cmeohpvdbj th {
+#esujitsvtk thead, #esujitsvtk tbody, #esujitsvtk tfoot, #esujitsvtk tr, #esujitsvtk td, #esujitsvtk th {
   border-style: none;
 }
 
-#cmeohpvdbj p {
+#esujitsvtk p {
   margin: 0;
   padding: 0;
 }
 
-#cmeohpvdbj .gt_table {
+#esujitsvtk .gt_table {
   display: table;
   border-collapse: collapse;
   line-height: normal;
@@ -893,12 +906,12 @@ window.Quarto = {
   border-left-color: #D3D3D3;
 }
 
-#cmeohpvdbj .gt_caption {
+#esujitsvtk .gt_caption {
   padding-top: 4px;
   padding-bottom: 4px;
 }
 
-#cmeohpvdbj .gt_title {
+#esujitsvtk .gt_title {
   color: #333333;
   font-size: 125%;
   font-weight: initial;
@@ -910,7 +923,7 @@ window.Quarto = {
   border-bottom-width: 0;
 }
 
-#cmeohpvdbj .gt_subtitle {
+#esujitsvtk .gt_subtitle {
   color: #333333;
   font-size: 85%;
   font-weight: initial;
@@ -922,7 +935,7 @@ window.Quarto = {
   border-top-width: 0;
 }
 
-#cmeohpvdbj .gt_heading {
+#esujitsvtk .gt_heading {
   background-color: #FFFFFF;
   text-align: center;
   border-bottom-color: #FFFFFF;
@@ -934,13 +947,13 @@ window.Quarto = {
   border-right-color: #D3D3D3;
 }
 
-#cmeohpvdbj .gt_bottom_border {
+#esujitsvtk .gt_bottom_border {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
 }
 
-#cmeohpvdbj .gt_col_headings {
+#esujitsvtk .gt_col_headings {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -955,7 +968,7 @@ window.Quarto = {
   border-right-color: #D3D3D3;
 }
 
-#cmeohpvdbj .gt_col_heading {
+#esujitsvtk .gt_col_heading {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -975,7 +988,7 @@ window.Quarto = {
   overflow-x: hidden;
 }
 
-#cmeohpvdbj .gt_column_spanner_outer {
+#esujitsvtk .gt_column_spanner_outer {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -987,15 +1000,15 @@ window.Quarto = {
   padding-right: 4px;
 }
 
-#cmeohpvdbj .gt_column_spanner_outer:first-child {
+#esujitsvtk .gt_column_spanner_outer:first-child {
   padding-left: 0;
 }
 
-#cmeohpvdbj .gt_column_spanner_outer:last-child {
+#esujitsvtk .gt_column_spanner_outer:last-child {
   padding-right: 0;
 }
 
-#cmeohpvdbj .gt_column_spanner {
+#esujitsvtk .gt_column_spanner {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
@@ -1007,11 +1020,11 @@ window.Quarto = {
   width: 100%;
 }
 
-#cmeohpvdbj .gt_spanner_row {
+#esujitsvtk .gt_spanner_row {
   border-bottom-style: hidden;
 }
 
-#cmeohpvdbj .gt_group_heading {
+#esujitsvtk .gt_group_heading {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1037,7 +1050,7 @@ window.Quarto = {
   text-align: left;
 }
 
-#cmeohpvdbj .gt_empty_group_heading {
+#esujitsvtk .gt_empty_group_heading {
   padding: 0.5px;
   color: #333333;
   background-color: #FFFFFF;
@@ -1052,15 +1065,15 @@ window.Quarto = {
   vertical-align: middle;
 }
 
-#cmeohpvdbj .gt_from_md > :first-child {
+#esujitsvtk .gt_from_md > :first-child {
   margin-top: 0;
 }
 
-#cmeohpvdbj .gt_from_md > :last-child {
+#esujitsvtk .gt_from_md > :last-child {
   margin-bottom: 0;
 }
 
-#cmeohpvdbj .gt_row {
+#esujitsvtk .gt_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1079,7 +1092,7 @@ window.Quarto = {
   overflow-x: hidden;
 }
 
-#cmeohpvdbj .gt_stub {
+#esujitsvtk .gt_stub {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -1092,7 +1105,7 @@ window.Quarto = {
   padding-right: 5px;
 }
 
-#cmeohpvdbj .gt_stub_row_group {
+#esujitsvtk .gt_stub_row_group {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -1106,15 +1119,15 @@ window.Quarto = {
   vertical-align: top;
 }
 
-#cmeohpvdbj .gt_row_group_first td {
+#esujitsvtk .gt_row_group_first td {
   border-top-width: 2px;
 }
 
-#cmeohpvdbj .gt_row_group_first th {
+#esujitsvtk .gt_row_group_first th {
   border-top-width: 2px;
 }
 
-#cmeohpvdbj .gt_summary_row {
+#esujitsvtk .gt_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -1124,16 +1137,16 @@ window.Quarto = {
   padding-right: 5px;
 }
 
-#cmeohpvdbj .gt_first_summary_row {
+#esujitsvtk .gt_first_summary_row {
   border-top-style: solid;
   border-top-color: #D3D3D3;
 }
 
-#cmeohpvdbj .gt_first_summary_row.thick {
+#esujitsvtk .gt_first_summary_row.thick {
   border-top-width: 2px;
 }
 
-#cmeohpvdbj .gt_last_summary_row {
+#esujitsvtk .gt_last_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1143,7 +1156,7 @@ window.Quarto = {
   border-bottom-color: #D3D3D3;
 }
 
-#cmeohpvdbj .gt_grand_summary_row {
+#esujitsvtk .gt_grand_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -1153,7 +1166,7 @@ window.Quarto = {
   padding-right: 5px;
 }
 
-#cmeohpvdbj .gt_first_grand_summary_row {
+#esujitsvtk .gt_first_grand_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1163,7 +1176,7 @@ window.Quarto = {
   border-top-color: #D3D3D3;
 }
 
-#cmeohpvdbj .gt_last_grand_summary_row_top {
+#esujitsvtk .gt_last_grand_summary_row_top {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1173,11 +1186,11 @@ window.Quarto = {
   border-bottom-color: #D3D3D3;
 }
 
-#cmeohpvdbj .gt_striped {
+#esujitsvtk .gt_striped {
   background-color: rgba(128, 128, 128, 0.05);
 }
 
-#cmeohpvdbj .gt_table_body {
+#esujitsvtk .gt_table_body {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -1186,7 +1199,7 @@ window.Quarto = {
   border-bottom-color: #D3D3D3;
 }
 
-#cmeohpvdbj .gt_footnotes {
+#esujitsvtk .gt_footnotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -1200,7 +1213,7 @@ window.Quarto = {
   border-right-color: #D3D3D3;
 }
 
-#cmeohpvdbj .gt_footnote {
+#esujitsvtk .gt_footnote {
   margin: 0px;
   font-size: 90%;
   padding-top: 4px;
@@ -1209,7 +1222,7 @@ window.Quarto = {
   padding-right: 5px;
 }
 
-#cmeohpvdbj .gt_sourcenotes {
+#esujitsvtk .gt_sourcenotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -1223,7 +1236,7 @@ window.Quarto = {
   border-right-color: #D3D3D3;
 }
 
-#cmeohpvdbj .gt_sourcenote {
+#esujitsvtk .gt_sourcenote {
   font-size: 90%;
   padding-top: 4px;
   padding-bottom: 4px;
@@ -1231,72 +1244,72 @@ window.Quarto = {
   padding-right: 5px;
 }
 
-#cmeohpvdbj .gt_left {
+#esujitsvtk .gt_left {
   text-align: left;
 }
 
-#cmeohpvdbj .gt_center {
+#esujitsvtk .gt_center {
   text-align: center;
 }
 
-#cmeohpvdbj .gt_right {
+#esujitsvtk .gt_right {
   text-align: right;
   font-variant-numeric: tabular-nums;
 }
 
-#cmeohpvdbj .gt_font_normal {
+#esujitsvtk .gt_font_normal {
   font-weight: normal;
 }
 
-#cmeohpvdbj .gt_font_bold {
+#esujitsvtk .gt_font_bold {
   font-weight: bold;
 }
 
-#cmeohpvdbj .gt_font_italic {
+#esujitsvtk .gt_font_italic {
   font-style: italic;
 }
 
-#cmeohpvdbj .gt_super {
+#esujitsvtk .gt_super {
   font-size: 65%;
 }
 
-#cmeohpvdbj .gt_footnote_marks {
+#esujitsvtk .gt_footnote_marks {
   font-size: 75%;
   vertical-align: 0.4em;
   position: initial;
 }
 
-#cmeohpvdbj .gt_asterisk {
+#esujitsvtk .gt_asterisk {
   font-size: 100%;
   vertical-align: 0;
 }
 
-#cmeohpvdbj .gt_indent_1 {
+#esujitsvtk .gt_indent_1 {
   text-indent: 5px;
 }
 
-#cmeohpvdbj .gt_indent_2 {
+#esujitsvtk .gt_indent_2 {
   text-indent: 10px;
 }
 
-#cmeohpvdbj .gt_indent_3 {
+#esujitsvtk .gt_indent_3 {
   text-indent: 15px;
 }
 
-#cmeohpvdbj .gt_indent_4 {
+#esujitsvtk .gt_indent_4 {
   text-indent: 20px;
 }
 
-#cmeohpvdbj .gt_indent_5 {
+#esujitsvtk .gt_indent_5 {
   text-indent: 25px;
 }
 
-#cmeohpvdbj .katex-display {
+#esujitsvtk .katex-display {
   display: inline-flex !important;
   margin-bottom: 0.75em !important;
 }
 
-#cmeohpvdbj div.Reactable > div.rt-table > div.rt-thead > div.rt-tr.rt-tr-group-header > div.rt-th-group:after {
+#esujitsvtk div.Reactable > div.rt-table > div.rt-thead > div.rt-tr.rt-tr-group-header > div.rt-th-group:after {
   height: 0px !important;
 }
 </style>
@@ -1402,23 +1415,23 @@ window.Quarto = {
 <p><strong>Lecturas filtradas con DADA2</strong></p>
 <div class="cell">
 <div class="cell-output-display">
-<div id="fuwewqaxvy" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
-<style>#fuwewqaxvy table {
+<div id="hasncubdnh" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<style>#hasncubdnh table {
   font-family: system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
-#fuwewqaxvy thead, #fuwewqaxvy tbody, #fuwewqaxvy tfoot, #fuwewqaxvy tr, #fuwewqaxvy td, #fuwewqaxvy th {
+#hasncubdnh thead, #hasncubdnh tbody, #hasncubdnh tfoot, #hasncubdnh tr, #hasncubdnh td, #hasncubdnh th {
   border-style: none;
 }
 
-#fuwewqaxvy p {
+#hasncubdnh p {
   margin: 0;
   padding: 0;
 }
 
-#fuwewqaxvy .gt_table {
+#hasncubdnh .gt_table {
   display: table;
   border-collapse: collapse;
   line-height: normal;
@@ -1444,12 +1457,12 @@ window.Quarto = {
   border-left-color: #D3D3D3;
 }
 
-#fuwewqaxvy .gt_caption {
+#hasncubdnh .gt_caption {
   padding-top: 4px;
   padding-bottom: 4px;
 }
 
-#fuwewqaxvy .gt_title {
+#hasncubdnh .gt_title {
   color: #333333;
   font-size: 125%;
   font-weight: initial;
@@ -1461,7 +1474,7 @@ window.Quarto = {
   border-bottom-width: 0;
 }
 
-#fuwewqaxvy .gt_subtitle {
+#hasncubdnh .gt_subtitle {
   color: #333333;
   font-size: 85%;
   font-weight: initial;
@@ -1473,7 +1486,7 @@ window.Quarto = {
   border-top-width: 0;
 }
 
-#fuwewqaxvy .gt_heading {
+#hasncubdnh .gt_heading {
   background-color: #FFFFFF;
   text-align: center;
   border-bottom-color: #FFFFFF;
@@ -1485,13 +1498,13 @@ window.Quarto = {
   border-right-color: #D3D3D3;
 }
 
-#fuwewqaxvy .gt_bottom_border {
+#hasncubdnh .gt_bottom_border {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
 }
 
-#fuwewqaxvy .gt_col_headings {
+#hasncubdnh .gt_col_headings {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -1506,7 +1519,7 @@ window.Quarto = {
   border-right-color: #D3D3D3;
 }
 
-#fuwewqaxvy .gt_col_heading {
+#hasncubdnh .gt_col_heading {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -1526,7 +1539,7 @@ window.Quarto = {
   overflow-x: hidden;
 }
 
-#fuwewqaxvy .gt_column_spanner_outer {
+#hasncubdnh .gt_column_spanner_outer {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -1538,15 +1551,15 @@ window.Quarto = {
   padding-right: 4px;
 }
 
-#fuwewqaxvy .gt_column_spanner_outer:first-child {
+#hasncubdnh .gt_column_spanner_outer:first-child {
   padding-left: 0;
 }
 
-#fuwewqaxvy .gt_column_spanner_outer:last-child {
+#hasncubdnh .gt_column_spanner_outer:last-child {
   padding-right: 0;
 }
 
-#fuwewqaxvy .gt_column_spanner {
+#hasncubdnh .gt_column_spanner {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
@@ -1558,11 +1571,11 @@ window.Quarto = {
   width: 100%;
 }
 
-#fuwewqaxvy .gt_spanner_row {
+#hasncubdnh .gt_spanner_row {
   border-bottom-style: hidden;
 }
 
-#fuwewqaxvy .gt_group_heading {
+#hasncubdnh .gt_group_heading {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1588,7 +1601,7 @@ window.Quarto = {
   text-align: left;
 }
 
-#fuwewqaxvy .gt_empty_group_heading {
+#hasncubdnh .gt_empty_group_heading {
   padding: 0.5px;
   color: #333333;
   background-color: #FFFFFF;
@@ -1603,15 +1616,15 @@ window.Quarto = {
   vertical-align: middle;
 }
 
-#fuwewqaxvy .gt_from_md > :first-child {
+#hasncubdnh .gt_from_md > :first-child {
   margin-top: 0;
 }
 
-#fuwewqaxvy .gt_from_md > :last-child {
+#hasncubdnh .gt_from_md > :last-child {
   margin-bottom: 0;
 }
 
-#fuwewqaxvy .gt_row {
+#hasncubdnh .gt_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1630,7 +1643,7 @@ window.Quarto = {
   overflow-x: hidden;
 }
 
-#fuwewqaxvy .gt_stub {
+#hasncubdnh .gt_stub {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -1643,7 +1656,7 @@ window.Quarto = {
   padding-right: 5px;
 }
 
-#fuwewqaxvy .gt_stub_row_group {
+#hasncubdnh .gt_stub_row_group {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -1657,15 +1670,15 @@ window.Quarto = {
   vertical-align: top;
 }
 
-#fuwewqaxvy .gt_row_group_first td {
+#hasncubdnh .gt_row_group_first td {
   border-top-width: 2px;
 }
 
-#fuwewqaxvy .gt_row_group_first th {
+#hasncubdnh .gt_row_group_first th {
   border-top-width: 2px;
 }
 
-#fuwewqaxvy .gt_summary_row {
+#hasncubdnh .gt_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -1675,16 +1688,16 @@ window.Quarto = {
   padding-right: 5px;
 }
 
-#fuwewqaxvy .gt_first_summary_row {
+#hasncubdnh .gt_first_summary_row {
   border-top-style: solid;
   border-top-color: #D3D3D3;
 }
 
-#fuwewqaxvy .gt_first_summary_row.thick {
+#hasncubdnh .gt_first_summary_row.thick {
   border-top-width: 2px;
 }
 
-#fuwewqaxvy .gt_last_summary_row {
+#hasncubdnh .gt_last_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1694,7 +1707,7 @@ window.Quarto = {
   border-bottom-color: #D3D3D3;
 }
 
-#fuwewqaxvy .gt_grand_summary_row {
+#hasncubdnh .gt_grand_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -1704,7 +1717,7 @@ window.Quarto = {
   padding-right: 5px;
 }
 
-#fuwewqaxvy .gt_first_grand_summary_row {
+#hasncubdnh .gt_first_grand_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1714,7 +1727,7 @@ window.Quarto = {
   border-top-color: #D3D3D3;
 }
 
-#fuwewqaxvy .gt_last_grand_summary_row_top {
+#hasncubdnh .gt_last_grand_summary_row_top {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1724,11 +1737,11 @@ window.Quarto = {
   border-bottom-color: #D3D3D3;
 }
 
-#fuwewqaxvy .gt_striped {
+#hasncubdnh .gt_striped {
   background-color: rgba(128, 128, 128, 0.05);
 }
 
-#fuwewqaxvy .gt_table_body {
+#hasncubdnh .gt_table_body {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -1737,7 +1750,7 @@ window.Quarto = {
   border-bottom-color: #D3D3D3;
 }
 
-#fuwewqaxvy .gt_footnotes {
+#hasncubdnh .gt_footnotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -1751,7 +1764,7 @@ window.Quarto = {
   border-right-color: #D3D3D3;
 }
 
-#fuwewqaxvy .gt_footnote {
+#hasncubdnh .gt_footnote {
   margin: 0px;
   font-size: 90%;
   padding-top: 4px;
@@ -1760,7 +1773,7 @@ window.Quarto = {
   padding-right: 5px;
 }
 
-#fuwewqaxvy .gt_sourcenotes {
+#hasncubdnh .gt_sourcenotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -1774,7 +1787,7 @@ window.Quarto = {
   border-right-color: #D3D3D3;
 }
 
-#fuwewqaxvy .gt_sourcenote {
+#hasncubdnh .gt_sourcenote {
   font-size: 90%;
   padding-top: 4px;
   padding-bottom: 4px;
@@ -1782,72 +1795,72 @@ window.Quarto = {
   padding-right: 5px;
 }
 
-#fuwewqaxvy .gt_left {
+#hasncubdnh .gt_left {
   text-align: left;
 }
 
-#fuwewqaxvy .gt_center {
+#hasncubdnh .gt_center {
   text-align: center;
 }
 
-#fuwewqaxvy .gt_right {
+#hasncubdnh .gt_right {
   text-align: right;
   font-variant-numeric: tabular-nums;
 }
 
-#fuwewqaxvy .gt_font_normal {
+#hasncubdnh .gt_font_normal {
   font-weight: normal;
 }
 
-#fuwewqaxvy .gt_font_bold {
+#hasncubdnh .gt_font_bold {
   font-weight: bold;
 }
 
-#fuwewqaxvy .gt_font_italic {
+#hasncubdnh .gt_font_italic {
   font-style: italic;
 }
 
-#fuwewqaxvy .gt_super {
+#hasncubdnh .gt_super {
   font-size: 65%;
 }
 
-#fuwewqaxvy .gt_footnote_marks {
+#hasncubdnh .gt_footnote_marks {
   font-size: 75%;
   vertical-align: 0.4em;
   position: initial;
 }
 
-#fuwewqaxvy .gt_asterisk {
+#hasncubdnh .gt_asterisk {
   font-size: 100%;
   vertical-align: 0;
 }
 
-#fuwewqaxvy .gt_indent_1 {
+#hasncubdnh .gt_indent_1 {
   text-indent: 5px;
 }
 
-#fuwewqaxvy .gt_indent_2 {
+#hasncubdnh .gt_indent_2 {
   text-indent: 10px;
 }
 
-#fuwewqaxvy .gt_indent_3 {
+#hasncubdnh .gt_indent_3 {
   text-indent: 15px;
 }
 
-#fuwewqaxvy .gt_indent_4 {
+#hasncubdnh .gt_indent_4 {
   text-indent: 20px;
 }
 
-#fuwewqaxvy .gt_indent_5 {
+#hasncubdnh .gt_indent_5 {
   text-indent: 25px;
 }
 
-#fuwewqaxvy .katex-display {
+#hasncubdnh .katex-display {
   display: inline-flex !important;
   margin-bottom: 0.75em !important;
 }
 
-#fuwewqaxvy div.Reactable > div.rt-table > div.rt-thead > div.rt-tr.rt-tr-group-header > div.rt-th-group:after {
+#hasncubdnh div.Reactable > div.rt-table > div.rt-thead > div.rt-tr.rt-tr-group-header > div.rt-th-group:after {
   height: 0px !important;
 }
 </style>
@@ -2052,23 +2065,23 @@ window.Quarto = {
 <p>El archivo <code>table-dada2-tomato-16s.qza</code> contiene la matriz de cuentas; en el apéndice <a href="#abrir-archivos-de-qiime2-en-r">Abrir archivos de Qiime2 en R</a> podrás ver a detlla como trabajar con los archivos <code>.qza</code> en <code>R</code>; los primeros 10 ASV se ven del siguiente modo:</p>
 <div class="cell">
 <div class="cell-output-display">
-<div id="xhvntkdayk" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
-<style>#xhvntkdayk table {
+<div id="kfaolzumas" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<style>#kfaolzumas table {
   font-family: system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
-#xhvntkdayk thead, #xhvntkdayk tbody, #xhvntkdayk tfoot, #xhvntkdayk tr, #xhvntkdayk td, #xhvntkdayk th {
+#kfaolzumas thead, #kfaolzumas tbody, #kfaolzumas tfoot, #kfaolzumas tr, #kfaolzumas td, #kfaolzumas th {
   border-style: none;
 }
 
-#xhvntkdayk p {
+#kfaolzumas p {
   margin: 0;
   padding: 0;
 }
 
-#xhvntkdayk .gt_table {
+#kfaolzumas .gt_table {
   display: table;
   border-collapse: collapse;
   line-height: normal;
@@ -2094,12 +2107,12 @@ window.Quarto = {
   border-left-color: #D3D3D3;
 }
 
-#xhvntkdayk .gt_caption {
+#kfaolzumas .gt_caption {
   padding-top: 4px;
   padding-bottom: 4px;
 }
 
-#xhvntkdayk .gt_title {
+#kfaolzumas .gt_title {
   color: #333333;
   font-size: 125%;
   font-weight: initial;
@@ -2111,7 +2124,7 @@ window.Quarto = {
   border-bottom-width: 0;
 }
 
-#xhvntkdayk .gt_subtitle {
+#kfaolzumas .gt_subtitle {
   color: #333333;
   font-size: 85%;
   font-weight: initial;
@@ -2123,7 +2136,7 @@ window.Quarto = {
   border-top-width: 0;
 }
 
-#xhvntkdayk .gt_heading {
+#kfaolzumas .gt_heading {
   background-color: #FFFFFF;
   text-align: center;
   border-bottom-color: #FFFFFF;
@@ -2135,13 +2148,13 @@ window.Quarto = {
   border-right-color: #D3D3D3;
 }
 
-#xhvntkdayk .gt_bottom_border {
+#kfaolzumas .gt_bottom_border {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
 }
 
-#xhvntkdayk .gt_col_headings {
+#kfaolzumas .gt_col_headings {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -2156,7 +2169,7 @@ window.Quarto = {
   border-right-color: #D3D3D3;
 }
 
-#xhvntkdayk .gt_col_heading {
+#kfaolzumas .gt_col_heading {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -2176,7 +2189,7 @@ window.Quarto = {
   overflow-x: hidden;
 }
 
-#xhvntkdayk .gt_column_spanner_outer {
+#kfaolzumas .gt_column_spanner_outer {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -2188,15 +2201,15 @@ window.Quarto = {
   padding-right: 4px;
 }
 
-#xhvntkdayk .gt_column_spanner_outer:first-child {
+#kfaolzumas .gt_column_spanner_outer:first-child {
   padding-left: 0;
 }
 
-#xhvntkdayk .gt_column_spanner_outer:last-child {
+#kfaolzumas .gt_column_spanner_outer:last-child {
   padding-right: 0;
 }
 
-#xhvntkdayk .gt_column_spanner {
+#kfaolzumas .gt_column_spanner {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
@@ -2208,11 +2221,11 @@ window.Quarto = {
   width: 100%;
 }
 
-#xhvntkdayk .gt_spanner_row {
+#kfaolzumas .gt_spanner_row {
   border-bottom-style: hidden;
 }
 
-#xhvntkdayk .gt_group_heading {
+#kfaolzumas .gt_group_heading {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -2238,7 +2251,7 @@ window.Quarto = {
   text-align: left;
 }
 
-#xhvntkdayk .gt_empty_group_heading {
+#kfaolzumas .gt_empty_group_heading {
   padding: 0.5px;
   color: #333333;
   background-color: #FFFFFF;
@@ -2253,15 +2266,15 @@ window.Quarto = {
   vertical-align: middle;
 }
 
-#xhvntkdayk .gt_from_md > :first-child {
+#kfaolzumas .gt_from_md > :first-child {
   margin-top: 0;
 }
 
-#xhvntkdayk .gt_from_md > :last-child {
+#kfaolzumas .gt_from_md > :last-child {
   margin-bottom: 0;
 }
 
-#xhvntkdayk .gt_row {
+#kfaolzumas .gt_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -2280,7 +2293,7 @@ window.Quarto = {
   overflow-x: hidden;
 }
 
-#xhvntkdayk .gt_stub {
+#kfaolzumas .gt_stub {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -2293,7 +2306,7 @@ window.Quarto = {
   padding-right: 5px;
 }
 
-#xhvntkdayk .gt_stub_row_group {
+#kfaolzumas .gt_stub_row_group {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -2307,15 +2320,15 @@ window.Quarto = {
   vertical-align: top;
 }
 
-#xhvntkdayk .gt_row_group_first td {
+#kfaolzumas .gt_row_group_first td {
   border-top-width: 2px;
 }
 
-#xhvntkdayk .gt_row_group_first th {
+#kfaolzumas .gt_row_group_first th {
   border-top-width: 2px;
 }
 
-#xhvntkdayk .gt_summary_row {
+#kfaolzumas .gt_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -2325,16 +2338,16 @@ window.Quarto = {
   padding-right: 5px;
 }
 
-#xhvntkdayk .gt_first_summary_row {
+#kfaolzumas .gt_first_summary_row {
   border-top-style: solid;
   border-top-color: #D3D3D3;
 }
 
-#xhvntkdayk .gt_first_summary_row.thick {
+#kfaolzumas .gt_first_summary_row.thick {
   border-top-width: 2px;
 }
 
-#xhvntkdayk .gt_last_summary_row {
+#kfaolzumas .gt_last_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -2344,7 +2357,7 @@ window.Quarto = {
   border-bottom-color: #D3D3D3;
 }
 
-#xhvntkdayk .gt_grand_summary_row {
+#kfaolzumas .gt_grand_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -2354,7 +2367,7 @@ window.Quarto = {
   padding-right: 5px;
 }
 
-#xhvntkdayk .gt_first_grand_summary_row {
+#kfaolzumas .gt_first_grand_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -2364,7 +2377,7 @@ window.Quarto = {
   border-top-color: #D3D3D3;
 }
 
-#xhvntkdayk .gt_last_grand_summary_row_top {
+#kfaolzumas .gt_last_grand_summary_row_top {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -2374,11 +2387,11 @@ window.Quarto = {
   border-bottom-color: #D3D3D3;
 }
 
-#xhvntkdayk .gt_striped {
+#kfaolzumas .gt_striped {
   background-color: rgba(128, 128, 128, 0.05);
 }
 
-#xhvntkdayk .gt_table_body {
+#kfaolzumas .gt_table_body {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -2387,7 +2400,7 @@ window.Quarto = {
   border-bottom-color: #D3D3D3;
 }
 
-#xhvntkdayk .gt_footnotes {
+#kfaolzumas .gt_footnotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -2401,7 +2414,7 @@ window.Quarto = {
   border-right-color: #D3D3D3;
 }
 
-#xhvntkdayk .gt_footnote {
+#kfaolzumas .gt_footnote {
   margin: 0px;
   font-size: 90%;
   padding-top: 4px;
@@ -2410,7 +2423,7 @@ window.Quarto = {
   padding-right: 5px;
 }
 
-#xhvntkdayk .gt_sourcenotes {
+#kfaolzumas .gt_sourcenotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -2424,7 +2437,7 @@ window.Quarto = {
   border-right-color: #D3D3D3;
 }
 
-#xhvntkdayk .gt_sourcenote {
+#kfaolzumas .gt_sourcenote {
   font-size: 90%;
   padding-top: 4px;
   padding-bottom: 4px;
@@ -2432,72 +2445,72 @@ window.Quarto = {
   padding-right: 5px;
 }
 
-#xhvntkdayk .gt_left {
+#kfaolzumas .gt_left {
   text-align: left;
 }
 
-#xhvntkdayk .gt_center {
+#kfaolzumas .gt_center {
   text-align: center;
 }
 
-#xhvntkdayk .gt_right {
+#kfaolzumas .gt_right {
   text-align: right;
   font-variant-numeric: tabular-nums;
 }
 
-#xhvntkdayk .gt_font_normal {
+#kfaolzumas .gt_font_normal {
   font-weight: normal;
 }
 
-#xhvntkdayk .gt_font_bold {
+#kfaolzumas .gt_font_bold {
   font-weight: bold;
 }
 
-#xhvntkdayk .gt_font_italic {
+#kfaolzumas .gt_font_italic {
   font-style: italic;
 }
 
-#xhvntkdayk .gt_super {
+#kfaolzumas .gt_super {
   font-size: 65%;
 }
 
-#xhvntkdayk .gt_footnote_marks {
+#kfaolzumas .gt_footnote_marks {
   font-size: 75%;
   vertical-align: 0.4em;
   position: initial;
 }
 
-#xhvntkdayk .gt_asterisk {
+#kfaolzumas .gt_asterisk {
   font-size: 100%;
   vertical-align: 0;
 }
 
-#xhvntkdayk .gt_indent_1 {
+#kfaolzumas .gt_indent_1 {
   text-indent: 5px;
 }
 
-#xhvntkdayk .gt_indent_2 {
+#kfaolzumas .gt_indent_2 {
   text-indent: 10px;
 }
 
-#xhvntkdayk .gt_indent_3 {
+#kfaolzumas .gt_indent_3 {
   text-indent: 15px;
 }
 
-#xhvntkdayk .gt_indent_4 {
+#kfaolzumas .gt_indent_4 {
   text-indent: 20px;
 }
 
-#xhvntkdayk .gt_indent_5 {
+#kfaolzumas .gt_indent_5 {
   text-indent: 25px;
 }
 
-#xhvntkdayk .katex-display {
+#kfaolzumas .katex-display {
   display: inline-flex !important;
   margin-bottom: 0.75em !important;
 }
 
-#xhvntkdayk div.Reactable > div.rt-table > div.rt-thead > div.rt-tr.rt-tr-group-header > div.rt-th-group:after {
+#kfaolzumas div.Reactable > div.rt-table > div.rt-thead > div.rt-tr.rt-tr-group-header > div.rt-th-group:after {
   height: 0px !important;
 }
 </style>
@@ -2732,6 +2745,29 @@ window.Quarto = {
 </section>
 <section id="simpson-index" class="level3">
 <h3 class="anchored" data-anchor-id="simpson-index">Simpson Index</h3>
+<p>El <strong>índice de Simpson</strong> mide la probabilidad de que dos individuos tomados al azar de una muestra pertenezcan a la misma especie. Es sensible a la dominancia de especies abundantes.</p>
+</section>
+<section id="fórmula-del-índice-de-simpson" class="level3">
+<h3 class="anchored" data-anchor-id="fórmula-del-índice-de-simpson">Fórmula del Índice de Simpson:</h3>
+<p><span class="math display">\[D = 1 - \sum_{i=1}^{S} p_i^2\]</span></p>
+<p>donde:</p>
+<ul>
+<li><p><span class="math inline">\(D\)</span> = índice de Simpson (diversidad)</p></li>
+<li><p><span class="math inline">\(S\)</span> = número de especies (riqueza)</p></li>
+<li><p><span class="math inline">\(p_i\)</span> = proporción de la especie <span class="math inline">\(i\)</span> en la muestra: $p_i = ra</p></li>
+</ul>
+<p>c{n_i}{N}$</p>
+<p>- <span class="math inline">\(n_i\)</span> = número de individuos de la especie <span class="math inline">\(i\)</span> - <span class="math inline">\(N\)</span> = número total de individuos</p>
+<p>Algunas variantes:</p>
+<p>- <strong>Índice de Simpson original</strong>: <span class="math inline">\(\lambda = \sum p_i^2\)</span></p>
+<p>- <strong>Diversidad de Simpson</strong>: <span class="math inline">\(1/\lambda\)</span></p>
+</section>
+<section id="interpretación" class="level3">
+<h3 class="anchored" data-anchor-id="interpretación">Interpretación:</h3>
+<ul>
+<li><span class="math inline">\(D\)</span> cercano a 1 indica alta diversidad (baja dominancia)</li>
+<li><span class="math inline">\(D\)</span> cercano a 0 indica baja diversidad (alta dominancia)</li>
+</ul>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb16"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a><span class="ex">qiime</span> diversity alpha-group-significance <span class="dt">\</span></span>
 <span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a>  <span class="at">--i-alpha-diversity</span> simpson_diversity.qza <span class="dt">\ </span>            </span>
@@ -2754,23 +2790,23 @@ window.Quarto = {
 </div>
 <div class="cell">
 <div class="cell-output-display">
-<div id="twpaqmigey" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
-<style>#twpaqmigey table {
+<div id="qmppctgucr" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<style>#qmppctgucr table {
   font-family: system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
-#twpaqmigey thead, #twpaqmigey tbody, #twpaqmigey tfoot, #twpaqmigey tr, #twpaqmigey td, #twpaqmigey th {
+#qmppctgucr thead, #qmppctgucr tbody, #qmppctgucr tfoot, #qmppctgucr tr, #qmppctgucr td, #qmppctgucr th {
   border-style: none;
 }
 
-#twpaqmigey p {
+#qmppctgucr p {
   margin: 0;
   padding: 0;
 }
 
-#twpaqmigey .gt_table {
+#qmppctgucr .gt_table {
   display: table;
   border-collapse: collapse;
   line-height: normal;
@@ -2796,12 +2832,12 @@ window.Quarto = {
   border-left-color: #D3D3D3;
 }
 
-#twpaqmigey .gt_caption {
+#qmppctgucr .gt_caption {
   padding-top: 4px;
   padding-bottom: 4px;
 }
 
-#twpaqmigey .gt_title {
+#qmppctgucr .gt_title {
   color: #333333;
   font-size: 125%;
   font-weight: initial;
@@ -2813,7 +2849,7 @@ window.Quarto = {
   border-bottom-width: 0;
 }
 
-#twpaqmigey .gt_subtitle {
+#qmppctgucr .gt_subtitle {
   color: #333333;
   font-size: 85%;
   font-weight: initial;
@@ -2825,7 +2861,7 @@ window.Quarto = {
   border-top-width: 0;
 }
 
-#twpaqmigey .gt_heading {
+#qmppctgucr .gt_heading {
   background-color: #FFFFFF;
   text-align: center;
   border-bottom-color: #FFFFFF;
@@ -2837,13 +2873,13 @@ window.Quarto = {
   border-right-color: #D3D3D3;
 }
 
-#twpaqmigey .gt_bottom_border {
+#qmppctgucr .gt_bottom_border {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
 }
 
-#twpaqmigey .gt_col_headings {
+#qmppctgucr .gt_col_headings {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -2858,7 +2894,7 @@ window.Quarto = {
   border-right-color: #D3D3D3;
 }
 
-#twpaqmigey .gt_col_heading {
+#qmppctgucr .gt_col_heading {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -2878,7 +2914,7 @@ window.Quarto = {
   overflow-x: hidden;
 }
 
-#twpaqmigey .gt_column_spanner_outer {
+#qmppctgucr .gt_column_spanner_outer {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -2890,15 +2926,15 @@ window.Quarto = {
   padding-right: 4px;
 }
 
-#twpaqmigey .gt_column_spanner_outer:first-child {
+#qmppctgucr .gt_column_spanner_outer:first-child {
   padding-left: 0;
 }
 
-#twpaqmigey .gt_column_spanner_outer:last-child {
+#qmppctgucr .gt_column_spanner_outer:last-child {
   padding-right: 0;
 }
 
-#twpaqmigey .gt_column_spanner {
+#qmppctgucr .gt_column_spanner {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
@@ -2910,11 +2946,11 @@ window.Quarto = {
   width: 100%;
 }
 
-#twpaqmigey .gt_spanner_row {
+#qmppctgucr .gt_spanner_row {
   border-bottom-style: hidden;
 }
 
-#twpaqmigey .gt_group_heading {
+#qmppctgucr .gt_group_heading {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -2940,7 +2976,7 @@ window.Quarto = {
   text-align: left;
 }
 
-#twpaqmigey .gt_empty_group_heading {
+#qmppctgucr .gt_empty_group_heading {
   padding: 0.5px;
   color: #333333;
   background-color: #FFFFFF;
@@ -2955,15 +2991,15 @@ window.Quarto = {
   vertical-align: middle;
 }
 
-#twpaqmigey .gt_from_md > :first-child {
+#qmppctgucr .gt_from_md > :first-child {
   margin-top: 0;
 }
 
-#twpaqmigey .gt_from_md > :last-child {
+#qmppctgucr .gt_from_md > :last-child {
   margin-bottom: 0;
 }
 
-#twpaqmigey .gt_row {
+#qmppctgucr .gt_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -2982,7 +3018,7 @@ window.Quarto = {
   overflow-x: hidden;
 }
 
-#twpaqmigey .gt_stub {
+#qmppctgucr .gt_stub {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -2995,7 +3031,7 @@ window.Quarto = {
   padding-right: 5px;
 }
 
-#twpaqmigey .gt_stub_row_group {
+#qmppctgucr .gt_stub_row_group {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -3009,15 +3045,15 @@ window.Quarto = {
   vertical-align: top;
 }
 
-#twpaqmigey .gt_row_group_first td {
+#qmppctgucr .gt_row_group_first td {
   border-top-width: 2px;
 }
 
-#twpaqmigey .gt_row_group_first th {
+#qmppctgucr .gt_row_group_first th {
   border-top-width: 2px;
 }
 
-#twpaqmigey .gt_summary_row {
+#qmppctgucr .gt_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -3027,16 +3063,16 @@ window.Quarto = {
   padding-right: 5px;
 }
 
-#twpaqmigey .gt_first_summary_row {
+#qmppctgucr .gt_first_summary_row {
   border-top-style: solid;
   border-top-color: #D3D3D3;
 }
 
-#twpaqmigey .gt_first_summary_row.thick {
+#qmppctgucr .gt_first_summary_row.thick {
   border-top-width: 2px;
 }
 
-#twpaqmigey .gt_last_summary_row {
+#qmppctgucr .gt_last_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -3046,7 +3082,7 @@ window.Quarto = {
   border-bottom-color: #D3D3D3;
 }
 
-#twpaqmigey .gt_grand_summary_row {
+#qmppctgucr .gt_grand_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -3056,7 +3092,7 @@ window.Quarto = {
   padding-right: 5px;
 }
 
-#twpaqmigey .gt_first_grand_summary_row {
+#qmppctgucr .gt_first_grand_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -3066,7 +3102,7 @@ window.Quarto = {
   border-top-color: #D3D3D3;
 }
 
-#twpaqmigey .gt_last_grand_summary_row_top {
+#qmppctgucr .gt_last_grand_summary_row_top {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -3076,11 +3112,11 @@ window.Quarto = {
   border-bottom-color: #D3D3D3;
 }
 
-#twpaqmigey .gt_striped {
+#qmppctgucr .gt_striped {
   background-color: rgba(128, 128, 128, 0.05);
 }
 
-#twpaqmigey .gt_table_body {
+#qmppctgucr .gt_table_body {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -3089,7 +3125,7 @@ window.Quarto = {
   border-bottom-color: #D3D3D3;
 }
 
-#twpaqmigey .gt_footnotes {
+#qmppctgucr .gt_footnotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -3103,7 +3139,7 @@ window.Quarto = {
   border-right-color: #D3D3D3;
 }
 
-#twpaqmigey .gt_footnote {
+#qmppctgucr .gt_footnote {
   margin: 0px;
   font-size: 90%;
   padding-top: 4px;
@@ -3112,7 +3148,7 @@ window.Quarto = {
   padding-right: 5px;
 }
 
-#twpaqmigey .gt_sourcenotes {
+#qmppctgucr .gt_sourcenotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -3126,7 +3162,7 @@ window.Quarto = {
   border-right-color: #D3D3D3;
 }
 
-#twpaqmigey .gt_sourcenote {
+#qmppctgucr .gt_sourcenote {
   font-size: 90%;
   padding-top: 4px;
   padding-bottom: 4px;
@@ -3134,72 +3170,72 @@ window.Quarto = {
   padding-right: 5px;
 }
 
-#twpaqmigey .gt_left {
+#qmppctgucr .gt_left {
   text-align: left;
 }
 
-#twpaqmigey .gt_center {
+#qmppctgucr .gt_center {
   text-align: center;
 }
 
-#twpaqmigey .gt_right {
+#qmppctgucr .gt_right {
   text-align: right;
   font-variant-numeric: tabular-nums;
 }
 
-#twpaqmigey .gt_font_normal {
+#qmppctgucr .gt_font_normal {
   font-weight: normal;
 }
 
-#twpaqmigey .gt_font_bold {
+#qmppctgucr .gt_font_bold {
   font-weight: bold;
 }
 
-#twpaqmigey .gt_font_italic {
+#qmppctgucr .gt_font_italic {
   font-style: italic;
 }
 
-#twpaqmigey .gt_super {
+#qmppctgucr .gt_super {
   font-size: 65%;
 }
 
-#twpaqmigey .gt_footnote_marks {
+#qmppctgucr .gt_footnote_marks {
   font-size: 75%;
   vertical-align: 0.4em;
   position: initial;
 }
 
-#twpaqmigey .gt_asterisk {
+#qmppctgucr .gt_asterisk {
   font-size: 100%;
   vertical-align: 0;
 }
 
-#twpaqmigey .gt_indent_1 {
+#qmppctgucr .gt_indent_1 {
   text-indent: 5px;
 }
 
-#twpaqmigey .gt_indent_2 {
+#qmppctgucr .gt_indent_2 {
   text-indent: 10px;
 }
 
-#twpaqmigey .gt_indent_3 {
+#qmppctgucr .gt_indent_3 {
   text-indent: 15px;
 }
 
-#twpaqmigey .gt_indent_4 {
+#qmppctgucr .gt_indent_4 {
   text-indent: 20px;
 }
 
-#twpaqmigey .gt_indent_5 {
+#qmppctgucr .gt_indent_5 {
   text-indent: 25px;
 }
 
-#twpaqmigey .katex-display {
+#qmppctgucr .katex-display {
   display: inline-flex !important;
   margin-bottom: 0.75em !important;
 }
 
-#twpaqmigey div.Reactable > div.rt-table > div.rt-thead > div.rt-tr.rt-tr-group-header > div.rt-th-group:after {
+#qmppctgucr div.Reactable > div.rt-table > div.rt-thead > div.rt-tr.rt-tr-group-header > div.rt-th-group:after {
   height: 0px !important;
 }
 </style>
@@ -3262,8 +3298,8 @@ window.Quarto = {
 <p>- <span class="math inline">\(H'_{\max}\)</span> = diversidad máxima posible = <span class="math inline">\(\ln S\)</span></p>
 <p>- <span class="math inline">\(S\)</span> = número de especies</p>
 </section>
-<section id="interpretación" class="level4">
-<h4 class="anchored" data-anchor-id="interpretación">Interpretación:</h4>
+<section id="interpretación-1" class="level4">
+<h4 class="anchored" data-anchor-id="interpretación-1">Interpretación:</h4>
 <ul>
 <li>Valores entre 0 y 1</li>
 <li>0 = máxima inequidad (una especie domina completamente)</li>
@@ -3276,23 +3312,23 @@ window.Quarto = {
 </div>
 <div class="cell">
 <div class="cell-output-display">
-<div id="zrmbzedyjt" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
-<style>#zrmbzedyjt table {
+<div id="bneqxltvsk" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<style>#bneqxltvsk table {
   font-family: system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
-#zrmbzedyjt thead, #zrmbzedyjt tbody, #zrmbzedyjt tfoot, #zrmbzedyjt tr, #zrmbzedyjt td, #zrmbzedyjt th {
+#bneqxltvsk thead, #bneqxltvsk tbody, #bneqxltvsk tfoot, #bneqxltvsk tr, #bneqxltvsk td, #bneqxltvsk th {
   border-style: none;
 }
 
-#zrmbzedyjt p {
+#bneqxltvsk p {
   margin: 0;
   padding: 0;
 }
 
-#zrmbzedyjt .gt_table {
+#bneqxltvsk .gt_table {
   display: table;
   border-collapse: collapse;
   line-height: normal;
@@ -3318,12 +3354,12 @@ window.Quarto = {
   border-left-color: #D3D3D3;
 }
 
-#zrmbzedyjt .gt_caption {
+#bneqxltvsk .gt_caption {
   padding-top: 4px;
   padding-bottom: 4px;
 }
 
-#zrmbzedyjt .gt_title {
+#bneqxltvsk .gt_title {
   color: #333333;
   font-size: 125%;
   font-weight: initial;
@@ -3335,7 +3371,7 @@ window.Quarto = {
   border-bottom-width: 0;
 }
 
-#zrmbzedyjt .gt_subtitle {
+#bneqxltvsk .gt_subtitle {
   color: #333333;
   font-size: 85%;
   font-weight: initial;
@@ -3347,7 +3383,7 @@ window.Quarto = {
   border-top-width: 0;
 }
 
-#zrmbzedyjt .gt_heading {
+#bneqxltvsk .gt_heading {
   background-color: #FFFFFF;
   text-align: center;
   border-bottom-color: #FFFFFF;
@@ -3359,13 +3395,13 @@ window.Quarto = {
   border-right-color: #D3D3D3;
 }
 
-#zrmbzedyjt .gt_bottom_border {
+#bneqxltvsk .gt_bottom_border {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
 }
 
-#zrmbzedyjt .gt_col_headings {
+#bneqxltvsk .gt_col_headings {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -3380,7 +3416,7 @@ window.Quarto = {
   border-right-color: #D3D3D3;
 }
 
-#zrmbzedyjt .gt_col_heading {
+#bneqxltvsk .gt_col_heading {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -3400,7 +3436,7 @@ window.Quarto = {
   overflow-x: hidden;
 }
 
-#zrmbzedyjt .gt_column_spanner_outer {
+#bneqxltvsk .gt_column_spanner_outer {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -3412,15 +3448,15 @@ window.Quarto = {
   padding-right: 4px;
 }
 
-#zrmbzedyjt .gt_column_spanner_outer:first-child {
+#bneqxltvsk .gt_column_spanner_outer:first-child {
   padding-left: 0;
 }
 
-#zrmbzedyjt .gt_column_spanner_outer:last-child {
+#bneqxltvsk .gt_column_spanner_outer:last-child {
   padding-right: 0;
 }
 
-#zrmbzedyjt .gt_column_spanner {
+#bneqxltvsk .gt_column_spanner {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
@@ -3432,11 +3468,11 @@ window.Quarto = {
   width: 100%;
 }
 
-#zrmbzedyjt .gt_spanner_row {
+#bneqxltvsk .gt_spanner_row {
   border-bottom-style: hidden;
 }
 
-#zrmbzedyjt .gt_group_heading {
+#bneqxltvsk .gt_group_heading {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -3462,7 +3498,7 @@ window.Quarto = {
   text-align: left;
 }
 
-#zrmbzedyjt .gt_empty_group_heading {
+#bneqxltvsk .gt_empty_group_heading {
   padding: 0.5px;
   color: #333333;
   background-color: #FFFFFF;
@@ -3477,15 +3513,15 @@ window.Quarto = {
   vertical-align: middle;
 }
 
-#zrmbzedyjt .gt_from_md > :first-child {
+#bneqxltvsk .gt_from_md > :first-child {
   margin-top: 0;
 }
 
-#zrmbzedyjt .gt_from_md > :last-child {
+#bneqxltvsk .gt_from_md > :last-child {
   margin-bottom: 0;
 }
 
-#zrmbzedyjt .gt_row {
+#bneqxltvsk .gt_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -3504,7 +3540,7 @@ window.Quarto = {
   overflow-x: hidden;
 }
 
-#zrmbzedyjt .gt_stub {
+#bneqxltvsk .gt_stub {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -3517,7 +3553,7 @@ window.Quarto = {
   padding-right: 5px;
 }
 
-#zrmbzedyjt .gt_stub_row_group {
+#bneqxltvsk .gt_stub_row_group {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -3531,15 +3567,15 @@ window.Quarto = {
   vertical-align: top;
 }
 
-#zrmbzedyjt .gt_row_group_first td {
+#bneqxltvsk .gt_row_group_first td {
   border-top-width: 2px;
 }
 
-#zrmbzedyjt .gt_row_group_first th {
+#bneqxltvsk .gt_row_group_first th {
   border-top-width: 2px;
 }
 
-#zrmbzedyjt .gt_summary_row {
+#bneqxltvsk .gt_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -3549,16 +3585,16 @@ window.Quarto = {
   padding-right: 5px;
 }
 
-#zrmbzedyjt .gt_first_summary_row {
+#bneqxltvsk .gt_first_summary_row {
   border-top-style: solid;
   border-top-color: #D3D3D3;
 }
 
-#zrmbzedyjt .gt_first_summary_row.thick {
+#bneqxltvsk .gt_first_summary_row.thick {
   border-top-width: 2px;
 }
 
-#zrmbzedyjt .gt_last_summary_row {
+#bneqxltvsk .gt_last_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -3568,7 +3604,7 @@ window.Quarto = {
   border-bottom-color: #D3D3D3;
 }
 
-#zrmbzedyjt .gt_grand_summary_row {
+#bneqxltvsk .gt_grand_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -3578,7 +3614,7 @@ window.Quarto = {
   padding-right: 5px;
 }
 
-#zrmbzedyjt .gt_first_grand_summary_row {
+#bneqxltvsk .gt_first_grand_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -3588,7 +3624,7 @@ window.Quarto = {
   border-top-color: #D3D3D3;
 }
 
-#zrmbzedyjt .gt_last_grand_summary_row_top {
+#bneqxltvsk .gt_last_grand_summary_row_top {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -3598,11 +3634,11 @@ window.Quarto = {
   border-bottom-color: #D3D3D3;
 }
 
-#zrmbzedyjt .gt_striped {
+#bneqxltvsk .gt_striped {
   background-color: rgba(128, 128, 128, 0.05);
 }
 
-#zrmbzedyjt .gt_table_body {
+#bneqxltvsk .gt_table_body {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -3611,7 +3647,7 @@ window.Quarto = {
   border-bottom-color: #D3D3D3;
 }
 
-#zrmbzedyjt .gt_footnotes {
+#bneqxltvsk .gt_footnotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -3625,7 +3661,7 @@ window.Quarto = {
   border-right-color: #D3D3D3;
 }
 
-#zrmbzedyjt .gt_footnote {
+#bneqxltvsk .gt_footnote {
   margin: 0px;
   font-size: 90%;
   padding-top: 4px;
@@ -3634,7 +3670,7 @@ window.Quarto = {
   padding-right: 5px;
 }
 
-#zrmbzedyjt .gt_sourcenotes {
+#bneqxltvsk .gt_sourcenotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -3648,7 +3684,7 @@ window.Quarto = {
   border-right-color: #D3D3D3;
 }
 
-#zrmbzedyjt .gt_sourcenote {
+#bneqxltvsk .gt_sourcenote {
   font-size: 90%;
   padding-top: 4px;
   padding-bottom: 4px;
@@ -3656,72 +3692,72 @@ window.Quarto = {
   padding-right: 5px;
 }
 
-#zrmbzedyjt .gt_left {
+#bneqxltvsk .gt_left {
   text-align: left;
 }
 
-#zrmbzedyjt .gt_center {
+#bneqxltvsk .gt_center {
   text-align: center;
 }
 
-#zrmbzedyjt .gt_right {
+#bneqxltvsk .gt_right {
   text-align: right;
   font-variant-numeric: tabular-nums;
 }
 
-#zrmbzedyjt .gt_font_normal {
+#bneqxltvsk .gt_font_normal {
   font-weight: normal;
 }
 
-#zrmbzedyjt .gt_font_bold {
+#bneqxltvsk .gt_font_bold {
   font-weight: bold;
 }
 
-#zrmbzedyjt .gt_font_italic {
+#bneqxltvsk .gt_font_italic {
   font-style: italic;
 }
 
-#zrmbzedyjt .gt_super {
+#bneqxltvsk .gt_super {
   font-size: 65%;
 }
 
-#zrmbzedyjt .gt_footnote_marks {
+#bneqxltvsk .gt_footnote_marks {
   font-size: 75%;
   vertical-align: 0.4em;
   position: initial;
 }
 
-#zrmbzedyjt .gt_asterisk {
+#bneqxltvsk .gt_asterisk {
   font-size: 100%;
   vertical-align: 0;
 }
 
-#zrmbzedyjt .gt_indent_1 {
+#bneqxltvsk .gt_indent_1 {
   text-indent: 5px;
 }
 
-#zrmbzedyjt .gt_indent_2 {
+#bneqxltvsk .gt_indent_2 {
   text-indent: 10px;
 }
 
-#zrmbzedyjt .gt_indent_3 {
+#bneqxltvsk .gt_indent_3 {
   text-indent: 15px;
 }
 
-#zrmbzedyjt .gt_indent_4 {
+#bneqxltvsk .gt_indent_4 {
   text-indent: 20px;
 }
 
-#zrmbzedyjt .gt_indent_5 {
+#bneqxltvsk .gt_indent_5 {
   text-indent: 25px;
 }
 
-#zrmbzedyjt .katex-display {
+#bneqxltvsk .katex-display {
   display: inline-flex !important;
   margin-bottom: 0.75em !important;
 }
 
-#zrmbzedyjt div.Reactable > div.rt-table > div.rt-thead > div.rt-tr.rt-tr-group-header > div.rt-th-group:after {
+#bneqxltvsk div.Reactable > div.rt-table > div.rt-thead > div.rt-tr.rt-tr-group-header > div.rt-th-group:after {
   height: 0px !important;
 }
 </style>
@@ -3779,23 +3815,23 @@ window.Quarto = {
 </div>
 <div class="cell">
 <div class="cell-output-display">
-<div id="omeibahxut" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
-<style>#omeibahxut table {
+<div id="kyobunwutp" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<style>#kyobunwutp table {
   font-family: system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
-#omeibahxut thead, #omeibahxut tbody, #omeibahxut tfoot, #omeibahxut tr, #omeibahxut td, #omeibahxut th {
+#kyobunwutp thead, #kyobunwutp tbody, #kyobunwutp tfoot, #kyobunwutp tr, #kyobunwutp td, #kyobunwutp th {
   border-style: none;
 }
 
-#omeibahxut p {
+#kyobunwutp p {
   margin: 0;
   padding: 0;
 }
 
-#omeibahxut .gt_table {
+#kyobunwutp .gt_table {
   display: table;
   border-collapse: collapse;
   line-height: normal;
@@ -3821,12 +3857,12 @@ window.Quarto = {
   border-left-color: #D3D3D3;
 }
 
-#omeibahxut .gt_caption {
+#kyobunwutp .gt_caption {
   padding-top: 4px;
   padding-bottom: 4px;
 }
 
-#omeibahxut .gt_title {
+#kyobunwutp .gt_title {
   color: #333333;
   font-size: 125%;
   font-weight: initial;
@@ -3838,7 +3874,7 @@ window.Quarto = {
   border-bottom-width: 0;
 }
 
-#omeibahxut .gt_subtitle {
+#kyobunwutp .gt_subtitle {
   color: #333333;
   font-size: 85%;
   font-weight: initial;
@@ -3850,7 +3886,7 @@ window.Quarto = {
   border-top-width: 0;
 }
 
-#omeibahxut .gt_heading {
+#kyobunwutp .gt_heading {
   background-color: #FFFFFF;
   text-align: center;
   border-bottom-color: #FFFFFF;
@@ -3862,13 +3898,13 @@ window.Quarto = {
   border-right-color: #D3D3D3;
 }
 
-#omeibahxut .gt_bottom_border {
+#kyobunwutp .gt_bottom_border {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
 }
 
-#omeibahxut .gt_col_headings {
+#kyobunwutp .gt_col_headings {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -3883,7 +3919,7 @@ window.Quarto = {
   border-right-color: #D3D3D3;
 }
 
-#omeibahxut .gt_col_heading {
+#kyobunwutp .gt_col_heading {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -3903,7 +3939,7 @@ window.Quarto = {
   overflow-x: hidden;
 }
 
-#omeibahxut .gt_column_spanner_outer {
+#kyobunwutp .gt_column_spanner_outer {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -3915,15 +3951,15 @@ window.Quarto = {
   padding-right: 4px;
 }
 
-#omeibahxut .gt_column_spanner_outer:first-child {
+#kyobunwutp .gt_column_spanner_outer:first-child {
   padding-left: 0;
 }
 
-#omeibahxut .gt_column_spanner_outer:last-child {
+#kyobunwutp .gt_column_spanner_outer:last-child {
   padding-right: 0;
 }
 
-#omeibahxut .gt_column_spanner {
+#kyobunwutp .gt_column_spanner {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
@@ -3935,11 +3971,11 @@ window.Quarto = {
   width: 100%;
 }
 
-#omeibahxut .gt_spanner_row {
+#kyobunwutp .gt_spanner_row {
   border-bottom-style: hidden;
 }
 
-#omeibahxut .gt_group_heading {
+#kyobunwutp .gt_group_heading {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -3965,7 +4001,7 @@ window.Quarto = {
   text-align: left;
 }
 
-#omeibahxut .gt_empty_group_heading {
+#kyobunwutp .gt_empty_group_heading {
   padding: 0.5px;
   color: #333333;
   background-color: #FFFFFF;
@@ -3980,15 +4016,15 @@ window.Quarto = {
   vertical-align: middle;
 }
 
-#omeibahxut .gt_from_md > :first-child {
+#kyobunwutp .gt_from_md > :first-child {
   margin-top: 0;
 }
 
-#omeibahxut .gt_from_md > :last-child {
+#kyobunwutp .gt_from_md > :last-child {
   margin-bottom: 0;
 }
 
-#omeibahxut .gt_row {
+#kyobunwutp .gt_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -4007,7 +4043,7 @@ window.Quarto = {
   overflow-x: hidden;
 }
 
-#omeibahxut .gt_stub {
+#kyobunwutp .gt_stub {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -4020,7 +4056,7 @@ window.Quarto = {
   padding-right: 5px;
 }
 
-#omeibahxut .gt_stub_row_group {
+#kyobunwutp .gt_stub_row_group {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -4034,15 +4070,15 @@ window.Quarto = {
   vertical-align: top;
 }
 
-#omeibahxut .gt_row_group_first td {
+#kyobunwutp .gt_row_group_first td {
   border-top-width: 2px;
 }
 
-#omeibahxut .gt_row_group_first th {
+#kyobunwutp .gt_row_group_first th {
   border-top-width: 2px;
 }
 
-#omeibahxut .gt_summary_row {
+#kyobunwutp .gt_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -4052,16 +4088,16 @@ window.Quarto = {
   padding-right: 5px;
 }
 
-#omeibahxut .gt_first_summary_row {
+#kyobunwutp .gt_first_summary_row {
   border-top-style: solid;
   border-top-color: #D3D3D3;
 }
 
-#omeibahxut .gt_first_summary_row.thick {
+#kyobunwutp .gt_first_summary_row.thick {
   border-top-width: 2px;
 }
 
-#omeibahxut .gt_last_summary_row {
+#kyobunwutp .gt_last_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -4071,7 +4107,7 @@ window.Quarto = {
   border-bottom-color: #D3D3D3;
 }
 
-#omeibahxut .gt_grand_summary_row {
+#kyobunwutp .gt_grand_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -4081,7 +4117,7 @@ window.Quarto = {
   padding-right: 5px;
 }
 
-#omeibahxut .gt_first_grand_summary_row {
+#kyobunwutp .gt_first_grand_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -4091,7 +4127,7 @@ window.Quarto = {
   border-top-color: #D3D3D3;
 }
 
-#omeibahxut .gt_last_grand_summary_row_top {
+#kyobunwutp .gt_last_grand_summary_row_top {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -4101,11 +4137,11 @@ window.Quarto = {
   border-bottom-color: #D3D3D3;
 }
 
-#omeibahxut .gt_striped {
+#kyobunwutp .gt_striped {
   background-color: rgba(128, 128, 128, 0.05);
 }
 
-#omeibahxut .gt_table_body {
+#kyobunwutp .gt_table_body {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -4114,7 +4150,7 @@ window.Quarto = {
   border-bottom-color: #D3D3D3;
 }
 
-#omeibahxut .gt_footnotes {
+#kyobunwutp .gt_footnotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -4128,7 +4164,7 @@ window.Quarto = {
   border-right-color: #D3D3D3;
 }
 
-#omeibahxut .gt_footnote {
+#kyobunwutp .gt_footnote {
   margin: 0px;
   font-size: 90%;
   padding-top: 4px;
@@ -4137,7 +4173,7 @@ window.Quarto = {
   padding-right: 5px;
 }
 
-#omeibahxut .gt_sourcenotes {
+#kyobunwutp .gt_sourcenotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -4151,7 +4187,7 @@ window.Quarto = {
   border-right-color: #D3D3D3;
 }
 
-#omeibahxut .gt_sourcenote {
+#kyobunwutp .gt_sourcenote {
   font-size: 90%;
   padding-top: 4px;
   padding-bottom: 4px;
@@ -4159,72 +4195,72 @@ window.Quarto = {
   padding-right: 5px;
 }
 
-#omeibahxut .gt_left {
+#kyobunwutp .gt_left {
   text-align: left;
 }
 
-#omeibahxut .gt_center {
+#kyobunwutp .gt_center {
   text-align: center;
 }
 
-#omeibahxut .gt_right {
+#kyobunwutp .gt_right {
   text-align: right;
   font-variant-numeric: tabular-nums;
 }
 
-#omeibahxut .gt_font_normal {
+#kyobunwutp .gt_font_normal {
   font-weight: normal;
 }
 
-#omeibahxut .gt_font_bold {
+#kyobunwutp .gt_font_bold {
   font-weight: bold;
 }
 
-#omeibahxut .gt_font_italic {
+#kyobunwutp .gt_font_italic {
   font-style: italic;
 }
 
-#omeibahxut .gt_super {
+#kyobunwutp .gt_super {
   font-size: 65%;
 }
 
-#omeibahxut .gt_footnote_marks {
+#kyobunwutp .gt_footnote_marks {
   font-size: 75%;
   vertical-align: 0.4em;
   position: initial;
 }
 
-#omeibahxut .gt_asterisk {
+#kyobunwutp .gt_asterisk {
   font-size: 100%;
   vertical-align: 0;
 }
 
-#omeibahxut .gt_indent_1 {
+#kyobunwutp .gt_indent_1 {
   text-indent: 5px;
 }
 
-#omeibahxut .gt_indent_2 {
+#kyobunwutp .gt_indent_2 {
   text-indent: 10px;
 }
 
-#omeibahxut .gt_indent_3 {
+#kyobunwutp .gt_indent_3 {
   text-indent: 15px;
 }
 
-#omeibahxut .gt_indent_4 {
+#kyobunwutp .gt_indent_4 {
   text-indent: 20px;
 }
 
-#omeibahxut .gt_indent_5 {
+#kyobunwutp .gt_indent_5 {
   text-indent: 25px;
 }
 
-#omeibahxut .katex-display {
+#kyobunwutp .katex-display {
   display: inline-flex !important;
   margin-bottom: 0.75em !important;
 }
 
-#omeibahxut div.Reactable > div.rt-table > div.rt-thead > div.rt-tr.rt-tr-group-header > div.rt-th-group:after {
+#kyobunwutp div.Reactable > div.rt-table > div.rt-thead > div.rt-tr.rt-tr-group-header > div.rt-th-group:after {
   height: 0px !important;
 }
 </style>
@@ -4311,8 +4347,8 @@ window.Quarto = {
 <p>- <span class="math inline">\(N\)</span> = número total de individuos de todas las especies</p>
 <p>- <span class="math inline">\(\ln\)</span> = logaritmo natural</p>
 </section>
-<section id="interpretación-1" class="level4">
-<h4 class="anchored" data-anchor-id="interpretación-1">Interpretación:</h4>
+<section id="interpretación-2" class="level4">
+<h4 class="anchored" data-anchor-id="interpretación-2">Interpretación:</h4>
 <ul>
 <li>Valores entre 0.5 y 5 en ecosistemas naturales</li>
 <li>Valores &lt; 2: baja diversidad</li>
@@ -4369,8 +4405,8 @@ window.Quarto = {
 <p>- <span class="math inline">\(x_{ik}\)</span>, <span class="math inline">\(x_{jk}\)</span> = abundancia de la especie <span class="math inline">\(k\)</span> en los sitios <span class="math inline">\(i\)</span> y <span class="math inline">\(j\)</span></p>
 <p>- <span class="math inline">\(n\)</span> = número total de especies</p>
 </section>
-<section id="interpretación-2" class="level4">
-<h4 class="anchored" data-anchor-id="interpretación-2">Interpretación:</h4>
+<section id="interpretación-3" class="level4">
+<h4 class="anchored" data-anchor-id="interpretación-3">Interpretación:</h4>
 <ul>
 <li>Valores entre 0 y 1</li>
 <li>0 = sitios idénticos en composición</li>
@@ -4429,8 +4465,8 @@ window.Quarto = {
 - <span class="math inline">\(c\)</span> = número de especies presentes en ambos sitios A y B</p>
 <p>- <span class="math inline">\(D_J\)</span> = distancia de Jaccard</p>
 </section>
-<section id="interpretación-3" class="level4">
-<h4 class="anchored" data-anchor-id="interpretación-3">Interpretación:</h4>
+<section id="interpretación-4" class="level4">
+<h4 class="anchored" data-anchor-id="interpretación-4">Interpretación:</h4>
 <ul>
 <li>Valores entre 0 y 1</li>
 <li>0 = sitios idénticos (especies presentes son las mismas)</li>
@@ -4495,8 +4531,8 @@ window.Quarto = {
 <p>- <span class="math inline">\(B_i\)</span> = número de secuencias de la muestra B en las ramas descendientes del nodo <span class="math inline">\(i\)</span></p>
 <p>- <span class="math inline">\(B_t\)</span> = número total de secuencias en la muestra B</p>
 </section>
-<section id="interpretación-4" class="level4">
-<h4 class="anchored" data-anchor-id="interpretación-4">Interpretación:</h4>
+<section id="interpretación-5" class="level4">
+<h4 class="anchored" data-anchor-id="interpretación-5">Interpretación:</h4>
 <ul>
 <li>Valores entre 0 y 1</li>
 <li>0 = comunidades idénticas filogenéticamente</li>
@@ -4543,6 +4579,7 @@ window.Quarto = {
 </section>
 <section id="taxonomía" class="level1">
 <h1>Taxonomía</h1>
+<p><strong>NOTA</strong> ⚠️<strong>:</strong> si no cuentas con un modelo entrenado para clasificar las secuencias, debes checar en al Apéndice <a href="#entrenamiento-base-de-datos-silva">Entrenamiento base de datos SILVA</a>.</p>
 <section id="diversidadabundancía" class="level2">
 <h2 class="anchored" data-anchor-id="diversidadabundancía">Diversidad/abundancía</h2>
 <div class="cell">
@@ -4571,6 +4608,38 @@ window.Quarto = {
 </section>
 <section id="pruebas-de-abundancia-diferencial-con-ancom-bc" class="level2">
 <h2 class="anchored" data-anchor-id="pruebas-de-abundancia-diferencial-con-ancom-bc">Pruebas de abundancia diferencial con ANCOM-BC</h2>
+<p><strong>ANCOM-BC</strong> (Analysis of Composition of Microbiomes with Bias Correction) es un método para detectar taxones con abundancia diferencial entre grupos, corregir sesgos de muestreo y normalización.</p>
+<section id="pasos-principales-de-ancom-bc" class="level3">
+<h3 class="anchored" data-anchor-id="pasos-principales-de-ancom-bc">Pasos Principales de ANCOM-BC:</h3>
+<ol type="1">
+<li><strong>Modelado de cuentas</strong>: Ajusta modelos lineales generalizados a las cuentas de taxones con corrección de tamaño de muestra.</li>
+<li><strong>Estimación de log-fold changes</strong>: Calcula la diferencia de abundancia en escala logarítmica entre condiciones.</li>
+<li><strong>Corrección de sesgos</strong>: Ajusta estimaciones para minimizar sesgos debidos a diferencias en la profundidad de secuenciación.</li>
+<li><strong>Pruebas estadísticas</strong>: Realiza pruebas Wald para evaluar si los cambios log-fold son significativamente distintos de cero.</li>
+</ol>
+</section>
+<section id="ecuación-general-de-log-fold-change-estimado" class="level3">
+<h3 class="anchored" data-anchor-id="ecuación-general-de-log-fold-change-estimado">Ecuación general de log-fold change estimado:</h3>
+<p><span class="math display">\[\hat{\eta}_i = \log\left(\frac{\hat{\mu}_{i,1}}{\hat{\mu}_{i,0}}\right)\]</span></p>
+<p>donde:</p>
+<p>- <span class="math inline">\(\hat{\eta}_i\)</span> = estimación del log-fold change para el taxón <span class="math inline">\(i\)</span></p>
+<p>- <span class="math inline">\(\hat{\mu}_{i,1}\)</span> = abundancia media ajustada del taxón <span class="math inline">\(i\)</span> en el grupo 1</p>
+<p>- <span class="math inline">\(\hat{\mu}_{i,0}\)</span> = abundancia media ajustada del taxón <span class="math inline">\(i\)</span> en el grupo 0</p>
+</section>
+<section id="interpretación-de-resultados" class="level3">
+<h3 class="anchored" data-anchor-id="interpretación-de-resultados">Interpretación de resultados:</h3>
+<ul>
+<li><span class="math inline">\(\hat{\eta}_i &gt; 0\)</span> indica mayor abundancia en el grupo 1</li>
+<li><span class="math inline">\(\hat{\eta}_i &lt; 0\)</span> indica mayor abundancia en el grupo 0</li>
+<li>SE(<span class="math inline">\(\hat{\eta}_i\)</span>) es el error estándar de la estimación</li>
+<li><span class="math inline">\(z_i = \hat{\eta}_i / SE(\hat{\eta}_i)\)</span> se utiliza para la prueba Wald</li>
+</ul>
+<p>ANCOM-BC es especialmente útil en metabarcoding porque:</p>
+<ul>
+<li><p>Corrige sesgos de muestreo</p></li>
+<li><p>Maneja datos escasos y muy dispersos</p></li>
+<li><p>Proporciona estimaciones robustas de cambios en abundancia</p></li>
+</ul>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb36"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb36-1"><a href="#cb36-1" aria-hidden="true" tabindex="-1"></a><span class="ex">qiime</span> composition ancombc <span class="dt">\</span></span>
 <span id="cb36-2"><a href="#cb36-2" aria-hidden="true" tabindex="-1"></a>  <span class="at">--i-table</span> table-dada2-tomato-16s.qza <span class="dt">\ </span></span>
@@ -4650,16 +4719,45 @@ window.Quarto = {
 </div>
 </section>
 </section>
+</section>
 <section id="apéndice" class="level1">
 <h1>Apéndice</h1>
 <section id="abrir-archivos-de-qiime2-en-r" class="level2">
 <h2 class="anchored" data-anchor-id="abrir-archivos-de-qiime2-en-r">Abrir archivos de Qiime2 en R</h2>
+<p>Primero instala la paquetería <a href="https://github.com/jbisanz/qiime2R/"><code>qiime2R</code></a></p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb43"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb43-1"><a href="#cb43-1" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> (<span class="sc">!</span><span class="fu">requireNamespace</span>(<span class="st">"devtools"</span>, <span class="at">quietly =</span> <span class="cn">TRUE</span>)){<span class="fu">install.packages</span>(<span class="st">"devtools"</span>)}</span>
+<span id="cb43-2"><a href="#cb43-2" aria-hidden="true" tabindex="-1"></a>devtools<span class="sc">::</span><span class="fu">install_github</span>(<span class="st">"jbisanz/qiime2R"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>Esta paquetería nos permite leer los archivos <code>.qza</code> <strong>QIIME Zipped Artifact</strong>.</p>
+<p>Por ejemplo, si buscas acceder a la matriz de cuentas de los ASV del archivo <code>table-dada2-tomato-16s.qza</code>, puede utilizar el siguiente código:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb44"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb44-1"><a href="#cb44-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(qiime2R)</span>
+<span id="cb44-2"><a href="#cb44-2" aria-hidden="true" tabindex="-1"></a>df_tmp <span class="ot">&lt;-</span> <span class="fu">read_qza</span>(<span class="st">"../2025_Demo_16S_tomate/table-dada2-tomato-16s.qza"</span>)</span>
+<span id="cb44-3"><a href="#cb44-3" aria-hidden="true" tabindex="-1"></a>df_counts <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(df_tmp<span class="sc">$</span>data)</span>
+<span id="cb44-4"><a href="#cb44-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb44-5"><a href="#cb44-5" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(df_counts, <span class="dv">5</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>                                 NC_1 NC_2 NC_3 NC_4 NC_5 NC_6 Tomato_1
+9002efc8d0aae0e00570a0ef34a8f2f4    0    0    0    0    0    0     1280
+41ae7e08f17de260576e380c2f703a0f   20 1360  537  161 1272 3080       36
+0be25e4c445f978d165c30f36c9b41ae    0    0    0    0    0    0      807
+d1316b26e5350da36e6456499ecdfe18   72    0  326  102  283   54      401
+1624f6ce2f3a06b5b884c321e3d24587    0    0    0    0    0    0      543
+                                 Tomato_2 Tomato_3 Tomato_4 Tomato_5 Tomato_6
+9002efc8d0aae0e00570a0ef34a8f2f4     1170     3153     1873      795      772
+41ae7e08f17de260576e380c2f703a0f       18       82      116       21       66
+0be25e4c445f978d165c30f36c9b41ae     1201      682      393      537      955
+d1316b26e5350da36e6456499ecdfe18      694      498      355      426      819
+1624f6ce2f3a06b5b884c321e3d24587      537     1332      929      358      314</code></pre>
+</div>
+</div>
 </section>
 <section id="otras-métricas-de-alfa-diversidad" class="level2">
 <h2 class="anchored" data-anchor-id="otras-métricas-de-alfa-diversidad">Otras métricas de Alfa Diversidad</h2>
 <p>Para los siguientes gráficos se dercargaron los archivos <code>.csv</code> a partir del archivo <code>.qzv</code>, para posteriormente usar <code>R</code> para gráficar.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb43"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb43-1"><a href="#cb43-1" aria-hidden="true" tabindex="-1"></a><span class="ex">qiime</span> tools view alpha-rarefaction-dada2-tomato-16s.qzv</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb46"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb46-1"><a href="#cb46-1" aria-hidden="true" tabindex="-1"></a><span class="ex">qiime</span> tools view alpha-rarefaction-dada2-tomato-16s.qzv</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>Se descargaron los siguientes archivos:</p>
 <ul>
@@ -4672,61 +4770,61 @@ window.Quarto = {
 <section id="observed-features-1" class="level4">
 <h4 class="anchored" data-anchor-id="observed-features-1">Observed Features</h4>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb44"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb44-1"><a href="#cb44-1" aria-hidden="true" tabindex="-1"></a><span class="fu">suppressPackageStartupMessages</span>(<span class="fu">library</span>(tidyverse))</span>
-<span id="cb44-2"><a href="#cb44-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb44-3"><a href="#cb44-3" aria-hidden="true" tabindex="-1"></a>obfe <span class="ot">&lt;-</span> readr<span class="sc">::</span><span class="fu">read_csv</span>(<span class="st">"tables/observed_features.csv"</span>,</span>
-<span id="cb44-4"><a href="#cb44-4" aria-hidden="true" tabindex="-1"></a>                        <span class="at">col_types =</span> <span class="fu">cols</span>(</span>
-<span id="cb44-5"><a href="#cb44-5" aria-hidden="true" tabindex="-1"></a>                 <span class="st">`</span><span class="at">sample-id</span><span class="st">`</span> <span class="ot">=</span> <span class="fu">col_skip</span>(),</span>
-<span id="cb44-6"><a href="#cb44-6" aria-hidden="true" tabindex="-1"></a>                 <span class="at">accession   =</span> <span class="fu">col_skip</span>(),</span>
-<span id="cb44-7"><a href="#cb44-7" aria-hidden="true" tabindex="-1"></a>                 <span class="at">sra_run     =</span> <span class="fu">col_skip</span>(),</span>
-<span id="cb44-8"><a href="#cb44-8" aria-hidden="true" tabindex="-1"></a>                 <span class="at">Type        =</span> <span class="fu">col_factor</span>(),</span>
-<span id="cb44-9"><a href="#cb44-9" aria-hidden="true" tabindex="-1"></a>                 <span class="at">.default    =</span> <span class="fu">col_double</span>()</span>
-<span id="cb44-10"><a href="#cb44-10" aria-hidden="true" tabindex="-1"></a>               ))</span>
-<span id="cb44-11"><a href="#cb44-11" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb44-12"><a href="#cb44-12" aria-hidden="true" tabindex="-1"></a>obfe_long <span class="ot">&lt;-</span> obfe <span class="sc">%&gt;%</span></span>
-<span id="cb44-13"><a href="#cb44-13" aria-hidden="true" tabindex="-1"></a>  <span class="fu">pivot_longer</span>(</span>
-<span id="cb44-14"><a href="#cb44-14" aria-hidden="true" tabindex="-1"></a>    <span class="at">cols =</span> <span class="fu">starts_with</span>(<span class="st">"depth-"</span>), </span>
-<span id="cb44-15"><a href="#cb44-15" aria-hidden="true" tabindex="-1"></a>    <span class="at">names_to =</span> <span class="fu">c</span>(<span class="st">"Depth"</span>, <span class="st">"Iter"</span>),            </span>
-<span id="cb44-16"><a href="#cb44-16" aria-hidden="true" tabindex="-1"></a>    <span class="at">names_pattern =</span> <span class="st">"depth-([0-9]+)_iter-([0-9]+)"</span>,</span>
-<span id="cb44-17"><a href="#cb44-17" aria-hidden="true" tabindex="-1"></a>    <span class="at">values_to =</span> <span class="st">"observed_features"</span>,</span>
-<span id="cb44-18"><a href="#cb44-18" aria-hidden="true" tabindex="-1"></a>    <span class="at">values_drop_na =</span> <span class="cn">TRUE</span>                     </span>
-<span id="cb44-19"><a href="#cb44-19" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">%&gt;%</span></span>
-<span id="cb44-20"><a href="#cb44-20" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(</span>
-<span id="cb44-21"><a href="#cb44-21" aria-hidden="true" tabindex="-1"></a>    <span class="at">Depth =</span> <span class="fu">as.integer</span>(Depth),</span>
-<span id="cb44-22"><a href="#cb44-22" aria-hidden="true" tabindex="-1"></a>    <span class="at">Iter  =</span> <span class="fu">as.integer</span>(Iter)</span>
-<span id="cb44-23"><a href="#cb44-23" aria-hidden="true" tabindex="-1"></a>  )</span>
-<span id="cb44-24"><a href="#cb44-24" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb44-25"><a href="#cb44-25" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb44-26"><a href="#cb44-26" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(obfe_long, <span class="fu">aes</span>(</span>
-<span id="cb44-27"><a href="#cb44-27" aria-hidden="true" tabindex="-1"></a>    <span class="at">x    =</span> <span class="fu">factor</span>(Depth),                   </span>
-<span id="cb44-28"><a href="#cb44-28" aria-hidden="true" tabindex="-1"></a>    <span class="at">y    =</span> observed_features,</span>
-<span id="cb44-29"><a href="#cb44-29" aria-hidden="true" tabindex="-1"></a>    <span class="at">fill =</span> Type                         </span>
-<span id="cb44-30"><a href="#cb44-30" aria-hidden="true" tabindex="-1"></a>  )) <span class="sc">+</span></span>
-<span id="cb44-31"><a href="#cb44-31" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_boxplot</span>(<span class="at">position =</span> <span class="fu">position_dodge</span>(<span class="at">width =</span> <span class="fl">0.8</span>),</span>
-<span id="cb44-32"><a href="#cb44-32" aria-hidden="true" tabindex="-1"></a>               <span class="at">color =</span> <span class="st">"black"</span>) <span class="sc">+</span></span>
-<span id="cb44-33"><a href="#cb44-33" aria-hidden="true" tabindex="-1"></a>  <span class="fu">stat_summary</span>(</span>
-<span id="cb44-34"><a href="#cb44-34" aria-hidden="true" tabindex="-1"></a>    <span class="fu">aes</span>(</span>
-<span id="cb44-35"><a href="#cb44-35" aria-hidden="true" tabindex="-1"></a>      <span class="at">x      =</span> <span class="fu">as.numeric</span>(<span class="fu">factor</span>(Depth)),</span>
-<span id="cb44-36"><a href="#cb44-36" aria-hidden="true" tabindex="-1"></a>      <span class="at">colour =</span> Type,</span>
-<span id="cb44-37"><a href="#cb44-37" aria-hidden="true" tabindex="-1"></a>      <span class="at">group  =</span> Type</span>
-<span id="cb44-38"><a href="#cb44-38" aria-hidden="true" tabindex="-1"></a>    ),</span>
-<span id="cb44-39"><a href="#cb44-39" aria-hidden="true" tabindex="-1"></a>    <span class="at">fun    =</span> median,</span>
-<span id="cb44-40"><a href="#cb44-40" aria-hidden="true" tabindex="-1"></a>    <span class="at">geom   =</span> <span class="st">"line"</span>,</span>
-<span id="cb44-41"><a href="#cb44-41" aria-hidden="true" tabindex="-1"></a>    <span class="at">size   =</span> <span class="dv">1</span></span>
-<span id="cb44-42"><a href="#cb44-42" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">+</span></span>
-<span id="cb44-43"><a href="#cb44-43" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_x_discrete</span>(<span class="at">name =</span> <span class="st">"Sequencing Depth"</span>) <span class="sc">+</span></span>
-<span id="cb44-44"><a href="#cb44-44" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_y_continuous</span>(<span class="at">name =</span> <span class="st">"Observed Features"</span>) <span class="sc">+</span></span>
-<span id="cb44-45"><a href="#cb44-45" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_minimal</span>(<span class="at">base_size =</span> <span class="dv">15</span>) <span class="sc">+</span></span>
-<span id="cb44-46"><a href="#cb44-46" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(</span>
-<span id="cb44-47"><a href="#cb44-47" aria-hidden="true" tabindex="-1"></a>    <span class="at">legend.title =</span> <span class="fu">element_blank</span>(),</span>
-<span id="cb44-48"><a href="#cb44-48" aria-hidden="true" tabindex="-1"></a>    <span class="at">panel.grid.major.x =</span> <span class="fu">element_blank</span>()</span>
-<span id="cb44-49"><a href="#cb44-49" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">+</span></span>
-<span id="cb44-50"><a href="#cb44-50" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_fill_manual</span>(<span class="at">values =</span> <span class="fu">c</span>( <span class="st">"#8f0052"</span>,<span class="st">"#276518"</span>)) <span class="sc">+</span></span>
-<span id="cb44-51"><a href="#cb44-51" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_color_manual</span>(<span class="at">values =</span> <span class="fu">c</span>( <span class="st">"#8f0052"</span>,<span class="st">"#276518"</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb47"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb47-1"><a href="#cb47-1" aria-hidden="true" tabindex="-1"></a><span class="fu">suppressPackageStartupMessages</span>(<span class="fu">library</span>(tidyverse))</span>
+<span id="cb47-2"><a href="#cb47-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb47-3"><a href="#cb47-3" aria-hidden="true" tabindex="-1"></a>obfe <span class="ot">&lt;-</span> readr<span class="sc">::</span><span class="fu">read_csv</span>(<span class="st">"tables/observed_features.csv"</span>,</span>
+<span id="cb47-4"><a href="#cb47-4" aria-hidden="true" tabindex="-1"></a>                        <span class="at">col_types =</span> <span class="fu">cols</span>(</span>
+<span id="cb47-5"><a href="#cb47-5" aria-hidden="true" tabindex="-1"></a>                 <span class="st">`</span><span class="at">sample-id</span><span class="st">`</span> <span class="ot">=</span> <span class="fu">col_skip</span>(),</span>
+<span id="cb47-6"><a href="#cb47-6" aria-hidden="true" tabindex="-1"></a>                 <span class="at">accession   =</span> <span class="fu">col_skip</span>(),</span>
+<span id="cb47-7"><a href="#cb47-7" aria-hidden="true" tabindex="-1"></a>                 <span class="at">sra_run     =</span> <span class="fu">col_skip</span>(),</span>
+<span id="cb47-8"><a href="#cb47-8" aria-hidden="true" tabindex="-1"></a>                 <span class="at">Type        =</span> <span class="fu">col_factor</span>(),</span>
+<span id="cb47-9"><a href="#cb47-9" aria-hidden="true" tabindex="-1"></a>                 <span class="at">.default    =</span> <span class="fu">col_double</span>()</span>
+<span id="cb47-10"><a href="#cb47-10" aria-hidden="true" tabindex="-1"></a>               ))</span>
+<span id="cb47-11"><a href="#cb47-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb47-12"><a href="#cb47-12" aria-hidden="true" tabindex="-1"></a>obfe_long <span class="ot">&lt;-</span> obfe <span class="sc">%&gt;%</span></span>
+<span id="cb47-13"><a href="#cb47-13" aria-hidden="true" tabindex="-1"></a>  <span class="fu">pivot_longer</span>(</span>
+<span id="cb47-14"><a href="#cb47-14" aria-hidden="true" tabindex="-1"></a>    <span class="at">cols =</span> <span class="fu">starts_with</span>(<span class="st">"depth-"</span>), </span>
+<span id="cb47-15"><a href="#cb47-15" aria-hidden="true" tabindex="-1"></a>    <span class="at">names_to =</span> <span class="fu">c</span>(<span class="st">"Depth"</span>, <span class="st">"Iter"</span>),            </span>
+<span id="cb47-16"><a href="#cb47-16" aria-hidden="true" tabindex="-1"></a>    <span class="at">names_pattern =</span> <span class="st">"depth-([0-9]+)_iter-([0-9]+)"</span>,</span>
+<span id="cb47-17"><a href="#cb47-17" aria-hidden="true" tabindex="-1"></a>    <span class="at">values_to =</span> <span class="st">"observed_features"</span>,</span>
+<span id="cb47-18"><a href="#cb47-18" aria-hidden="true" tabindex="-1"></a>    <span class="at">values_drop_na =</span> <span class="cn">TRUE</span>                     </span>
+<span id="cb47-19"><a href="#cb47-19" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">%&gt;%</span></span>
+<span id="cb47-20"><a href="#cb47-20" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(</span>
+<span id="cb47-21"><a href="#cb47-21" aria-hidden="true" tabindex="-1"></a>    <span class="at">Depth =</span> <span class="fu">as.integer</span>(Depth),</span>
+<span id="cb47-22"><a href="#cb47-22" aria-hidden="true" tabindex="-1"></a>    <span class="at">Iter  =</span> <span class="fu">as.integer</span>(Iter)</span>
+<span id="cb47-23"><a href="#cb47-23" aria-hidden="true" tabindex="-1"></a>  )</span>
+<span id="cb47-24"><a href="#cb47-24" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb47-25"><a href="#cb47-25" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb47-26"><a href="#cb47-26" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(obfe_long, <span class="fu">aes</span>(</span>
+<span id="cb47-27"><a href="#cb47-27" aria-hidden="true" tabindex="-1"></a>    <span class="at">x    =</span> <span class="fu">factor</span>(Depth),                   </span>
+<span id="cb47-28"><a href="#cb47-28" aria-hidden="true" tabindex="-1"></a>    <span class="at">y    =</span> observed_features,</span>
+<span id="cb47-29"><a href="#cb47-29" aria-hidden="true" tabindex="-1"></a>    <span class="at">fill =</span> Type                         </span>
+<span id="cb47-30"><a href="#cb47-30" aria-hidden="true" tabindex="-1"></a>  )) <span class="sc">+</span></span>
+<span id="cb47-31"><a href="#cb47-31" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_boxplot</span>(<span class="at">position =</span> <span class="fu">position_dodge</span>(<span class="at">width =</span> <span class="fl">0.8</span>),</span>
+<span id="cb47-32"><a href="#cb47-32" aria-hidden="true" tabindex="-1"></a>               <span class="at">color =</span> <span class="st">"black"</span>) <span class="sc">+</span></span>
+<span id="cb47-33"><a href="#cb47-33" aria-hidden="true" tabindex="-1"></a>  <span class="fu">stat_summary</span>(</span>
+<span id="cb47-34"><a href="#cb47-34" aria-hidden="true" tabindex="-1"></a>    <span class="fu">aes</span>(</span>
+<span id="cb47-35"><a href="#cb47-35" aria-hidden="true" tabindex="-1"></a>      <span class="at">x      =</span> <span class="fu">as.numeric</span>(<span class="fu">factor</span>(Depth)),</span>
+<span id="cb47-36"><a href="#cb47-36" aria-hidden="true" tabindex="-1"></a>      <span class="at">colour =</span> Type,</span>
+<span id="cb47-37"><a href="#cb47-37" aria-hidden="true" tabindex="-1"></a>      <span class="at">group  =</span> Type</span>
+<span id="cb47-38"><a href="#cb47-38" aria-hidden="true" tabindex="-1"></a>    ),</span>
+<span id="cb47-39"><a href="#cb47-39" aria-hidden="true" tabindex="-1"></a>    <span class="at">fun    =</span> median,</span>
+<span id="cb47-40"><a href="#cb47-40" aria-hidden="true" tabindex="-1"></a>    <span class="at">geom   =</span> <span class="st">"line"</span>,</span>
+<span id="cb47-41"><a href="#cb47-41" aria-hidden="true" tabindex="-1"></a>    <span class="at">size   =</span> <span class="dv">1</span></span>
+<span id="cb47-42"><a href="#cb47-42" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">+</span></span>
+<span id="cb47-43"><a href="#cb47-43" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_x_discrete</span>(<span class="at">name =</span> <span class="st">"Sequencing Depth"</span>) <span class="sc">+</span></span>
+<span id="cb47-44"><a href="#cb47-44" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_y_continuous</span>(<span class="at">name =</span> <span class="st">"Observed Features"</span>) <span class="sc">+</span></span>
+<span id="cb47-45"><a href="#cb47-45" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_minimal</span>(<span class="at">base_size =</span> <span class="dv">15</span>) <span class="sc">+</span></span>
+<span id="cb47-46"><a href="#cb47-46" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(</span>
+<span id="cb47-47"><a href="#cb47-47" aria-hidden="true" tabindex="-1"></a>    <span class="at">legend.title =</span> <span class="fu">element_blank</span>(),</span>
+<span id="cb47-48"><a href="#cb47-48" aria-hidden="true" tabindex="-1"></a>    <span class="at">panel.grid.major.x =</span> <span class="fu">element_blank</span>()</span>
+<span id="cb47-49"><a href="#cb47-49" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">+</span></span>
+<span id="cb47-50"><a href="#cb47-50" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_fill_manual</span>(<span class="at">values =</span> <span class="fu">c</span>( <span class="st">"#8f0052"</span>,<span class="st">"#276518"</span>)) <span class="sc">+</span></span>
+<span id="cb47-51"><a href="#cb47-51" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_color_manual</span>(<span class="at">values =</span> <span class="fu">c</span>( <span class="st">"#8f0052"</span>,<span class="st">"#276518"</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <div>
 <figure class="figure">
-<p><img src="index_files/figure-html/unnamed-chunk-51-1.png" class="img-fluid figure-img" width="672"></p>
+<p><img src="index_files/figure-html/unnamed-chunk-53-1.png" class="img-fluid figure-img" width="672"></p>
 </figure>
 </div>
 </div>
@@ -4736,61 +4834,61 @@ window.Quarto = {
 <h4 class="anchored" data-anchor-id="shannon-1">Shannon</h4>
 <p>En <code>R</code>:</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb45"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb45-1"><a href="#cb45-1" aria-hidden="true" tabindex="-1"></a><span class="fu">suppressPackageStartupMessages</span>(<span class="fu">library</span>(tidyverse))</span>
-<span id="cb45-2"><a href="#cb45-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb45-3"><a href="#cb45-3" aria-hidden="true" tabindex="-1"></a>obfe <span class="ot">&lt;-</span> readr<span class="sc">::</span><span class="fu">read_csv</span>(<span class="st">"tables/shannon.csv"</span>,</span>
-<span id="cb45-4"><a href="#cb45-4" aria-hidden="true" tabindex="-1"></a>                        <span class="at">col_types =</span> <span class="fu">cols</span>(</span>
-<span id="cb45-5"><a href="#cb45-5" aria-hidden="true" tabindex="-1"></a>                 <span class="st">`</span><span class="at">sample-id</span><span class="st">`</span> <span class="ot">=</span> <span class="fu">col_skip</span>(),</span>
-<span id="cb45-6"><a href="#cb45-6" aria-hidden="true" tabindex="-1"></a>                 <span class="at">accession   =</span> <span class="fu">col_skip</span>(),</span>
-<span id="cb45-7"><a href="#cb45-7" aria-hidden="true" tabindex="-1"></a>                 <span class="at">sra_run     =</span> <span class="fu">col_skip</span>(),</span>
-<span id="cb45-8"><a href="#cb45-8" aria-hidden="true" tabindex="-1"></a>                 <span class="at">Type        =</span> <span class="fu">col_factor</span>(),</span>
-<span id="cb45-9"><a href="#cb45-9" aria-hidden="true" tabindex="-1"></a>                 <span class="at">.default    =</span> <span class="fu">col_double</span>()</span>
-<span id="cb45-10"><a href="#cb45-10" aria-hidden="true" tabindex="-1"></a>               ))</span>
-<span id="cb45-11"><a href="#cb45-11" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb45-12"><a href="#cb45-12" aria-hidden="true" tabindex="-1"></a>obfe_long <span class="ot">&lt;-</span> obfe <span class="sc">%&gt;%</span></span>
-<span id="cb45-13"><a href="#cb45-13" aria-hidden="true" tabindex="-1"></a>  <span class="fu">pivot_longer</span>(</span>
-<span id="cb45-14"><a href="#cb45-14" aria-hidden="true" tabindex="-1"></a>    <span class="at">cols =</span> <span class="fu">starts_with</span>(<span class="st">"depth-"</span>), </span>
-<span id="cb45-15"><a href="#cb45-15" aria-hidden="true" tabindex="-1"></a>    <span class="at">names_to =</span> <span class="fu">c</span>(<span class="st">"Depth"</span>, <span class="st">"Iter"</span>),            </span>
-<span id="cb45-16"><a href="#cb45-16" aria-hidden="true" tabindex="-1"></a>    <span class="at">names_pattern =</span> <span class="st">"depth-([0-9]+)_iter-([0-9]+)"</span>,</span>
-<span id="cb45-17"><a href="#cb45-17" aria-hidden="true" tabindex="-1"></a>    <span class="at">values_to =</span> <span class="st">"Shannon_Index"</span>,</span>
-<span id="cb45-18"><a href="#cb45-18" aria-hidden="true" tabindex="-1"></a>    <span class="at">values_drop_na =</span> <span class="cn">TRUE</span>                     </span>
-<span id="cb45-19"><a href="#cb45-19" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">%&gt;%</span></span>
-<span id="cb45-20"><a href="#cb45-20" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(</span>
-<span id="cb45-21"><a href="#cb45-21" aria-hidden="true" tabindex="-1"></a>    <span class="at">Depth =</span> <span class="fu">as.integer</span>(Depth),</span>
-<span id="cb45-22"><a href="#cb45-22" aria-hidden="true" tabindex="-1"></a>    <span class="at">Iter  =</span> <span class="fu">as.integer</span>(Iter)</span>
-<span id="cb45-23"><a href="#cb45-23" aria-hidden="true" tabindex="-1"></a>  )</span>
-<span id="cb45-24"><a href="#cb45-24" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb45-25"><a href="#cb45-25" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb45-26"><a href="#cb45-26" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(obfe_long, <span class="fu">aes</span>(</span>
-<span id="cb45-27"><a href="#cb45-27" aria-hidden="true" tabindex="-1"></a>    <span class="at">x    =</span> <span class="fu">factor</span>(Depth),                   </span>
-<span id="cb45-28"><a href="#cb45-28" aria-hidden="true" tabindex="-1"></a>    <span class="at">y    =</span> Shannon_Index,</span>
-<span id="cb45-29"><a href="#cb45-29" aria-hidden="true" tabindex="-1"></a>    <span class="at">fill =</span> Type                         </span>
-<span id="cb45-30"><a href="#cb45-30" aria-hidden="true" tabindex="-1"></a>  )) <span class="sc">+</span></span>
-<span id="cb45-31"><a href="#cb45-31" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_boxplot</span>(<span class="at">position =</span> <span class="fu">position_dodge</span>(<span class="at">width =</span> <span class="fl">0.8</span>),</span>
-<span id="cb45-32"><a href="#cb45-32" aria-hidden="true" tabindex="-1"></a>               <span class="at">color =</span> <span class="st">"black"</span>) <span class="sc">+</span></span>
-<span id="cb45-33"><a href="#cb45-33" aria-hidden="true" tabindex="-1"></a>  <span class="fu">stat_summary</span>(</span>
-<span id="cb45-34"><a href="#cb45-34" aria-hidden="true" tabindex="-1"></a>    <span class="fu">aes</span>(</span>
-<span id="cb45-35"><a href="#cb45-35" aria-hidden="true" tabindex="-1"></a>      <span class="at">x      =</span> <span class="fu">as.numeric</span>(<span class="fu">factor</span>(Depth)),</span>
-<span id="cb45-36"><a href="#cb45-36" aria-hidden="true" tabindex="-1"></a>      <span class="at">colour =</span> Type,</span>
-<span id="cb45-37"><a href="#cb45-37" aria-hidden="true" tabindex="-1"></a>      <span class="at">group  =</span> Type</span>
-<span id="cb45-38"><a href="#cb45-38" aria-hidden="true" tabindex="-1"></a>    ),</span>
-<span id="cb45-39"><a href="#cb45-39" aria-hidden="true" tabindex="-1"></a>    <span class="at">fun    =</span> median,</span>
-<span id="cb45-40"><a href="#cb45-40" aria-hidden="true" tabindex="-1"></a>    <span class="at">geom   =</span> <span class="st">"line"</span>,</span>
-<span id="cb45-41"><a href="#cb45-41" aria-hidden="true" tabindex="-1"></a>    <span class="at">size   =</span> <span class="dv">1</span></span>
-<span id="cb45-42"><a href="#cb45-42" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">+</span></span>
-<span id="cb45-43"><a href="#cb45-43" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_x_discrete</span>(<span class="at">name =</span> <span class="st">"Sequencing Depth"</span>) <span class="sc">+</span></span>
-<span id="cb45-44"><a href="#cb45-44" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_y_continuous</span>(<span class="at">name =</span> <span class="st">"Shannon Index"</span>) <span class="sc">+</span></span>
-<span id="cb45-45"><a href="#cb45-45" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_minimal</span>(<span class="at">base_size =</span> <span class="dv">15</span>) <span class="sc">+</span></span>
-<span id="cb45-46"><a href="#cb45-46" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(</span>
-<span id="cb45-47"><a href="#cb45-47" aria-hidden="true" tabindex="-1"></a>    <span class="at">legend.title =</span> <span class="fu">element_blank</span>(),</span>
-<span id="cb45-48"><a href="#cb45-48" aria-hidden="true" tabindex="-1"></a>    <span class="at">panel.grid.major.x =</span> <span class="fu">element_blank</span>()</span>
-<span id="cb45-49"><a href="#cb45-49" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">+</span></span>
-<span id="cb45-50"><a href="#cb45-50" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_fill_manual</span>(<span class="at">values =</span> <span class="fu">c</span>( <span class="st">"#8f0052"</span>,<span class="st">"#276518"</span>)) <span class="sc">+</span></span>
-<span id="cb45-51"><a href="#cb45-51" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_color_manual</span>(<span class="at">values =</span> <span class="fu">c</span>( <span class="st">"#8f0052"</span>,<span class="st">"#276518"</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb48"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb48-1"><a href="#cb48-1" aria-hidden="true" tabindex="-1"></a><span class="fu">suppressPackageStartupMessages</span>(<span class="fu">library</span>(tidyverse))</span>
+<span id="cb48-2"><a href="#cb48-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb48-3"><a href="#cb48-3" aria-hidden="true" tabindex="-1"></a>obfe <span class="ot">&lt;-</span> readr<span class="sc">::</span><span class="fu">read_csv</span>(<span class="st">"tables/shannon.csv"</span>,</span>
+<span id="cb48-4"><a href="#cb48-4" aria-hidden="true" tabindex="-1"></a>                        <span class="at">col_types =</span> <span class="fu">cols</span>(</span>
+<span id="cb48-5"><a href="#cb48-5" aria-hidden="true" tabindex="-1"></a>                 <span class="st">`</span><span class="at">sample-id</span><span class="st">`</span> <span class="ot">=</span> <span class="fu">col_skip</span>(),</span>
+<span id="cb48-6"><a href="#cb48-6" aria-hidden="true" tabindex="-1"></a>                 <span class="at">accession   =</span> <span class="fu">col_skip</span>(),</span>
+<span id="cb48-7"><a href="#cb48-7" aria-hidden="true" tabindex="-1"></a>                 <span class="at">sra_run     =</span> <span class="fu">col_skip</span>(),</span>
+<span id="cb48-8"><a href="#cb48-8" aria-hidden="true" tabindex="-1"></a>                 <span class="at">Type        =</span> <span class="fu">col_factor</span>(),</span>
+<span id="cb48-9"><a href="#cb48-9" aria-hidden="true" tabindex="-1"></a>                 <span class="at">.default    =</span> <span class="fu">col_double</span>()</span>
+<span id="cb48-10"><a href="#cb48-10" aria-hidden="true" tabindex="-1"></a>               ))</span>
+<span id="cb48-11"><a href="#cb48-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb48-12"><a href="#cb48-12" aria-hidden="true" tabindex="-1"></a>obfe_long <span class="ot">&lt;-</span> obfe <span class="sc">%&gt;%</span></span>
+<span id="cb48-13"><a href="#cb48-13" aria-hidden="true" tabindex="-1"></a>  <span class="fu">pivot_longer</span>(</span>
+<span id="cb48-14"><a href="#cb48-14" aria-hidden="true" tabindex="-1"></a>    <span class="at">cols =</span> <span class="fu">starts_with</span>(<span class="st">"depth-"</span>), </span>
+<span id="cb48-15"><a href="#cb48-15" aria-hidden="true" tabindex="-1"></a>    <span class="at">names_to =</span> <span class="fu">c</span>(<span class="st">"Depth"</span>, <span class="st">"Iter"</span>),            </span>
+<span id="cb48-16"><a href="#cb48-16" aria-hidden="true" tabindex="-1"></a>    <span class="at">names_pattern =</span> <span class="st">"depth-([0-9]+)_iter-([0-9]+)"</span>,</span>
+<span id="cb48-17"><a href="#cb48-17" aria-hidden="true" tabindex="-1"></a>    <span class="at">values_to =</span> <span class="st">"Shannon_Index"</span>,</span>
+<span id="cb48-18"><a href="#cb48-18" aria-hidden="true" tabindex="-1"></a>    <span class="at">values_drop_na =</span> <span class="cn">TRUE</span>                     </span>
+<span id="cb48-19"><a href="#cb48-19" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">%&gt;%</span></span>
+<span id="cb48-20"><a href="#cb48-20" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(</span>
+<span id="cb48-21"><a href="#cb48-21" aria-hidden="true" tabindex="-1"></a>    <span class="at">Depth =</span> <span class="fu">as.integer</span>(Depth),</span>
+<span id="cb48-22"><a href="#cb48-22" aria-hidden="true" tabindex="-1"></a>    <span class="at">Iter  =</span> <span class="fu">as.integer</span>(Iter)</span>
+<span id="cb48-23"><a href="#cb48-23" aria-hidden="true" tabindex="-1"></a>  )</span>
+<span id="cb48-24"><a href="#cb48-24" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb48-25"><a href="#cb48-25" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb48-26"><a href="#cb48-26" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(obfe_long, <span class="fu">aes</span>(</span>
+<span id="cb48-27"><a href="#cb48-27" aria-hidden="true" tabindex="-1"></a>    <span class="at">x    =</span> <span class="fu">factor</span>(Depth),                   </span>
+<span id="cb48-28"><a href="#cb48-28" aria-hidden="true" tabindex="-1"></a>    <span class="at">y    =</span> Shannon_Index,</span>
+<span id="cb48-29"><a href="#cb48-29" aria-hidden="true" tabindex="-1"></a>    <span class="at">fill =</span> Type                         </span>
+<span id="cb48-30"><a href="#cb48-30" aria-hidden="true" tabindex="-1"></a>  )) <span class="sc">+</span></span>
+<span id="cb48-31"><a href="#cb48-31" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_boxplot</span>(<span class="at">position =</span> <span class="fu">position_dodge</span>(<span class="at">width =</span> <span class="fl">0.8</span>),</span>
+<span id="cb48-32"><a href="#cb48-32" aria-hidden="true" tabindex="-1"></a>               <span class="at">color =</span> <span class="st">"black"</span>) <span class="sc">+</span></span>
+<span id="cb48-33"><a href="#cb48-33" aria-hidden="true" tabindex="-1"></a>  <span class="fu">stat_summary</span>(</span>
+<span id="cb48-34"><a href="#cb48-34" aria-hidden="true" tabindex="-1"></a>    <span class="fu">aes</span>(</span>
+<span id="cb48-35"><a href="#cb48-35" aria-hidden="true" tabindex="-1"></a>      <span class="at">x      =</span> <span class="fu">as.numeric</span>(<span class="fu">factor</span>(Depth)),</span>
+<span id="cb48-36"><a href="#cb48-36" aria-hidden="true" tabindex="-1"></a>      <span class="at">colour =</span> Type,</span>
+<span id="cb48-37"><a href="#cb48-37" aria-hidden="true" tabindex="-1"></a>      <span class="at">group  =</span> Type</span>
+<span id="cb48-38"><a href="#cb48-38" aria-hidden="true" tabindex="-1"></a>    ),</span>
+<span id="cb48-39"><a href="#cb48-39" aria-hidden="true" tabindex="-1"></a>    <span class="at">fun    =</span> median,</span>
+<span id="cb48-40"><a href="#cb48-40" aria-hidden="true" tabindex="-1"></a>    <span class="at">geom   =</span> <span class="st">"line"</span>,</span>
+<span id="cb48-41"><a href="#cb48-41" aria-hidden="true" tabindex="-1"></a>    <span class="at">size   =</span> <span class="dv">1</span></span>
+<span id="cb48-42"><a href="#cb48-42" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">+</span></span>
+<span id="cb48-43"><a href="#cb48-43" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_x_discrete</span>(<span class="at">name =</span> <span class="st">"Sequencing Depth"</span>) <span class="sc">+</span></span>
+<span id="cb48-44"><a href="#cb48-44" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_y_continuous</span>(<span class="at">name =</span> <span class="st">"Shannon Index"</span>) <span class="sc">+</span></span>
+<span id="cb48-45"><a href="#cb48-45" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_minimal</span>(<span class="at">base_size =</span> <span class="dv">15</span>) <span class="sc">+</span></span>
+<span id="cb48-46"><a href="#cb48-46" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(</span>
+<span id="cb48-47"><a href="#cb48-47" aria-hidden="true" tabindex="-1"></a>    <span class="at">legend.title =</span> <span class="fu">element_blank</span>(),</span>
+<span id="cb48-48"><a href="#cb48-48" aria-hidden="true" tabindex="-1"></a>    <span class="at">panel.grid.major.x =</span> <span class="fu">element_blank</span>()</span>
+<span id="cb48-49"><a href="#cb48-49" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">+</span></span>
+<span id="cb48-50"><a href="#cb48-50" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_fill_manual</span>(<span class="at">values =</span> <span class="fu">c</span>( <span class="st">"#8f0052"</span>,<span class="st">"#276518"</span>)) <span class="sc">+</span></span>
+<span id="cb48-51"><a href="#cb48-51" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_color_manual</span>(<span class="at">values =</span> <span class="fu">c</span>( <span class="st">"#8f0052"</span>,<span class="st">"#276518"</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <div>
 <figure class="figure">
-<p><img src="index_files/figure-html/unnamed-chunk-52-1.png" class="img-fluid figure-img" width="672"></p>
+<p><img src="index_files/figure-html/unnamed-chunk-54-1.png" class="img-fluid figure-img" width="672"></p>
 </figure>
 </div>
 </div>
@@ -4801,61 +4899,61 @@ window.Quarto = {
 <h3 class="anchored" data-anchor-id="faith-pd-1">Faith-PD</h3>
 <p>En <code>R</code>:</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb46"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb46-1"><a href="#cb46-1" aria-hidden="true" tabindex="-1"></a><span class="fu">suppressPackageStartupMessages</span>(<span class="fu">library</span>(tidyverse))</span>
-<span id="cb46-2"><a href="#cb46-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb46-3"><a href="#cb46-3" aria-hidden="true" tabindex="-1"></a>obfe <span class="ot">&lt;-</span> readr<span class="sc">::</span><span class="fu">read_csv</span>(<span class="st">"tables/faith_pd.csv"</span>,</span>
-<span id="cb46-4"><a href="#cb46-4" aria-hidden="true" tabindex="-1"></a>                        <span class="at">col_types =</span> <span class="fu">cols</span>(</span>
-<span id="cb46-5"><a href="#cb46-5" aria-hidden="true" tabindex="-1"></a>                 <span class="st">`</span><span class="at">sample-id</span><span class="st">`</span> <span class="ot">=</span> <span class="fu">col_skip</span>(),</span>
-<span id="cb46-6"><a href="#cb46-6" aria-hidden="true" tabindex="-1"></a>                 <span class="at">accession   =</span> <span class="fu">col_skip</span>(),</span>
-<span id="cb46-7"><a href="#cb46-7" aria-hidden="true" tabindex="-1"></a>                 <span class="at">sra_run     =</span> <span class="fu">col_skip</span>(),</span>
-<span id="cb46-8"><a href="#cb46-8" aria-hidden="true" tabindex="-1"></a>                 <span class="at">Type        =</span> <span class="fu">col_factor</span>(),</span>
-<span id="cb46-9"><a href="#cb46-9" aria-hidden="true" tabindex="-1"></a>                 <span class="at">.default    =</span> <span class="fu">col_double</span>()</span>
-<span id="cb46-10"><a href="#cb46-10" aria-hidden="true" tabindex="-1"></a>               ))</span>
-<span id="cb46-11"><a href="#cb46-11" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb46-12"><a href="#cb46-12" aria-hidden="true" tabindex="-1"></a>obfe_long <span class="ot">&lt;-</span> obfe <span class="sc">%&gt;%</span></span>
-<span id="cb46-13"><a href="#cb46-13" aria-hidden="true" tabindex="-1"></a>  <span class="fu">pivot_longer</span>(</span>
-<span id="cb46-14"><a href="#cb46-14" aria-hidden="true" tabindex="-1"></a>    <span class="at">cols =</span> <span class="fu">starts_with</span>(<span class="st">"depth-"</span>), </span>
-<span id="cb46-15"><a href="#cb46-15" aria-hidden="true" tabindex="-1"></a>    <span class="at">names_to =</span> <span class="fu">c</span>(<span class="st">"Depth"</span>, <span class="st">"Iter"</span>),            </span>
-<span id="cb46-16"><a href="#cb46-16" aria-hidden="true" tabindex="-1"></a>    <span class="at">names_pattern =</span> <span class="st">"depth-([0-9]+)_iter-([0-9]+)"</span>,</span>
-<span id="cb46-17"><a href="#cb46-17" aria-hidden="true" tabindex="-1"></a>    <span class="at">values_to =</span> <span class="st">"faith"</span>,</span>
-<span id="cb46-18"><a href="#cb46-18" aria-hidden="true" tabindex="-1"></a>    <span class="at">values_drop_na =</span> <span class="cn">TRUE</span>                     </span>
-<span id="cb46-19"><a href="#cb46-19" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">%&gt;%</span></span>
-<span id="cb46-20"><a href="#cb46-20" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(</span>
-<span id="cb46-21"><a href="#cb46-21" aria-hidden="true" tabindex="-1"></a>    <span class="at">Depth =</span> <span class="fu">as.integer</span>(Depth),</span>
-<span id="cb46-22"><a href="#cb46-22" aria-hidden="true" tabindex="-1"></a>    <span class="at">Iter  =</span> <span class="fu">as.integer</span>(Iter)</span>
-<span id="cb46-23"><a href="#cb46-23" aria-hidden="true" tabindex="-1"></a>  )</span>
-<span id="cb46-24"><a href="#cb46-24" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb46-25"><a href="#cb46-25" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb46-26"><a href="#cb46-26" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(obfe_long, <span class="fu">aes</span>(</span>
-<span id="cb46-27"><a href="#cb46-27" aria-hidden="true" tabindex="-1"></a>    <span class="at">x    =</span> <span class="fu">factor</span>(Depth),                   </span>
-<span id="cb46-28"><a href="#cb46-28" aria-hidden="true" tabindex="-1"></a>    <span class="at">y    =</span> faith,</span>
-<span id="cb46-29"><a href="#cb46-29" aria-hidden="true" tabindex="-1"></a>    <span class="at">fill =</span> Type                         </span>
-<span id="cb46-30"><a href="#cb46-30" aria-hidden="true" tabindex="-1"></a>  )) <span class="sc">+</span></span>
-<span id="cb46-31"><a href="#cb46-31" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_boxplot</span>(<span class="at">position =</span> <span class="fu">position_dodge</span>(<span class="at">width =</span> <span class="fl">0.8</span>),</span>
-<span id="cb46-32"><a href="#cb46-32" aria-hidden="true" tabindex="-1"></a>               <span class="at">color =</span> <span class="st">"black"</span>) <span class="sc">+</span></span>
-<span id="cb46-33"><a href="#cb46-33" aria-hidden="true" tabindex="-1"></a>  <span class="fu">stat_summary</span>(</span>
-<span id="cb46-34"><a href="#cb46-34" aria-hidden="true" tabindex="-1"></a>    <span class="fu">aes</span>(</span>
-<span id="cb46-35"><a href="#cb46-35" aria-hidden="true" tabindex="-1"></a>      <span class="at">x      =</span> <span class="fu">as.numeric</span>(<span class="fu">factor</span>(Depth)),</span>
-<span id="cb46-36"><a href="#cb46-36" aria-hidden="true" tabindex="-1"></a>      <span class="at">colour =</span> Type,</span>
-<span id="cb46-37"><a href="#cb46-37" aria-hidden="true" tabindex="-1"></a>      <span class="at">group  =</span> Type</span>
-<span id="cb46-38"><a href="#cb46-38" aria-hidden="true" tabindex="-1"></a>    ),</span>
-<span id="cb46-39"><a href="#cb46-39" aria-hidden="true" tabindex="-1"></a>    <span class="at">fun    =</span> median,</span>
-<span id="cb46-40"><a href="#cb46-40" aria-hidden="true" tabindex="-1"></a>    <span class="at">geom   =</span> <span class="st">"line"</span>,</span>
-<span id="cb46-41"><a href="#cb46-41" aria-hidden="true" tabindex="-1"></a>    <span class="at">size   =</span> <span class="dv">1</span></span>
-<span id="cb46-42"><a href="#cb46-42" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">+</span></span>
-<span id="cb46-43"><a href="#cb46-43" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_x_discrete</span>(<span class="at">name =</span> <span class="st">"Sequencing Depth"</span>) <span class="sc">+</span></span>
-<span id="cb46-44"><a href="#cb46-44" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_y_continuous</span>(<span class="at">name =</span> <span class="st">"Faith PD"</span>) <span class="sc">+</span></span>
-<span id="cb46-45"><a href="#cb46-45" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_minimal</span>(<span class="at">base_size =</span> <span class="dv">15</span>) <span class="sc">+</span></span>
-<span id="cb46-46"><a href="#cb46-46" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(</span>
-<span id="cb46-47"><a href="#cb46-47" aria-hidden="true" tabindex="-1"></a>    <span class="at">legend.title =</span> <span class="fu">element_blank</span>(),</span>
-<span id="cb46-48"><a href="#cb46-48" aria-hidden="true" tabindex="-1"></a>    <span class="at">panel.grid.major.x =</span> <span class="fu">element_blank</span>()</span>
-<span id="cb46-49"><a href="#cb46-49" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">+</span></span>
-<span id="cb46-50"><a href="#cb46-50" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_fill_manual</span>(<span class="at">values =</span> <span class="fu">c</span>( <span class="st">"#8f0052"</span>,<span class="st">"#276518"</span>)) <span class="sc">+</span></span>
-<span id="cb46-51"><a href="#cb46-51" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_color_manual</span>(<span class="at">values =</span> <span class="fu">c</span>( <span class="st">"#8f0052"</span>,<span class="st">"#276518"</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb49"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb49-1"><a href="#cb49-1" aria-hidden="true" tabindex="-1"></a><span class="fu">suppressPackageStartupMessages</span>(<span class="fu">library</span>(tidyverse))</span>
+<span id="cb49-2"><a href="#cb49-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb49-3"><a href="#cb49-3" aria-hidden="true" tabindex="-1"></a>obfe <span class="ot">&lt;-</span> readr<span class="sc">::</span><span class="fu">read_csv</span>(<span class="st">"tables/faith_pd.csv"</span>,</span>
+<span id="cb49-4"><a href="#cb49-4" aria-hidden="true" tabindex="-1"></a>                        <span class="at">col_types =</span> <span class="fu">cols</span>(</span>
+<span id="cb49-5"><a href="#cb49-5" aria-hidden="true" tabindex="-1"></a>                 <span class="st">`</span><span class="at">sample-id</span><span class="st">`</span> <span class="ot">=</span> <span class="fu">col_skip</span>(),</span>
+<span id="cb49-6"><a href="#cb49-6" aria-hidden="true" tabindex="-1"></a>                 <span class="at">accession   =</span> <span class="fu">col_skip</span>(),</span>
+<span id="cb49-7"><a href="#cb49-7" aria-hidden="true" tabindex="-1"></a>                 <span class="at">sra_run     =</span> <span class="fu">col_skip</span>(),</span>
+<span id="cb49-8"><a href="#cb49-8" aria-hidden="true" tabindex="-1"></a>                 <span class="at">Type        =</span> <span class="fu">col_factor</span>(),</span>
+<span id="cb49-9"><a href="#cb49-9" aria-hidden="true" tabindex="-1"></a>                 <span class="at">.default    =</span> <span class="fu">col_double</span>()</span>
+<span id="cb49-10"><a href="#cb49-10" aria-hidden="true" tabindex="-1"></a>               ))</span>
+<span id="cb49-11"><a href="#cb49-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb49-12"><a href="#cb49-12" aria-hidden="true" tabindex="-1"></a>obfe_long <span class="ot">&lt;-</span> obfe <span class="sc">%&gt;%</span></span>
+<span id="cb49-13"><a href="#cb49-13" aria-hidden="true" tabindex="-1"></a>  <span class="fu">pivot_longer</span>(</span>
+<span id="cb49-14"><a href="#cb49-14" aria-hidden="true" tabindex="-1"></a>    <span class="at">cols =</span> <span class="fu">starts_with</span>(<span class="st">"depth-"</span>), </span>
+<span id="cb49-15"><a href="#cb49-15" aria-hidden="true" tabindex="-1"></a>    <span class="at">names_to =</span> <span class="fu">c</span>(<span class="st">"Depth"</span>, <span class="st">"Iter"</span>),            </span>
+<span id="cb49-16"><a href="#cb49-16" aria-hidden="true" tabindex="-1"></a>    <span class="at">names_pattern =</span> <span class="st">"depth-([0-9]+)_iter-([0-9]+)"</span>,</span>
+<span id="cb49-17"><a href="#cb49-17" aria-hidden="true" tabindex="-1"></a>    <span class="at">values_to =</span> <span class="st">"faith"</span>,</span>
+<span id="cb49-18"><a href="#cb49-18" aria-hidden="true" tabindex="-1"></a>    <span class="at">values_drop_na =</span> <span class="cn">TRUE</span>                     </span>
+<span id="cb49-19"><a href="#cb49-19" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">%&gt;%</span></span>
+<span id="cb49-20"><a href="#cb49-20" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(</span>
+<span id="cb49-21"><a href="#cb49-21" aria-hidden="true" tabindex="-1"></a>    <span class="at">Depth =</span> <span class="fu">as.integer</span>(Depth),</span>
+<span id="cb49-22"><a href="#cb49-22" aria-hidden="true" tabindex="-1"></a>    <span class="at">Iter  =</span> <span class="fu">as.integer</span>(Iter)</span>
+<span id="cb49-23"><a href="#cb49-23" aria-hidden="true" tabindex="-1"></a>  )</span>
+<span id="cb49-24"><a href="#cb49-24" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb49-25"><a href="#cb49-25" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb49-26"><a href="#cb49-26" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(obfe_long, <span class="fu">aes</span>(</span>
+<span id="cb49-27"><a href="#cb49-27" aria-hidden="true" tabindex="-1"></a>    <span class="at">x    =</span> <span class="fu">factor</span>(Depth),                   </span>
+<span id="cb49-28"><a href="#cb49-28" aria-hidden="true" tabindex="-1"></a>    <span class="at">y    =</span> faith,</span>
+<span id="cb49-29"><a href="#cb49-29" aria-hidden="true" tabindex="-1"></a>    <span class="at">fill =</span> Type                         </span>
+<span id="cb49-30"><a href="#cb49-30" aria-hidden="true" tabindex="-1"></a>  )) <span class="sc">+</span></span>
+<span id="cb49-31"><a href="#cb49-31" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_boxplot</span>(<span class="at">position =</span> <span class="fu">position_dodge</span>(<span class="at">width =</span> <span class="fl">0.8</span>),</span>
+<span id="cb49-32"><a href="#cb49-32" aria-hidden="true" tabindex="-1"></a>               <span class="at">color =</span> <span class="st">"black"</span>) <span class="sc">+</span></span>
+<span id="cb49-33"><a href="#cb49-33" aria-hidden="true" tabindex="-1"></a>  <span class="fu">stat_summary</span>(</span>
+<span id="cb49-34"><a href="#cb49-34" aria-hidden="true" tabindex="-1"></a>    <span class="fu">aes</span>(</span>
+<span id="cb49-35"><a href="#cb49-35" aria-hidden="true" tabindex="-1"></a>      <span class="at">x      =</span> <span class="fu">as.numeric</span>(<span class="fu">factor</span>(Depth)),</span>
+<span id="cb49-36"><a href="#cb49-36" aria-hidden="true" tabindex="-1"></a>      <span class="at">colour =</span> Type,</span>
+<span id="cb49-37"><a href="#cb49-37" aria-hidden="true" tabindex="-1"></a>      <span class="at">group  =</span> Type</span>
+<span id="cb49-38"><a href="#cb49-38" aria-hidden="true" tabindex="-1"></a>    ),</span>
+<span id="cb49-39"><a href="#cb49-39" aria-hidden="true" tabindex="-1"></a>    <span class="at">fun    =</span> median,</span>
+<span id="cb49-40"><a href="#cb49-40" aria-hidden="true" tabindex="-1"></a>    <span class="at">geom   =</span> <span class="st">"line"</span>,</span>
+<span id="cb49-41"><a href="#cb49-41" aria-hidden="true" tabindex="-1"></a>    <span class="at">size   =</span> <span class="dv">1</span></span>
+<span id="cb49-42"><a href="#cb49-42" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">+</span></span>
+<span id="cb49-43"><a href="#cb49-43" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_x_discrete</span>(<span class="at">name =</span> <span class="st">"Sequencing Depth"</span>) <span class="sc">+</span></span>
+<span id="cb49-44"><a href="#cb49-44" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_y_continuous</span>(<span class="at">name =</span> <span class="st">"Faith PD"</span>) <span class="sc">+</span></span>
+<span id="cb49-45"><a href="#cb49-45" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_minimal</span>(<span class="at">base_size =</span> <span class="dv">15</span>) <span class="sc">+</span></span>
+<span id="cb49-46"><a href="#cb49-46" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(</span>
+<span id="cb49-47"><a href="#cb49-47" aria-hidden="true" tabindex="-1"></a>    <span class="at">legend.title =</span> <span class="fu">element_blank</span>(),</span>
+<span id="cb49-48"><a href="#cb49-48" aria-hidden="true" tabindex="-1"></a>    <span class="at">panel.grid.major.x =</span> <span class="fu">element_blank</span>()</span>
+<span id="cb49-49"><a href="#cb49-49" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">+</span></span>
+<span id="cb49-50"><a href="#cb49-50" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_fill_manual</span>(<span class="at">values =</span> <span class="fu">c</span>( <span class="st">"#8f0052"</span>,<span class="st">"#276518"</span>)) <span class="sc">+</span></span>
+<span id="cb49-51"><a href="#cb49-51" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_color_manual</span>(<span class="at">values =</span> <span class="fu">c</span>( <span class="st">"#8f0052"</span>,<span class="st">"#276518"</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <div>
 <figure class="figure">
-<p><img src="index_files/figure-html/unnamed-chunk-53-1.png" class="img-fluid figure-img" width="672"></p>
+<p><img src="index_files/figure-html/unnamed-chunk-55-1.png" class="img-fluid figure-img" width="672"></p>
 </figure>
 </div>
 </div>
@@ -4870,7 +4968,7 @@ window.Quarto = {
 <p>Los siguientes datos se descargaron a partir del siguinete comando en <code>bash</code> para posteriormente gráficar en <code>R</code>.</p>
 <p>En <code>bash</code>:</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb47"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb47-1"><a href="#cb47-1" aria-hidden="true" tabindex="-1"></a><span class="ex">qiime</span> tools view core-metrics-results/unweighted-unifrac-body-site-significance.qzv</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb50"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb50-1"><a href="#cb50-1" aria-hidden="true" tabindex="-1"></a><span class="ex">qiime</span> tools view core-metrics-results/unweighted-unifrac-body-site-significance.qzv</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <section id="usando-r-para-gráficar" class="level3">
 <h3 class="anchored" data-anchor-id="usando-r-para-gráficar">Usando R para gráficar</h3>
@@ -4878,64 +4976,64 @@ window.Quarto = {
 <h4 class="anchored" data-anchor-id="permanova-3">PERMANOVA</h4>
 <p>En <code>R</code>:</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb48"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb48-1"><a href="#cb48-1" aria-hidden="true" tabindex="-1"></a><span class="fu">suppressPackageStartupMessages</span>(<span class="fu">library</span>(tidyverse))</span>
-<span id="cb48-2"><a href="#cb48-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb48-3"><a href="#cb48-3" aria-hidden="true" tabindex="-1"></a>df <span class="ot">&lt;-</span> readr<span class="sc">::</span><span class="fu">read_tsv</span>(<span class="st">"tables/raw_data_permanova.tsv"</span>)</span>
-<span id="cb48-4"><a href="#cb48-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb48-5"><a href="#cb48-5" aria-hidden="true" tabindex="-1"></a>h1 <span class="ot">&lt;-</span> df <span class="sc">%&gt;%</span> </span>
-<span id="cb48-6"><a href="#cb48-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(Group1 <span class="sc">==</span> <span class="st">"NC"</span>)</span>
-<span id="cb48-7"><a href="#cb48-7" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb48-8"><a href="#cb48-8" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb48-9"><a href="#cb48-9" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(h1, <span class="fu">aes</span>(<span class="at">y =</span> Distance, <span class="at">x =</span> Group2, <span class="at">fill =</span> Group2)) <span class="sc">+</span></span>
-<span id="cb48-10"><a href="#cb48-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_boxplot</span>(<span class="at">color =</span> <span class="st">"black"</span>) <span class="sc">+</span> <span class="fu">theme_classic</span>() <span class="sc">+</span></span>
-<span id="cb48-11"><a href="#cb48-11" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">"Distance to NC"</span>, <span class="at">fill =</span> <span class="st">"Group"</span>) <span class="sc">+</span></span>
-<span id="cb48-12"><a href="#cb48-12" aria-hidden="true" tabindex="-1"></a>  <span class="fu">xlab</span>(<span class="st">"Group"</span>) <span class="sc">+</span> </span>
-<span id="cb48-13"><a href="#cb48-13" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(<span class="at">text =</span> <span class="fu">element_text</span>(<span class="at">size =</span> <span class="dv">20</span>)) <span class="sc">+</span></span>
-<span id="cb48-14"><a href="#cb48-14" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_fill_manual</span>(<span class="at">values =</span> <span class="fu">c</span>( <span class="st">"#8f0052"</span>,<span class="st">"#276518"</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb51"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb51-1"><a href="#cb51-1" aria-hidden="true" tabindex="-1"></a><span class="fu">suppressPackageStartupMessages</span>(<span class="fu">library</span>(tidyverse))</span>
+<span id="cb51-2"><a href="#cb51-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb51-3"><a href="#cb51-3" aria-hidden="true" tabindex="-1"></a>df <span class="ot">&lt;-</span> readr<span class="sc">::</span><span class="fu">read_tsv</span>(<span class="st">"tables/raw_data_permanova.tsv"</span>)</span>
+<span id="cb51-4"><a href="#cb51-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb51-5"><a href="#cb51-5" aria-hidden="true" tabindex="-1"></a>h1 <span class="ot">&lt;-</span> df <span class="sc">%&gt;%</span> </span>
+<span id="cb51-6"><a href="#cb51-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(Group1 <span class="sc">==</span> <span class="st">"NC"</span>)</span>
+<span id="cb51-7"><a href="#cb51-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb51-8"><a href="#cb51-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb51-9"><a href="#cb51-9" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(h1, <span class="fu">aes</span>(<span class="at">y =</span> Distance, <span class="at">x =</span> Group2, <span class="at">fill =</span> Group2)) <span class="sc">+</span></span>
+<span id="cb51-10"><a href="#cb51-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_boxplot</span>(<span class="at">color =</span> <span class="st">"black"</span>) <span class="sc">+</span> <span class="fu">theme_classic</span>() <span class="sc">+</span></span>
+<span id="cb51-11"><a href="#cb51-11" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">"Distance to NC"</span>, <span class="at">fill =</span> <span class="st">"Group"</span>) <span class="sc">+</span></span>
+<span id="cb51-12"><a href="#cb51-12" aria-hidden="true" tabindex="-1"></a>  <span class="fu">xlab</span>(<span class="st">"Group"</span>) <span class="sc">+</span> </span>
+<span id="cb51-13"><a href="#cb51-13" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(<span class="at">text =</span> <span class="fu">element_text</span>(<span class="at">size =</span> <span class="dv">20</span>)) <span class="sc">+</span></span>
+<span id="cb51-14"><a href="#cb51-14" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_fill_manual</span>(<span class="at">values =</span> <span class="fu">c</span>( <span class="st">"#8f0052"</span>,<span class="st">"#276518"</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <div>
 <figure class="figure">
-<p><img src="index_files/figure-html/unnamed-chunk-55-1.png" class="img-fluid figure-img" width="672"></p>
+<p><img src="index_files/figure-html/unnamed-chunk-57-1.png" class="img-fluid figure-img" width="672"></p>
 </figure>
 </div>
 </div>
-<div class="sourceCode cell-code" id="cb49"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb49-1"><a href="#cb49-1" aria-hidden="true" tabindex="-1"></a>h2 <span class="ot">&lt;-</span> df <span class="sc">%&gt;%</span> </span>
-<span id="cb49-2"><a href="#cb49-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(Group1 <span class="sc">==</span> <span class="st">"Tomato"</span>)</span>
-<span id="cb49-3"><a href="#cb49-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb49-4"><a href="#cb49-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb49-5"><a href="#cb49-5" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(h2, <span class="fu">aes</span>(<span class="at">y =</span> Distance, <span class="at">x =</span> Group2, <span class="at">fill =</span> Group2)) <span class="sc">+</span></span>
-<span id="cb49-6"><a href="#cb49-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_boxplot</span>(<span class="at">color =</span> <span class="st">"black"</span>) <span class="sc">+</span> <span class="fu">theme_classic</span>() <span class="sc">+</span></span>
-<span id="cb49-7"><a href="#cb49-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">"Distance to Tomato"</span>, <span class="at">fill =</span> <span class="st">"Group"</span>) <span class="sc">+</span></span>
-<span id="cb49-8"><a href="#cb49-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">xlab</span>(<span class="st">"Group"</span>) <span class="sc">+</span> </span>
-<span id="cb49-9"><a href="#cb49-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(<span class="at">text =</span> <span class="fu">element_text</span>(<span class="at">size =</span> <span class="dv">20</span>)) <span class="sc">+</span></span>
-<span id="cb49-10"><a href="#cb49-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_fill_manual</span>(<span class="at">values =</span> <span class="fu">c</span>( <span class="st">"#8f0052"</span>,<span class="st">"#276518"</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb52"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb52-1"><a href="#cb52-1" aria-hidden="true" tabindex="-1"></a>h2 <span class="ot">&lt;-</span> df <span class="sc">%&gt;%</span> </span>
+<span id="cb52-2"><a href="#cb52-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(Group1 <span class="sc">==</span> <span class="st">"Tomato"</span>)</span>
+<span id="cb52-3"><a href="#cb52-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb52-4"><a href="#cb52-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb52-5"><a href="#cb52-5" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(h2, <span class="fu">aes</span>(<span class="at">y =</span> Distance, <span class="at">x =</span> Group2, <span class="at">fill =</span> Group2)) <span class="sc">+</span></span>
+<span id="cb52-6"><a href="#cb52-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_boxplot</span>(<span class="at">color =</span> <span class="st">"black"</span>) <span class="sc">+</span> <span class="fu">theme_classic</span>() <span class="sc">+</span></span>
+<span id="cb52-7"><a href="#cb52-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">"Distance to Tomato"</span>, <span class="at">fill =</span> <span class="st">"Group"</span>) <span class="sc">+</span></span>
+<span id="cb52-8"><a href="#cb52-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">xlab</span>(<span class="st">"Group"</span>) <span class="sc">+</span> </span>
+<span id="cb52-9"><a href="#cb52-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(<span class="at">text =</span> <span class="fu">element_text</span>(<span class="at">size =</span> <span class="dv">20</span>)) <span class="sc">+</span></span>
+<span id="cb52-10"><a href="#cb52-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_fill_manual</span>(<span class="at">values =</span> <span class="fu">c</span>( <span class="st">"#8f0052"</span>,<span class="st">"#276518"</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <div>
 <figure class="figure">
-<p><img src="index_files/figure-html/unnamed-chunk-55-2.png" class="img-fluid figure-img" width="672"></p>
+<p><img src="index_files/figure-html/unnamed-chunk-57-2.png" class="img-fluid figure-img" width="672"></p>
 </figure>
 </div>
 </div>
 </div>
 <div class="cell">
 <div class="cell-output-display">
-<div id="ihdjfzofar" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
-<style>#ihdjfzofar table {
+<div id="krrjjldtct" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<style>#krrjjldtct table {
   font-family: system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
-#ihdjfzofar thead, #ihdjfzofar tbody, #ihdjfzofar tfoot, #ihdjfzofar tr, #ihdjfzofar td, #ihdjfzofar th {
+#krrjjldtct thead, #krrjjldtct tbody, #krrjjldtct tfoot, #krrjjldtct tr, #krrjjldtct td, #krrjjldtct th {
   border-style: none;
 }
 
-#ihdjfzofar p {
+#krrjjldtct p {
   margin: 0;
   padding: 0;
 }
 
-#ihdjfzofar .gt_table {
+#krrjjldtct .gt_table {
   display: table;
   border-collapse: collapse;
   line-height: normal;
@@ -4961,12 +5059,12 @@ window.Quarto = {
   border-left-color: #D3D3D3;
 }
 
-#ihdjfzofar .gt_caption {
+#krrjjldtct .gt_caption {
   padding-top: 4px;
   padding-bottom: 4px;
 }
 
-#ihdjfzofar .gt_title {
+#krrjjldtct .gt_title {
   color: #333333;
   font-size: 125%;
   font-weight: initial;
@@ -4978,7 +5076,7 @@ window.Quarto = {
   border-bottom-width: 0;
 }
 
-#ihdjfzofar .gt_subtitle {
+#krrjjldtct .gt_subtitle {
   color: #333333;
   font-size: 85%;
   font-weight: initial;
@@ -4990,7 +5088,7 @@ window.Quarto = {
   border-top-width: 0;
 }
 
-#ihdjfzofar .gt_heading {
+#krrjjldtct .gt_heading {
   background-color: #FFFFFF;
   text-align: center;
   border-bottom-color: #FFFFFF;
@@ -5002,13 +5100,13 @@ window.Quarto = {
   border-right-color: #D3D3D3;
 }
 
-#ihdjfzofar .gt_bottom_border {
+#krrjjldtct .gt_bottom_border {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
 }
 
-#ihdjfzofar .gt_col_headings {
+#krrjjldtct .gt_col_headings {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -5023,7 +5121,7 @@ window.Quarto = {
   border-right-color: #D3D3D3;
 }
 
-#ihdjfzofar .gt_col_heading {
+#krrjjldtct .gt_col_heading {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -5043,7 +5141,7 @@ window.Quarto = {
   overflow-x: hidden;
 }
 
-#ihdjfzofar .gt_column_spanner_outer {
+#krrjjldtct .gt_column_spanner_outer {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -5055,15 +5153,15 @@ window.Quarto = {
   padding-right: 4px;
 }
 
-#ihdjfzofar .gt_column_spanner_outer:first-child {
+#krrjjldtct .gt_column_spanner_outer:first-child {
   padding-left: 0;
 }
 
-#ihdjfzofar .gt_column_spanner_outer:last-child {
+#krrjjldtct .gt_column_spanner_outer:last-child {
   padding-right: 0;
 }
 
-#ihdjfzofar .gt_column_spanner {
+#krrjjldtct .gt_column_spanner {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
@@ -5075,11 +5173,11 @@ window.Quarto = {
   width: 100%;
 }
 
-#ihdjfzofar .gt_spanner_row {
+#krrjjldtct .gt_spanner_row {
   border-bottom-style: hidden;
 }
 
-#ihdjfzofar .gt_group_heading {
+#krrjjldtct .gt_group_heading {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -5105,7 +5203,7 @@ window.Quarto = {
   text-align: left;
 }
 
-#ihdjfzofar .gt_empty_group_heading {
+#krrjjldtct .gt_empty_group_heading {
   padding: 0.5px;
   color: #333333;
   background-color: #FFFFFF;
@@ -5120,15 +5218,15 @@ window.Quarto = {
   vertical-align: middle;
 }
 
-#ihdjfzofar .gt_from_md > :first-child {
+#krrjjldtct .gt_from_md > :first-child {
   margin-top: 0;
 }
 
-#ihdjfzofar .gt_from_md > :last-child {
+#krrjjldtct .gt_from_md > :last-child {
   margin-bottom: 0;
 }
 
-#ihdjfzofar .gt_row {
+#krrjjldtct .gt_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -5147,7 +5245,7 @@ window.Quarto = {
   overflow-x: hidden;
 }
 
-#ihdjfzofar .gt_stub {
+#krrjjldtct .gt_stub {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -5160,7 +5258,7 @@ window.Quarto = {
   padding-right: 5px;
 }
 
-#ihdjfzofar .gt_stub_row_group {
+#krrjjldtct .gt_stub_row_group {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -5174,15 +5272,15 @@ window.Quarto = {
   vertical-align: top;
 }
 
-#ihdjfzofar .gt_row_group_first td {
+#krrjjldtct .gt_row_group_first td {
   border-top-width: 2px;
 }
 
-#ihdjfzofar .gt_row_group_first th {
+#krrjjldtct .gt_row_group_first th {
   border-top-width: 2px;
 }
 
-#ihdjfzofar .gt_summary_row {
+#krrjjldtct .gt_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -5192,16 +5290,16 @@ window.Quarto = {
   padding-right: 5px;
 }
 
-#ihdjfzofar .gt_first_summary_row {
+#krrjjldtct .gt_first_summary_row {
   border-top-style: solid;
   border-top-color: #D3D3D3;
 }
 
-#ihdjfzofar .gt_first_summary_row.thick {
+#krrjjldtct .gt_first_summary_row.thick {
   border-top-width: 2px;
 }
 
-#ihdjfzofar .gt_last_summary_row {
+#krrjjldtct .gt_last_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -5211,7 +5309,7 @@ window.Quarto = {
   border-bottom-color: #D3D3D3;
 }
 
-#ihdjfzofar .gt_grand_summary_row {
+#krrjjldtct .gt_grand_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -5221,7 +5319,7 @@ window.Quarto = {
   padding-right: 5px;
 }
 
-#ihdjfzofar .gt_first_grand_summary_row {
+#krrjjldtct .gt_first_grand_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -5231,7 +5329,7 @@ window.Quarto = {
   border-top-color: #D3D3D3;
 }
 
-#ihdjfzofar .gt_last_grand_summary_row_top {
+#krrjjldtct .gt_last_grand_summary_row_top {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -5241,11 +5339,11 @@ window.Quarto = {
   border-bottom-color: #D3D3D3;
 }
 
-#ihdjfzofar .gt_striped {
+#krrjjldtct .gt_striped {
   background-color: rgba(128, 128, 128, 0.05);
 }
 
-#ihdjfzofar .gt_table_body {
+#krrjjldtct .gt_table_body {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -5254,7 +5352,7 @@ window.Quarto = {
   border-bottom-color: #D3D3D3;
 }
 
-#ihdjfzofar .gt_footnotes {
+#krrjjldtct .gt_footnotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -5268,7 +5366,7 @@ window.Quarto = {
   border-right-color: #D3D3D3;
 }
 
-#ihdjfzofar .gt_footnote {
+#krrjjldtct .gt_footnote {
   margin: 0px;
   font-size: 90%;
   padding-top: 4px;
@@ -5277,7 +5375,7 @@ window.Quarto = {
   padding-right: 5px;
 }
 
-#ihdjfzofar .gt_sourcenotes {
+#krrjjldtct .gt_sourcenotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -5291,7 +5389,7 @@ window.Quarto = {
   border-right-color: #D3D3D3;
 }
 
-#ihdjfzofar .gt_sourcenote {
+#krrjjldtct .gt_sourcenote {
   font-size: 90%;
   padding-top: 4px;
   padding-bottom: 4px;
@@ -5299,72 +5397,72 @@ window.Quarto = {
   padding-right: 5px;
 }
 
-#ihdjfzofar .gt_left {
+#krrjjldtct .gt_left {
   text-align: left;
 }
 
-#ihdjfzofar .gt_center {
+#krrjjldtct .gt_center {
   text-align: center;
 }
 
-#ihdjfzofar .gt_right {
+#krrjjldtct .gt_right {
   text-align: right;
   font-variant-numeric: tabular-nums;
 }
 
-#ihdjfzofar .gt_font_normal {
+#krrjjldtct .gt_font_normal {
   font-weight: normal;
 }
 
-#ihdjfzofar .gt_font_bold {
+#krrjjldtct .gt_font_bold {
   font-weight: bold;
 }
 
-#ihdjfzofar .gt_font_italic {
+#krrjjldtct .gt_font_italic {
   font-style: italic;
 }
 
-#ihdjfzofar .gt_super {
+#krrjjldtct .gt_super {
   font-size: 65%;
 }
 
-#ihdjfzofar .gt_footnote_marks {
+#krrjjldtct .gt_footnote_marks {
   font-size: 75%;
   vertical-align: 0.4em;
   position: initial;
 }
 
-#ihdjfzofar .gt_asterisk {
+#krrjjldtct .gt_asterisk {
   font-size: 100%;
   vertical-align: 0;
 }
 
-#ihdjfzofar .gt_indent_1 {
+#krrjjldtct .gt_indent_1 {
   text-indent: 5px;
 }
 
-#ihdjfzofar .gt_indent_2 {
+#krrjjldtct .gt_indent_2 {
   text-indent: 10px;
 }
 
-#ihdjfzofar .gt_indent_3 {
+#krrjjldtct .gt_indent_3 {
   text-indent: 15px;
 }
 
-#ihdjfzofar .gt_indent_4 {
+#krrjjldtct .gt_indent_4 {
   text-indent: 20px;
 }
 
-#ihdjfzofar .gt_indent_5 {
+#krrjjldtct .gt_indent_5 {
   text-indent: 25px;
 }
 
-#ihdjfzofar .katex-display {
+#krrjjldtct .katex-display {
   display: inline-flex !important;
   margin-bottom: 0.75em !important;
 }
 
-#ihdjfzofar div.Reactable > div.rt-table > div.rt-thead > div.rt-tr.rt-tr-group-header > div.rt-th-group:after {
+#krrjjldtct div.Reactable > div.rt-table > div.rt-thead > div.rt-tr.rt-tr-group-header > div.rt-th-group:after {
   height: 0px !important;
 }
 </style>
@@ -5402,32 +5500,33 @@ window.Quarto = {
 </section>
 <section id="entrenamiento-base-de-datos-silva" class="level2">
 <h2 class="anchored" data-anchor-id="entrenamiento-base-de-datos-silva">Entrenamiento base de datos SILVA</h2>
+<p><strong>NOTA</strong> ⚠️: para entrenar el clasificador debes contar con al menos <strong>8GB</strong> de RAM en tu máquina.</p>
 <section id="descarga-de-la-base-de-datos-silva" class="level3">
 <h3 class="anchored" data-anchor-id="descarga-de-la-base-de-datos-silva">Descarga de la base de datos SILVA</h3>
 <p>Descarga la base de datos SILVA en su versión 138.2, específicamente el conjunto de datos SSURef_NR99. Este conjunto contiene secuencias del gen 16S rRNA agrupadas al 99% de similitud, lo que reduce redundancia y facilita el procesamiento.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb50"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb50-1"><a href="#cb50-1" aria-hidden="true" tabindex="-1"></a><span class="ex">qiime</span> rescript get-silva-data <span class="dt">\</span></span>
-<span id="cb50-2"><a href="#cb50-2" aria-hidden="true" tabindex="-1"></a>--p-version <span class="st">'138.2'</span> <span class="dt">\</span></span>
-<span id="cb50-3"><a href="#cb50-3" aria-hidden="true" tabindex="-1"></a>--p-target <span class="st">'SSURef_NR99'</span> <span class="dt">\</span></span>
-<span id="cb50-4"><a href="#cb50-4" aria-hidden="true" tabindex="-1"></a>--o-silva-sequences silva-138.2-ssu-nr99-rna-seqs.qza <span class="dt">\</span></span>
-<span id="cb50-5"><a href="#cb50-5" aria-hidden="true" tabindex="-1"></a>--o-silva-taxonomy silva-138.2-ssu-nr99-tax.qza</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb53"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb53-1"><a href="#cb53-1" aria-hidden="true" tabindex="-1"></a><span class="ex">qiime</span> rescript get-silva-data <span class="dt">\</span></span>
+<span id="cb53-2"><a href="#cb53-2" aria-hidden="true" tabindex="-1"></a>--p-version <span class="st">'138.2'</span> <span class="dt">\</span></span>
+<span id="cb53-3"><a href="#cb53-3" aria-hidden="true" tabindex="-1"></a>--p-target <span class="st">'SSURef_NR99'</span> <span class="dt">\</span></span>
+<span id="cb53-4"><a href="#cb53-4" aria-hidden="true" tabindex="-1"></a>--o-silva-sequences silva-138.2-ssu-nr99-rna-seqs.qza <span class="dt">\</span></span>
+<span id="cb53-5"><a href="#cb53-5" aria-hidden="true" tabindex="-1"></a>--o-silva-taxonomy silva-138.2-ssu-nr99-tax.qza</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </section>
 <section id="conversión-de-rna-a-dna" class="level3">
 <h3 class="anchored" data-anchor-id="conversión-de-rna-a-dna">Conversión de RNA a DNA</h3>
 <p>Convierte las secuencias de RNA descargadas a secuencias de DNA. Esto es necesario porque los análisis posteriores, incluyendo el entrenamiento del clasificador.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb51"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb51-1"><a href="#cb51-1" aria-hidden="true" tabindex="-1"></a><span class="ex">qiime</span> rescript reverse-transcribe <span class="dt">\</span></span>
-<span id="cb51-2"><a href="#cb51-2" aria-hidden="true" tabindex="-1"></a>--i-rna-sequences silva-138.2-ssu-nr99-rna-seqs.qza <span class="dt">\ </span>   <span class="at">--o-dna-sequences</span> silva-138.2-ssu-nr99-seqs.qza</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb54"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb54-1"><a href="#cb54-1" aria-hidden="true" tabindex="-1"></a><span class="ex">qiime</span> rescript reverse-transcribe <span class="dt">\</span></span>
+<span id="cb54-2"><a href="#cb54-2" aria-hidden="true" tabindex="-1"></a>--i-rna-sequences silva-138.2-ssu-nr99-rna-seqs.qza <span class="dt">\ </span>   <span class="at">--o-dna-sequences</span> silva-138.2-ssu-nr99-seqs.qza</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </section>
 <section id="eliminación-de-secuencias-de-baja-calidad" class="level3">
 <h3 class="anchored" data-anchor-id="eliminación-de-secuencias-de-baja-calidad">Eliminación de secuencias de baja calidad</h3>
 <p>Filtra y elimina secuencias de baja calidad o con posibles errores, como aquellas con bases ambiguas (ej. ‘N’) o secuencias con regiones repetitivas largas que podrían afectar la precisión del clasificador.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb52"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb52-1"><a href="#cb52-1" aria-hidden="true" tabindex="-1"></a><span class="ex">qiime</span> rescript cull-seqs <span class="dt">\</span></span>
-<span id="cb52-2"><a href="#cb52-2" aria-hidden="true" tabindex="-1"></a>--i-sequences silva-138.2-ssu-nr99-seqs.qza <span class="dt">\</span></span>
-<span id="cb52-3"><a href="#cb52-3" aria-hidden="true" tabindex="-1"></a>--o-clean-sequences silva-138.2-ssu-nr99-seqs-cleaned.qza</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb55"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb55-1"><a href="#cb55-1" aria-hidden="true" tabindex="-1"></a><span class="ex">qiime</span> rescript cull-seqs <span class="dt">\</span></span>
+<span id="cb55-2"><a href="#cb55-2" aria-hidden="true" tabindex="-1"></a>--i-sequences silva-138.2-ssu-nr99-seqs.qza <span class="dt">\</span></span>
+<span id="cb55-3"><a href="#cb55-3" aria-hidden="true" tabindex="-1"></a>--o-clean-sequences silva-138.2-ssu-nr99-seqs-cleaned.qza</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </section>
 <section id="filtrado-de-secuencias-por-longitud-y-taxón" class="level3">
@@ -5440,59 +5539,59 @@ window.Quarto = {
 </ul>
 <p>Esto asegura que solo se utilicen secuencias completas o casi completas.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb53"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb53-1"><a href="#cb53-1" aria-hidden="true" tabindex="-1"></a><span class="ex">qiime</span> rescript filter-seqs-length-by-taxon <span class="dt">\</span></span>
-<span id="cb53-2"><a href="#cb53-2" aria-hidden="true" tabindex="-1"></a>--i-sequences silva-138.2-ssu-nr99-seqs-cleaned.qza <span class="dt">\</span></span>
-<span id="cb53-3"><a href="#cb53-3" aria-hidden="true" tabindex="-1"></a>--i-taxonomy silva-138.2-ssu-nr99-tax.qza <span class="dt">\</span></span>
-<span id="cb53-4"><a href="#cb53-4" aria-hidden="true" tabindex="-1"></a>--p-labels Archaea Bacteria Eukaryota <span class="dt">\</span></span>
-<span id="cb53-5"><a href="#cb53-5" aria-hidden="true" tabindex="-1"></a>--p-min-lens 900 1200 1400 <span class="dt">\</span></span>
-<span id="cb53-6"><a href="#cb53-6" aria-hidden="true" tabindex="-1"></a>--o-filtered-seqs silva-138.2-ssu-nr99-seqs-filt.qza <span class="dt">\ </span>   <span class="at">--o-discarded-seqs</span> silva-138.2-ssu-nr99-seqs-discard.qza</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb56"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb56-1"><a href="#cb56-1" aria-hidden="true" tabindex="-1"></a><span class="ex">qiime</span> rescript filter-seqs-length-by-taxon <span class="dt">\</span></span>
+<span id="cb56-2"><a href="#cb56-2" aria-hidden="true" tabindex="-1"></a>--i-sequences silva-138.2-ssu-nr99-seqs-cleaned.qza <span class="dt">\</span></span>
+<span id="cb56-3"><a href="#cb56-3" aria-hidden="true" tabindex="-1"></a>--i-taxonomy silva-138.2-ssu-nr99-tax.qza <span class="dt">\</span></span>
+<span id="cb56-4"><a href="#cb56-4" aria-hidden="true" tabindex="-1"></a>--p-labels Archaea Bacteria Eukaryota <span class="dt">\</span></span>
+<span id="cb56-5"><a href="#cb56-5" aria-hidden="true" tabindex="-1"></a>--p-min-lens 900 1200 1400 <span class="dt">\</span></span>
+<span id="cb56-6"><a href="#cb56-6" aria-hidden="true" tabindex="-1"></a>--o-filtered-seqs silva-138.2-ssu-nr99-seqs-filt.qza <span class="dt">\ </span>   <span class="at">--o-discarded-seqs</span> silva-138.2-ssu-nr99-seqs-discard.qza</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </section>
 <section id="dereplicación-de-secuencias" class="level3">
 <h3 class="anchored" data-anchor-id="dereplicación-de-secuencias">Dereplicación de secuencias</h3>
 <p>Elimina secuencias duplicadas, manteniendo solo las únicas junto con su información taxonómica. Esto reduce la carga computacional sin perder diversidad taxonómica.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb54"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb54-1"><a href="#cb54-1" aria-hidden="true" tabindex="-1"></a><span class="ex">qiime</span> rescript dereplicate <span class="dt">\</span></span>
-<span id="cb54-2"><a href="#cb54-2" aria-hidden="true" tabindex="-1"></a>--i-sequences silva-138.2-ssu-nr99-seqs-filt.qza  <span class="dt">\</span></span>
-<span id="cb54-3"><a href="#cb54-3" aria-hidden="true" tabindex="-1"></a>--i-taxa silva-138.2-ssu-nr99-tax.qza <span class="dt">\</span></span>
-<span id="cb54-4"><a href="#cb54-4" aria-hidden="true" tabindex="-1"></a>--p-mode <span class="st">'uniq'</span> <span class="dt">\</span></span>
-<span id="cb54-5"><a href="#cb54-5" aria-hidden="true" tabindex="-1"></a>--o-dereplicated-sequences silva-138.2-ssu-nr99-seqs-derep-uniq.qza <span class="dt">\</span></span>
-<span id="cb54-6"><a href="#cb54-6" aria-hidden="true" tabindex="-1"></a>--o-dereplicated-taxa silva-138.2-ssu-nr99-tax-derep-uniq.qza</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb57"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb57-1"><a href="#cb57-1" aria-hidden="true" tabindex="-1"></a><span class="ex">qiime</span> rescript dereplicate <span class="dt">\</span></span>
+<span id="cb57-2"><a href="#cb57-2" aria-hidden="true" tabindex="-1"></a>--i-sequences silva-138.2-ssu-nr99-seqs-filt.qza  <span class="dt">\</span></span>
+<span id="cb57-3"><a href="#cb57-3" aria-hidden="true" tabindex="-1"></a>--i-taxa silva-138.2-ssu-nr99-tax.qza <span class="dt">\</span></span>
+<span id="cb57-4"><a href="#cb57-4" aria-hidden="true" tabindex="-1"></a>--p-mode <span class="st">'uniq'</span> <span class="dt">\</span></span>
+<span id="cb57-5"><a href="#cb57-5" aria-hidden="true" tabindex="-1"></a>--o-dereplicated-sequences silva-138.2-ssu-nr99-seqs-derep-uniq.qza <span class="dt">\</span></span>
+<span id="cb57-6"><a href="#cb57-6" aria-hidden="true" tabindex="-1"></a>--o-dereplicated-taxa silva-138.2-ssu-nr99-tax-derep-uniq.qza</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </section>
 <section id="extracción-de-la-región-v4" class="level3">
 <h3 class="anchored" data-anchor-id="extracción-de-la-región-v4">Extracción de la región V4</h3>
 <p>Extrae la región hipervariable V4 del gen 16S rRNA usando los cebadores 515F (forward) y 806R (reverse). Esta región es comúnmente utilizada en estudios de microbiomas, por lo que el clasificador se optimiza para datos que la contengan.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb55"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb55-1"><a href="#cb55-1" aria-hidden="true" tabindex="-1"></a><span class="ex">qiime</span> feature-classifier extract-reads <span class="dt">\</span></span>
-<span id="cb55-2"><a href="#cb55-2" aria-hidden="true" tabindex="-1"></a>--i-sequences silva-138.2-ssu-nr99-seqs-derep-uniq.qza <span class="dt">\</span></span>
-<span id="cb55-3"><a href="#cb55-3" aria-hidden="true" tabindex="-1"></a>--p-f-primer GTGYCAGCMGCCGCGGTAA <span class="dt">\</span></span>
-<span id="cb55-4"><a href="#cb55-4" aria-hidden="true" tabindex="-1"></a>--p-r-primer GGACTACNVGGGTWTCTAAT <span class="dt">\</span></span>
-<span id="cb55-5"><a href="#cb55-5" aria-hidden="true" tabindex="-1"></a>--p-n-jobs 5 <span class="dt">\</span></span>
-<span id="cb55-6"><a href="#cb55-6" aria-hidden="true" tabindex="-1"></a>--p-read-orientation <span class="st">'forward'</span> <span class="dt">\</span></span>
-<span id="cb55-7"><a href="#cb55-7" aria-hidden="true" tabindex="-1"></a>--o-reads silva-138.2-ssu-nr99-seqs-515f-806r.qza</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb58"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb58-1"><a href="#cb58-1" aria-hidden="true" tabindex="-1"></a><span class="ex">qiime</span> feature-classifier extract-reads <span class="dt">\</span></span>
+<span id="cb58-2"><a href="#cb58-2" aria-hidden="true" tabindex="-1"></a>--i-sequences silva-138.2-ssu-nr99-seqs-derep-uniq.qza <span class="dt">\</span></span>
+<span id="cb58-3"><a href="#cb58-3" aria-hidden="true" tabindex="-1"></a>--p-f-primer GTGYCAGCMGCCGCGGTAA <span class="dt">\</span></span>
+<span id="cb58-4"><a href="#cb58-4" aria-hidden="true" tabindex="-1"></a>--p-r-primer GGACTACNVGGGTWTCTAAT <span class="dt">\</span></span>
+<span id="cb58-5"><a href="#cb58-5" aria-hidden="true" tabindex="-1"></a>--p-n-jobs 5 <span class="dt">\</span></span>
+<span id="cb58-6"><a href="#cb58-6" aria-hidden="true" tabindex="-1"></a>--p-read-orientation <span class="st">'forward'</span> <span class="dt">\</span></span>
+<span id="cb58-7"><a href="#cb58-7" aria-hidden="true" tabindex="-1"></a>--o-reads silva-138.2-ssu-nr99-seqs-515f-806r.qza</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </section>
 <section id="dereplicación-de-la-región-v4" class="level3">
 <h3 class="anchored" data-anchor-id="dereplicación-de-la-región-v4">Dereplicación de la región V4</h3>
 <p>Realiza una segunda dereplicación, esta vez sobre las secuencias de la región V4, eliminando duplicados adicionales que puedan haber surgido tras la extracción.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb56"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb56-1"><a href="#cb56-1" aria-hidden="true" tabindex="-1"></a><span class="ex">qiime</span> rescript dereplicate <span class="dt">\</span></span>
-<span id="cb56-2"><a href="#cb56-2" aria-hidden="true" tabindex="-1"></a>--i-sequences silva-138.2-ssu-nr99-seqs-515f-806r.qza <span class="dt">\</span></span>
-<span id="cb56-3"><a href="#cb56-3" aria-hidden="true" tabindex="-1"></a>--i-taxa silva-138.2-ssu-nr99-tax-derep-uniq.qza <span class="dt">\</span></span>
-<span id="cb56-4"><a href="#cb56-4" aria-hidden="true" tabindex="-1"></a>--p-mode <span class="st">'uniq'</span> <span class="dt">\</span></span>
-<span id="cb56-5"><a href="#cb56-5" aria-hidden="true" tabindex="-1"></a>--o-dereplicated-sequences silva-138.2-ssu-nr99-seqs-515f-806r-uniq.qza <span class="dt">\</span></span>
-<span id="cb56-6"><a href="#cb56-6" aria-hidden="true" tabindex="-1"></a>--o-dereplicated-taxa  silva-138.2-ssu-nr99-tax-515f-806r-derep-uniq.qza</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb59"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb59-1"><a href="#cb59-1" aria-hidden="true" tabindex="-1"></a><span class="ex">qiime</span> rescript dereplicate <span class="dt">\</span></span>
+<span id="cb59-2"><a href="#cb59-2" aria-hidden="true" tabindex="-1"></a>--i-sequences silva-138.2-ssu-nr99-seqs-515f-806r.qza <span class="dt">\</span></span>
+<span id="cb59-3"><a href="#cb59-3" aria-hidden="true" tabindex="-1"></a>--i-taxa silva-138.2-ssu-nr99-tax-derep-uniq.qza <span class="dt">\</span></span>
+<span id="cb59-4"><a href="#cb59-4" aria-hidden="true" tabindex="-1"></a>--p-mode <span class="st">'uniq'</span> <span class="dt">\</span></span>
+<span id="cb59-5"><a href="#cb59-5" aria-hidden="true" tabindex="-1"></a>--o-dereplicated-sequences silva-138.2-ssu-nr99-seqs-515f-806r-uniq.qza <span class="dt">\</span></span>
+<span id="cb59-6"><a href="#cb59-6" aria-hidden="true" tabindex="-1"></a>--o-dereplicated-taxa  silva-138.2-ssu-nr99-tax-515f-806r-derep-uniq.qza</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </section>
 <section id="entrenamiento-del-clasificador-naive-bayes" class="level3">
 <h3 class="anchored" data-anchor-id="entrenamiento-del-clasificador-naive-bayes">Entrenamiento del clasificador Naive Bayes</h3>
 <p>Entrena un clasificador Naive Bayes utilizando las secuencias únicas de la región V4 y su taxonomía. Este clasificador puede usarse luego para asignar taxonomía a secuencias 16S de muestras de microbiomas.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb57"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb57-1"><a href="#cb57-1" aria-hidden="true" tabindex="-1"></a><span class="ex">qiime</span> feature-classifier fit-classifier-naive-bayes <span class="dt">\</span></span>
-<span id="cb57-2"><a href="#cb57-2" aria-hidden="true" tabindex="-1"></a>--i-reference-reads silva-138.2-ssu-nr99-seqs-515f-806r-uniq.qza <span class="dt">\</span></span>
-<span id="cb57-3"><a href="#cb57-3" aria-hidden="true" tabindex="-1"></a>--i-reference-taxonomy silva-138.2-ssu-nr99-tax-515f-806r-derep-uniq.qza <span class="dt">\</span></span>
-<span id="cb57-4"><a href="#cb57-4" aria-hidden="true" tabindex="-1"></a>--o-classifier silva-138.2-ssu-nr99-515f-806r-classifier.qza</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb60"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb60-1"><a href="#cb60-1" aria-hidden="true" tabindex="-1"></a><span class="ex">qiime</span> feature-classifier fit-classifier-naive-bayes <span class="dt">\</span></span>
+<span id="cb60-2"><a href="#cb60-2" aria-hidden="true" tabindex="-1"></a>--i-reference-reads silva-138.2-ssu-nr99-seqs-515f-806r-uniq.qza <span class="dt">\</span></span>
+<span id="cb60-3"><a href="#cb60-3" aria-hidden="true" tabindex="-1"></a>--i-reference-taxonomy silva-138.2-ssu-nr99-tax-515f-806r-derep-uniq.qza <span class="dt">\</span></span>
+<span id="cb60-4"><a href="#cb60-4" aria-hidden="true" tabindex="-1"></a>--o-classifier silva-138.2-ssu-nr99-515f-806r-classifier.qza</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </section>
 </section>

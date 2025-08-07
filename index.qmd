@@ -47,6 +47,14 @@ df
 
 Este archivo lo vamos a nombrar como `tomato_manifest`, este archivo es de tipo `tab-separate-value`. Puedes descargar el archivo `manifiesto` [aquí](https://drive.google.com/file/d/1hIzzApEfZfKqOlxhjVDsSvKVmqUbEA1d/view?usp=drive_link).
 
+**NOTA** ⚠️**: Durante todo este tutorial vamos a ir generando dos clases de archivos**
+
+-   `.qza` **QIIME Zipped Artifact**
+
+-   `.qzv` **QIIME Zipped Visualization**
+
+Para ver todos los archivos `.qzv` basta con utilizar el comando `qiime tools view` seguido del nombre de tu archivo. Más adelante lo verás más claro.
+
 Para importar los secuencias 16S pareadas vamos a utilizar el siguiente código:
 
 ```{bash, eval=FALSE, echo=TRUE}
@@ -267,6 +275,35 @@ La **alfa diversidad** es la diversidad media de especies microbianas en un luga
 -   Fundamental para caracterizar comunidades microbianas
 
 ### Simpson Index
+
+El **índice de Simpson** mide la probabilidad de que dos individuos tomados al azar de una muestra pertenezcan a la misma especie. Es sensible a la dominancia de especies abundantes.
+
+### Fórmula del Índice de Simpson:
+
+$$D = 1 - \sum_{i=1}^{S} p_i^2$$
+
+donde:
+
+ - $D$ = índice de Simpson (diversidad)
+
+ - $S$ = número de especies (riqueza)
+
+ - $p_i$ = proporción de la especie $i$ en la muestra: \$p_i = ra
+
+c{n_i}{N}\$
+
+\- $n_i$ = número de individuos de la especie $i$ - $N$ = número total de individuos
+
+Algunas variantes:
+
+\- **Índice de Simpson original**: $\lambda = \sum p_i^2$
+
+\- **Diversidad de Simpson**: $1/\lambda$
+
+### Interpretación:
+
+-   $D$ cercano a 1 indica alta diversidad (baja dominancia)
+-   $D$ cercano a 0 indica baja diversidad (alta dominancia)
 
 ```{bash, eval=FALSE}
 qiime diversity alpha-group-significance \
@@ -673,6 +710,8 @@ qiime tools view core-metrics-results/unweighted-unifrac-body-site-significance.
 
 # Taxonomía
 
+**NOTA** ⚠️**:** si no cuentas con un modelo entrenado para clasificar las secuencias, debes checar en al Apéndice [Entrenamiento base de datos SILVA].
+
 ## Diversidad/abundancía
 
 ```{bash, eval=FALSE}
@@ -699,6 +738,42 @@ qiime taxa barplot \
 ![](images/rect469.png){fig-align="center"}
 
 ## Pruebas de abundancia diferencial con ANCOM-BC
+
+**ANCOM-BC** (Analysis of Composition of Microbiomes with Bias Correction) es un método para detectar taxones con abundancia diferencial entre grupos, corregir sesgos de muestreo y normalización.
+
+### Pasos Principales de ANCOM-BC:
+
+1.  **Modelado de cuentas**: Ajusta modelos lineales generalizados a las cuentas de taxones con corrección de tamaño de muestra.
+2.  **Estimación de log-fold changes**: Calcula la diferencia de abundancia en escala logarítmica entre condiciones.
+3.  **Corrección de sesgos**: Ajusta estimaciones para minimizar sesgos debidos a diferencias en la profundidad de secuenciación.
+4.  **Pruebas estadísticas**: Realiza pruebas Wald para evaluar si los cambios log-fold son significativamente distintos de cero.
+
+### Ecuación general de log-fold change estimado:
+
+$$\hat{\eta}_i = \log\left(\frac{\hat{\mu}_{i,1}}{\hat{\mu}_{i,0}}\right)$$
+
+donde:
+
+\- $\hat{\eta}_i$ = estimación del log-fold change para el taxón $i$
+
+\- $\hat{\mu}_{i,1}$ = abundancia media ajustada del taxón $i$ en el grupo 1
+
+\- $\hat{\mu}_{i,0}$ = abundancia media ajustada del taxón $i$ en el grupo 0
+
+### Interpretación de resultados:
+
+-   $\hat{\eta}_i > 0$ indica mayor abundancia en el grupo 1
+-   $\hat{\eta}_i < 0$ indica mayor abundancia en el grupo 0
+-   SE($\hat{\eta}_i$) es el error estándar de la estimación
+-   $z_i = \hat{\eta}_i / SE(\hat{\eta}_i)$ se utiliza para la prueba Wald
+
+ANCOM-BC es especialmente útil en metabarcoding porque:
+
+ - Corrige sesgos de muestreo
+
+ - Maneja datos escasos y muy dispersos
+
+ - Proporciona estimaciones robustas de cambios en abundancia
 
 ```{bash, eval=FALSE}
 qiime composition ancombc \
@@ -780,6 +855,25 @@ qiime tools view l6-da-barplot-subject.qzv
 # Apéndice 
 
 ## Abrir archivos de Qiime2 en R
+
+Primero instala la paquetería [`qiime2R`](https://github.com/jbisanz/qiime2R/)
+
+```{r, message=FALSE, warning=FALSE}
+if (!requireNamespace("devtools", quietly = TRUE)){install.packages("devtools")}
+devtools::install_github("jbisanz/qiime2R")
+```
+
+Esta paquetería nos permite leer los archivos `.qza` **QIIME Zipped Artifact**.
+
+Por ejemplo, si buscas acceder a la matriz de cuentas de los ASV del archivo `table-dada2-tomato-16s.qza`, puede utilizar el siguiente código:
+
+```{r, message=FALSE, warning=FALSE}
+library(qiime2R)
+df_tmp <- read_qza("../2025_Demo_16S_tomate/table-dada2-tomato-16s.qza")
+df_counts <- data.frame(df_tmp$data)
+
+head(df_counts, 5)
+```
 
 ## Otras métricas de Alfa Diversidad
 
@@ -1029,6 +1123,8 @@ gt::gt(df)
 ```
 
 ## Entrenamiento base de datos SILVA
+
+**NOTA** ⚠️: para entrenar el clasificador debes contar con al menos **8GB** de RAM en tu máquina.
 
 ### Descarga de la base de datos SILVA
 
