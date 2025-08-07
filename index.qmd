@@ -1263,7 +1263,6 @@ p <- ggboxplot(Lyso_df, x = "Type", y = "Lysobacteraceae",
 
 my_comparisons <- list( c("NC", "Tomato"))
 p + stat_compare_means(comparisons = my_comparisons, label = "p.signif", paired = TRUE, method = "t.test")+ 
-  stat_compare_means(label.y = 50)  +
   theme_classic() +
   theme(text = element_text(size = 20)) +
   ylab("Lysobacteraceae ASV")
