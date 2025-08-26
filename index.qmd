@@ -1,11 +1,14 @@
 ---
 title: "Metabarcoding: Tomate 16S usando Qiime2"
-author: "OMICs analysis"
+author: "OMICs Analysis"
 format: 
   html:
     toc: true
     toc-depth: 3
     theme: journal
+    toc-location: left-body
+    smooth-scroll: true
+    toc-title: "Contenido"
 editor: visual
 execute:
   engine: knitr
