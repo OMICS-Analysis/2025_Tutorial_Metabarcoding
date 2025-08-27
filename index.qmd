@@ -1117,7 +1117,32 @@ ggplot(obfe_long, aes(
   scale_color_manual(values = c( "#8f0052","#276518"))
 ```
 
-## 
+## Fisher Alpha
+
+```{bash, eval=FALSE}
+qiime diversity alpha \                   
+  --i-table table-dada2-tomato-16s.qza \               
+  --p-metric fisher_alpha \                
+  --o-alpha-diversity fisher_alpha_diversity.qza
+```
+
+```{bash, eval=FALSE}
+qiime diversity alpha-group-significance \
+--i-alpha-diversity fisher_alpha_diversity.qza \
+--m-metadata-file Experiment_Design.tsv \
+--o-visualization core-metrics-results/fisher_alpha-group-significance.qzv
+
+```
+
+```{bash, eval=FALSE}
+qiime tools view core-metrics-results/fisher_alpha-group-significance.qzv
+```
+
+![](images/FISHER_ALPHA_EX1.png){fig-align="center"}
+
+![](images/FISHER_ALPHA_EX2.png){fig-align="center"}
+
+##  {data-link="Entrenamiento base de datos SILVA"}
 
 ## Otras métricas de Beta Diversidad
 
