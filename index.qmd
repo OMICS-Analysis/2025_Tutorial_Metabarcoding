@@ -314,15 +314,15 @@ Algunas variantes:
 -   $D$ cercano a 0 indica baja diversidad (alta dominancia)
 
 ```{bash, eval=FALSE}
-qiime diversity alpha-group-significance \
-  --i-alpha-diversity simpson_diversity.qza \             
-  --m-metadata-file Experiment_Design.tsv \ 
-  --o-visualization core-metrics-results/simpson-group-significance.qzv
+qiime diversity alpha \
+  --i-table table-dada2-tomato-16s.qza \ 
+  --p-metric simpson \
+  --o-alpha-diversity simpson_diversity.qza
 ```
 
 ```{bash, eval=FALSE}
 qiime diversity alpha-group-significance \
-  --i-alpha-diversity simpson_diversity.qza \                   
+  --i-alpha-diversity simpson_diversity.qza \           
   --m-metadata-file Experiment_Design.tsv \ 
   --o-visualization core-metrics-results/simpson-group-significance.qzv
 ```
@@ -338,6 +338,57 @@ df <- readr::read_csv("tables/kruskal-wallis-pairwise-Type_simpson.csv")
 
 gt::gt(df)
 ```
+
+### Shannon
+
+El **índice de Shannon** (Shannon-Weaver o Shannon-Wiener) mide la biodiversidad específica considerando tanto la riqueza de especies como su abundancia relativa. Está basado en la teoría de la información y mide la incertidumbre para predecir la especie de un individuo tomado al azar.
+
+#### Fórmula del índice de Shannon:
+
+$$H' = -\sum_{i=1}^{S} p_i \ln p_i$$
+
+donde:
+
+\- $H'$ = índice de Shannon
+
+\- $S$ = número de especies (riqueza de especies)
+
+\- $p_i$ = proporción de individuos de la especie $i$ respecto al total: $p_i = \frac{n_i}{N}$
+
+\- $n_i$ = número de individuos de la especie $i$
+
+\- $N$ = número total de individuos de todas las especies
+
+\- $\ln$ = logaritmo natural
+
+#### Interpretación:
+
+-   Valores entre 0.5 y 5 en ecosistemas naturales
+-   Valores \< 2: baja diversidad
+-   Valores \> 3: alta diversidad
+-   Valores más altos indican mayor diversidad y equitabilidad
+
+```{bash, eval=FALSE}
+qiime diversity alpha \
+  --i-table table-dada2-tomato-16s.qza \ 
+  --p-metric shannon \
+  --o-alpha-diversity shannon_diversity.qza
+```
+
+```{bash, eval=FALSE}
+qiime diversity alpha-group-significance \
+  --i-alpha-diversity shanon_diversity.qza \           
+  --m-metadata-file Experiment_Design.tsv \ 
+  --o-visualization core-metrics-results/shannon-group-significance.qzv
+```
+
+```{bash, eval=FALSE}
+qiime tools view core-metrics-results/shannon-group-significance.qzv
+```
+
+![](images/shannon_ex1.png){fig-align="center"}
+
+![](images/shannon_ex2.png){fig-align="center"}
 
 ### Otras métricas
 
@@ -475,26 +526,6 @@ donde:
 ![](images/features_rarefaction.png){fig-align="center"}
 
 ### Shannon
-
-El **índice de Shannon** (Shannon-Weaver o Shannon-Wiener) mide la biodiversidad específica considerando tanto la riqueza de especies como su abundancia relativa. Está basado en la teoría de la información y mide la incertidumbre para predecir la especie de un individuo tomado al azar.
-
-#### Fórmula del índice de Shannon:
-
-$$H' = -\sum_{i=1}^{S} p_i \ln p_i$$
-
-donde:
-
-\- $H'$ = índice de Shannon
-
-\- $S$ = número de especies (riqueza de especies)
-
-\- $p_i$ = proporción de individuos de la especie $i$ respecto al total: $p_i = \frac{n_i}{N}$
-
-\- $n_i$ = número de individuos de la especie $i$
-
-\- $N$ = número total de individuos de todas las especies
-
-\- $\ln$ = logaritmo natural
 
 #### Interpretación:
 
